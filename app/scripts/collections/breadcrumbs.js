@@ -1,8 +1,6 @@
-define(['collection', 'models/breadcrumb'], function(Collection, Breadcrumb){
-  'use strict';
+var Core = require('core_boot');
+var Breadcrumb = require('../models/breadcrumb');
 
-  return Collection.extend({
-    model: Breadcrumb
-  });
-
+module.exports = Core.Collection.extend({
+  model: Breadcrumb
 });

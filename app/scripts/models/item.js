@@ -1,65 +1,65 @@
-define(['app', 'model', './mixin/tree'], function(App, Model, MixinTree){
-  'use strict';
+'use strict';
 
-  return Model
-    .extend(MixinTree)
-    .extend({
+var Core = require('core_boot');
+var MixinTree = require('core_tree');
 
-      content_browser: true,
+module.exports = Core.Model
+  .extend(MixinTree)
+  .extend({
 
-      path: function(){
-        return App.g.tree_config.get('root_path') + '/browse';
-      },
+    content_browser: true,
 
-      has_children: function(){
-        return this.attributes.has_children;
-      },
+    path: function(){
+      return Core.g.tree_config.get('root_path') + '/browse';
+    },
 
-      has_sub_categories: function(){
-        return this.attributes.has_sub_categories;
-      },
+    has_children: function(){
+      return this.attributes.has_children;
+    },
 
-      can_show_children: function(){
-        return this.attributes.has_children && !this.is_root_model;
-      },
+    has_sub_categories: function(){
+      return this.attributes.has_sub_categories;
+    },
 
-      type: function(){
-        return this.attributes.type;
-      },
+    can_show_children: function(){
+      return this.attributes.has_children && !this.is_root_model;
+    },
 
-      short_name: function(){
-        return this.get('name').length > 27 ? this.get('name').substring(0, 27) + '...' : this.get('name');
-      },
+    type: function(){
+      return this.attributes.type;
+    },
 
-      select: function(){
-        this.selected = true;
-      },
+    short_name: function(){
+      return this.get('name').length > 27 ? this.get('name').substring(0, 27) + '...' : this.get('name');
+    },
 
-      deselect: function(){
-        this.selected = false;
-      },
+    select: function(){
+      this.selected = true;
+    },
 
-      check: function(){
-        this.selected_collection().add(this);
-        return this;
-      },
+    deselect: function(){
+      this.selected = false;
+    },
 
-      uncheck: function(){
-        this.selected_collection().remove(this);
-        return this;
-      },
+    check: function(){
+      this.selected_collection().add(this);
+      return this;
+    },
 
-      is_checked: function(){
-        return this.selected_collection().get(this.id);
-      },
+    uncheck: function(){
+      this.selected_collection().remove(this);
+      return this;
+    },
 
-      selected_collection: function(){
-        return (this.collection && this.collection.browser && this.collection.browser.selected_collection) ||
-          (this.browser && this.browser.selected_collection);
-      }
+    is_checked: function(){
+      return this.selected_collection().get(this.id);
+    },
 
-    }, {
-      BREADCRUMB_TEXT: 'Search for'
-    });
+    selected_collection: function(){
+      return (this.collection && this.collection.browser && this.collection.browser.selected_collection) ||
+        (this.browser && this.browser.selected_collection);
+    }
 
-});
+  }, {
+    BREADCRUMB_TEXT: 'Search for'
+  });

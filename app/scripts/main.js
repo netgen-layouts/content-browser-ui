@@ -1,64 +1,36 @@
 'use strict';
 
-require.config({
-  baseUrl: 'scripts',
+require('./templates_loader');
+var Core = require('core_boot');
 
-  paths: {
-    env: 'environments/development',
-    modernizr: '../../bower_components/modernizr/modernizr',
-    underscore: '../../bower_components/underscore/underscore',
-    requirejs: '../../bower_components/requirejs/require',
-    moment: '../../bower_components/moment/moment',
-    jquery: '../../bower_components/jquery/dist/jquery',
-    handlebars: '../../bower_components/handlebars/handlebars',
-    localstorage: '../../bower_components/backbone.localstorage/backbone.localStorage',
-    backbone_original: '../../bower_components/backbone/backbone',
-    backbone: './extended/backbone_override',
+var TreeConfig = require('./models/tree_config');
+var Items = require('./collections/items');
+var Browser = require('./views/browser');
 
-    jquery_ui: '../../bower_components/jquery-ui/jquery-ui',
-
-    collection: 'extended/collection',
-    model: 'extended/model',
-    view: 'extended/view',
-    register_helpers: './register_helpers',
-    templates: 'templates',
-    app: 'app',
-    init: 'init',
-    modal: '../../bower_components/bootstrap-sass/assets/javascripts/bootstrap/modal',
-    inflection: '../../bower_components/inflection/lib/inflection'
-  },
-
-  shim: {
-
-    modal: {
-      deps: ['jquery'],
-      exports: 'jquery'
-    },
-
-    handlebars: {
-      exports: 'Handlebars',
-
-      init: function() {
-        this.Handlebars = Handlebars; /*jshint ignore:line */ //NOTE: dont write window.Handlebars here it causes build bug
-        return this.Handlebars;
-      }
-    },
-
-    templates: {
-      deps: ['register_helpers']
-    }
-
-  }
+Core.g.tree_config = new TreeConfig({
+  root_path: 'ezcontent' // ezcontent, ezlocation, eztags
 });
 
-require(['init', 'backbone', 'router', 'jquery', 'jquery_ui', 'extended/jquery_override', 'modal', 'register_helpers', 'templates'],
-  function(App, Backbone, Router){
+window.Core = Core;
 
-    App.init();
+var _open_browser = function(){
 
-    $(function(){
-      App.router = new Router();
-      Backbone.history.start();
-    });
+  var default_location = Core.g.tree_config.default_location();
 
-});
+  var tree_collection = new Items();
+
+  var browser = new Browser({
+    tree_collection: tree_collection,
+    title: 'Content browser'
+  }).on('apply', function(){
+    alert(browser.selected_values());
+  }).open();
+
+  default_location && tree_collection.fetch_root_model_id(default_location.id);
+};
+
+Core.Backbone.$.when(
+  Core.g.tree_config.fetch()
+).then(Core.g.tree_config.save_available_columns.bind(Core.g.tree_config)
+).then(_open_browser);
+

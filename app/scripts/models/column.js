@@ -1,10 +1,9 @@
-define(['backbone', 'localstorage'], function(Backbone){
-  'use strict';
+'use strict';
 
-  return Backbone.Model.extend({
-    save_visibility: function(visible){
-      this.save({ visible: visible });
-    }
-  });
+var Core = require('core_boot');
 
+module.exports = Core.Backbone.Model.extend({
+  save_visibility: function(visible){
+    this.save({ visible: visible });
+  }
 });

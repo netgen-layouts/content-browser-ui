@@ -1,8 +1,5 @@
-define(['model'], function(Model){
-  'use strict';
+'use strict';
 
-  return Model.extend({
+var Core = require('core_boot');
 
-  });
-
-});
+module.exports = Core.Model.extend({});

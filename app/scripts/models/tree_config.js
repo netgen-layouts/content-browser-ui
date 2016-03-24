@@ -1,70 +1,74 @@
-define(['underscore', 'model', 'collections/items', 'collections/columns', 'models/column', 'collections/breadcrumbs'], function(_, Model, Items, Columns, Column, Breadcrumbs){
-  'use strict';
+'use strict';
 
-  return Model
-    .extend({
+var Core = require('core_boot');
+var Items = require('../collections/items');
+var Columns = require('../collections/columns');
+var Breadcrumbs = require('../collections/breadcrumbs');
+var Column = require('./column');
 
-      content_browser: true,
+module.exports = Core.Model
+  .extend({
 
-      path: function(){
-        return this.get('root_path') + '/config';
-      },
+    content_browser: true,
 
-      default_location: function(){
-        var default_model = this.sections.first();
-        default_model && default_model.select();
-        return default_model;
-      },
+    path: function(){
+      return this.get('root_path') + '/config';
+    },
 
-      parse: function(response) {
-        this.initialize_root_items(response);
-        return response;
-      },
+    default_location: function(){
+      var default_model = this.sections.first();
+      default_model && default_model.select();
+      return default_model;
+    },
 
-      is_in_root_item: function(id){
-        return this.sections.some(function(item){ return item.id === id; });
-      },
+    parse: function(response) {
+      this.initialize_root_items(response);
+      return response;
+    },
 
-      initialize_root_items: function(response){
-        if(!response.sections){ return; }
+    is_in_root_item: function(id){
+      return this.sections.some(function(item){ return item.id === id; });
+    },
 
-        this.sections = new Items();
-        this.sections.add(response.sections);
-        this.sections.models.forEach(function(model){
-          // we use this property for initial root list item
-          model.is_root_model = true;
-          model.path = new Breadcrumbs([{
-            id: model.id,
-            name: model.get('name'),
-            last: true // for initial breadcrumb
-          }]);
-        });
-        delete(response.sections);
-      },
+    initialize_root_items: function(response){
+      if(!response.sections){ return; }
 
-      save_available_columns: function(){
+      this.sections = new Items();
+      this.sections.add(response.sections);
+      this.sections.models.forEach(function(model){
+        // we use this property for initial root list item
+        model.is_root_model = true;
+        model.path = new Breadcrumbs([{
+          id: model.id,
+          name: model.get('name'),
+          last: true // for initial breadcrumb
+        }]);
+      });
+      delete(response.sections);
+    },
 
-        if(!localStorage.getItem('default_saved')){
-          var default_columns = this.get('default_columns');
-          var available_columns = this.get('available_columns');
+    save_available_columns: function(){
 
-          var columns = new Columns();
-          _.each(available_columns, function(item, index){
-            var column = new Column({
-              column_id: item.id,
-              name: item.name,
-              visible: default_columns.indexOf(item.id) !== -1,
-              order: index
-            });
-            columns.add(column);
-            column.save();
+      if(!localStorage.getItem('table_column_' + this.get('root_path'))){
+        var default_columns = this.get('default_columns');
+        var available_columns = this.get('available_columns');
 
+        var columns = new Columns({});
+        columns.suffix = this.get('root_path');
+        Core._.each(available_columns, function(item, index){
+          var column = new Column({
+            column_id: item.id,
+            name: item.name,
+            visible: default_columns.indexOf(item.id) !== -1,
+            order: index
           });
+          columns.add(column);
+          column.save();
 
-          localStorage.setItem('default_saved', true);
-        }
-      },
+        });
 
-    });
+        localStorage.setItem('default_saved', true);
+      }
+    },
 
-});
+  });
