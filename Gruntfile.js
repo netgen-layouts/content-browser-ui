@@ -294,7 +294,8 @@ module.exports = function (grunt) {
               alias: {
                 'core': './app/scripts/core-ui/core.js',
                 'core_boot': './app/scripts/core-ui/core_boot.js',
-                'core_tree': './app/scripts/core-ui/models/mixin/tree.js'
+                'core_tree': './app/scripts/core-ui/models/mixin/tree.js',
+                'core_pager': './app/scripts/core-ui/components/pager.js'
               }
             },
           }
