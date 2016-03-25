@@ -121,7 +121,8 @@ module.exports = Core.View.extend({
       collection: items,
       el: '.right-panel .list',
       browser: this.browser,
-      tabs: this
+      tabs: this,
+      paginate: true
     });
 
     this.list_view.on('render', function(){

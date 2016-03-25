@@ -109,7 +109,7 @@ module.exports = function (grunt) {
           //  },
             browserify: {
               files: ['<%= yeoman.app %>/scripts/**/*.js'],
-              tasks: ['browserify:dev', 'concat:dev']
+              tasks: ['browserify:dev']
             },
             sass: {
                 files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
@@ -276,7 +276,10 @@ module.exports = function (grunt) {
             dest: '.tmp/scripts/vendor.js',
             options: {
               debug: true,
-              require: ['jquery', 'underscore', 'backbone']
+              require: ['jquery', 'underscore', 'backbone'],
+              browserifyOptions:{
+                debug: true
+              }
             }
           },
           dev: {
@@ -583,7 +586,7 @@ module.exports = function (grunt) {
             'handlebars',
             'concurrent:server',
             'configureProxies:server',
-            'concat:dev',
+            // 'concat:dev',
             'connect:livereload',
             //'open',
             'watch'

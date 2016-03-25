@@ -32,6 +32,12 @@ module.exports = Core.View.extend({
     return this;
   },
 
+  render: function(){
+    Core.View.prototype.render.apply(this, arguments);
+    // this.pager('listview_collection', this.collection);
+    // console.log('pager', this.pager['listview_collection']);
+  },
+
   $show_dropdown_menu: function(e){
     e.preventDefault();
     this.$('.dropdown-menu').css({
