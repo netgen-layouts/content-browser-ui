@@ -61,7 +61,7 @@ module.exports = Core.View.extend({
 
     var items = new Items();
     this.$el.addClass('loading');
-    items.fetch_tree_model_id(this.model.id, {
+    items.fetch_tree_by_model_id(this.model.id, {
       success: function(){
         this.render_tree(items);
         this.show_breadcrumb(items);

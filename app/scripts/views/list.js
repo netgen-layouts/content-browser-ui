@@ -17,7 +17,9 @@ module.exports = Core.View.extend({
 
   events: {
     'contextmenu': '$show_dropdown_menu',
-    'change .column-check': '$toggle_table_columns'
+    'change .column-check': '$toggle_table_columns',
+    'change .pages_selector': '$save_default_limit',
+    'click .pagination a': '$change_page'
   },
 
   initialize: function(){
@@ -33,9 +35,8 @@ module.exports = Core.View.extend({
   },
 
   render: function(){
+    this.pager('listview_collection', this.collection);
     Core.View.prototype.render.apply(this, arguments);
-    // this.pager('listview_collection', this.collection);
-    // console.log('pager', this.pager['listview_collection']);
   },
 
   $show_dropdown_menu: function(e){
@@ -68,5 +69,13 @@ module.exports = Core.View.extend({
 
     this.hide_dropdown_menu();
   },
+
+  $save_default_limit: function(e){
+    localStorage.setItem('default_limit', $(e.target).val());
+  },
+
+  $change_page: function(e){
+    this.paginate(e);
+  }
 
 });

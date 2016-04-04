@@ -66,9 +66,13 @@ module.exports = Core.Model
           column.save();
 
         });
-
-        localStorage.setItem('default_saved', true);
       }
     },
+
+    save_default_limit: function(){
+      if(!localStorage.getItem('default_limit')){
+        localStorage.setItem('default_limit', this.get('default_limit'));
+      }
+    }
 
   });

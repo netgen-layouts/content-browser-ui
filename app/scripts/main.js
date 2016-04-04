@@ -26,11 +26,12 @@ var _open_browser = function(){
     alert(browser.selected_values());
   }).open();
 
-  default_location && tree_collection.fetch_root_model_id(default_location.id);
+  default_location && tree_collection.fetch_root_by_model_id(default_location.id);
 };
 
 Core.Backbone.$.when(
   Core.g.tree_config.fetch()
+).then(Core.g.tree_config.save_default_limit.bind(Core.g.tree_config)
 ).then(Core.g.tree_config.save_available_columns.bind(Core.g.tree_config)
 ).then(_open_browser);
 

@@ -33,7 +33,7 @@ module.exports = Core.View.extend({
     var items = this.tabs.collection,
         model = this.$('option:selected').data('_view').model;
 
-    items.fetch_root_model_id(model.id);
+    items.fetch_root_by_model_id(model.id);
 
     // select root item by id
     this.collection.select_model_by_id(model.id);

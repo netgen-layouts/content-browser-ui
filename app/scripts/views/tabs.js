@@ -132,7 +132,7 @@ module.exports = Core.View.extend({
       this.root_model = null;
     }.bind(this));
 
-    items.fetch_list_model_id(model.id);
+    items.fetch_list_by_model_id(model.id);
   },
 
   render_breadcrumb: function(collection){
@@ -178,7 +178,7 @@ module.exports = Core.View.extend({
     items.browser = this.browser;
     // if user click on breadcrumb link we have a model
     if(model){
-      items.fetch_list_model_id(model.id, {
+      items.fetch_list_by_model_id(model.id, {
         success: function(){
           this._render_search_list_view(items);
           this.render_search_breadcrumb(items);

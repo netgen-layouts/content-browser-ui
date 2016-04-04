@@ -36,7 +36,7 @@ module.exports = ListBaseView.extend({
     var items = new Items();
     items.browser = this.parent.browser;
 
-    items.fetch_list_model_id(this.model.id, {
+    items.fetch_list_by_model_id(this.model.id, {
       success: function(){
         this.parent.collection.reset(items.models);
         this.show_search_breadcrumb(items);
@@ -53,7 +53,7 @@ module.exports = ListBaseView.extend({
     var items = new Items();
     items.browser = this.parent.browser;
 
-    items.fetch_list_model_id(this.model.id, {
+    items.fetch_list_by_model_id(this.model.id, {
       success: function(){
         this.parent.collection.reset(items.models);
         this.show_breadcrumb(items);
