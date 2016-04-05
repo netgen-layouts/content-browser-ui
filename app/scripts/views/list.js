@@ -29,7 +29,7 @@ module.exports = Core.View.extend({
 
     Core.on('browser:click', this.hide_dropdown_menu);
 
-    this.listenTo(this.collection, 'reset', this.render);
+    this.listenTo(this.collection, 'reset', this.render.bind(this));
 
     return this;
   },
@@ -37,6 +37,7 @@ module.exports = Core.View.extend({
   render: function(){
     this.pager('listview_collection', this.collection);
     Core.View.prototype.render.apply(this, arguments);
+    return this;
   },
 
   $show_dropdown_menu: function(e){

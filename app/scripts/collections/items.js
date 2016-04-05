@@ -15,8 +15,7 @@ module.exports = Core.Collection.extend({
       this.path = new Breadcrumbs(response.path);
       var last = this.path.last();
       last && last.set({last: true});
-      var first = this.path.first();
-      first && (this.model_id = first.id);
+      last && (this.model_id = last.id);
       this.children_count = response.children_count;
       this.children_limit = localStorage.getItem('default_limit') || Core.g.tree_config.get('default_limit');
       this.children_offset = Math.floor(this.children_count / this.children_limit);
@@ -35,9 +34,10 @@ module.exports = Core.Collection.extend({
   },
 
   fetch_list_by_model_id: function(id, options){
-    id = id || this.model_id;
+    id = id || this.request.read.id;
     options = options || {};
     options.data = {
+      id: id,
       limit: options.data ? options.data.limit : localStorage.getItem('default_limit'),
       page: options.data ? options.data.page : 1
     };

@@ -123,7 +123,7 @@ module.exports = Core.View.extend({
       browser: this.browser,
       tabs: this,
       paginate: true
-    });
+    }).render();
 
     this.list_view.on('render', function(){
       var root_model = this.root_model || model;
