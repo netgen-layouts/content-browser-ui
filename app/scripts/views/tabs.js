@@ -41,6 +41,7 @@ module.exports = Core.View.extend({
   render: function(){
     Core.View.prototype.render.apply(this, arguments);
     this.$('#browser-tabs').browser_tabs();
+    $('#search').trigger('click'); // TODO: remove when you're done
     return this;
   },
 
@@ -67,7 +68,6 @@ module.exports = Core.View.extend({
     var model = this.sections.selected_model();
     this.render_tree();
     this.render_list_view(model);
-    this.render_breadcrumb(model);
   },
 
   render_root_items: function(){
@@ -102,6 +102,37 @@ module.exports = Core.View.extend({
     return this;
   },
 
+  render_list_view: function(model){
+    this.empty_view(this.list_view);
+    var items = new Items();
+    items.browser = this.browser;
+
+    this.list_view = new ListView({
+      collection: items,
+      el: '.right-panel .list',
+      browser: this.browser,
+      tabs: this,
+      paginate: true
+    });
+
+    this.list_view.on('render', function(){
+      this._render_list_root(model);
+    }.bind(this));
+
+    items.fetch_list_by_model_id(model.id, {
+      success: function(){
+        this.render_breadcrumb(items);
+      }.bind(this)
+    });
+  },
+
+  _render_list_root: function(model){
+    var root_model = this.root_model || model;
+    root_model && (root_model.is_root_model = true);
+    this.render_list_root(root_model);
+    this.root_model = null;
+  },
+
   render_list_root: function(model){
     model.browser = this.browser;
 
@@ -113,29 +144,8 @@ module.exports = Core.View.extend({
 
   },
 
-  render_list_view: function(model){
-    var items = new Items();
-    items.browser = this.browser;
-
-    this.list_view = new ListView({
-      collection: items,
-      el: '.right-panel .list',
-      browser: this.browser,
-      tabs: this,
-      paginate: true
-    }).render();
-
-    this.list_view.on('render', function(){
-      var root_model = this.root_model || model;
-      root_model && (root_model.is_root_model = true);
-      this.render_list_root(root_model);
-      this.root_model = null;
-    }.bind(this));
-
-    items.fetch_list_by_model_id(model.id);
-  },
-
   render_breadcrumb: function(collection){
+    this.empty_view(this.breadcrumb);
     this.breadcrumb = new BreadcrumbView({
       collection: collection.path,
       'el': '.breadcrumb-list',
@@ -144,6 +154,7 @@ module.exports = Core.View.extend({
   },
 
   render_preview: function(model){
+    this.empty_view(this.preview);
     this.preview = new PreviewView({
       context: {
         html: model.get('html') || '<h3>' + model.get('name') + '</h3>'
@@ -168,35 +179,46 @@ module.exports = Core.View.extend({
   $search: function(e){
     e.preventDefault();
 
-    this.render_search_tab();
+    this.render_search_result();
 
     return false;
   },
 
-  render_search_tab: function(model){
+  render_search_result: function(model){
     var items = new Items();
     items.browser = this.browser;
     // if user click on breadcrumb link we have a model
     if(model){
       items.fetch_list_by_model_id(model.id, {
         success: function(){
-          this._render_search_list_view(items);
-          this.render_search_breadcrumb(items);
+          this.search_success(items);
         }.bind(this)
       });
     }else{
       items.search_data({
-        data: this.serialize('form').params,
+        data: this.search_params(),
         success: function(){
-          this._render_search_list_view(items);
-          this.render_search_breadcrumb(items);
+          this.search_success(items);
         }.bind(this)
       });
     }
 
   },
 
-  _render_search_list_view: function(items){
+  search_params: function(){
+    return Core._.pick(this.serialize('form').params, 'searchText', 'limit', 'page');
+  },
+
+  empty_view: function(view){
+    view && view.empty();
+  },
+
+  search_success: function(items){
+    this.render_search_list_view(items);
+  },
+
+  render_search_list_view: function(items){
+    this.empty_view(this.search_list_view);
     this.search_list_view = new ListView({
       collection: items,
       el: '.right-panel .search-list',
@@ -204,6 +226,8 @@ module.exports = Core.View.extend({
       tabs: this,
       name: 'search'
     });
+
+    this.render_search_breadcrumb(items);
   },
 
   render_search_root_items: function(){
@@ -217,9 +241,11 @@ module.exports = Core.View.extend({
   },
 
   render_search_breadcrumb: function(collection){
+    this.empty_view(this.search_breadcrumb);
+
     this.change_breadcrumb_home(collection.path.first());
 
-    this.breadcrumb = new BreadcrumbView({
+    this.search_breadcrumb = new BreadcrumbView({
       collection: collection.path,
       'el': '.breadcrumb-search',
       tabs: this,

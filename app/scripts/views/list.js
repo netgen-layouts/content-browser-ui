@@ -24,13 +24,9 @@ module.exports = Core.View.extend({
 
   initialize: function(){
     Core.View.prototype.initialize.apply(this, arguments);
-
     this.context.columns = this.tabs.columns;
-
     Core.on('browser:click', this.hide_dropdown_menu);
-
-    this.listenTo(this.collection, 'reset', this.render.bind(this));
-
+    this.listenTo(this.collection, 'reset', this.render);
     return this;
   },
 
@@ -76,7 +72,11 @@ module.exports = Core.View.extend({
   },
 
   $change_page: function(e){
-    this.paginate(e);
+    if(this.name === 'search'){
+      this.paginate(e, this.tabs.search_params());
+    }else{
+      this.paginate(e);
+    }
   }
 
 });

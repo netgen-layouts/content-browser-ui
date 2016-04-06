@@ -21,56 +21,32 @@ module.exports = ListBaseView.extend({
     e.preventDefault();
     if(this.model.has_children()){
       if(this.parent.name === 'search'){
-        this.open_search_item();
+        this.render_search_result();
       }else{
         var result = this.parent.tabs.tree_view.click_item_by_id(this.model.id);
         if(!result){
-          this.open_list_item_with_root();
+          this.render_list_view();
         }
         this.setup_root_model();
       }
     }
   },
 
-  open_search_item: function(){
-    var items = new Items();
-    items.browser = this.parent.browser;
-
-    items.fetch_list_by_model_id(this.model.id, {
-      success: function(){
-        this.parent.collection.reset(items.models);
-        this.show_search_breadcrumb(items);
-        this.disable_search_panel();
-      }.bind(this)
-    });
+  render_search_result: function(){
+    this.parent.tabs.render_search_result(this.model);
+    this.disable_search_panel();
   },
 
   disable_search_panel: function(){
     $('.search-left-panel').find('*').prop('disabled', true);
   },
 
-  open_list_item_with_root: function(){
-    var items = new Items();
-    items.browser = this.parent.browser;
-
-    items.fetch_list_by_model_id(this.model.id, {
-      success: function(){
-        this.parent.collection.reset(items.models);
-        this.show_breadcrumb(items);
-      }.bind(this)
-    });
+  render_list_view: function(){
+    this.parent.tabs.render_list_view(this.model);
   },
 
   setup_root_model: function(){
     this.parent.tabs.root_model = this.model;
-  },
-
-  show_breadcrumb: function(collection){
-    this.parent.tabs.render_breadcrumb(collection);
-  },
-
-  show_search_breadcrumb: function(collection){
-    this.parent.tabs.render_search_breadcrumb(collection);
   }
 
 });

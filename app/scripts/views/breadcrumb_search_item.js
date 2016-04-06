@@ -11,10 +11,10 @@ module.exports = BreadcrumbItemView.extend({
     var tabs = this.parent.tabs;
 
     if(this.model.get('name').indexOf(Item.BREADCRUMB_TEXT) !== -1){
-      tabs.render_search_tab();
+      tabs.render_search_result();
       tabs.enable_search_panel();
     }else{
-      tabs.render_search_tab(this.model);
+      tabs.render_search_result(this.model);
       tabs.disable_search_panel();
     }
 
