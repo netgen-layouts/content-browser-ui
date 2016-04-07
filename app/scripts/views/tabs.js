@@ -41,7 +41,6 @@ module.exports = Core.View.extend({
   render: function(){
     Core.View.prototype.render.apply(this, arguments);
     this.$('#browser-tabs').browser_tabs();
-    $('#search').trigger('click'); // TODO: remove when you're done
     return this;
   },
 
@@ -254,7 +253,7 @@ module.exports = Core.View.extend({
   },
 
   change_breadcrumb_home: function(model){
-    model && model.set({ name: Item.BREADCRUMB_TEXT + ' "' + this.$('#search_text').val() + '"'});
+    model && model.set({ name: Item.BREADCRUMB_TEXT + ' "' + this.$('[name="searchText"]').val() + '"'});
   },
 
   disable_search_panel: function(){
