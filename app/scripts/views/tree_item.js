@@ -59,6 +59,15 @@ module.exports = Core.View.extend({
 
     this.render_list_view();
 
+    // don't call server because we don't have subcategories
+    if(!this.model.get('has_sub_categories')){
+      this.$el.addClass('loading').delay(200).queue(function(next){
+        this.add_open_tree_classes();
+        next();
+      }.bind(this));
+      return;
+    }
+
     var items = new Items();
     this.$el.addClass('loading');
     items.fetch_tree_by_model_id(this.model.id, {
@@ -69,9 +78,13 @@ module.exports = Core.View.extend({
     });
   },
 
-  render_tree: function(collection){
+  add_open_tree_classes: function(){
     this.$el.removeClass('loading');
     this.$el.addClass('open');
+  },
+
+  render_tree: function(collection){
+    this.add_open_tree_classes();
     this.model.loaded = true;
     this.open = true;
     this.parent.tabs.render_subtree(this.$('> ul'), collection);
