@@ -17,12 +17,16 @@ module.exports = Core.Collection.extend({
       last && last.set({last: true});
       last && (this.last_model = last);
       this.children_count = response.children_count;
-      this.children_limit = localStorage.getItem('default_limit') || Core.g.tree_config.get('default_limit');
+      this.children_limit = localStorage.getItem('default_limit') || this.tree_config.get('default_limit');
       this.children_offset = Math.floor(this.children_count / this.children_limit);
       return response.children;
     }else{
       return response;
     }
+  },
+
+  url: function(){
+    return Core.env.cb_base_url + this.tree_config.get('root_path') + '/browse';
   },
 
   fetch_root_by_model_id: function(id, options){
@@ -52,7 +56,7 @@ module.exports = Core.Collection.extend({
   },
 
   search_data: function(options){
-    var url = Core.env.cb_base_url + Core.g.tree_config.get('root_path') +'/search';
+    var url = Core.env.cb_base_url + this.tree_config.get('root_path') +'/search';
     options = this.setup_options(options);
     this.fetch(Core._.extend({
       url: url

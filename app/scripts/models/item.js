@@ -10,7 +10,7 @@ module.exports = Core.Model
     content_browser: true,
 
     path: function(){
-      return Core.g.tree_config.get('root_path') + '/browse';
+      return this.collection.tree_config.get('root_path') +  '/browse';
     },
 
     has_children: function(){

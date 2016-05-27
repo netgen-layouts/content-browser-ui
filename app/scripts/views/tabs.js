@@ -27,7 +27,7 @@ module.exports = Core.View.extend({
   initialize: function(){
     Core.View.prototype.initialize.apply(this, arguments);
 
-    this.sections = Core.g.tree_config.sections;
+    this.sections = this.browser.tree_config.sections;
 
     this.listenToOnce(this.collection, 'sync', this.render_root_item_views.bind(this));
 
@@ -104,6 +104,7 @@ module.exports = Core.View.extend({
   render_list_view: function(model){
     this.empty_view(this.list_view);
     var items = new Items();
+    items.tree_config = this.browser.tree_config;
     items.browser = this.browser;
 
     this.list_view = new ListView({

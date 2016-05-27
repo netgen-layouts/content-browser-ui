@@ -109,7 +109,7 @@ module.exports = function (grunt) {
           //  },
             browserify: {
               files: ['<%= yeoman.app %>/scripts/**/*.js'],
-              tasks: ['browserify:dev']
+              tasks: ['browserify:dev', 'browserify:demo']
             },
             sass: {
                 files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
@@ -285,6 +285,24 @@ module.exports = function (grunt) {
           dev: {
             src: ['<%= yeoman.app %>/scripts/main.js'],
             dest: '.tmp/scripts/main.js',
+            options: {
+              debug: true,
+              external: ['jquery', 'underscore', 'backbone'],
+              browserifyOptions:{
+                debug: true
+              },
+              alias: {
+                'core': './app/scripts/core-ui/core.js',
+                'core_boot': './app/scripts/core-ui/core_boot.js',
+                'core_tree': './app/scripts/core-ui/models/mixin/tree.js',
+                'core_pager': './app/scripts/core-ui/components/pager.js'
+              }
+            },
+          },
+
+          demo: {
+            src: ['<%= yeoman.app %>/scripts/demo.js'],
+            dest: '.tmp/scripts/demo.js',
             options: {
               debug: true,
               external: ['jquery', 'underscore', 'backbone'],
@@ -540,8 +558,7 @@ module.exports = function (grunt) {
         concurrent: {
             server: [
               'sass',
-              'browserify:dev',
-              'browserify:vendor'
+              'browserify'
             ],
             test: [
 

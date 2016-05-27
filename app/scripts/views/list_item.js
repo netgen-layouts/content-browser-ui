@@ -1,7 +1,6 @@
 'use strict';
 
 var ListBaseView = require('./list_base');
-var Items = require('../collections/items');
 
 module.exports = ListBaseView.extend({
 

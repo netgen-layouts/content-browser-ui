@@ -11,6 +11,18 @@ module.exports = Core.Model
 
     content_browser: true,
 
+    initialize: function(){
+      Core.Model.prototype.initialize.apply(this, arguments);
+      this.on('read:success', this.setup);
+      return this;
+    },
+
+    setup: function(){
+      this.save_default_limit();
+      this.save_available_columns();
+      return this;
+    },
+
     path: function(){
       return this.get('root_path') + '/config';
     },
@@ -34,6 +46,7 @@ module.exports = Core.Model
       if(!response.sections){ return; }
 
       this.sections = new Items();
+      this.tree_config = this;
       this.sections.add(response.sections);
       this.sections.models.forEach(function(model){
         // we use this property for initial root list item
