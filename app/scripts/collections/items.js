@@ -63,6 +63,16 @@ module.exports = Core.Collection.extend({
     }, options));
   },
 
+  fetch_selected_items: function(ids){
+    var url = Core.env.cb_base_url + this.tree_config.get('root_path') + '/values';
+    return this.fetch({
+      url: url,
+      data: {
+        values: ids.join(',')
+      }
+    });
+  },
+
   setup_options: function(options){
     options = options || {};
     options.data = Core._.extend({}, options.data, {

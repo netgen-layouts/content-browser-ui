@@ -24,6 +24,7 @@ module.exports = Core.Modal.extend({
     Core.Modal.prototype.initialize.apply(this, arguments);
 
     this.tree_config = new TreeConfig(options.tree_config);
+    this.preselected_item_ids = options.preselected_item_ids;
 
     this.tree_collection = options.tree_collection || new Items();
     this.selected_collection = new Items();
@@ -72,8 +73,20 @@ module.exports = Core.Modal.extend({
   load_and_open: function(){
     this.tree_config.fetch().done(function(){
       var default_location = this.tree_config.default_location();
-      this.tree_collection.fetch_root_by_model_id(default_location.id);
-      this.open();
+
+      $.when(
+        this.tree_collection.fetch_root_by_model_id(default_location.id),
+        this.preselected_item_ids ? this.selected_collection.fetch_selected_items(this.preselected_item_ids) : true
+
+      ).then(this.open.bind(this), function(){
+        alert('Error while loading content browser');
+      });
+
+      // this.selected_collection.fetch_selected_items([1,2,3]).fail(function(){
+      //   this.open();
+      // }.bind(this));
+
+
     }.bind(this));
 
     return this;
