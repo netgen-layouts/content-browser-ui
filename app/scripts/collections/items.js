@@ -13,6 +13,8 @@ module.exports = Core.Collection.extend({
   parse: function(response){
     if(response.children){
       this.path = new Breadcrumbs(response.path);
+      this.path.items_collection = this;
+
       var last = this.path.last();
       last && last.set({last: true});
       last && (this.last_model = last);

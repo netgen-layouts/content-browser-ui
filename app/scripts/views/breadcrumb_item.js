@@ -18,21 +18,17 @@ module.exports = Core.View.extend({
 
   $open: function(e){
     e.preventDefault();
+    var tree_config = this.model.collection.items_collection.tree_config,
+        tabs = this.parent.tabs;
 
-    var tabs = this.parent.tabs;
-
-    console.log(this.model.attributes);
-
-    if(Core.g.tree_config.is_in_root_item(this.model.id)){
+    if(tree_config.is_in_root_item(this.model.id)){
       var $item = $('option[data-id="' + this.model.id + '"]');
       if($item.length === 0){ return false; }
       $item.prop('selected', true);
       $item.parent().change();
     }else{
       var result = tabs.tree_view.click_item_by_id(this.model.id);
-      if(!result){
-        tabs.render_list_view(this.model);
-      }
+      !result && tabs.render_list_view(this.model);
     }
   }
 

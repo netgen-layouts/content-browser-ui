@@ -9,6 +9,10 @@ module.exports = Core.Model
 
     content_browser: true,
 
+    index: [
+      ['value']
+    ],
+
     path: function(){
       return this.collection.tree_config.get('root_path') +  '/browse';
     },
@@ -52,7 +56,7 @@ module.exports = Core.Model
     },
 
     is_checked: function(){
-      return this.selected_collection().get(this.id);
+      return this.selected_collection().where({value: this.get('value')});
     },
 
     selected_collection: function(){

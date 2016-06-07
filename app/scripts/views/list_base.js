@@ -16,18 +16,16 @@ module.exports = Core.View.extend({
   initialize: function(){
     Core.View.prototype.initialize.apply(this, arguments);
     this.setup_dom();
-    if(this.model.is_checked()){
-      this.check_item();
-    }
-
+    this.model.is_checked() && this.check_item();
     this.context.columns = this.browse_tab().columns;
-
     return this;
   },
 
   setup_dom: function(){
-    this.$el.attr('data-id', this.model.id);
-    this.$el.attr('data-type', this.model.type());
+    this.$el.attr({
+      'data-id': this.model.id,
+      'data-type': this.model.type()
+    });
   },
 
   render: function(){
