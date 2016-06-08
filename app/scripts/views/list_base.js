@@ -18,6 +18,9 @@ module.exports = Core.View.extend({
     this.setup_dom();
     this.model.is_checked() && this.check_item();
     this.context.columns = this.browse_tab().columns;
+    this.listenTo(this.model, 'check', this.check_item)
+    this.listenTo(this.model, 'uncheck', this.uncheck_item)
+    console.warn('initialize', this.model.id)
     return this;
   },
 
@@ -29,6 +32,7 @@ module.exports = Core.View.extend({
   },
 
   render: function(){
+    console.info("list_item", this);
     Core.View.prototype.render.apply(this, arguments);
     this.hide_columns_by_visibility();
     return this;
@@ -46,14 +50,7 @@ module.exports = Core.View.extend({
   },
 
   $toogle_select: function(){
-    if(this.model.is_checked()){
-      this.uncheck_item();
-      this.model.uncheck();
-    }else{
-      this.check_item();
-      this.model.check();
-    }
-    Core.trigger('item:check_changed', this.model);
+    this.model.is_checked() ? this.model.uncheck() : this.model.check();
   },
 
   uncheck_item: function(){

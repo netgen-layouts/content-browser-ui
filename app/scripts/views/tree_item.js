@@ -36,6 +36,7 @@ module.exports = Core.View.extend({
   },
 
   toggle_tree: function(e){
+    console.warn('toggl');
     e.stopPropagation();
 
     if(!this.is_open()){
@@ -59,6 +60,7 @@ module.exports = Core.View.extend({
 
     this.render_list_view();
 
+
     // don't call server because we don't have subcategories
     if(!this.model.get('has_sub_categories')){
       this.$el.addClass('loading').delay(200).queue(function(next){
@@ -68,11 +70,16 @@ module.exports = Core.View.extend({
       return;
     }
 
+
+
+    //For tree subitems
     var items = new Items();
-    this.$el.addClass('loading');
+    items.browser = this.model.collection.browser;
+    // this.$el.addClass('loading');
     items.fetch_tree_by_model_id(this.model.id, {
       success: function(){
-        this.render_tree(items);
+        console.log('fetch_tree_by_model_id<<<<<<<<<<<<<<<<<<<<<<<<<')
+        //this.render_tree(items);
         this.show_breadcrumb(items);
       }.bind(this)
     });
@@ -99,7 +106,7 @@ module.exports = Core.View.extend({
   },
 
   show_breadcrumb: function(collection){
-    this.parent.tabs.render_breadcrumb(collection);
+    //this.parent.tabs.render_breadcrumb(collection);
   }
 
 

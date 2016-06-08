@@ -24,14 +24,17 @@ module.exports = Core.Modal.extend({
     Core.Modal.prototype.initialize.apply(this, arguments);
 
     this.tree_config = new TreeConfig(options.tree_config);
-    this.preselected_item_ids = options.preselected_item_ids;
+    this.disabled_item_ids = options.disabled_item_ids;
 
     this.tree_collection = options.tree_collection || new Items();
     this.selected_collection = new Items();
 
+    this.selected_collection.browser = this;
+    this.tree_collection.browser = this;
+
     this.tree_collection.tree_config = this.selected_collection.tree_config = this.tree_config;
 
-    this.listenTo(this.selected_collection, 'add remove', this.render_selected_items.bind(this));
+    this.listenTo(this.selected_collection, 'check uncheck', this.render_selected_items.bind(this));
 
     this.on('open', function(){
       this.render_tabs_view();
@@ -41,6 +44,7 @@ module.exports = Core.Modal.extend({
   },
 
   render_tabs_view: function(){
+    console.info("render_tabs_view");
     var columns = new Columns();
     columns.suffix = this.tree_config.get('root_path');
     columns.fetch();
@@ -52,14 +56,16 @@ module.exports = Core.Modal.extend({
       columns: columns
     }).render();
 
-  },
-
-  render_selected_items: function(){
     this.selected_items = new SelectedItemsView({
       collection: this.selected_collection,
       el: '.selected-items',
       browser: this,
     }).render();
+
+  },
+
+  render_selected_items: function(){
+    this.selected_items && this.selected_items.render();
   },
 
   selected_values: function(){
@@ -75,16 +81,12 @@ module.exports = Core.Modal.extend({
       var default_location = this.tree_config.default_location();
 
       $.when(
-        this.tree_collection.fetch_root_by_model_id(default_location.id),
-        this.preselected_item_ids ? this.selected_collection.fetch_selected_items(this.preselected_item_ids) : true
+        this.tree_collection.fetch_root_by_model_id(default_location.id)
+        //this.preselected_item_ids ? this.selected_collection.fetch_selected_items(this.preselected_item_ids) : true
 
       ).then(this.open.bind(this), function(){
         alert('Error while loading content browser');
       });
-
-      // this.selected_collection.fetch_selected_items([1,2,3]).fail(function(){
-      //   this.open();
-      // }.bind(this));
 
 
     }.bind(this));

@@ -28,7 +28,7 @@ module.exports = Core.Collection.extend({
   },
 
   url: function(){
-    return Core.env.cb_base_url + this.tree_config.get('root_path') + '/browse';
+    return Core.env.cb_base_url + this.browser.tree_config.get('root_path') + '/browse';
   },
 
   fetch_root_by_model_id: function(id, options){
@@ -58,7 +58,7 @@ module.exports = Core.Collection.extend({
   },
 
   search_data: function(options){
-    var url = Core.env.cb_base_url + this.tree_config.get('root_path') +'/search';
+    var url = Core.env.cb_base_url + this.browser.tree_config.get('root_path') +'/search';
     options = this.setup_options(options);
     this.fetch(Core._.extend({
       url: url

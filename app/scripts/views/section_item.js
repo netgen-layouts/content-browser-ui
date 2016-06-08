@@ -9,12 +9,8 @@ module.exports = Core.View.extend({
 
   initialize: function(){
     Core.View.prototype.initialize.apply(this, arguments);
-    this.setup_dom();
-    return this;
-  },
-
-  setup_dom: function(){
     this.$el.attr('data-id', this.model.id);
+    return this;
   }
 
 });

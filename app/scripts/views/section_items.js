@@ -12,12 +12,12 @@ module.exports = Core.View.extend({
   prevent_auto_render: true,
 
   events : {
-  'change' : '$open_root_location'
+    'change' : '$open_root_location'
   },
 
   initialize: function(){
     Core.View.prototype.initialize.apply(this, arguments);
-    console.log(this.collection);
+    console.log('section_items', this.collection);
     this.show_preview_for_first_item();
     return this;
   },
@@ -30,18 +30,14 @@ module.exports = Core.View.extend({
   $open_root_location: function(e){
     e.preventDefault();
 
-    var items = this.tabs.collection,
-        model = this.$('option:selected').data('_view').model;
-
-    items.fetch_root_by_model_id(model.id);
+    var model = this.$('option:selected').data('_view').model;
 
     // select root item by id
     this.collection.select_model_by_id(model.id);
 
-    this.show_preview(model);
-  },
+    this.tabs.list_items.fetch_list_by_model_id(model.id);
+    this.tabs.collection.fetch_root_by_model_id(model.id);
 
-  show_preview: function(model){
     this.tabs.render_preview(model);
   }
 

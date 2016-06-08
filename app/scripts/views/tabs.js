@@ -26,47 +26,34 @@ module.exports = Core.View.extend({
 
   initialize: function(){
     Core.View.prototype.initialize.apply(this, arguments);
-
     this.sections = this.browser.tree_config.sections;
 
-    this.listenToOnce(this.collection, 'sync', this.render_root_item_views.bind(this));
+    this.list_items = new Items();
+    this.list_items.tree_config = this.browser.tree_config;
+    this.list_items.browser = this.browser;
 
-    this.listenTo(this.collection, 'sync', this.render_browse_tab.bind(this));
-
-    Core.on('item:check_changed', this.toggle_selected_list_item.bind(this));
-
+    this.listenTo(this.list_items, 'read:success', this.on_list_items_success);
+    // this.listenTo(this.list_items, 'all', function(e){
+    //   console.log(e);
+    // });
+    this.listenTo(this.collection, 'read:success', this.set_preview_height);
+    // this.listenToOnce(this.collection, 'read:success', this.render_browse_tab);
+    // this.listenTo(Core, 'browser:select_item', this.render_list_view)
     return this;
   },
 
   render: function(){
     Core.View.prototype.render.apply(this, arguments);
     this.$('#browser-tabs').browser_tabs();
+    this.setup_list_view();
+    this.render_root_items();
+    this.render_search_root_items();
+    this.render_tree();
+    this.render_list_view();
+    this.set_preview_height();
     return this;
   },
 
-  toggle_selected_list_item: function(model){
-    var tr = 'tr[data-id="' + model.id + '"]';
-    if(model.is_checked()){
-      this.list_view.$(tr) && this.list_view.$(tr).data('_view').check_item();
-      this.search_list_view && this.search_list_view.$(tr).length &&
-        this.search_list_view.$(tr).data('_view').check_item();
-    }else{
-      this.list_view.$(tr) && this.list_view.$(tr).data('_view').uncheck_item();
-      this.search_list_view && this.search_list_view.$(tr) &&
-        this.search_list_view.$(tr).data('_view').uncheck_item();
-    }
-  },
-
-  render_root_item_views: function(){
-    this.render_root_items();
-    this.render_search_root_items();
-  },
-
-  render_browse_tab: function(){
-    var model = this.sections.selected_model();
-    this.render_tree();
-    this.render_list_view(model);
-  },
 
   render_root_items: function(){
     this.root_items_view = new SectionItemsView({
@@ -100,29 +87,40 @@ module.exports = Core.View.extend({
     return this;
   },
 
-  render_list_view: function(model){
-    this.empty_view(this.list_view);
-    var items = new Items();
-    items.tree_config = this.browser.tree_config;
-    items.browser = this.browser;
+
+  setup_list_view: function(){
+    console.info("setup_list_view");
 
     this.list_view = new ListView({
-      collection: items,
+      collection: this.list_items,
       el: '.right-panel .list',
       browser: this.browser,
       tabs: this,
       paginate: true
     });
 
+    //Root model
+    this.list_view.root_model = this.sections.selected_model();
+
     this.list_view.on('render', function(){
-      this._render_list_root(model);
+      this._render_list_root(this.list_view.root_model);
     }.bind(this));
 
-    items.fetch_list_by_model_id(model.id, {
-      success: function(){
-        this.render_breadcrumb(items);
-      }.bind(this)
-    });
+    return this;
+  },
+
+  on_list_items_success: function(){
+    this.render_breadcrumb(this.list_items);
+    return this;
+  },
+
+
+  render_list_view: function(model){
+    console.info("items.fetch_list_by_model_id");
+    this.list_view.root_model = this.sections.selected_model();
+    var items = this.list_view.collection;
+    model || (model = this.list_view.root_model);
+    this.list_items.fetch_list_by_model_id(model.id);
   },
 
   _render_list_root: function(model){
@@ -147,7 +145,7 @@ module.exports = Core.View.extend({
     this.empty_view(this.breadcrumb);
     this.breadcrumb = new BreadcrumbView({
       collection: collection.path,
-      'el': '.breadcrumb-list',
+      el: '.breadcrumb-list',
       tabs: this
     }).render();
   },

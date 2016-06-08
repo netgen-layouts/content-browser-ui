@@ -2,6 +2,7 @@
 
 var Core = require('core_boot');
 var MixinTree = require('core_tree');
+var _ = require('underscore');
 
 module.exports = Core.Model
   .extend(MixinTree)
@@ -47,21 +48,30 @@ module.exports = Core.Model
 
     check: function(){
       this.selected_collection().add(this);
+      this.trigger('check');
       return this;
     },
 
     uncheck: function(){
       this.selected_collection().remove(this);
+      this.trigger('uncheck');
       return this;
     },
 
     is_checked: function(){
-      return this.selected_collection().where({value: this.get('value')});
+      return this.selected_collection().where({value: this.get('value')}).length;
+    },
+
+    is_disabled: function(){
+      return _.contains(this.get_browser().disabled_item_ids, this.get('value'));
+    },
+
+    get_browser: function(){
+      return this.browser || (this.collection && this.collection.browser);
     },
 
     selected_collection: function(){
-      return (this.collection && this.collection.browser && this.collection.browser.selected_collection) ||
-        (this.browser && this.browser.selected_collection);
+      return this.get_browser().selected_collection;
     }
 
   }, {
