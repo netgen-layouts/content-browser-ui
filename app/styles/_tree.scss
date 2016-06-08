@@ -1,0 +1,122 @@
+.browser {
+  .tree {
+    list-style-type:none;
+    margin:0;
+    padding:0;
+    li {
+      font-size:0.875em;
+      ul {
+        display: none;
+      }
+      a {
+        cursor:pointer;
+        text-decoration:none;
+        color:#fff;
+        padding: 2px 3px;
+      }
+      &.item {
+        line-height:24px;
+        position:relative;
+        padding-left:18px;
+        list-style:none;
+        > a {
+          padding-left: 22px;
+          position:relative;
+          font-weight:200;
+          &::before {
+            @extend %fontawesome;
+            content:"\f07b";
+            position:absolute;
+            left:0;
+            top:4px;
+            color:#222;
+          }
+        }
+        &.selected {
+          > a {
+            color:$highlightcolor;
+          }
+        }
+      }
+      &.has_children {
+        &::before {
+          @extend %fontawesome;
+          content:"\f0fe";
+          position:absolute;
+          left:0;
+          color:#fff;
+          font-size:0.7857142857em;
+          top:0.5em;
+          cursor:pointer;
+        }
+        &.open {
+          &::before {
+            content:"\f146";
+          }
+        }
+      }
+      &.open {
+        > a {
+          &::before {
+            content:"\f07c";
+          }
+        }
+        > ul { display: block; }
+      }
+      &.loading {
+        > a {
+          &::before {
+            content:"\f110";
+            animation:load-spin 1.5s infinite linear;
+          }
+        }
+      }
+    }
+  }
+  .tree-panel {
+    display:flex;
+    flex-direction:column;
+    select {
+      border-radius:0;
+      border:none;
+      margin:0;
+      background:$asideinput url('../images/caret-down.svg') no-repeat;
+      background-position:right 0.5714285714em center;
+      background-size:0.9285714286em auto;
+      height:2.5714285714em;
+      font-size:0.875em;
+      padding:0 2.25em 0 0.5em;
+      color:#fff;
+      -webkit-appearance:none;
+      -moz-appearance:none;
+      appearance:none;
+      width:100%;
+      &[multiple] {
+        height:auto;
+        padding-top:0.25em;
+        padding-bottom:0.25em;
+        padding-left:0;
+        background-position:right 0.5714285714em top 0.7em;
+        option {
+        }
+      }
+    }
+    option {
+      padding:0.125em 0.5em;
+    }
+    .panel {
+      flex-grow:1;
+      background:$asideinput;
+      padding:$gutter;
+    }
+  }
+}
+
+@keyframes load-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(359deg);
+  }
+}

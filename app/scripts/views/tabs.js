@@ -60,7 +60,6 @@ module.exports = Core.View.extend({
   render_root_item_views: function(){
     this.render_root_items();
     this.render_search_root_items();
-    this.set_preview_height();
   },
 
   render_browse_tab: function(){
@@ -163,16 +162,9 @@ module.exports = Core.View.extend({
     }).render();
   },
 
-  set_preview_height: function(){
-    var $panel = this.$('.preview-panel .panel');
-    $panel.height($panel.closest('.modal-body').height() - 22); // padding and border of .preview-panel .panel
-  },
-
   $toggle_preview: function(){
     this.$('.preview-panel').toggle();
-    this.$('.list-panel')
-      .toggleClass('col-md-7')
-      .toggleClass('col-md-9');
+    this.$('.btn-preview .fa').toggleClass('fa-toggle-on').toggleClass('fa-toggle-off');
   },
 
   /* Search */

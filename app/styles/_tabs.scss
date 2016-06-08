@@ -1,0 +1,31 @@
+.browser-tabs-control {
+  background:$headerbg;
+  padding:$gutter;
+  margin:0;
+  list-style-type:none;
+  li {
+    display:inline-block;
+    padding:0;
+    margin:0;
+    float:left;
+    a {
+      font-size:0.875em;
+      display:block;
+      border:1px solid $headerbg2;
+      color:#fff;
+      padding:0.42857em 2.5em;
+      cursor:pointer;
+      text-decoration:none;
+    }
+    &.active {
+      a {
+        background:$headerbg2;
+      }
+    }
+  }
+  &::after {
+    clear:both;
+    content:"";
+    display:table;
+  }
+}

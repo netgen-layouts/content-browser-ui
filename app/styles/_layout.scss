@@ -1,0 +1,145 @@
+.browser{
+  .modal-content {
+    font-size:16px;
+    font-family:'Open Sans', Helvetica, Arial, sans-serif;
+    background:#f2f2f2;
+    border-radius:0;
+    border:none;
+  }
+  .modal-header {
+    background:#fff;
+    border:none;
+    min-height:64px;
+    .modal-title {
+      font-size:1.5em;
+    }
+  }
+  .modal-body {
+    padding:$gutter;
+    h1{
+      font-size: 24px;
+      margin-top: -56px;
+      margin-bottom: 40px;
+    }
+    .actions{
+      display: none;
+    }
+  }
+  .modal-footer {
+    padding:$gutter 0;
+    margin:0 $gutter;
+    border-top:1px solid #fff;
+  }
+  .modal-dialog {
+    width:98%;
+    margin:1%;
+  }
+  a {
+    color:$linkColor;
+  }
+  .btn-primary {
+    background:$btnprimary;
+    border-color:$btnprimary;
+    &:hover,
+    &:focus,
+    &.focus {
+      background:darken($btnprimary, 5%);
+      border-color:darken($btnprimary, 5%);
+    }
+  }
+  .btn-link {
+    color:$btnprimary;
+    &:hover,
+    &:focus,
+    &.focus {
+      color:darken($btnprimary, 5%);
+    }
+  }
+
+  .panel{
+    min-height:400px;
+    max-height:600px;
+    overflow-y:scroll;
+    margin:0;
+    padding:0;
+    border-radius:0;
+    box-shadow:none;
+    border:none;
+    background:transparent;
+  }
+  .header-col {
+    padding: 0 0 $gutter;
+  }
+  .breadcrumb {
+    padding:0.375em 0;
+    margin:0;
+    background:transparent;
+    border-radius:0;
+    > li {
+      font-size:0.875em;
+      + li:before {
+        content:"/";
+        padding:0 0.3125em 0 0.625em;
+        color:#999;
+      }
+    }
+  }
+  .breadcrumb-list {
+    float: left;
+  }
+  .breadcrumb-search {
+    margin-left: 20px;
+    display: inline-block;
+  }
+  .btn {
+    height:$btnHeight;
+  }
+  .btn-group {
+    float:right;
+  }
+  .btn:focus {
+    background-color: #fff;
+    outline: none;
+  }
+  .select {
+    height: $btnHeight;
+    padding: 6px 12px;
+    margin: 0;
+    border: 1px solid #ccc;
+    width: 100%;
+    border-radius: 0;
+    background-color: #fff;
+    &:focus{
+      outline: none;
+    }
+  }
+  .browse-panels {
+    display:flex;
+    .tree-panel {
+      flex-basis:25%;
+      background:$asidebg;
+      padding:$gutter;
+    }
+    .list-panel {
+      flex-grow:1;
+      padding:$gutter;
+    }
+    .preview-panel {
+      flex-basis:20%;
+      padding:$gutter;
+      background:#fff;
+    }
+  }
+
+  .btn-preview {
+    font-size:12px;
+    background:transparent !important;
+    padding:0;
+    .fa {
+      font-size:18px;
+      margin-left:4px;
+      color:#333;
+      vertical-align:middle;
+    }
+  }
+}

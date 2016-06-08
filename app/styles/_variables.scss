@@ -1,0 +1,22 @@
+// colors
+$asidebg: hsl(210, 12, 23);
+$asideinput: hsl(211, 13, 34);
+$headerbg: hsl(0, 0, 18);
+$headerbg2: hsl(210, 15, 32);
+$headerColor: hsl(0, 0, 95);
+$linkColor: hsl(212, 72, 59);
+$btnprimary: $linkColor;
+$highlightcolor: hsl(50, 90, 50);
+
+// dimensions
+$gutter: 15px;
+$btnHeight: 34px;
+
+%fontawesome {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
