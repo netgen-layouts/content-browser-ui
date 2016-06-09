@@ -29,12 +29,14 @@ module.exports = Core.Modal.extend({
     this.tree_collection = options.tree_collection || new Items();
     this.selected_collection = new Items();
 
+    window.tmp = this.selected_collection
+
     this.selected_collection.browser = this;
     this.tree_collection.browser = this;
 
     this.tree_collection.tree_config = this.selected_collection.tree_config = this.tree_config;
 
-    this.listenTo(this.selected_collection, 'check uncheck', this.render_selected_items.bind(this));
+    // this.listenTo(this.selected_collection, 'check uncheck', this.render_selected_items.bind(this));
 
     this.on('open', function(){
       this.render_tabs_view();
@@ -44,7 +46,6 @@ module.exports = Core.Modal.extend({
   },
 
   render_tabs_view: function(){
-    console.info("render_tabs_view");
     var columns = new Columns();
     columns.suffix = this.tree_config.get('root_path');
     columns.fetch();

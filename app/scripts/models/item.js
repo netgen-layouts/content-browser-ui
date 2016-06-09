@@ -47,14 +47,17 @@ module.exports = Core.Model
     },
 
     check: function(){
+      this.trigger('checked', this);
       this.selected_collection().add(this);
-      this.trigger('check');
+      Core.trigger('browser:check', this.get('value'))
       return this;
     },
 
     uncheck: function(){
+      this.trigger('unchecked', this);
       this.selected_collection().remove(this);
-      this.trigger('uncheck');
+      console.log('core trigger', this.get('value'));
+      Core.trigger('browser:uncheck', this.get('value'))
       return this;
     },
 
@@ -72,7 +75,24 @@ module.exports = Core.Model
 
     selected_collection: function(){
       return this.get_browser().selected_collection;
-    }
+    },
+
+    //For tree
+    fetch_children: function(){
+      var items = new this.collection.constructor();
+      items.browser = this.collection.browser;
+      this.loaded_children = items;
+      items.on('categories:success', function(e){
+        this.trigger('categories:success');
+      }.bind(this))
+
+      items.on('categories:error', function(e){
+        this.trigger('categories:error');
+      }.bind(this))
+
+      return items.fetch_tree_by_model_id(this.id);
+    },
+
 
   }, {
     BREADCRUMB_TEXT: 'Search for'

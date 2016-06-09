@@ -50,7 +50,7 @@ module.exports = Core.View.extend({
     this.render_search_root_items();
     this.render_tree();
     this.render_list_view();
-    this.set_preview_height();
+    // this.set_preview_height();
     return this;
   },
 
@@ -89,8 +89,6 @@ module.exports = Core.View.extend({
 
 
   setup_list_view: function(){
-    console.info("setup_list_view");
-
     this.list_view = new ListView({
       collection: this.list_items,
       el: '.right-panel .list',
@@ -116,11 +114,13 @@ module.exports = Core.View.extend({
 
 
   render_list_view: function(model){
-    console.info("items.fetch_list_by_model_id");
     this.list_view.root_model = this.sections.selected_model();
     var items = this.list_view.collection;
     model || (model = this.list_view.root_model);
-    this.list_items.fetch_list_by_model_id(model.id);
+    this.list_items.fetch_list_by_model_id(model.id)
+        .done(function(){
+          model.trigger('children:success');
+        });
   },
 
   _render_list_root: function(model){

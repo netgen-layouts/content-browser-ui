@@ -32,27 +32,28 @@ module.exports = Core.Collection.extend({
   },
 
   fetch_root_by_model_id: function(id, options){
-    this._fetch_data(id, 'categories', options);
+    return this._fetch_data(id, 'categories', options);
   },
 
   fetch_tree_by_model_id: function(id, options){
-    this._fetch_data(id, 'categories', options);
+    return this._fetch_data(id, 'categories', options);
   },
 
   fetch_list_by_model_id: function(id, options){
     id = id || this.request.read.id;
     options = this.setup_options(options);
     options.data.id = id;
-    this._fetch_data(id, 'children', options);
+    return this._fetch_data(id, 'children', options);
   },
 
   fetch_list: function(options){
-    this.fetch_list_by_model_id(null, options);
+    return this.fetch_list_by_model_id(null, options);
   },
 
   _fetch_data: function(id, postfix, options){
     var url = this.url() + '/' + id + '/' + postfix;
-    this.fetch(Core._.extend({
+    return this.fetch(Core._.extend({
+      via: postfix,
       url: url
     }, options));
   },
@@ -60,7 +61,7 @@ module.exports = Core.Collection.extend({
   search_data: function(options){
     var url = Core.env.cb_base_url + this.browser.tree_config.get('root_path') +'/search';
     options = this.setup_options(options);
-    this.fetch(Core._.extend({
+    return this.fetch(Core._.extend({
       url: url
     }, options));
   },

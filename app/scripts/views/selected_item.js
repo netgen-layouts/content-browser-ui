@@ -6,12 +6,6 @@ module.exports = Core.View.extend({
   tagName: 'li',
   template: 'selected_item',
 
-  initialize: function(){
-    Core.View.prototype.initialize.apply(this, arguments);
-    this.listenTo(this.model, 'uncheck', this.remove);
-    return this;
-  },
-
   events: {
     'click a': '$remove_item'
   },

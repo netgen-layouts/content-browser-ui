@@ -9,8 +9,8 @@ module.exports = Core.View.extend({
   className: 'item',
 
   events:{
-    'click': 'toggle_tree',
-    'click a': 'open_tree'
+    'click': '$toggle',
+    'click a': '$select'
   },
 
   limit: 3,
@@ -18,32 +18,68 @@ module.exports = Core.View.extend({
 
   initialize: function(){
     Core.View.prototype.initialize.apply(this, arguments);
+    this.listenTo(this.model, 'categories:success', this.load_subtree);
+    this.listenTo(this.model, 'children:success', this.unmark_loading);
     this.setup_dom();
     return this;
   },
 
   setup_dom: function(){
-    if(this.model.has_sub_categories()){
-      this.$el.addClass('has_children');
-    }
-
-    this.$el.attr('data-id', this.model.id);
-    this.$el.attr('data-type', this.model.type());
+    this.model.has_sub_categories() && this.$el.addClass('has_children');
+    this.$el.attr({
+      'data-id': this.model.id,
+      'data-type': this.model.type()
+    });
   },
 
-  is_open: function(){
-    return this.$el.hasClass('open');
-  },
-
-  toggle_tree: function(e){
-    console.warn('toggl');
+  $toggle: function(e){
     e.stopPropagation();
 
-    if(!this.is_open()){
-      this.open_tree(e);
+    this.select_tree_item();
+
+    if(this.opened){
+      this.unmark_opended();
     }else{
-      this.$el.toggleClass('open');
+      this.mark_loading();
+      this.open();
     }
+  },
+
+  $select: function(e){
+    e.stopPropagation();
+    if(this.opened){return;}
+    this.mark_loading();
+    this.select_tree_item();
+    this.render_list_view();
+    return this;
+  },
+
+  open: function(){
+    this.mark_opened()
+    this.show_preview();
+    this.render_list_view();
+    this.model.get('has_sub_categories') && this.model.fetch_children();
+    return this;
+  },
+
+  mark_opened: function(){
+    this.$el.addClass('open');
+    this.opened = true;
+    return this;
+  },
+
+  unmark_opended: function(){
+    this.$el.removeClass('open');
+    this.opened = false;
+    return this;
+  },
+
+  mark_loading: function(){
+    this.$el.addClass('loading');
+  },
+
+  unmark_loading: function(){
+    this.$el.removeClass('loading');
   },
 
   select_tree_item: function(){
@@ -51,49 +87,14 @@ module.exports = Core.View.extend({
     this.$el.addClass('selected');
   },
 
-  open_tree: function(e){
-    e.stopPropagation();
-
-    this.select_tree_item();
-
-    this.show_preview();
-
-    this.render_list_view();
-
-
-    // don't call server because we don't have subcategories
-    if(!this.model.get('has_sub_categories')){
-      this.$el.addClass('loading').delay(200).queue(function(next){
-        this.add_open_tree_classes();
-        next();
-      }.bind(this));
-      return;
-    }
-
-
-
-    //For tree subitems
-    var items = new Items();
-    items.browser = this.model.collection.browser;
-    // this.$el.addClass('loading');
-    items.fetch_tree_by_model_id(this.model.id, {
-      success: function(){
-        console.log('fetch_tree_by_model_id<<<<<<<<<<<<<<<<<<<<<<<<<')
-        //this.render_tree(items);
-        this.show_breadcrumb(items);
-      }.bind(this)
-    });
-  },
-
-  add_open_tree_classes: function(){
-    this.$el.removeClass('loading');
-    this.$el.addClass('open');
+  load_subtree: function(){
+    this.render_tree(this.model.loaded_children);
+    return this;
   },
 
   render_tree: function(collection){
-    this.add_open_tree_classes();
+    this.mark_opened();
     this.model.loaded = true;
-    this.open = true;
     this.parent.tabs.render_subtree(this.$('> ul'), collection);
   },
 
@@ -103,10 +104,6 @@ module.exports = Core.View.extend({
 
   show_preview: function(){
     this.parent.tabs.render_preview(this.model);
-  },
-
-  show_breadcrumb: function(collection){
-    //this.parent.tabs.render_breadcrumb(collection);
   }
 
 
