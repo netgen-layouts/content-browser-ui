@@ -34,13 +34,6 @@ $icon-font-path: "../fonts/bootstrap/";
           content: "\e013";
         }
       }
-
-      &:disabled + label {
-        & i:before {
-          color: gray;
-        }
-      }
-
     }
   }
   .right-panel{
@@ -105,6 +98,12 @@ input[type="checkbox"] {
     i::before {
       content: "\f046";
       color: green;
+    }
+  }
+
+  &:disabled + label {
+    i::before {
+      color: gray;
     }
   }
 }
