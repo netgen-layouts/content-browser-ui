@@ -8,39 +8,51 @@ $icon-font-path: "../fonts/bootstrap/";
 @import "list";
 
 .browser {
-  .dropdown-menu {
-    position:absolute;
-    input[type="checkbox"] {
-      & + label{
-        padding-left: 28px;
-        &:hover{
-          background-color: #efefef;
-        }
-        & i {
-          top: 7px;
-          left: 8px;
-          font-size: 12px;
-        }
-      }
-      &:not(:checked) + label {
-        & i:before {
-          content: "";
-        }
-      }
-      &:checked + label{
-        & i:before {
-          color: #333;
-          content: "\e013";
-        }
-      }
-    }
-  }
   .right-panel{
     position: relative;
     padding: 0px;
     border: none;
     .no-content{
       padding: 10px;
+    }
+  }
+  input[type="checkbox"] {
+    & + label {
+      display:block;
+      position:relative;
+      padding:5px 5px 5px 20px;
+      margin-bottom:0px;
+      cursor:pointer;
+      font-weight:normal;
+      &::before {
+        position:absolute;
+        top:9px;
+        left:0px;
+        font-size:14px;
+        color:gray;
+        @extend %fontawesome;
+      }
+    }
+    &:not(:checked), &:checked {
+      position: absolute;
+      left: -9999px;
+    }
+    &:not(:checked) + label {
+      &::before {
+        content: "\f096";
+      }
+    }
+    &:checked + label {
+      &::before {
+        content: "\f046";
+        color: green;
+      }
+    }
+
+    &:disabled + label {
+      &::before {
+        color: gray;
+      }
     }
   }
 }
@@ -54,50 +66,6 @@ $icon-font-path: "../fonts/bootstrap/";
   width: 20%;
 }
 
-input[type="checkbox"] {
-  & + label {
-    display: block;
-    position: relative;
-    padding: 5px 5px 5px 20px;
-    margin-bottom: 0px;
-    cursor: pointer;
-    font-weight: normal;
-    i {
-      position: absolute;
-      top: 0px;
-      left: 0px;
-      font-size:14px;
-      color: gray;
-      &::before {
-        @extend %fontawesome;
-      }
-    }
-  }
-  &:not(:checked), &:checked {
-    position: absolute;
-    left: -9999px;
-  }
-  &:not(:checked) + label {
-    i::before {
-      content: "\f096";
-    }
-  }
-  &:checked + label {
-    i::before {
-      content: "\f046";
-      color: green;
-    }
-  }
-
-  &:disabled + label {
-    i::before {
-      color: gray;
-    }
-  }
-}
-
-
-
 .selected-panel{
   padding-right: 0px;
 }
@@ -105,6 +73,7 @@ input[type="checkbox"] {
   overflow-y: scroll;
   max-height: 80px;
   margin-bottom: 0px;
+  padding:0;
   &:empty{
     display: none;
   }
