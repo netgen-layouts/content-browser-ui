@@ -27,6 +27,13 @@
   tbody {
     td {
       border-bottom:1px solid #e8e8e8;
+      img {
+        display:block;
+        max-width:60px;
+        max-height:60px;
+        padding:2px;
+        background-color:#fff;
+      }
     }
     tr:hover {
       td {

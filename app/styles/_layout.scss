@@ -26,8 +26,8 @@
     }
   }
   .modal-footer {
-    padding:$gutter 0;
-    margin:0 $gutter;
+    padding:$gutter;
+    margin:0;
     border-top:1px solid #fff;
   }
   .modal-dialog {
@@ -113,21 +113,24 @@
       outline: none;
     }
   }
-  .browse-panels {
+  .browse-panels,
+  .search-panels {
     display:flex;
-    .tree-panel {
+    .tree-panel,
+    .search-panel {
       flex-basis:25%;
       background:$asidebg;
       padding:$gutter;
     }
-    .list-panel {
+    .list-panel,
+    .search-list-panel {
       flex-grow:1;
       padding:$gutter;
     }
     .preview-panel {
       flex-basis:20%;
       padding:$gutter;
-      background:#fff;
+      background:#fafafa;
     }
   }
 

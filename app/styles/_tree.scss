@@ -45,7 +45,7 @@
           position:absolute;
           left:0;
           color:#fff;
-          font-size:0.7857142857em;
+          font-size:0.7857142857em !important;
           top:0.5em;
           cursor:pointer;
         }
@@ -67,13 +67,14 @@
         > a {
           &::before {
             content:"\f110";
-            animation:load-spin 1.5s infinite linear;
+            animation:load-spin 1.25s infinite linear;
           }
         }
       }
     }
   }
-  .tree-panel {
+  .tree-panel,
+  .search-panel {
     display:flex;
     flex-direction:column;
     select {
