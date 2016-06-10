@@ -615,6 +615,7 @@ module.exports = function (grunt) {
             'clean:server',
             'handlebars',
             'concurrent:server',
+            'postcss',
             'configureProxies:server',
             // 'concat:dev',
             'connect:livereload',
