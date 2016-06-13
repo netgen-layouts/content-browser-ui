@@ -1,6 +1,8 @@
 .list-panel {
   .panel {
     margin:0 (-$gutter);
+    overflow-y:scroll;
+    flex:1;
   }
 }
 
@@ -26,14 +28,17 @@
     }
   }
   thead {
-    td,
     th {
       background:#e5e5e5;
+    }
+    td {
+      border-top:1px solid #e2e2e2;
     }
   }
   tbody {
     td {
       border-bottom:1px solid #e8e8e8;
+      transition:background-color 250ms;
       img {
         display:block;
         max-width:60px;

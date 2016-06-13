@@ -44,7 +44,7 @@ module.exports = Core.View.extend({
 
   render: function(){
     Core.View.prototype.render.apply(this, arguments);
-    this.$('#browser-tabs').browser_tabs();
+    this.$el.browser_tabs();
     this.setup_list_view();
     this.render_root_items();
     this.render_search_root_items();

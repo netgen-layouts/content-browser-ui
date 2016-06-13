@@ -108,9 +108,10 @@
       padding:0.125em 0.5em;
     }
     .panel {
-      flex-grow:1;
+      flex:1;
       background:$asideinput;
       padding:$gutter;
+      overflow-y:scroll;
     }
   }
 }
