@@ -90,10 +90,9 @@
       font-size:0.875em;
       padding:0 2.25em 0 0.5em;
       color:#fff;
-      -webkit-appearance:none;
-      -moz-appearance:none;
       appearance:none;
       width:100%;
+      cursor:pointer;
       &[multiple] {
         height:auto;
         padding-top:0.25em;
