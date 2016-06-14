@@ -20,3 +20,9 @@ $btnHeight: 34px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+%flexcolumn {
+  display:flex;
+  flex-direction:column;
+  flex:1;
+}
