@@ -20,27 +20,32 @@ function InputBrowse(el) {
 }
 
 InputBrowse.prototype.setup_events = function() {
-  this.$el.on('click', this.$change.bind(this));
+  this.$el.on('click', '.js-trigger', this.$change.bind(this));
 };
 
 
-InputBrowse.prototype.$change = function(){
+InputBrowse.prototype.$change = function(e){
+  console.log('change', e);
+  e.preventDefault();
   var self = this;
   this.browser = new Browser(this.browser_opts).on('apply', function(){
     var selected = this.selected_collection.first();
-    self.$input.val(selected.get('value'));
-    self.$name.html(selected.get('name'));
-    self.$el.trigger('browser:change', {instance: this, browser: this.browser});
+    if(selected){
+      self.$input.val(selected.get('value'));
+      self.$name.html(selected.get('name'));
+      self.$el.trigger('browser:change', {instance: this, browser: this.browser});
+    }
   }).load_and_open();
 };
 
 
 
 $.fn.input_browse = function () {
-  return $.each(function(){
+  return $(this).each(function(){
+    console.log('input_browse');
     var $this = $(this);
     if($this.data('input_browse')){ return; }
-    var instance = new $.InputBrowse(this);
+    var instance = new InputBrowse(this);
     $this.data('input_browse', instance);
   });
 };
