@@ -5,6 +5,7 @@ var Items = require('../collections/items');
 var Columns = require('../collections/columns');
 var SelectedItemsView = require('./selected_items');
 var TreeConfig = require('../models/tree_config');
+var BrowserConfig = require('../models/browser_config');
 var TabsView = require('./tabs');
 
 module.exports = Core.Modal.extend({
@@ -29,10 +30,13 @@ module.exports = Core.Modal.extend({
     this.tree_collection = options.tree_collection || new Items();
     this.selected_collection = new Items();
 
-    window.tmp = this.selected_collection
+    window.tmp = this.selected_collection;
 
     this.selected_collection.browser = this;
     this.tree_collection.browser = this;
+
+    this.browser_config = new BrowserConfig({id: 1});
+    this.browser_config.fetch();
 
     this.tree_collection.tree_config = this.selected_collection.tree_config = this.tree_config;
 
@@ -54,7 +58,10 @@ module.exports = Core.Modal.extend({
       collection: this.tree_collection,
       el: '.browser-tabs',
       browser: this,
-      columns: columns
+      columns: columns,
+      context: {
+        preview_visible: this.browser_config.get('preview_visible')
+      }
     }).render();
 
     this.selected_items = new SelectedItemsView({

@@ -158,11 +158,13 @@ module.exports = Core.View.extend({
       },
       'el': '.preview'
     }).render();
+    !this.browser.browser_config.get('preview_visible') && this.$('.preview-panel').hide();
   },
 
   $toggle_preview: function(){
     this.$('.preview-panel').toggle();
     this.$('.btn-preview .fa').toggleClass('fa-toggle-on').toggleClass('fa-toggle-off');
+    this.$('.preview-panel').is(':visible') ? this.browser.browser_config.save('preview_visible', true) : this.browser.browser_config.save('preview_visible', false);
   },
 
   /* Search */
