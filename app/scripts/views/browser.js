@@ -31,8 +31,6 @@ module.exports = Core.Modal.extend({
     this.tree_collection = options.tree_collection || new Items();
     this.selected_collection = new Items();
 
-    window.tmp = this.selected_collection;
-
     this.selected_collection.browser = this;
     this.tree_collection.browser = this;
 
@@ -45,9 +43,6 @@ module.exports = Core.Modal.extend({
 
     this.listenToOnce(this.tree_collection, 'read:success', this.on_load);
 
-    // this.on('open', function(){
-    //   this.render_tabs_view();
-    // }.bind(this));
 
     return this;
   },

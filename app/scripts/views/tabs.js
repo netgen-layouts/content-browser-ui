@@ -59,7 +59,7 @@ module.exports = Core.View.extend({
     this.root_items_view = new SectionItemsView({
       collection: this.sections,
       tabs: this,
-      'el': '.root-items'
+      el: '.root-items'
     }).render();
 
     return this;
