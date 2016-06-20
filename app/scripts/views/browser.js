@@ -12,13 +12,14 @@ module.exports = Core.Modal.extend({
 
   template: 'browser',
 
-  className: 'browser modal fade',
+  className: 'browser modal fade loading',
 
   prevent_auto_render: true,
 
   events:{
     'click': '$browser_click',
-    'click .btn-preview': '$toggle_preview'
+    'click .btn-preview': '$toggle_preview',
+    'transitionend .loader': '$loading_done'
   },
 
   initialize: function(options){
@@ -42,10 +43,23 @@ module.exports = Core.Modal.extend({
 
     // this.listenTo(this.selected_collection, 'check uncheck', this.render_selected_items.bind(this));
 
-    this.on('open', function(){
-      this.render_tabs_view();
-    }.bind(this));
+    this.listenToOnce(this.tree_collection, 'read:success', this.on_load);
 
+    // this.on('open', function(){
+    //   this.render_tabs_view();
+    // }.bind(this));
+
+    return this;
+  },
+
+  $loading_done: function(e){
+    this.$('.loader').remove();
+  },
+
+  on_load: function(){
+    console.warn('on load');
+    this.render_tabs_view();
+    this.$el.removeClass('loading');
     return this;
   },
 
@@ -85,6 +99,8 @@ module.exports = Core.Modal.extend({
   },
 
   load_and_open: function(){
+    this.open();
+
     this.tree_config.fetch().done(function(){
       var default_location = this.tree_config.default_location();
 
@@ -92,7 +108,7 @@ module.exports = Core.Modal.extend({
         this.tree_collection.fetch_root_by_model_id(default_location.id)
         //this.preselected_item_ids ? this.selected_collection.fetch_selected_items(this.preselected_item_ids) : true
 
-      ).then(this.open.bind(this), function(){
+      ).then(null, function(){
         alert('Error while loading content browser');
       });
 
