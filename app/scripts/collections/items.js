@@ -40,7 +40,7 @@ module.exports = Core.Collection.extend({
   },
 
   fetch_list_by_model_id: function(id, options){
-    id = id || this.request.read.id;
+    id = typeof(id) == 'undefined' ? this.request.read.id : id;
     options = this.setup_options(options);
     options.data.id = id;
     return this._fetch_data(id, 'children', options);
