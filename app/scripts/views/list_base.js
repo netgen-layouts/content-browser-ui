@@ -20,27 +20,12 @@ module.exports = Core.View.extend({
     this.context.columns = this.browse_tab().columns;
 
     this.listenTo(Core, 'browser:check', function(value){
-
-       if(this.model.get('value') === value){
-         console.log(this);
-         this.check_item();
-       }
+      this.model.get('value') === value && this.check_item();
     });
 
     this.listenTo(Core, 'browser:uncheck', function(value){
-      // console.log(this.model.get('value'), model.get('value'))
-      if(this.model.get('value') === value){
-         console.log(this);
-         this.uncheck_item();
-       }
+      this.model.get('value') === value && this.uncheck_item();
     });
-
-    // this.listenTo(this.model.selected_collection(), 'check', function(model){
-    //   this.model.get('value') === model.get('value') && this.check_item();
-    // });
-    // this.listenTo(this.model.selected_collection(), 'uncheck', function(model){
-    //   this.model.get('value') === model.get('value') && this.uncheck_item();
-    // });
 
     return this;
   },
@@ -70,7 +55,6 @@ module.exports = Core.View.extend({
   },
 
   $toogle_select: function(){
-    console.log('toggle_select', this.model.is_checked());
     this.model.is_checked() ? this.model.uncheck() : this.model.check();
   },
 

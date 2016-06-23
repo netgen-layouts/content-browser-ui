@@ -43,16 +43,13 @@ module.exports = Core.Model
     },
 
     check: function(){
-      this.trigger('checked', this);
-      this.selected_collection().add(this);
+      this.selected_collection().add(this.clone());
       Core.trigger('browser:check', this.get('value'))
       return this;
     },
 
     uncheck: function(){
-      this.trigger('unchecked', this);
-      this.selected_collection().remove(this);
-      console.log('core trigger', this.get('value'));
+      this.selected_collection().remove(this.clone());
       Core.trigger('browser:uncheck', this.get('value'))
       return this;
     },

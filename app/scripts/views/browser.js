@@ -41,8 +41,6 @@ module.exports = Core.Modal.extend({
 
     this.tree_collection.tree_config = this.selected_collection.tree_config = this.tree_config;
 
-    // this.listenTo(this.selected_collection, 'check uncheck', this.render_selected_items.bind(this));
-
     this.listenToOnce(this.tree_collection, 'read:success', this.on_load);
 
 
@@ -54,7 +52,6 @@ module.exports = Core.Modal.extend({
   },
 
   on_load: function(){
-    console.warn('on load');
     this.render_tabs_view();
     this.$el.removeClass('loading');
     return this;

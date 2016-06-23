@@ -24,15 +24,6 @@ module.exports = Core.View.extend({
       tabs.list_items.fetch_list_by_model_id(this.model.id);
     }
 
-    // if(tree_config.is_in_root_item(this.model.id)){
-    //   var $item = $('option[data-id="' + this.model.id + '"]');
-    //   if($item.length === 0){ return false; }
-    //   $item.prop('selected', true);
-    //   $item.parent().change();
-    // }else{
-    //   var result = tabs.tree_view.click_item_by_id(this.model.id);
-    //   !result && tabs.render_list_view(this.model);
-    // }
   }
 
 });
