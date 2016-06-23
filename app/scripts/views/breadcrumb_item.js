@@ -15,7 +15,7 @@ module.exports = Core.View.extend({
 
   $open: function(e){
     e.preventDefault();
-    var tree_config = this.model.collection.items_collection.tree_config,
+    var tree_config = this.model.collection.items_collection.browser.tree_config,
         tabs = this.parent.tabs;
 
     console.log(this.model.attributes);

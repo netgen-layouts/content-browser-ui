@@ -8,9 +8,10 @@ module.exports = BreadcrumbItemView.extend({
   $open: function(e){
     e.preventDefault();
 
-    var tabs = this.parent.tabs;
+    var tabs = this.parent.tabs,
+        is_dummy = this.model.get('dummy');
 
-    if(this.model.get('name').indexOf(Item.BREADCRUMB_TEXT) !== -1){
+    if(is_dummy){
       tabs.render_search_result();
       tabs.enable_search_panel();
     }else{

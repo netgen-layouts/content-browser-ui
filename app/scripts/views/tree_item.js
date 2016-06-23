@@ -48,7 +48,7 @@ module.exports = Core.View.extend({
 
   $select: function(e){
     e.stopPropagation();
-    if(this.opened){return;}
+    // if(this.opened){return;}
     this.mark_loading();
     this.select_tree_item();
     this.load_list_view();

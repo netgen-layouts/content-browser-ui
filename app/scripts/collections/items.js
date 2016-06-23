@@ -10,6 +10,19 @@ module.exports = Core.Collection.extend({
 
   name: 'Items',
 
+
+  initialize: function(){
+    Core.Collection.prototype.initialize.apply(this, arguments);
+    this.on('sync', this.on_sync);
+    return this;
+  },
+
+
+  on_sync: function(){
+    this.searchText = this.request.read.searchText || this.searchText;
+    return this;
+  },
+
   parse: function(response){
     if(response.children){
       this.path = new Breadcrumbs(response.path);

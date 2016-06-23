@@ -74,6 +74,4 @@ module.exports = Core.Model
     }
 
 
-  }, {
-    BREADCRUMB_TEXT: 'Search for'
   });

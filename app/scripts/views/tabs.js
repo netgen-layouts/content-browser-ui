@@ -10,7 +10,10 @@ var ListRootView = require('./list_root');
 var ListView = require('./list');
 var PreviewView = require('./preview');
 var BreadcrumbView = require('./breadcrumb');
+
 var BreadcrumbSearchItemView = require('./breadcrumb_search_item');
+var SearchBreadcrumbView = require('./search_breadcrumb');
+
 
 module.exports = Core.View.extend({
 
@@ -33,13 +36,12 @@ module.exports = Core.View.extend({
     this.list_items.tree_config = this.browser.tree_config;
     this.list_items.browser = this.browser;
 
+    this.search_items = new Items();
+    this.search_items.browser = this.browser;
+
     this.listenTo(this.list_items, 'read:success', this.on_list_items_success);
-    // this.listenTo(this.list_items, 'all', function(e){
-    //   console.log(e);
-    // });
     this.listenTo(this.collection, 'read:success', this.set_preview_height);
-    // this.listenToOnce(this.collection, 'read:success', this.render_browse_tab);
-    // this.listenTo(Core, 'browser:select_item', this.render_list_view)
+
     return this;
   },
 
@@ -51,6 +53,9 @@ module.exports = Core.View.extend({
     this.render_search_root_items();
     this.render_tree();
     this.load_list_view();
+    this.setup_search_list_view();
+    this.setup_search_breadcrumb();
+    this.setup_breadcrumb();
     // this.set_preview_height();
     return this;
   },
@@ -107,10 +112,6 @@ module.exports = Core.View.extend({
     return this;
   },
 
-  on_list_items_success: function(){
-    this.render_breadcrumb(this.list_items);
-    return this;
-  },
 
 
   load_list_view: function(model){
@@ -120,13 +121,6 @@ module.exports = Core.View.extend({
           model.trigger('children:success');
         });
   },
-
-  // _render_list_root: function(model){
-  //   var root_model = this.root_model || model;
-  //   root_model && (root_model.is_root_model = true);
-  //   this.render_list_root(root_model);
-  //   this.root_model = null;
-  // },
 
   render_list_root: function(){
     var model = this.list_items.parent_item;
@@ -141,23 +135,22 @@ module.exports = Core.View.extend({
 
   },
 
-  render_breadcrumb: function(collection){
-    this.empty_view(this.breadcrumb);
+  setup_breadcrumb: function(){
+
     this.breadcrumb = new BreadcrumbView({
-      collection: collection.path,
+      collection: this.list_items,
       el: '.breadcrumb-list',
       tabs: this
     }).render();
   },
 
   render_preview: function(model){
-    this.empty_view(this.preview);
     this.preview = new PreviewView({
-      context: {
-        html: model.get('html') || '<h3>' + model.get('name') + '</h3>'
-      },
-      'el': '.preview'
-    }).render();
+      model: model
+    });
+
+    this.$('.preview').html(this.preview.render().$el);
+
     !this.browser.browser_config.get('preview_visible') && this.$('.preview-panel').hide();
   },
 
@@ -170,28 +163,21 @@ module.exports = Core.View.extend({
   /* Search */
   $search: function(e){
     e.preventDefault();
-
     this.render_search_result();
-
     return false;
   },
 
   render_search_result: function(model){
-    var items = new Items();
-    items.browser = this.browser;
+
+
+    model && console.log(model.attributes);
+
     // if user click on breadcrumb link we have a model
     if(model){
-      items.fetch_list_by_model_id(model.id, {
-        success: function(){
-          this.search_success(items);
-        }.bind(this)
-      });
+      this.search_items.fetch_list_by_model_id(model.id);
     }else{
-      items.search_data({
-        data: this.search_params(),
-        success: function(){
-          this.search_success(items);
-        }.bind(this)
+      this.search_items.search_data({
+        data: this.search_params()
       });
     }
 
@@ -201,52 +187,34 @@ module.exports = Core.View.extend({
     return Core._.pick(this.serialize('form').params, 'searchText', 'limit', 'page');
   },
 
-  empty_view: function(view){
-    view && view.empty();
-  },
 
-  search_success: function(items){
-    this.render_search_list_view(items);
-  },
-
-  render_search_list_view: function(items){
-    this.empty_view(this.search_list_view);
+  setup_search_list_view: function(items){
     this.search_list_view = new ListView({
-      collection: items,
+      collection: this.search_items,
       el: '.right-panel .search-list',
       browser: this.browser,
       tabs: this,
       name: 'search'
     });
-
-    this.render_search_breadcrumb(items);
   },
 
   render_search_root_items: function(){
     this.root_items_view = new SearchSectionItemsView({
       collection: this.sections,
       tabs: this,
-      'el': '.search-root-items'
+      el: '.search-root-items'
     }).render();
 
     return this;
   },
 
-  render_search_breadcrumb: function(collection){
-    this.empty_view(this.search_breadcrumb);
+  setup_search_breadcrumb: function(){
 
-    this.change_breadcrumb_home(collection.path.first());
-
-    this.search_breadcrumb = new BreadcrumbView({
-      collection: collection.path,
-      'el': '.breadcrumb-search',
-      tabs: this,
-      ViewItem: BreadcrumbSearchItemView
+    this.search_breadcrumb = new SearchBreadcrumbView({
+      collection: this.search_items,
+      el: '.breadcrumb-search',
+      tabs: this
     }).render();
-  },
-
-  change_breadcrumb_home: function(model){
-    model && model.set({ name: Item.BREADCRUMB_TEXT + ' "' + this.$('[name="searchText"]').val() + '"'});
   },
 
   disable_search_panel: function(){

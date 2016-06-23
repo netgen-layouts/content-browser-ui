@@ -5,47 +5,33 @@ var ListBaseView = require('./list_base');
 module.exports = ListBaseView.extend({
 
   tagName: 'tr',
-
   className: 'item',
 
   browse_tab: function(){
     return this.parent.tabs;
   },
 
-  events:{
+  events: {
     'click a': '$open'
   },
 
   $open: function(e){
     e.preventDefault();
-    if(this.model.has_children()){
-      if(this.parent.name === 'search'){
-        this.render_search_result();
-      }else{
-        var result = this.parent.tabs.tree_view.click_item_by_id(this.model.id);
-        if(!result){
-          this.render_list_view();
-        }
-        this.setup_root_model();
-      }
+    if(!this.model.has_children()){return;}
+
+    if(this.parent.name === 'search'){
+      this.model.collection.fetch_list_by_model_id(this.model.get('location_id'));
+      this.disable_search_panel();
+    }else{
+      //var result = this.parent.tabs.tree_view.click_item_by_id(this.model.id);
+      this.parent.tabs.list_items.fetch_list_by_model_id(this.model.get('location_id'));
     }
+
   },
 
-  render_search_result: function(){
-    this.parent.tabs.render_search_result(this.model);
-    this.disable_search_panel();
-  },
 
   disable_search_panel: function(){
     $('.search-left-panel').find('*').prop('disabled', true);
   },
-
-  render_list_view: function(){
-    this.parent.tabs.list_items.fetch_list_by_model_id(this.model.get('location_id'));
-  },
-
-  setup_root_model: function(){
-    this.parent.tabs.root_model = this.model;
-  }
 
 });
