@@ -51,7 +51,7 @@ module.exports = Core.Collection.extend({
     id = typeof(id) == 'undefined' ? this.request.read.id : id;
     options = this.setup_options(options);
     options.data.id = id;
-    return this._fetch_data(id, 'children', options);
+    return this._fetch_data(id, 'items', options);
   },
 
   fetch_list: function(options){

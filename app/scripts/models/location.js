@@ -15,12 +15,12 @@ module.exports = Core.Model
       items.browser = this.collection.browser;
       this.loaded_children = items;
 
-      items.on('categories:success', function(e){
-        this.trigger('categories:success');
+      items.on('locations:success', function(e){
+        this.trigger('locations:success');
       }.bind(this))
 
-      items.on('categories:error', function(e){
-        this.trigger('categories:error');
+      items.on('locations:error', function(e){
+        this.trigger('locations:error');
       }.bind(this))
 
       return items.fetch_tree_by_model_id(this.id);

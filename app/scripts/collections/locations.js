@@ -1,5 +1,4 @@
 'use strict';
-//TODO: remove path from http://bm.lan/cb/api/v1/ezcontent/browse/2/categories
 
 var Core = require('core_boot');
 var Location = require('../models/location');
@@ -18,7 +17,7 @@ module.exports = Core.Collection.extend({
   },
 
   fetch_tree_by_model_id: function(id, options){
-    return this._fetch_data(id, 'categories', options);
+    return this._fetch_data(id, 'locations', options);
   },
 
   _fetch_data: function(id, postfix, options){

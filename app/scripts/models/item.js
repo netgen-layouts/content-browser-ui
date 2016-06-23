@@ -20,13 +20,13 @@ module.exports = Core.Model
       return this.collection.tree_config.get('root_path') +  '/browse';
     },
 
-    has_children: function(){
-      return this.attributes.has_children;
+    has_sub_items: function(){
+      return this.attributes.has_sub_items;
     },
 
 
     can_show_children: function(){
-      return this.attributes.has_children && !this.is_root_model;
+      return this.attributes.has_sub_items && !this.is_root_model;
     },
 
 

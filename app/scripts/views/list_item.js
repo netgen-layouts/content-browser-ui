@@ -17,7 +17,7 @@ module.exports = ListBaseView.extend({
 
   $open: function(e){
     e.preventDefault();
-    if(!this.model.has_children()){return;}
+    if(!this.model.has_sub_items()){return;}
 
     if(this.parent.name === 'search'){
       this.model.collection.fetch_list_by_model_id(this.model.get('location_id'));

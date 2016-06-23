@@ -18,14 +18,14 @@ module.exports = Core.View.extend({
 
   initialize: function(){
     Core.View.prototype.initialize.apply(this, arguments);
-    this.listenTo(this.model, 'categories:success', this.load_subtree);
+    this.listenTo(this.model, 'locations:success', this.load_subtree);
     this.listenTo(this.model, 'children:success', this.unmark_loading);
     this.setup_dom();
     return this;
   },
 
   setup_dom: function(){
-    this.model.get('has_sub_categories') && this.$el.addClass('has_children');
+    this.model.get('has_sub_locations') && this.$el.addClass('has_children');
     this.$el.attr({
       'data-id': this.model.id,
       'data-type': this.model.get('type')
@@ -58,7 +58,7 @@ module.exports = Core.View.extend({
     this.mark_opened()
     this.show_preview();
     this.load_list_view();
-    this.model.get('has_sub_categories') && this.model.fetch_children();
+    this.model.get('has_sub_locations') && this.model.fetch_children();
     return this;
   },
 
