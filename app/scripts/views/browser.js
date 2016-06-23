@@ -2,6 +2,7 @@
 
 var Core = require('core_boot');
 var Items = require('../collections/items');
+var Locations = require('../collections/locations');
 var Columns = require('../collections/columns');
 var SelectedItemsView = require('./selected_items');
 var TreeConfig = require('../models/tree_config');
@@ -12,7 +13,7 @@ module.exports = Core.Modal.extend({
 
   template: 'browser',
 
-  className: 'browser modal fade loading',
+  className: 'browser modal fade',
 
   prevent_auto_render: true,
 
@@ -28,7 +29,8 @@ module.exports = Core.Modal.extend({
     this.tree_config = new TreeConfig(options.tree_config);
     this.disabled_item_ids = options.disabled_item_ids;
 
-    this.tree_collection = options.tree_collection || new Items();
+    this.tree_collection = new Locations();
+
     this.selected_collection = new Items();
 
     this.selected_collection.browser = this;
@@ -100,7 +102,7 @@ module.exports = Core.Modal.extend({
       var default_location = this.tree_config.default_location();
 
       $.when(
-        this.tree_collection.fetch_root_by_model_id(default_location.id)
+        this.tree_collection.fetch_tree_by_model_id(default_location.id)
         //this.preselected_item_ids ? this.selected_collection.fetch_selected_items(this.preselected_item_ids) : true
 
       ).then(null, function(){

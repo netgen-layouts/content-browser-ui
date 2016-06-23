@@ -41,7 +41,7 @@ module.exports = ListBaseView.extend({
   },
 
   render_list_view: function(){
-    this.parent.tabs.render_list_view(this.model);
+    this.parent.tabs.list_items.fetch_list_by_model_id(this.model.get('location_id'));
   },
 
   setup_root_model: function(){

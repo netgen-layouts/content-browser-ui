@@ -1,7 +1,7 @@
 'use strict';
 
 var Core = require('core_boot');
-var Items = require('../collections/items');
+var Locations = require('../collections/locations');
 var Columns = require('../collections/columns');
 var Breadcrumbs = require('../collections/breadcrumbs');
 var Column = require('./column');
@@ -45,7 +45,7 @@ module.exports = Core.Model
     initialize_root_items: function(response){
       if(!response.sections){ return; }
 
-      this.sections = new Items();
+      this.sections = new Locations();
       this.tree_config = this;
       this.sections.add(response.sections);
       this.sections.models.forEach(function(model){

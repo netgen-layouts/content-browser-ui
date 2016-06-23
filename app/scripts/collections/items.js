@@ -15,6 +15,8 @@ module.exports = Core.Collection.extend({
       this.path = new Breadcrumbs(response.path);
       this.path.items_collection = this;
 
+      this.parent_item = new Item(response.parent);
+
       var last = this.path.last();
       last && last.set({last: true});
       last && (this.last_model = last);
@@ -31,13 +33,6 @@ module.exports = Core.Collection.extend({
     return Core.env.cb_base_url + this.browser.tree_config.get('root_path') + '/browse';
   },
 
-  fetch_root_by_model_id: function(id, options){
-    return this._fetch_data(id, 'categories', options);
-  },
-
-  fetch_tree_by_model_id: function(id, options){
-    return this._fetch_data(id, 'categories', options);
-  },
 
   fetch_list_by_model_id: function(id, options){
     id = typeof(id) == 'undefined' ? this.request.read.id : id;

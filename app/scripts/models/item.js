@@ -8,6 +8,8 @@ module.exports = Core.Model
   .extend(MixinTree)
   .extend({
 
+    idAttribute: 'value',
+
     content_browser: true,
 
     index: [
@@ -22,17 +24,11 @@ module.exports = Core.Model
       return this.attributes.has_children;
     },
 
-    has_sub_categories: function(){
-      return this.attributes.has_sub_categories;
-    },
 
     can_show_children: function(){
       return this.attributes.has_children && !this.is_root_model;
     },
 
-    type: function(){
-      return this.attributes.type;
-    },
 
     short_name: function(){
       return this.get('name').length > 27 ? this.get('name').substring(0, 27) + '...' : this.get('name');
@@ -75,23 +71,7 @@ module.exports = Core.Model
 
     selected_collection: function(){
       return this.get_browser().selected_collection;
-    },
-
-    //For tree
-    fetch_children: function(){
-      var items = new this.collection.constructor();
-      items.browser = this.collection.browser;
-      this.loaded_children = items;
-      items.on('categories:success', function(e){
-        this.trigger('categories:success');
-      }.bind(this))
-
-      items.on('categories:error', function(e){
-        this.trigger('categories:error');
-      }.bind(this))
-
-      return items.fetch_tree_by_model_id(this.id);
-    },
+    }
 
 
   }, {

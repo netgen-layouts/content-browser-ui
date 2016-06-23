@@ -53,7 +53,7 @@ module.exports = Core.View.extend({
   setup_dom: function(){
     this.$el.attr({
       'data-id': this.model.id,
-      'data-type': this.model.type()
+      'data-type': this.model.get('type')
     });
   },
 

@@ -17,6 +17,7 @@ module.exports = Core.View.extend({
   current_page: 1,
 
   initialize: function(){
+    console.log('CB:', this);
     Core.View.prototype.initialize.apply(this, arguments);
     this.listenTo(this.model, 'categories:success', this.load_subtree);
     this.listenTo(this.model, 'children:success', this.unmark_loading);
@@ -25,10 +26,10 @@ module.exports = Core.View.extend({
   },
 
   setup_dom: function(){
-    this.model.has_sub_categories() && this.$el.addClass('has_children');
+    this.model.get('has_sub_categories') && this.$el.addClass('has_children');
     this.$el.attr({
       'data-id': this.model.id,
-      'data-type': this.model.type()
+      'data-type': this.model.get('type')
     });
   },
 
@@ -50,14 +51,14 @@ module.exports = Core.View.extend({
     if(this.opened){return;}
     this.mark_loading();
     this.select_tree_item();
-    this.render_list_view();
+    this.load_list_view();
     return this;
   },
 
   open: function(){
     this.mark_opened()
     this.show_preview();
-    this.render_list_view();
+    this.load_list_view();
     this.model.get('has_sub_categories') && this.model.fetch_children();
     return this;
   },
@@ -98,8 +99,10 @@ module.exports = Core.View.extend({
     this.parent.tabs.render_subtree(this.$('> ul'), collection);
   },
 
-  render_list_view: function(){
-    this.parent.tabs.render_list_view(this.model);
+  load_list_view: function(){
+    this.parent.tabs.list_items.fetch_list_by_model_id(this.model.id).done(function(){
+      this.model.trigger('children:success');
+    }.bind(this));
   },
 
   show_preview: function(){

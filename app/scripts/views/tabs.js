@@ -4,6 +4,7 @@ var Core = require('core_boot');
 var Items = require('../collections/items');
 var Item = require('../models/item');
 var SectionItemsView = require('./section_items');
+var SearchSectionItemsView = require('./search_section_items');
 var TreeView = require('./tree');
 var ListRootView = require('./list_root');
 var ListView = require('./list');
@@ -49,7 +50,7 @@ module.exports = Core.View.extend({
     this.render_root_items();
     this.render_search_root_items();
     this.render_tree();
-    this.render_list_view();
+    this.load_list_view();
     // this.set_preview_height();
     return this;
   },
@@ -97,11 +98,10 @@ module.exports = Core.View.extend({
       paginate: true
     });
 
-    //Root model
-    this.list_view.root_model = this.sections.selected_model();
 
-    this.list_view.on('render', function(){
-      this._render_list_root(this.list_view.root_model);
+    this.list_items.on('read:success', function(){
+      console.log("render_root_items >>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+      this.render_list_root();
     }.bind(this));
 
     return this;
@@ -113,25 +113,25 @@ module.exports = Core.View.extend({
   },
 
 
-  render_list_view: function(model){
-    this.list_view.root_model = this.sections.selected_model();
-    var items = this.list_view.collection;
-    model || (model = this.list_view.root_model);
+  load_list_view: function(model){
+    model || (model = this.sections.first());
     this.list_items.fetch_list_by_model_id(model.id)
         .done(function(){
           model.trigger('children:success');
         });
   },
 
-  _render_list_root: function(model){
-    var root_model = this.root_model || model;
-    root_model && (root_model.is_root_model = true);
-    this.render_list_root(root_model);
-    this.root_model = null;
-  },
+  // _render_list_root: function(model){
+  //   var root_model = this.root_model || model;
+  //   root_model && (root_model.is_root_model = true);
+  //   this.render_list_root(root_model);
+  //   this.root_model = null;
+  // },
 
-  render_list_root: function(model){
+  render_list_root: function(){
+    var model = this.list_items.parent_item;
     model.browser = this.browser;
+    model.is_root_model = true;
 
     this.list_root_view = new ListRootView({
       model: model,
@@ -223,7 +223,7 @@ module.exports = Core.View.extend({
   },
 
   render_search_root_items: function(){
-    this.root_items_view = new SectionItemsView({
+    this.root_items_view = new SearchSectionItemsView({
       collection: this.sections,
       tabs: this,
       'el': '.search-root-items'
