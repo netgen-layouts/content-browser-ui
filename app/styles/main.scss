@@ -51,7 +51,7 @@ $icon-font-path: "../fonts/bootstrap/";
 
     &:disabled + label {
       &::before {
-        color: gray;
+        color: lighten(gray, 20%);
       }
     }
   }

@@ -10,15 +10,17 @@ var Browser = require('./main');
 //   alert(browser.selected_values());
 // });
 
-// $(document).on('ready', '.js-open-browser', function(e){
-  // e.preventDefault();
+$(document).on('click', '.js-open-browser', function(e){
+  e.preventDefault();
+  var type = $('select').val();
+  console.log(type);
   var browser = new Browser({
     tree_config: {
-      root_path: 'ezcontent' // ezcontent, ezlocation, eztags
+      root_path: type // ezcontent, ezlocation, eztags
     }
   }).on('apply', function(){
     alert(browser.selected_values());
   }).load_and_open();
-// })
+})
 
 

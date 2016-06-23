@@ -55,11 +55,17 @@ module.exports = Core.Model
     },
 
     is_checked: function(){
-      return this.selected_collection().where({value: this.get('value')}).length;
+      return this.prechecked() || this.selected_collection().where({value: this.get('value')}).length;
+    },
+
+
+    prechecked: function(){
+      return _.contains(this.get_browser().disabled_item_ids, this.get('value'));
     },
 
     is_disabled: function(){
-      return _.contains(this.get_browser().disabled_item_ids, this.get('value'));
+      var not_selectable = !this.get('selectable');
+      return not_selectable || this.prechecked();
     },
 
     get_browser: function(){

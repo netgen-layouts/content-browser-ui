@@ -61,6 +61,7 @@ module.exports = Core.Modal.extend({
     var columns = new Columns();
     columns.suffix = this.tree_config.get('root_path');
     columns.fetch();
+    console.log(columns);
 
     this.tabs = new TabsView({
       collection: this.tree_collection,

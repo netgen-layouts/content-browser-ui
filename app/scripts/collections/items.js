@@ -48,7 +48,7 @@ module.exports = Core.Collection.extend({
 
 
   fetch_list_by_model_id: function(id, options){
-    id = typeof(id) == 'undefined' ? this.request.read.id : id;
+    id = typeof id === 'undefined' || id === null ? this.request.read.id : id;
     options = this.setup_options(options);
     options.data.id = id;
     return this._fetch_data(id, 'items', options);
