@@ -18,12 +18,7 @@ module.exports = Core.View.extend({
     this.setup_dom();
     this.model.is_checked() && this.check_item();
     this.context.columns = this.browse_tab().columns;
-    // this.listenTo(this.model, 'check', this.check_item);
-    // this.listenTo(this.model, 'uncheck', this.uncheck_item);
 
-
-    // var selected_collection = this.model.selected_collection();
-    // console.log(selected_collection);
     this.listenTo(Core, 'browser:check', function(value){
 
        if(this.model.get('value') === value){

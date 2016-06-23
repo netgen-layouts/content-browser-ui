@@ -24,7 +24,6 @@ module.exports = Core.View.extend({
   },
 
   initialize: function(){
-    console.log(this.collection);
     Core.View.prototype.initialize.apply(this, arguments);
     this.context.columns = this.tabs.columns;
     Core.on('browser:click', this.hide_dropdown_menu);
@@ -33,7 +32,6 @@ module.exports = Core.View.extend({
   },
 
   render: function(){
-    console.info('list', this);
     this.pager('listview_collection', this.collection);
     Core.View.prototype.render.apply(this, arguments);
     return this;

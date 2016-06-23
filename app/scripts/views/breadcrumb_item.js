@@ -18,8 +18,6 @@ module.exports = Core.View.extend({
     var tree_config = this.model.collection.items_collection.browser.tree_config,
         tabs = this.parent.tabs;
 
-    console.log(this.model.attributes);
-
     if(tree_config.is_in_root_item(this.model.id)){
       Core.trigger('browser:select_section', this.model)
     }else{

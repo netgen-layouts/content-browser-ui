@@ -17,7 +17,6 @@ module.exports = Core.View.extend({
   current_page: 1,
 
   initialize: function(){
-    console.log('CB:', this);
     Core.View.prototype.initialize.apply(this, arguments);
     this.listenTo(this.model, 'categories:success', this.load_subtree);
     this.listenTo(this.model, 'children:success', this.unmark_loading);

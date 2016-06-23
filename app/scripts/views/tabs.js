@@ -104,8 +104,7 @@ module.exports = Core.View.extend({
     });
 
 
-    this.list_items.on('read:success', function(){
-      console.log("render_root_items >>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+    this.list_view.on('render', function(){
       this.render_list_root();
     }.bind(this));
 
@@ -168,9 +167,6 @@ module.exports = Core.View.extend({
   },
 
   render_search_result: function(model){
-
-
-    model && console.log(model.attributes);
 
     // if user click on breadcrumb link we have a model
     if(model){

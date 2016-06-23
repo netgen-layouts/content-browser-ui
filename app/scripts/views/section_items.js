@@ -14,7 +14,6 @@ module.exports = Core.View.extend({
 
   initialize: function(){
     Core.View.prototype.initialize.apply(this, arguments);
-    console.log("aaaa", this);
     this.show_preview_for_first_item();
     this.listenTo(Core, 'browser:select_section', this.select_section);
     return this;
@@ -33,8 +32,6 @@ module.exports = Core.View.extend({
 
 
   select_section: function(model){
-    console.log("select_section >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-
     // select root item by id
     this.collection.select_model_by_id(model.id);
 
