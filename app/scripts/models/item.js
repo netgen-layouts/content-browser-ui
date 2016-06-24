@@ -43,6 +43,7 @@ module.exports = Core.Model
     },
 
     check: function(){
+      this.handle_single_mode();
       this.selected_collection().add(this.clone());
       Core.trigger('browser:check', this.get('value'))
       return this;
@@ -52,6 +53,15 @@ module.exports = Core.Model
       this.selected_collection().remove(this.clone());
       Core.trigger('browser:uncheck', this.get('value'))
       return this;
+    },
+
+
+    handle_single_mode: function(){
+      var first,
+          max = this.get_browser().tree_config.get('max_selected');
+      if(max !== 1){return;}
+      first = this.selected_collection().first();
+      first && first !== this && first.uncheck();
     },
 
     is_checked: function(){

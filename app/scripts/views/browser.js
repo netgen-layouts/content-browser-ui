@@ -43,6 +43,8 @@ module.exports = Core.Modal.extend({
 
     this.listenToOnce(this.tree_collection, 'read:success', this.on_load);
 
+    this.listenTo(Core, 'browser:check browser:uncheck', this.enable_disable_apply);
+
 
     return this;
   },
@@ -53,8 +55,24 @@ module.exports = Core.Modal.extend({
 
   on_load: function(){
     this.render_tabs_view();
+    this.enable_disable_apply();
     this.$el.removeClass('loading');
     return this;
+  },
+
+  enable_disable_apply: function(){
+    var min_selected_is_valid = this.selected_collection.length >= this.tree_config.get('min_selected');
+    min_selected_is_valid ? this.enable_apply() : this.disable_apply();
+    return this;
+  },
+
+
+  disable_apply: function(){
+    this.$('.action_apply').attr('disabled', true);
+  },
+
+  enable_apply: function(){
+    this.$('.action_apply').attr('disabled', false);
   },
 
   render_tabs_view: function(){

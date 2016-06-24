@@ -70,7 +70,7 @@ $icon-font-path: "../fonts/bootstrap/";
   padding-right: 0px;
 }
 .selected-items{
-  overflow-y: scroll;
+  overflow-y: auto;
   max-height: 80px;
   margin-bottom: 0px;
   padding:0;

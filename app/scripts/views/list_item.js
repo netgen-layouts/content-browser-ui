@@ -7,6 +7,12 @@ module.exports = ListBaseView.extend({
   tagName: 'tr',
   className: 'item',
 
+  initialize: function(){
+    ListBaseView.prototype.initialize.apply(this, arguments);
+    !this.model.get('visible') && this.$el.addClass('item-hidden')
+    return this;
+  },
+
   browse_tab: function(){
     return this.parent.tabs;
   },
