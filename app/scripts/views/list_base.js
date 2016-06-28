@@ -27,6 +27,9 @@ module.exports = Core.View.extend({
       this.model.get('value') === value && this.uncheck_item();
     });
 
+    this.listenTo(this.model, 'select', this.mark_selected);
+    this.listenTo(this.model, 'unselect', this.unmark_selected);
+
     return this;
   },
 
@@ -50,6 +53,14 @@ module.exports = Core.View.extend({
     }.bind(this));
   },
 
+  mark_selected: function(){
+    this.$el.addClass('selected');
+  },
+
+  unmark_selected: function(){
+    this.$el.removeClass('selected');
+  },
+
   $show_preview: function(){
     this.browse_tab().render_preview(this.model);
   },
@@ -59,12 +70,12 @@ module.exports = Core.View.extend({
   },
 
   uncheck_item: function(){
-    this.$el.removeClass('selected');
+    // this.$el.removeClass('selected');
     this.$(':checkbox').prop('checked', false);
   },
 
   check_item: function(){
-    this.$el.addClass('selected');
+    // this.$el.addClass('selected');
     this.$(':checkbox').prop('checked', true);
   },
 

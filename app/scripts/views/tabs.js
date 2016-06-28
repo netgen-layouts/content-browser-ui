@@ -60,6 +60,11 @@ module.exports = Core.View.extend({
     return this;
   },
 
+  on_list_items_success: function(){
+    this.render_preview(this.list_items.parent_item);
+    return this;
+  },
+
 
   render_root_items: function(){
     this.root_items_view = new SectionItemsView({
@@ -132,6 +137,9 @@ module.exports = Core.View.extend({
       tabs: this
     }).render();
 
+
+    model.trigger('select');
+
   },
 
   setup_breadcrumb: function(){
@@ -144,6 +152,9 @@ module.exports = Core.View.extend({
   },
 
   render_preview: function(model){
+    if(this.preview && this.preview.model === model){return;}
+    this.preview && this.preview.model && this.preview.model.trigger('unselect');
+    model.trigger('select');
     this.preview = new PreviewView({
       model: model
     });

@@ -14,14 +14,8 @@ module.exports = Core.View.extend({
 
   initialize: function(){
     Core.View.prototype.initialize.apply(this, arguments);
-    this.show_preview_for_first_item();
     this.listenTo(Core, 'browser:select_section', this.select_section);
     return this;
-  },
-
-  show_preview_for_first_item: function(){
-    var model = this.collection.first();
-    this.tabs.render_preview(model);
   },
 
   $open_root_location: function(e){
@@ -38,7 +32,6 @@ module.exports = Core.View.extend({
     this.tabs.list_items.fetch_list_by_model_id(model.id);
     this.tabs.collection.fetch_tree_by_model_id(model.id);
 
-    this.tabs.render_preview(model);
     return this;
   },
 
