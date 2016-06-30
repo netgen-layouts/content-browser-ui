@@ -1,5 +1,4 @@
 node_modules
-dist
 .tmp
 .sass-cache
 bower_components
@@ -11,4 +10,4 @@ coverage
 *.sublime-workspace
 *.ruby-version
 releases
-onesky.json
+local_config.json
