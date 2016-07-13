@@ -3,18 +3,18 @@
 require('./templates_loader');
 var Browser = require('./views/browser');
 
-function InputBrowse(el) {
+function InputBrowse(el, opts) {
   this.$el = $(el);
   this.$name = this.$el.find('.js-name');
   this.$input = this.$el.find('input');
   this.$trigger = this.$el.find('.js-trigger');
   var data = this.$el.data();
 
-  this.browser_opts = {
+  this.browser_opts = $.extend({
     tree_config: {
       root_path: data.browserConfigName
     }
-  };
+  }, opts || {});
 
   this.setup_events();
 }
@@ -25,7 +25,6 @@ InputBrowse.prototype.setup_events = function() {
 
 
 InputBrowse.prototype.$change = function(e){
-  console.log('change', e);
   e.preventDefault();
   var self = this;
   this.browser = new Browser(this.browser_opts).on('apply', function(){
@@ -33,19 +32,19 @@ InputBrowse.prototype.$change = function(e){
     if(selected){
       self.$input.val(selected.get('value'));
       self.$name.html(selected.get('name'));
-      self.$el.trigger('browser:change', {instance: this, browser: this.browser});
+      self.$el.trigger('browser:change', {instance: this, browser: self.browser, selected: selected});
     }
   }).load_and_open();
 };
 
 
 
-$.fn.input_browse = function () {
+$.fn.input_browse = function (opts) {
   return $(this).each(function(){
     console.log('input_browse');
     var $this = $(this);
     if($this.data('input_browse')){ return; }
-    var instance = new InputBrowse(this);
+    var instance = new InputBrowse(this, opts);
     $this.data('input_browse', instance);
   });
 };
