@@ -45,7 +45,6 @@ module.exports = Core.Modal.extend({
 
     this.listenTo(Core, 'browser:check browser:uncheck', this.enable_disable_apply);
 
-
     return this;
   },
 
@@ -54,6 +53,9 @@ module.exports = Core.Modal.extend({
   },
 
   on_load: function(){
+    !this.tree_config.get('has_tree') && this.$el.addClass('no_tree')
+    !this.tree_config.get('has_search') && this.$el.addClass('no_search')
+
     this.render_tabs_view();
     this.enable_disable_apply();
     this.$el.removeClass('loading');

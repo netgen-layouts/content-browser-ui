@@ -45,6 +45,14 @@ module.exports = Core.View.extend({
     return this;
   },
 
+
+  set_context: function(){
+    Core.View.prototype.set_context.apply(this, arguments);
+    this.context.has_search = this.collection.tree_config.get('has_search');
+    this.context.has_preview = this.collection.tree_config.get('has_preview');
+    return this;
+  },
+
   render: function(){
     Core.View.prototype.render.apply(this, arguments);
     this.$el.browser_tabs();

@@ -1,8 +1,15 @@
+ {{debug this}}
+
 <ul class="browser-tabs-control">
   <li><a href="#" id="browse">Browse</a></li>
+  {{#if has_search}}
   <li><a href="#" id="search">Search</a></li>
+  {{/if}}
 </ul>
 
 {{> browse }}
 
+{{#if has_search}}
 {{> search }}
+{{/if}}
+

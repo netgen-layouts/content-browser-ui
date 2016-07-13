@@ -113,6 +113,11 @@
       overflow-y:scroll;
     }
   }
+
+
+  &.no_tree{
+    .tree-panel{display:none;}
+  }
 }
 
 @keyframes load-spin {
