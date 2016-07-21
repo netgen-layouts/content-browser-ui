@@ -1,11 +1,15 @@
  {{debug this}}
 
 <ul class="browser-tabs-control">
-  <li><a href="#" id="browse">Browse</a></li>
+  <li><a href="#" id="browse"><i class="material-icons">list</i> Browse</a></li>
   {{#if has_search}}
-  <li><a href="#" id="search">Search</a></li>
+  <li><a href="#" id="search"><i class="material-icons">search</i> Search</a></li>
   {{/if}}
 </ul>
+
+{{#if has_preview}}
+  <button type="button" class="btn btn-link btn-preview"><span>{{#if preview_visible}}Hide{{else}}Show{{/if}} preview</span> <i class="toggle-icon toggle-icon-{{#if preview_visible}}on{{else}}off{{/if}}"></i></button>
+{{/if}}
 
 {{> browse }}
 

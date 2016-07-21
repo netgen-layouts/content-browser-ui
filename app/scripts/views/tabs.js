@@ -174,8 +174,14 @@ module.exports = Core.View.extend({
 
   $toggle_preview: function(){
     this.$('.preview-panel').toggle();
-    this.$('.btn-preview .fa').toggleClass('fa-toggle-on').toggleClass('fa-toggle-off');
-    this.$('.preview-panel').is(':visible') ? this.browser.browser_config.save('preview_visible', true) : this.browser.browser_config.save('preview_visible', false);
+    this.$('.toggle-icon').toggleClass('toggle-icon-on').toggleClass('toggle-icon-off');
+    if (this.$('.preview-panel').is(':visible')){
+      this.browser.browser_config.save('preview_visible', true);
+      this.$('.btn-preview span').text('Hide preview');
+    } else {
+      this.browser.browser_config.save('preview_visible', false);
+      this.$('.btn-preview span').text('Show preview');
+    }
   },
 
   /* Search */

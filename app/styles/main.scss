@@ -1,5 +1,6 @@
 $icon-font-path: "../fonts/bootstrap/";
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700);
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500,700&subset=latin,latin-ext);
+@import url(https://fonts.googleapis.com/icon?family=Material+Icons);
 
 @import "variables";
 @import "layout";
@@ -8,6 +9,7 @@ $icon-font-path: "../fonts/bootstrap/";
 @import "list";
 
 .browser {
+  -webkit-font-smoothing:antialiased;
   .right-panel{
     position: relative;
     padding: 0px;

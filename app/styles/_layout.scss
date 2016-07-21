@@ -1,8 +1,7 @@
 .browser {
   .modal-content {
     font-size:16px;
-    font-family:'Open Sans', Helvetica, Arial, sans-serif;
-    background:#f2f2f2;
+    font-family:'Roboto', Helvetica, Arial, sans-serif;
     border-radius:0;
     border:none;
     @extend %flexcolumn;
@@ -109,8 +108,7 @@
     background:transparent;
   }
   .header-col {
-    padding:0 0 $gutter;
-    flex-basis:50px;
+    padding:0 0 $gutter*0.5;
   }
   .breadcrumb {
     padding:0.375em 0;
@@ -162,17 +160,18 @@
     .tree-panel,
     .search-panel {
       flex-basis:25%;
-      background:$asidebg;
-      padding:$gutter;
+      background:#fff;
+      padding:0 $gutter $gutter*0.5;
     }
 
     .search-panel{display:none;}
 
     .list-panel,
     .search-list-panel {
+      @extend %flexcolumn;
       flex-grow:1;
       padding:$gutter;
-      @extend %flexcolumn;
+      background:$listBg;
     }
     .preview-panel {
       flex-basis:20%;
@@ -191,6 +190,9 @@
   }
 
   .btn-preview {
+    position:absolute;
+    right:$gutter;
+    top:$gutter;
     font-size:12px;
     background:transparent !important;
     padding:0;
