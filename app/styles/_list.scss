@@ -46,6 +46,12 @@
       color:$btnprimary;
     }
   }
+  .list-options-dropdown {
+    .dropdown-menu {
+      left:auto;
+      right:0;
+    }
+  }
 }
 
 .items-table {

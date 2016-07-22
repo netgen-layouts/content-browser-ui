@@ -10,6 +10,7 @@ var ListRootView = require('./list_root');
 var ListView = require('./list');
 var PreviewView = require('./preview');
 var BreadcrumbView = require('./breadcrumb');
+var ListOptionsView = require('./list_options');
 
 var BreadcrumbSearchItemView = require('./breadcrumb_search_item');
 var SearchBreadcrumbView = require('./search_breadcrumb');
@@ -64,6 +65,7 @@ module.exports = Core.View.extend({
     this.setup_search_list_view();
     this.setup_search_breadcrumb();
     this.setup_breadcrumb();
+    this.render_list_options();
     // this.set_preview_height();
     return this;
   },
@@ -124,7 +126,12 @@ module.exports = Core.View.extend({
     return this;
   },
 
-
+  render_list_options: function(){
+    this.list_options_view = new ListOptionsView({
+      model: this.columns,
+      el: '.list-panel .list-options-dropdown'
+    }).render();
+  },
 
   load_list_view: function(model){
     model || (model = this.sections.first());
