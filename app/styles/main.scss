@@ -32,7 +32,7 @@ $icon-font-path: "../fonts/bootstrap/";
         left:0px;
         font-size:18px;
         color:gray;
-        @extend %material-icons;
+        @extend %material-icon;
       }
       &:empty::before {
         top:-4px;

@@ -25,7 +25,7 @@
           padding-left: 22px;
           position:relative;
           &::before {
-            @extend %material-icons;
+            @extend %material-icon;
             content:"folder";
             position:absolute;
             left:0;
@@ -44,7 +44,7 @@
       }
       &.has_children {
         &::before {
-          @extend %material-icons;
+          @extend %material-icon;
           content:"add_box";
           position:absolute;
           left:0;
