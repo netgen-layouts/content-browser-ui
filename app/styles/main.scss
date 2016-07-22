@@ -28,11 +28,14 @@ $icon-font-path: "../fonts/bootstrap/";
       font-weight:normal;
       &::before {
         position:absolute;
-        top:9px;
+        top:4px;
         left:0px;
-        font-size:14px;
+        font-size:18px;
         color:gray;
-        @extend %fontawesome;
+        @extend %material-icons;
+      }
+      &:empty::before {
+        top:-4px;
       }
     }
     &:not(:checked), &:checked {
@@ -41,13 +44,13 @@ $icon-font-path: "../fonts/bootstrap/";
     }
     &:not(:checked) + label {
       &::before {
-        content: "\f096";
+        content: "check_box_outline_blank";
       }
     }
     &:checked + label {
       &::before {
-        content: "\f046";
-        color: green;
+        content: "check_box";
+        color: $btnprimary;
       }
     }
 
@@ -57,8 +60,6 @@ $icon-font-path: "../fonts/bootstrap/";
       }
     }
   }
-
-
 
 }
 
@@ -75,18 +76,26 @@ $icon-font-path: "../fonts/bootstrap/";
   padding-right: 0px;
 }
 .selected-items{
-  overflow-y: auto;
-  max-height: 80px;
-  margin-bottom: 0px;
+  margin:0 0 -5px;
   padding:0;
+  list-style-type:none;
   &:empty{
-    display: none;
+    display:none;
   }
-  li{
-    list-style: none;
-    float: left;
-    margin-right: 10px;
-    margin-bottom: 10px;
+  li {
+    float:left;
+    margin:0 5px 5px 0;
+    .btn.btn-default {
+      border:none;
+      color:#444;
+      font-weight:500;
+      i {
+        vertical-align:middle;
+        font-size:18px;
+        margin-left:6px;
+        color:hsl(0, 0, 78);
+      }
+    }
   }
 }
 

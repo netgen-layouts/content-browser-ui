@@ -1,15 +1,15 @@
 
   <table class="items-table">
     <thead>
-      <tr class="list-root"></tr>
       {{#if collection.length }}
         <tr>
-          <th>#</th>
+          <th></th>
           {{#each columns.models}}
             <th {{#unless visible}}class="hidden"{{/unless}} data-name="{{column_id}}">{{name}}</th>
           {{/each}}
         </tr>
       {{/if}}
+      <tr class="list-root"></tr>
     </thead>
 
     <tbody class="children"></tbody>

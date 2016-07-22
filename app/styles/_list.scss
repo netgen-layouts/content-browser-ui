@@ -1,24 +1,60 @@
 .list-panel {
   .panel {
-    margin:0 (-$gutter);
     overflow-y:scroll;
     flex:1;
+  }
+  .header-col {
+    height:$btnHeight + (0.5*$gutter);
+    padding-left:$gutter;
+    padding-right:$gutter;
+    display:flex;
+    align-items:center;
+    .breadcrumb {
+      padding:0;
+      margin:0 $gutter 0 0;
+      list-style-type:none;
+      background:transparent;
+      border-radius:0;
+      flex:1;
+      > li {
+        font-size:0.75em;
+        font-weight:500;
+        &.active {
+          color:#686868;
+        }
+        + li:before {
+          content:"/";
+          padding:0 0.3125em 0 0.625em;
+          color:#999;
+        }
+      }
+    }
+  }
+  .table-options {
+    display:flex;
+    align-items:center;
+    color:hsl(285, 0, 61);
+    font-size:0.6875em;
+    text-transform:uppercase;
+    font-weight:500;
+    text-decoration:none !important;
+    i {
+      font-size:18px;
+      margin-left:6px;
+    }
+    &:hover {
+      color:$btnprimary;
+    }
   }
 }
 
 .items-table {
   width:100%;
+  border-bottom:1px solid hsl(0, 0, 80);
   td,
   th {
-    padding:0.75em 1em 0.75em 0;
-    font-size:0.8125em;
-    input[type="checkbox"] {
-      & + label {
-        &::before {
-          top:0;
-        }
-      }
-    }
+    padding:0.5em 0.5em 0.5em 0;
+    font-size:0.875em;
   }
   tr {
     cursor:default;
@@ -40,26 +76,34 @@
 
 
   thead {
+    th,
+    td {
+      padding-top:0.8333333333em;
+      padding-bottom:0.8333333333em;
+    }
     th {
-      background:#e5e5e5;
+      background:hsl(0, 0, 60);
+      color:#fff;
+      font-size:0.75em;
+      text-transform:uppercase;
+      font-weight:400;
     }
     td {
-      border-top:1px solid #e2e2e2;
+      border-bottom:1px solid hsl(0, 0, 80);
     }
   }
   tbody {
     td {
-      border-bottom:1px solid #e8e8e8;
       transition:background-color 250ms;
     }
     tr:hover {
       td {
-        background:#eee;
+        background:hsl(0, 0, 95);
       }
     }
   }
 
-  tr.selected td{background:#dfdfff !important;}
+  tr.selected td{background:hsl(0, 0, 88) !important;}
 }
 .browser {
   .dropdown-menu {
