@@ -1,13 +1,9 @@
-<td width="10px">
-  <input type="checkbox" id="{{uid true}}" {{#if model.is_checked }} checked="checked" {{/if}} {{#if model.is_disabled }} disabled="disabled" {{/if}} />
-  <label for="{{uid false}}"></label>
-</td>
-
-
 {{#each columns.models}}
   <td data-name="{{column_id}}" {{#unless visible}}class="hidden"{{/unless}}>
     {{! name}}
     {{#eq column_id 'name'}}
+      <input type="checkbox" id="{{uid true}}" {{#if model.is_checked }} checked="checked" {{/if}} {{#if model.is_disabled }} disabled="disabled" {{/if}} />
+      <label for="{{uid false}}"></label>
       {{#if ../model.can_show_children}}
         <a href="#">{{get_column ../model column_id}}</a>
       {{else}}

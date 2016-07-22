@@ -3,7 +3,6 @@
     <thead>
       {{#if collection.length }}
         <tr>
-          <th></th>
           {{#each columns.models}}
             <th {{#unless visible}}class="hidden"{{/unless}} data-name="{{column_id}}">{{name}}</th>
           {{/each}}

@@ -55,6 +55,9 @@
   th {
     padding:0.5em 0.5em 0.5em 0;
     font-size:0.875em;
+    input[type="checkbox"] + label {
+      display:inline-block;
+    }
   }
   tr {
     cursor:default;
@@ -95,15 +98,18 @@
   tbody {
     td {
       transition:background-color 250ms;
+      &[data-name="name"] {
+        padding-left:40px;
+      }
     }
     tr:hover {
       td {
         background:hsl(0, 0, 95);
       }
     }
+    tr.selected td{background:hsl(0, 0, 88) !important;}
   }
 
-  tr.selected td{background:hsl(0, 0, 88) !important;}
 }
 .browser {
   .dropdown-menu {
