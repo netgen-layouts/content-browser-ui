@@ -27,7 +27,6 @@ module.exports = Core.View.extend({
   },
 
   $close: function(){
-    console.log('close');
     this.$el.removeClass('open');
     this.is_open = false;
   },
