@@ -1,6 +1,6 @@
-<a id="options-dropdown" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" class="table-options">Table options <i class="material-icons">settings</i></a>
-<ul class="dropdown-menu" aria-labelledby="options-dropdown">
-  {{#each columns.models}}
+<a data-target="#" role="button" class="options-dropdown-toggle">Table options <i class="material-icons">settings</i></a>
+<ul class="options-dropdown-menu">
+  {{#each collection.models}}
     <li>
       <input name="{{column_id}}" id="{{uid true}}" type="checkbox" class="column-check" autocomplete="off" {{#if visible}}checked{{/if}}>
       <label for="{{uid false}}">{{name}}</label>

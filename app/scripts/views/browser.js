@@ -109,8 +109,8 @@ module.exports = Core.Modal.extend({
     return this.selected_collection.pluck('value');
   },
 
-  $browser_click: function(){
-    Core.trigger('browser:click');
+  $browser_click: function(e){
+    Core.trigger('browser:click', e);
   },
 
   load_and_open: function(){
