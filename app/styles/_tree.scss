@@ -21,6 +21,9 @@
         position:relative;
         padding-left:18px;
         list-style:none;
+        li.item {
+          padding-left:22px;
+        }
         > a {
           padding-left: 22px;
           position:relative;
@@ -61,7 +64,7 @@
       &.open {
         > a {
           &::before {
-            content:"\f07c";
+            content:"folder_open";
           }
         }
         > ul { display: block; }
