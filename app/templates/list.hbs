@@ -1,13 +1,11 @@
 
   <table class="items-table">
     <thead>
-      {{#if collection.length }}
-        <tr>
-          {{#each columns.models}}
-            <th {{#unless visible}}class="hidden"{{/unless}} data-name="{{column_id}}">{{name}}</th>
-          {{/each}}
-        </tr>
-      {{/if}}
+      <tr>
+        {{#each columns.models}}
+          <th {{#unless visible}}class="hidden"{{/unless}} data-name="{{column_id}}">{{name}}</th>
+        {{/each}}
+      </tr>
       <tr class="list-root"></tr>
     </thead>
 
