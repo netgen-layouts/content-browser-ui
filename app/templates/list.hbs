@@ -13,16 +13,7 @@
 
   </table>
 
-  {{paginate 'listview_collection'}}
-  {{pages_selector 'listview_collection'}}
-
-  <ul class="dropdown-menu" aria-labelledby="drop">
-    {{#each columns.models}}
-      <li>
-        <input name="{{column_id}}" id="{{uid true}}" type="checkbox" class="column-check" autocomplete="off" {{#if visible}}checked{{/if}}>
-        <label for="{{uid false}}">{{name}}</label>
-      </li>
-    {{/each}}
-  </ul>
-
-
+  <div class="pagination-control-container">
+    {{paginate 'listview_collection'}}
+    {{pages_selector 'listview_collection'}}
+  </div>
