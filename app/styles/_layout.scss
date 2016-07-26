@@ -176,9 +176,8 @@
   }
 
   .btn-preview {
-    position:absolute;
-    right:$gutter;
-    top:$gutter;
+    align-self:flex-end;
+    margin:-($btnHeight + $gutter*0.5) $gutter $gutter*0.5 0;
     font-size:11px;
     height:$btnHeight;
     line-height:$btnHeight;
@@ -233,6 +232,20 @@
   #search-tab {
     > form {
       @extend %flexcolumn;
+    }
+  }
+
+  &.no_search {
+    .browser-tabs-control {
+      display:none;
+    }
+    .btn-preview {
+      margin-top:$gutter;
+    }
+  }
+  &.no_tree {
+    .list-root {
+      display:none;
     }
   }
 }
