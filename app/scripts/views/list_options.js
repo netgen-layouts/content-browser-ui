@@ -18,6 +18,12 @@ module.exports = Core.View.extend({
     return this;
   },
 
+  set_context: function(){
+    Core.View.prototype.set_context.apply(this, arguments);
+    this.context.items_for_menu = this.collection.for_menu();
+    return this;
+  },
+
   $toggle: function(){
     this.is_open ? this.$close() : this.$open();
   },
@@ -47,6 +53,7 @@ module.exports = Core.View.extend({
   },
 
   $toggle_checkbox: function(e){
+    console.log(e);
     $('[data-id="' + e.id + '"]').prop('checked', e.attributes.visible);
   }
 
