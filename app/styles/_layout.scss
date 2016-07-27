@@ -179,7 +179,11 @@
       padding:$gutter;
       .header-col {
         display:flex;
+        align-items:center;
         padding:0 0 $gutter;
+        .form-inline {
+          flex:1;
+        }
         .form-control {
           border:none;
           box-shadow:none;
@@ -190,6 +194,9 @@
       .pagination-control-container {
         padding-left:0;
         padding-right:0;
+      }
+      .items-table tbody td[data-name="name"] {
+        padding-left:$gutter;
       }
     }
   }

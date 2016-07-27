@@ -65,7 +65,6 @@ module.exports = Core.View.extend({
     this.setup_search_list_view();
     this.setup_search_breadcrumb();
     this.setup_breadcrumb();
-    this.render_list_options();
     // this.set_preview_height();
     return this;
   },
@@ -120,6 +119,7 @@ module.exports = Core.View.extend({
 
 
     this.list_view.on('render', function(){
+      this.render_list_options();
       this.render_list_root();
     }.bind(this));
 
@@ -215,6 +215,12 @@ module.exports = Core.View.extend({
     return Core._.pick(this.serialize('form').params, 'searchText', 'limit', 'page');
   },
 
+  render_search_list_options: function(){
+    this.list_options_view = new ListOptionsView({
+      collection: this.columns,
+      el: '.search-list-panel .options-dropdown'
+    }).render();
+  },
 
   setup_search_list_view: function(items){
     this.search_list_view = new ListView({
@@ -224,6 +230,10 @@ module.exports = Core.View.extend({
       tabs: this,
       name: 'search'
     });
+
+    this.search_list_view.on('render', function(){
+      this.render_search_list_options();
+    }.bind(this));
   },
 
   render_search_root_items: function(){

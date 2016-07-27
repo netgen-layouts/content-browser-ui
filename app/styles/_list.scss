@@ -30,63 +30,6 @@
       }
     }
   }
-  .options-dropdown-toggle {
-    display:flex;
-    align-items:center;
-    color:hsl(285, 0, 61);
-    font-size:0.6875em;
-    text-transform:uppercase;
-    font-weight:500;
-    text-decoration:none !important;
-    i {
-      font-size:18px;
-      margin-left:6px;
-    }
-    &:hover {
-      color:$btnprimary;
-    }
-  }
-  .options-dropdown {
-    position:relative;
-    .options-dropdown-menu {
-      display:none;
-      position:absolute;
-      right:0;
-      top:100%;
-      background:#fff;
-      box-shadow:0 0 6px rgba(0, 0, 0, 0.5);
-      border-radius:$borderRadius;
-      margin:6px 0 0;
-      padding:0.5em 0;
-      list-style-type:none;
-      z-index:999;
-      font-size:0.874em;
-      min-width:160px;
-      background-clip:padding-box;
-      &::before {
-        content:"";
-        position:absolute;
-        right:6px;
-        bottom:100%;
-        border-bottom:4px solid #fff;
-        border-left:4px solid transparent;
-        border-right:4px solid transparent;
-      }
-      label {
-        padding-left:2.25em;
-        &::before {
-          font-size:16px;
-          left:8px;
-          top:6px;
-        }
-      }
-    }
-    &.open {
-      .options-dropdown-menu {
-        display:block;
-      }
-    }
-  }
 }
 
 .items-table {
@@ -237,6 +180,64 @@
         border:none;
         cursor:pointer;
         width:auto;
+      }
+    }
+  }
+
+  .options-dropdown {
+    position:relative;
+    .options-dropdown-toggle {
+      display:flex;
+      align-items:center;
+      color:hsl(285, 0, 61);
+      font-size:0.6875em;
+      text-transform:uppercase;
+      font-weight:500;
+      text-decoration:none !important;
+      i {
+        font-size:18px;
+        margin-left:6px;
+      }
+      &:hover {
+        color:$btnprimary;
+      }
+    }
+    .options-dropdown-menu {
+      display:none;
+      position:absolute;
+      right:0;
+      top:100%;
+      background:#fff;
+      box-shadow:0 0 6px rgba(0, 0, 0, 0.5);
+      border-radius:$borderRadius;
+      margin:6px 0 0;
+      padding:0.5em 0;
+      list-style-type:none;
+      z-index:999;
+      font-size:0.874em;
+      min-width:160px;
+      background-clip:padding-box;
+      &::before {
+        content:"";
+        position:absolute;
+        right:6px;
+        bottom:100%;
+        border-bottom:4px solid #fff;
+        border-left:4px solid transparent;
+        border-right:4px solid transparent;
+      }
+      label {
+        padding-left:2.25em;
+        &::before {
+          font-size:16px;
+          left:8px;
+          top:6px;
+        }
+      }
+    }
+    &.open {
+      .options-dropdown-menu {
+        display:block;
       }
     }
   }

@@ -14,6 +14,7 @@ module.exports = Core.View.extend({
   initialize: function(){
     Core.View.prototype.initialize.apply(this, arguments);
     Core.on('browser:click', this.$close_outside.bind(this));
+    this.collection.on('change:visible', this.$toggle_checkbox);
     return this;
   },
 
@@ -36,12 +37,17 @@ module.exports = Core.View.extend({
   },
 
   $toggle_table_columns: function(e){
+    e.preventDefault();
     var name = e.target.name,
         $cell = $('[data-name="' + name + '"]');
 
     $cell.toggleClass('hidden');
 
     this.collection.save_visibility(name, e.target.checked);
+  },
+
+  $toggle_checkbox: function(e){
+    $('[data-id="' + e.id + '"]').prop('checked', e.attributes.visible);
   }
 
 });
