@@ -19,7 +19,6 @@ module.exports = Core.Modal.extend({
 
   events:{
     'click': '$browser_click',
-    'click .btn-preview': '$toggle_preview',
     'transitionend .loader': '$loading_done'
   },
 
