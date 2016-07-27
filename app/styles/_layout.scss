@@ -126,7 +126,6 @@
     float:right;
   }
   .btn:focus {
-    background-color: #fff;
     outline: none;
   }
   .select {
@@ -171,6 +170,26 @@
         top:0;
         bottom:0;
         overflow-y:scroll;
+      }
+    }
+  }
+
+  .search-panels {
+    .search-list-panel {
+      padding:$gutter;
+      .header-col {
+        display:flex;
+        padding:0 0 $gutter;
+        .form-control {
+          border:none;
+          box-shadow:none;
+          border-radius:$borderRadius 0 0 $borderRadius;
+          height:$btnHeight;
+        }
+      }
+      .pagination-control-container {
+        padding-left:0;
+        padding-right:0;
       }
     }
   }

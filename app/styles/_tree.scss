@@ -5,10 +5,30 @@
     padding:0;
     li {
       font-size:0.875em;
+      position:relative;
       ul {
         display: none;
         padding:0;
         margin:0;
+        position:relative;
+        &::before {
+          content:"";
+          position:absolute;
+          width:1px;
+          background:hsl(0, 0, 83);
+          top:0;
+          bottom:9px;
+          left:7px;
+        }
+        > li.item::before {
+          content:"";
+          position:absolute;
+          height:1px;
+          left:7px;
+          top:14px;
+          width:8px;
+          background:hsl(0, 0, 83);
+        }
       }
       a {
         cursor:pointer;
@@ -19,7 +39,6 @@
       &.item {
         line-height:24px;
         position:relative;
-        padding-left:18px;
         list-style:none;
         li.item {
           padding-left:22px;
@@ -55,6 +74,13 @@
           top:0.25em;
           cursor:pointer;
         }
+        > a {
+          padding-left:0;
+          margin-left:22px;
+          &::before {
+            display:none;
+          }
+        }
         &.open {
           &::before {
             content:"indeterminate_check_box";
@@ -70,6 +96,10 @@
         > ul { display: block; }
       }
       &.loading {
+        &.has_children::before {
+          content:"autorenew";
+          animation:load-spin 1.25s infinite linear;
+        }
         > a {
           &::before {
             content:"autorenew";
