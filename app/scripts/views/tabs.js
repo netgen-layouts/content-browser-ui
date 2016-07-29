@@ -65,6 +65,7 @@ module.exports = Core.View.extend({
     this.setup_search_list_view();
     this.setup_search_breadcrumb();
     this.setup_breadcrumb();
+    this.initial_preview_hidden();
     // this.set_preview_height();
     return this;
   },
@@ -166,6 +167,10 @@ module.exports = Core.View.extend({
     }).render();
   },
 
+  initial_preview_hidden: function(){
+    !this.browser.browser_config.get('preview_visible') && this.$el.addClass('preview-hidden');
+  },
+
   render_preview: function(model){
     if(this.preview && this.preview.model === model){return;}
     this.preview && this.preview.model && this.preview.model.trigger('unselect');
@@ -175,20 +180,11 @@ module.exports = Core.View.extend({
     });
 
     this.$('.preview').html(this.preview.render().$el);
-
-    !this.browser.browser_config.get('preview_visible') && this.$('.preview-panel').hide();
   },
 
   $toggle_preview: function(){
-    this.$('.preview-panel').toggle();
-    this.$('.toggle-icon').toggleClass('toggle-icon-on').toggleClass('toggle-icon-off');
-    if (this.$('.preview-panel').is(':visible')){
-      this.browser.browser_config.save('preview_visible', true);
-      this.$('.btn-preview span').text('Hide preview');
-    } else {
-      this.browser.browser_config.save('preview_visible', false);
-      this.$('.btn-preview span').text('Show preview');
-    }
+    this.$el.toggleClass('preview-hidden');
+    this.browser.browser_config.save('preview_visible', !this.browser.browser_config.get('preview_visible'));
   },
 
   /* Search */
