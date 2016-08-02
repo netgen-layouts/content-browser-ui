@@ -24,6 +24,7 @@ module.exports = Core.Modal.extend({
 
   initialize: function(options){
     Core.Modal.prototype.initialize.apply(this, arguments);
+    this.load_additional_vars();
 
     this.tree_config = new TreeConfig(options.tree_config);
     this.disabled_item_ids = options.disabled_item_ids;
@@ -45,6 +46,11 @@ module.exports = Core.Modal.extend({
     this.listenTo(Core, 'browser:check browser:uncheck', this.enable_disable_apply);
 
     return this;
+  },
+
+  load_additional_vars: function(){
+    var cb_base_path = $('meta[name="ngcb-base-path"]').attr('content');
+    cb_base_path && (Core.env.cb_base_path = cb_base_path);
   },
 
   $loading_done: function(e){

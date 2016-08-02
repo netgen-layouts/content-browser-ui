@@ -13,7 +13,7 @@ module.exports = Core.Collection.extend({
 
 
   url: function(){
-    return Core.env.cb_base_url + this.browser.tree_config.get('root_path') + '/browse';
+    return Core.env.cb_api_url(this.browser.tree_config.get('root_path') + '/browse');
   },
 
   fetch_tree_by_model_id: function(id, options){
