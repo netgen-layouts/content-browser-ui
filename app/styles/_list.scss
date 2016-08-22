@@ -242,3 +242,10 @@
     }
   }
 }
+
+.search-list-panel {
+  .panel {
+    overflow-y:scroll;
+    flex:1;
+  }
+}
