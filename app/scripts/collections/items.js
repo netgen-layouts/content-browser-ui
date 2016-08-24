@@ -1,6 +1,6 @@
 'use strict';
 
-var Core = require('core_boot');
+var Core = require('core');
 var Item = require('../models/item');
 var Breadcrumbs = require('./breadcrumbs');
 

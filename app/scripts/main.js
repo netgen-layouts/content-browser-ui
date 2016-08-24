@@ -1,7 +1,8 @@
 'use strict';
 require('./templates_loader');
 var Browser = require('./views/browser');
-var _ = require('underscore');
+var Core = require('core');
+var $ = Core.$;
 
 require('./jquery/multiple');
 

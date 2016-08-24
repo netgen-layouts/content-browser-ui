@@ -1,8 +1,7 @@
 'use strict';
 
-var Core = require('core_boot');
-var MixinTree = require('core_tree');
-var _ = require('underscore');
+var Core = require('core');
+var MixinTree = require('core/app/scripts/models/mixin/tree');
 
 module.exports = Core.Model
   .extend(MixinTree)
@@ -17,11 +16,11 @@ module.exports = Core.Model
 
       items.on('locations:success', function(e){
         this.trigger('locations:success');
-      }.bind(this))
+      }.bind(this));
 
       items.on('locations:error', function(e){
         this.trigger('locations:error');
-      }.bind(this))
+      }.bind(this));
 
       return items.fetch_tree_by_model_id(this.id);
     },
