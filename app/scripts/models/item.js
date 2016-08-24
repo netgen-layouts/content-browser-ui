@@ -1,7 +1,7 @@
 'use strict';
 
-var Core = require('core_boot');
-var MixinTree = require('core_tree');
+var Core = require('core');
+var MixinTree = require('core/app/scripts/models/mixin/tree');
 var _ = require('underscore');
 
 module.exports = Core.Model

@@ -1,6 +1,6 @@
 'use strict';
 
-var Core = require('core_boot');
+var Core = require('core');
 var Items = require('../collections/items');
 
 module.exports = Core.View.extend({

@@ -1,6 +1,7 @@
 'use strict';
 
-var Core = require('core_boot');
+var Core = require('core');
+var $ = Core.$;
 var Items = require('../collections/items');
 var Locations = require('../collections/locations');
 var Columns = require('../collections/columns');

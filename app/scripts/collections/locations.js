@@ -1,6 +1,6 @@
 'use strict';
 
-var Core = require('core_boot');
+var Core = require('core');
 var Location = require('../models/location');
 
 module.exports = Core.Collection.extend({

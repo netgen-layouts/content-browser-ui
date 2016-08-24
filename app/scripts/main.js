@@ -2,6 +2,9 @@
 
 require('./templates_loader');
 var Browser = require('./views/browser');
+var Core = require('core');
+
+var $ = Core.$;
 
 function InputBrowse(el, opts) {
   this.$el = $(el);
