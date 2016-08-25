@@ -11,3 +11,5 @@ coverage
 *.ruby-version
 releases
 local_config.json
+composer.lock
+/vendor
