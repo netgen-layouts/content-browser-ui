@@ -5,6 +5,7 @@ var Locations = require('../collections/locations');
 var Columns = require('../collections/columns');
 var Breadcrumbs = require('../collections/breadcrumbs');
 var Column = require('./column');
+var _ = require('underscore');
 
 module.exports = Core.Model
   .extend({
@@ -34,6 +35,7 @@ module.exports = Core.Model
     },
 
     parse: function(response) {
+      _.extend(response, _.pick(this.get('overrides'), 'min_selected', 'max_selected', 'has_tree', 'has_search', 'has_preview', 'default_limit'));
       this.initialize_root_items(response);
       return response;
     },
@@ -46,7 +48,7 @@ module.exports = Core.Model
       if(!response.sections){ return; }
 
       this.sections = new Locations();
-      this.tree_config = this;
+      //this.tree_config = this;
       this.sections.add(response.sections);
       this.sections.models.forEach(function(model){
         // we use this property for initial root list item

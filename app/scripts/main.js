@@ -1,7 +1,9 @@
 'use strict';
-
 require('./templates_loader');
 var Browser = require('./views/browser');
+var _ = require('underscore');
+
+require('./jquery/multiple');
 
 function InputBrowse(el, opts) {
   this.$el = $(el);
@@ -9,12 +11,15 @@ function InputBrowse(el, opts) {
   this.$input = this.$el.find('input');
   this.$trigger = this.$el.find('.js-trigger');
   var data = this.$el.data();
+  var overrides = $.extend({}, data, opts.overrides);
+
 
   this.browser_opts = $.extend({
     tree_config: {
-      root_path: data.browserConfigName
-    }
-  }, opts || {});
+      root_path: data.browserConfigName,
+      overrides: overrides
+    },
+  }, opts);
 
   this.setup_events();
 }
