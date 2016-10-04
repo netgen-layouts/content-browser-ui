@@ -5,7 +5,7 @@ var Locations = require('../collections/locations');
 var Columns = require('../collections/columns');
 var Breadcrumbs = require('../collections/breadcrumbs');
 var Column = require('./column');
-var _ = require('underscore');
+var _ = Core._;
 
 module.exports = Core.Model
   .extend({

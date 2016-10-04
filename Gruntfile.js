@@ -195,11 +195,12 @@ module.exports = function(grunt) {
         dest: '.tmp/scripts/main.js',
         options: {
           debug: true,
-          external: ['jquery', 'underscore', 'backbone'],
+          external: ['core'],
           browserifyOptions: {
             debug: true
           },
           alias: {
+            'browser': './app/scripts/main'
           }
         },
       },
@@ -220,10 +221,15 @@ module.exports = function(grunt) {
 
       dist: {
         src: ['<%= config.app %>/scripts/main.js'],
-        dest: '.tmp/scripts/main.js',
+        dest: '<%= config.dist %>/js/main.js',
         options: {
-          require: ['jquery', 'underscore', 'backbone'],
-          alias: {}
+          external: ['core'],
+          browserifyOptions: {
+            debug: true
+          },
+          alias: {
+            'browser': './app/scripts/views/browser'
+          }
         },
       }
 
@@ -237,8 +243,8 @@ module.exports = function(grunt) {
             drop_console: true
           }
         },
-        src: '.tmp/scripts/main.js',
-        dest: '<%= config.dist %>/js/main.js'
+        src: '<%= config.dist %>/js/main.js',
+        dest: '<%= config.dist %>/js/main.min.js'
       }
     },
 

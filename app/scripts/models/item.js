@@ -2,7 +2,7 @@
 
 var Core = require('core');
 var MixinTree = require('core/app/scripts/models/mixin/tree');
-var _ = require('underscore');
+var _ = Core._;
 
 module.exports = Core.Model
   .extend(MixinTree)

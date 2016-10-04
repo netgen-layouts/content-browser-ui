@@ -2,8 +2,7 @@
 
 var Core = require('core');
 var Column = require('../models/column');
-
-var _ = require('underscore');
+var _ = Core._;
 
 module.exports = Core.Backbone.Collection.extend({
 

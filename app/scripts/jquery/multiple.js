@@ -1,7 +1,9 @@
 'use strict';
 
 var Browser = require('../views/browser');
-var _ = require('underscore');
+var Core = require('core');
+var $ = Core.$;
+var _ = Core._;
 
 function MultipleBrowse(el, opts) {
   opts || (opts = {});
