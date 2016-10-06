@@ -53,6 +53,11 @@ module.exports = function(grunt) {
 
     watch: {
 
+      browserify_vendor: {
+        files: ['node_modules/core/app/scripts/**/*.js'],
+        tasks: ['browserify:vendor']
+      },
+
       browserify: {
         files: ['<%= config.app %>/scripts/**/*.js'],
         tasks: ['browserify:dev', 'browserify:demo']
@@ -77,7 +82,7 @@ module.exports = function(grunt) {
         watchTask: true,
         server: {
           middleware: [
-            proxyMiddleware('/cb/', {target: 'http://'+config.local.domain +'/', changeOrigin: true, silent: true})
+            proxyMiddleware('/cb/', {target: 'http://'+config.local.domain +'/ngadminui/', changeOrigin: true, silent: true})
           ],
           baseDir: ['.tmp', config.app]
         }
@@ -183,8 +188,7 @@ module.exports = function(grunt) {
         src: [],
         dest: '.tmp/scripts/vendor.js',
         options: {
-          debug: true,
-          require: ['jquery', 'underscore', 'backbone'],
+          require: ['core'],
           browserifyOptions: {
             debug: true
           }
@@ -194,13 +198,12 @@ module.exports = function(grunt) {
         src: ['<%= config.app %>/scripts/main.js'],
         dest: '.tmp/scripts/main.js',
         options: {
-          debug: true,
           external: ['core'],
           browserifyOptions: {
             debug: true
           },
           alias: {
-            'browser': './app/scripts/main'
+            'browser': './app/scripts/views/browser'
           }
         },
       },
@@ -209,12 +212,12 @@ module.exports = function(grunt) {
         src: ['<%= config.app %>/scripts/demo.js'],
         dest: '.tmp/scripts/demo.js',
         options: {
-          debug: true,
-          external: ['jquery', 'underscore', 'backbone'],
+          external: ['core'],
           browserifyOptions: {
             debug: true
           },
           alias: {
+            'browser': './app/scripts/views/browser'
           }
         },
       },
