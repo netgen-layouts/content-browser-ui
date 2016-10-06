@@ -246,8 +246,8 @@ module.exports = function(grunt) {
             drop_console: true
           }
         },
-        src: '<%= config.dist %>/js/main.js',
-        dest: '<%= config.dist %>/js/main.min.js'
+        src: '<%= config.dist %>/js/<%= pkg.name %>.js',
+        dest: '<%= config.dist %>/js/<%= pkg.name %>.min.js'
       }
     },
 

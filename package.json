@@ -23,14 +23,13 @@
     "grunt-svgmin": "~3.2.0",
     "http-proxy-middleware": "^0.16.0",
     "matchdep": "~1.0.1",
-    "mocha": "~2.5.3"
+    "mocha": "~2.5.3",
+    "handlebars": "^4.0.5"
   },
   "engines": {
     "node": ">=0.8.0"
   },
   "dependencies": {
-    "bootstrap": "^3.3.6",
-    "handlebars": "^4.0.5",
     "netgen-core": "0.9.x"
   }
 }
