@@ -1,6 +1,6 @@
 'use strict';
 
-var Core = require('core');
+var Core = require('netgen-core');
 var Item = require('../models/item');
 var Breadcrumbs = require('./breadcrumbs');
 

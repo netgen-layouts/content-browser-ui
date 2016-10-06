@@ -1,6 +1,6 @@
 'use strict';
 
-var Core = require('core');
+var Core = require('netgen-core');
 var Column = require('../models/column');
 var _ = Core._;
 

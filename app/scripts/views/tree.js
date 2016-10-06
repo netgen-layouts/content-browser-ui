@@ -1,6 +1,6 @@
 'use strict';
 
-var Core = require('core');
+var Core = require('netgen-core');
 var TreeItemView = require('./tree_item');
 
 module.exports = Core.View.extend({

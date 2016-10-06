@@ -1,6 +1,6 @@
 'use strict';
 
-var Core = require('core');
+var Core = require('netgen-core');
 var BreadcrumbSearchItemView = require('./breadcrumb_search_item');
 
 module.exports = Core.View.extend({

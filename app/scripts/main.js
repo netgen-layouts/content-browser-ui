@@ -1,7 +1,7 @@
 'use strict';
 require('./templates_loader');
 var Browser = require('./views/browser');
-var Core = require('core');
+var Core = require('netgen-core');
 var $ = Core.$;
 require('./jquery/multiple');
 

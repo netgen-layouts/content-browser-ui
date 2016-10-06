@@ -1,6 +1,6 @@
 'use strict';
 
-var Core = require('core');
+var Core = require('netgen-core');
 var ListItemView = require('./list_item');
 
 module.exports = Core.View.extend({

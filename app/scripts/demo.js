@@ -1,7 +1,7 @@
 'use strict';
 
 var Browser = require('./main');
-var Core = require('core');
+var Core = require('netgen-core');
 
 // var browser = new Browser({
 //   tree_config: {

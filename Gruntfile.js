@@ -7,7 +7,7 @@ var proxyMiddleware = require('http-proxy-middleware');
 var Handlebars = require('handlebars/lib/index');
 var JavaScriptCompiler = Handlebars.JavaScriptCompiler;
 
-var helpers = require('core/app/scripts/helpers');
+var helpers = require('netgen-core/app/scripts/helpers');
 
 var known_helpers = {};
 for (var k in helpers) {
@@ -54,7 +54,7 @@ module.exports = function(grunt) {
     watch: {
 
       browserify_vendor: {
-        files: ['node_modules/core/app/scripts/**/*.js'],
+        files: ['node_modules/netgen-core/app/scripts/**/*.js'],
         tasks: ['browserify:vendor']
       },
 
@@ -188,7 +188,7 @@ module.exports = function(grunt) {
         src: [],
         dest: '.tmp/scripts/vendor.js',
         options: {
-          require: ['core'],
+          require: ['netgen-core'],
           browserifyOptions: {
             debug: true
           }
@@ -198,12 +198,12 @@ module.exports = function(grunt) {
         src: ['<%= config.app %>/scripts/main.js'],
         dest: '.tmp/scripts/main.js',
         options: {
-          external: ['core'],
+          external: ['netgen-core'],
           browserifyOptions: {
             debug: true
           },
           alias: {
-            'browser': './app/scripts/views/browser'
+            'netgen-content-browser': './app/scripts/views/browser'
           }
         },
       },
@@ -212,26 +212,26 @@ module.exports = function(grunt) {
         src: ['<%= config.app %>/scripts/demo.js'],
         dest: '.tmp/scripts/demo.js',
         options: {
-          external: ['core'],
+          external: ['netgen-core'],
           browserifyOptions: {
             debug: true
           },
           alias: {
-            'browser': './app/scripts/views/browser'
+            'netgen-content-browser': './app/scripts/views/browser'
           }
         },
       },
 
       dist: {
         src: ['<%= config.app %>/scripts/main.js'],
-        dest: '<%= config.dist %>/js/main.js',
+        dest: '<%= config.dist %>/js/<%= pkg.name %>.js',
         options: {
-          external: ['core'],
+          external: ['netgen-core'],
           browserifyOptions: {
             debug: true
           },
           alias: {
-            'browser': './app/scripts/views/browser'
+            'netgen-content-browser': './app/scripts/views/browser'
           }
         },
       }
