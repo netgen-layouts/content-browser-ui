@@ -14,3 +14,4 @@ local_config.json
 composer.lock
 /vendor
 .php_cs.cache
+Resources/public/dev

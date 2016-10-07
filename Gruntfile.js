@@ -43,6 +43,7 @@ module.exports = function(grunt) {
   var config = {
     app: 'app',
     dist: 'Resources/public',
+    dev: 'Resources/public/dev',
     local: grunt.file.readJSON(local_config)
   };
 
@@ -74,7 +75,7 @@ module.exports = function(grunt) {
 
     browserSync: {
       bsFiles: {
-        src: ['.tmp/scripts/demo.js','.tmp/styles/*.css', 'app/*html']
+        src: ['<%= config.dev %>/js/demo.js','<%= config.dev %>/styles/*.css', 'app/*html']
       },
       options: {
 
@@ -84,7 +85,7 @@ module.exports = function(grunt) {
           middleware: [
             proxyMiddleware('/cb/', {target: 'http://'+config.local.domain +'/ngadminui/', changeOrigin: true, silent: true})
           ],
-          baseDir: ['.tmp', config.app]
+          baseDir: ['<%= config.dev %>', config.app]
         }
       }
     },
@@ -94,14 +95,14 @@ module.exports = function(grunt) {
         files: [{
           dot: true,
           src: [
-            '.tmp',
+            '<%= config.dev %>',
             '<%= config.dist %>/*',
             '!<%= config.dist %>/vendor',
             '!<%= config.dist %>/.git*'
           ]
         }]
       },
-      server: '.tmp'
+      server: '<%= config.dev %>'
     },
 
 
@@ -146,7 +147,7 @@ module.exports = function(grunt) {
           expand: true,
           cwd: '<%= config.app %>/styles',
           src: ['*.{scss,sass}'],
-          dest: '.tmp/styles',
+          dest: '<%= config.dev %>/styles',
           ext: '.css'
         }]
       },
@@ -175,7 +176,7 @@ module.exports = function(grunt) {
         ]
       },
       server: {
-        src: '.tmp/styles/*.css'
+        src: '<%= config.dev %>/styles/*.css'
       },
 
       dist: {
@@ -186,7 +187,7 @@ module.exports = function(grunt) {
     browserify: {
       vendor: {
         src: [],
-        dest: '.tmp/scripts/vendor.js',
+        dest: '<%= config.dev %>/js/vendor.js',
         options: {
           require: ['netgen-core'],
           browserifyOptions: {
@@ -196,7 +197,7 @@ module.exports = function(grunt) {
       },
       dev: {
         src: ['<%= config.app %>/scripts/main.js'],
-        dest: '.tmp/scripts/main.js',
+        dest: '<%= config.dev %>/js/main.js',
         options: {
           external: ['netgen-core'],
           browserifyOptions: {
@@ -210,7 +211,7 @@ module.exports = function(grunt) {
 
       demo: {
         src: ['<%= config.app %>/scripts/demo.js'],
-        dest: '.tmp/scripts/demo.js',
+        dest: '<%= config.dev %>/js/demo.js',
         options: {
           external: ['netgen-core'],
           browserifyOptions: {
@@ -289,7 +290,7 @@ module.exports = function(grunt) {
           ]
         }, {
           expand: true,
-          cwd: '.tmp/images',
+          cwd: '<%= config.dev %>/images',
           dest: '<%= config.dist %>/images',
           src: [
             'generated/*'
