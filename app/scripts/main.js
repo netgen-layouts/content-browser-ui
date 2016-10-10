@@ -6,6 +6,7 @@ var $ = Core.$;
 require('./jquery/multiple');
 
 function InputBrowse(el, opts) {
+  opts || (opts = {});
   this.$el = $(el);
   this.$name = this.$el.find('.js-name');
   this.$input = this.$el.find('input');
