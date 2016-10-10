@@ -85,7 +85,7 @@ module.exports = function(grunt) {
           middleware: [
             proxyMiddleware('/cb/', {target: 'http://'+config.local.domain +'/ngadminui/', changeOrigin: true, silent: true})
           ],
-          baseDir: ['<%= config.dev %>', config.app]
+          baseDir: ['<%= config.dev %>', config.app, '.']
         }
       }
     },
@@ -248,7 +248,7 @@ module.exports = function(grunt) {
           }
         },
         src: '<%= config.dist %>/js/<%= pkg.name %>.js',
-        dest: '<%= config.dist %>/js/<%= pkg.name %>.min.js'
+        dest: '<%= config.dist %>/js/<%= pkg.name %>.js'
       }
     },
 
