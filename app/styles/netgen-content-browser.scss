@@ -1,4 +1,4 @@
-$namespace: '.ngcb';
+$namespace: '.ngc .ngcb';
 
 @import "fonts";
 
@@ -102,6 +102,6 @@ $namespace: '.ngcb';
   }
 
   .tab-pane{
-    display: none;
+    //display: none;
   }
 }
