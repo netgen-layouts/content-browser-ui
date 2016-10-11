@@ -2,6 +2,7 @@
 
 var Core = require('netgen-core');
 var ListItemView = require('./list_item');
+var $ = Core.$;
 
 module.exports = Core.View.extend({
 
