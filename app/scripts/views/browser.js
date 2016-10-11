@@ -14,7 +14,7 @@ module.exports = Core.Modal.extend({
 
   template: 'browser',
 
-  className: 'browser modal fade loading',
+  className: 'ngcb modal fade loading',
 
   prevent_auto_render: true,
 
