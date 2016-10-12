@@ -227,10 +227,6 @@ module.exports = function(grunt) {
         src: ['<%= config.app %>/scripts/main.js'],
         dest: '<%= config.dist %>/js/<%= pkg.name %>.js',
         options: {
-          external: ['netgen-core'],
-          browserifyOptions: {
-            debug: true
-          },
           alias: {
             'netgen-content-browser': './app/scripts/views/browser'
           }

@@ -24,6 +24,6 @@ $(document).on('click', '.js-open-browser', function(e){
   }).on('apply', function(){
     alert(browser.selected_values());
   }).load_and_open();
-})
+});
 
 
