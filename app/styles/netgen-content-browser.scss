@@ -2,10 +2,10 @@
 
 
 @import "fonts";
+@import "variables";
 
 .ngc .ngcb{
 
-  @import "variables";
   @import "layout";
   @import "tabs";
   @import "tree";
@@ -112,4 +112,96 @@
   background-color: hsl(0, 0, 0);
   &.fade { opacity: 0; transition: opacity 0.15s linear; }
   &.in { opacity: 0.5; }
+}
+
+
+.js-input-browse {
+  .js-trigger {
+    display:flex;
+    margin:0 0 1em;
+    height:$btnHeight;
+    font-size:0.75em;
+    text-decoration:none;
+    border-radius:$borderRadius;
+    span {
+      flex:1;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+      line-height:$btnHeight;
+      padding:0 0.75em;
+    }
+    &::after {
+      @extend %material-icon;
+      padding:0 0.5833333333em;
+      align-items:center;
+      font-size:24px;
+      line-height:$btnHeight;
+      content:"folder_open";
+      transition:background 0.15s ease, color 0.15s ease;
+      border-radius:0 $borderRadius $borderRadius 0;
+    }
+    &:hover {
+      text-decoration:none;
+      &::after {
+        background:hsl(0, 0, 38);
+      }
+    }
+  }
+}
+.js-multiple-browse {
+  .js-trigger {
+    font-size:0.75em;
+    padding:0 1.5em;
+    line-height:3;
+    display:inline-block;
+    border-radius:$borderRadius;
+    text-decoration:none;
+    &:hover {
+      background:hsl(0, 0, 38);
+      text-decoration:none;
+    }
+  }
+  .items {
+    min-height:$btnHeight;
+    margin:0 0 0.5em;
+    padding:6px 0 0 6px;
+    font-size:0.75em;
+    border-radius:$borderRadius;
+    line-height:1.4166666;
+    @extend %clearfix;
+    .item {
+      float:left;
+      margin:0 6px 6px 0;
+      display:flex;
+      > * {
+        display:flex;
+        align-items:center;
+      }
+      .js-remove {
+        padding:0 3px;
+        margin:0 1px 0 0;
+        text-decoration:none;
+        border-radius:$borderRadius 0 0 $borderRadius;
+        i {
+          font-size:1.1666666667em;
+          float:left;
+          line-height:inherit;
+        }
+      }
+      .name {
+        border-radius:0 $borderRadius $borderRadius 0;
+        padding:4px 6px;
+      }
+    }
+  }
+  .no-items {
+    padding:4px 0;
+    display:none;
+  }
+  &.items-empty {
+    .no-items {
+      display:block;
+    }
+  }
 }

@@ -48,6 +48,7 @@ MultipleBrowse.prototype.$change = function(e){
   this.browser = new Browser(this.browser_opts).on('apply', function(){
     self.$items.append(self.render(this.selected_collection));
     self.trigger_change();
+    self.$empty_items();
   }).load_and_open();
 };
 
@@ -59,7 +60,12 @@ MultipleBrowse.prototype.trigger_change = function(){
 MultipleBrowse.prototype.$remove = function(e){
   e.preventDefault();
   $(e.target).closest('.item').remove();
+  this.$empty_items();
   this.trigger_change();
+};
+
+MultipleBrowse.prototype.$empty_items = function(){
+  !this.$items.find('.item').length ? this.$el.addClass('items-empty') : this.$el.removeClass('items-empty');
 };
 
 MultipleBrowse.prototype.render = function(collection){
