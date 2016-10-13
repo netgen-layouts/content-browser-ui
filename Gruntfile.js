@@ -189,9 +189,9 @@ module.exports = function(grunt) {
         src: [],
         dest: '<%= config.dev %>/js/vendor.js',
         options: {
-          require: ['netgen-core'],
+          // require: ['netgen-core'],
           browserifyOptions: {
-            debug: true
+            // debug: true
           }
         }
       },
@@ -199,7 +199,7 @@ module.exports = function(grunt) {
         src: ['<%= config.app %>/scripts/main.js'],
         dest: '<%= config.dev %>/js/main.js',
         options: {
-          external: ['netgen-core'],
+          // external: ['netgen-core'],
           browserifyOptions: {
             debug: true
           },
@@ -213,7 +213,7 @@ module.exports = function(grunt) {
         src: ['<%= config.app %>/scripts/demo.js'],
         dest: '<%= config.dev %>/js/demo.js',
         options: {
-          external: ['netgen-core'],
+          // external: ['netgen-core'],
           browserifyOptions: {
             debug: true
           },
