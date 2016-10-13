@@ -60,8 +60,8 @@ module.exports = Core.Modal.extend({
   },
 
   on_load: function(){
-    !this.tree_config.get('has_tree') && this.$el.addClass('no_tree')
-    !this.tree_config.get('has_search') && this.$el.addClass('no_search')
+    !this.tree_config.get('has_tree') && this.$el.addClass('no_tree');
+    !this.tree_config.get('has_search') && this.$el.addClass('no_search');
 
     this.render_tabs_view();
     this.enable_disable_apply();
@@ -70,8 +70,27 @@ module.exports = Core.Modal.extend({
   },
 
   enable_disable_apply: function(){
-    var min_selected_is_valid = this.selected_collection.length >= this.tree_config.get('min_selected');
-    min_selected_is_valid ? this.enable_apply() : this.disable_apply();
+    var note;
+    var max = this.tree_config.get('max_selected');
+    var min = this.tree_config.get('min_selected');
+    var count = this.selected_collection.length;
+    console.log(min, max);
+    var min_selected_is_valid = min === 0 || count >= min;
+    var max_selected_is_valid = max === 0 || count <= max;
+    max_selected_is_valid && min_selected_is_valid ? this.enable_apply() : this.disable_apply();
+
+    if(!min_selected_is_valid){
+      note = 'Please select at least ' + min +  Core.utils.pluralize(' item', min);
+    }else if(!max_selected_is_valid){
+      note = 'Please select at most ' + max + Core.utils.pluralize(' item', max);
+    }else{
+      note = '';
+    }
+
+    console.log(note);
+
+    this.$('.note').html(note)[note ? 'show' : 'hide'];
+
     return this;
   },
 
