@@ -11,12 +11,9 @@
             "homepage": "http://www.effectiva.hr"
         }
     ],
-    "require": {
+    "require-dev": {
         "netgen/core-ui-bundle": "^1.0@dev"
     },
-    "repositories": [
-        { "type": "composer", "url": "https://packagist.netgen.biz" }
-    ],
     "autoload": {
         "psr-4": {
             "Netgen\\Bundle\\ContentBrowserUIBundle\\": ""
