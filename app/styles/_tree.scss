@@ -1,167 +1,167 @@
-.browser {
-  .tree {
-    list-style-type:none;
-    margin:0;
-    padding:0;
-    li {
-      font-size:0.875em;
+
+.tree {
+  list-style-type:none;
+  margin:0;
+  padding:0;
+  li {
+    font-size:0.875em;
+    position:relative;
+    ul {
+      display: none;
+      padding:0;
+      margin:0;
       position:relative;
-      ul {
-        display: none;
-        padding:0;
-        margin:0;
+      &::before {
+        content:"";
+        position:absolute;
+        width:1px;
+        background:hsl(0, 0, 83);
+        top:0;
+        bottom:9px;
+        left:7px;
+      }
+      > li.item::before {
+        content:"";
+        position:absolute;
+        height:1px;
+        left:7px;
+        top:14px;
+        width:8px;
+        background:hsl(0, 0, 83);
+      }
+    }
+    a {
+      cursor:pointer;
+      text-decoration:none;
+      color:#444;
+      padding:2px 3px;
+    }
+    &.item {
+      line-height:24px;
+      position:relative;
+      list-style:none;
+      li.item {
+        padding-left:22px;
+      }
+      > a {
+        padding-left: 22px;
         position:relative;
-        &::before {
-          content:"";
-          position:absolute;
-          width:1px;
-          background:hsl(0, 0, 83);
-          top:0;
-          bottom:9px;
-          left:7px;
-        }
-        > li.item::before {
-          content:"";
-          position:absolute;
-          height:1px;
-          left:7px;
-          top:14px;
-          width:8px;
-          background:hsl(0, 0, 83);
-        }
-      }
-      a {
-        cursor:pointer;
-        text-decoration:none;
-        color:#444;
-        padding:2px 3px;
-      }
-      &.item {
-        line-height:24px;
-        position:relative;
-        list-style:none;
-        li.item {
-          padding-left:22px;
-        }
-        > a {
-          padding-left: 22px;
-          position:relative;
-          &::before {
-            @extend %material-icon;
-            content:"folder";
-            position:absolute;
-            left:0;
-            top:2px;
-            color:#222;
-            font-size:16px;
-            color:hsl(285, 0, 61);
-          }
-        }
-        &.selected {
-          > a {
-            color:$btnprimary;
-            font-weight:700;
-          }
-        }
-      }
-      &.has_children {
         &::before {
           @extend %material-icon;
-          content:"add_box";
+          content:"folder";
           position:absolute;
           left:0;
-          font-size:15px;
-          top:0.25em;
-          cursor:pointer;
+          top:2px;
+          color:#222;
+          font-size:16px;
+          color:hsl(285, 0, 61);
         }
+      }
+      &.selected {
         > a {
-          padding-left:0;
-          margin-left:22px;
-          &::before {
-            display:none;
-          }
+          color:$btnprimary;
+          font-weight:700;
         }
-        &.open {
-          &::before {
-            content:"indeterminate_check_box";
-          }
+      }
+    }
+    &.has_children {
+      &::before {
+        @extend %material-icon;
+        content:"add_box";
+        position:absolute;
+        left:0;
+        font-size:15px;
+        top:0.25em;
+        cursor:pointer;
+      }
+      > a {
+        padding-left:0;
+        margin-left:22px;
+        &::before {
+          display:none;
         }
       }
       &.open {
-        > a {
-          &::before {
-            content:"folder_open";
-          }
+        &::before {
+          content:"indeterminate_check_box";
         }
-        > ul { display: block; }
       }
-      &.loading {
-        &.has_children::before {
+    }
+    &.open {
+      > a {
+        &::before {
+          content:"folder_open";
+        }
+      }
+      > ul { display: block; }
+    }
+    &.loading {
+      &.has_children::before {
+        content:"autorenew";
+        animation:load-spin 1.25s infinite linear;
+      }
+      > a {
+        &::before {
           content:"autorenew";
+          color:#444;
           animation:load-spin 1.25s infinite linear;
         }
-        > a {
-          &::before {
-            content:"autorenew";
-            color:#444;
-            animation:load-spin 1.25s infinite linear;
-          }
-        }
       }
     }
   }
-  .tree-panel,
-  .search-panel {
-    display:flex;
-    flex-direction:column;
-    select {
-      border-radius:0;
-      border:none;
-      margin:0 0 0.5*$gutter;
-      display:block;
-      background:hsl(0, 0, 87) url('../images/caret-down-b.svg') no-repeat;
-      background-position:right 0.5714285714em center;
-      background-size:1em auto;
-      height:$btnHeight;
-      font-size:0.75em;
-      padding:0 2.25em 0 1em;
-      appearance:none;
-      width:100%;
-      cursor:pointer;
-      border-radius:$borderRadius;
-      &[multiple] {
-        height:auto;
-        padding-top:0.25em;
-        padding-bottom:0.25em;
-        padding-left:0;
-        background-position:right 0.5714285714em top 0.7em;
-        option {
-        }
+}
+.tree-panel,
+.search-panel {
+  display:flex;
+  flex-direction:column;
+  select {
+    border-radius:0;
+    border:none;
+    margin:0 0 0.5*$gutter;
+    display:block;
+    background:hsl(0, 0, 87) url('../images/caret-down-b.svg') no-repeat;
+    background-position:right 0.5714285714em center;
+    background-size:1em auto;
+    height:$btnHeight;
+    font-size:0.75em;
+    padding:0 2.25em 0 1em;
+    appearance:none;
+    width:100%;
+    cursor:pointer;
+    border-radius:$borderRadius;
+    &[multiple] {
+      height:auto;
+      padding-top:0.25em;
+      padding-bottom:0.25em;
+      padding-left:0;
+      background-position:right 0.5714285714em top 0.7em;
+      option {
       }
     }
-    option {
-      padding:0.125em 0.5em;
-    }
-    .panel {
-      flex:1;
-      background:$listBg;
-      padding:$gutter;
-      overflow-y:scroll;
-      border-radius:$borderRadius;
-    }
   }
-
-
-  &.no_tree{
-    .tree-panel{display:none;}
+  option {
+    padding:0.125em 0.5em;
+  }
+  .panel {
+    flex:1;
+    background:$listBg;
+    padding:$gutter;
+    overflow-y:scroll;
+    border-radius:$borderRadius;
   }
 }
 
+
+&.no_tree{
+  .tree-panel{display:none;}
+}
+
+
 @keyframes load-spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(359deg);
-  }
+0% {
+  transform: rotate(0deg);
+}
+100% {
+  transform: rotate(359deg);
+}
 }

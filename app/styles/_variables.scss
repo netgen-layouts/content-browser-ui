@@ -32,3 +32,11 @@ $borderRadius: 2px;
 %material-icon {
   @extend .material-icons;
 }
+
+%clearfix {
+    &::after {
+        display:table;
+        clear:both;
+        content:"";
+    }
+}

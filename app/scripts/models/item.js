@@ -1,8 +1,8 @@
 'use strict';
 
-var Core = require('core_boot');
-var MixinTree = require('core_tree');
-var _ = require('underscore');
+var Core = require('netgen-core');
+var MixinTree = require('netgen-core/app/scripts/models/mixin/tree');
+var _ = Core._;
 
 module.exports = Core.Model
   .extend(MixinTree)
@@ -45,13 +45,13 @@ module.exports = Core.Model
     check: function(){
       this.handle_single_mode();
       this.selected_collection().add(this.clone());
-      Core.trigger('browser:check', this.get('value'))
+      Core.trigger('browser:check', this.get('value'));
       return this;
     },
 
     uncheck: function(){
       this.selected_collection().remove(this.clone());
-      Core.trigger('browser:uncheck', this.get('value'))
+      Core.trigger('browser:uncheck', this.get('value'));
       return this;
     },
 

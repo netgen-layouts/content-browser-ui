@@ -1,9 +1,8 @@
 'use strict';
 
-var Core = require('core_boot');
+var Core = require('netgen-core');
 var Column = require('../models/column');
-
-var _ = require('underscore');
+var _ = Core._;
 
 module.exports = Core.Backbone.Collection.extend({
 

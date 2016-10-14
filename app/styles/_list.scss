@@ -44,6 +44,7 @@
     }
   }
   tr {
+    background:transparent;
     cursor:default;
     > td:first-child,
     > th:first-child {
@@ -95,153 +96,153 @@
   }
 
 }
-.browser {
-  .dropdown-menu {
-    position:absolute;
-    input[type="checkbox"] {
-      position:absolute;
-      left:-9999px;
-      + label{
-        padding-left:28px;
-        &:hover{
-          background-color:#efefef;
-        }
-        &::before {
-          top:10px;
-          left:8px;
-          font-size:12px;
-        }
-      }
-    }
-  }
-  .pagination-control-container {
-    display:flex;
-    padding:$gutter*1.6 $gutter;
-    .pagination-container {
-      flex:1;
-      text-align:center;
-    }
-    .pagination {
-      margin:0;
-      > li {
-        > a,
-        > span {
-          border:none;
-          font-size:0.875em;
-          line-height:0.8333333333*$btnHeight;
-          padding:0 0.5em;
-          min-width:0.8333333333*$btnHeight;
-          color:hsl(0, 0, 55);
-          margin:0 1px 1px 0;
-          border-radius:$borderRadius;
-          background:transparent;
-          transition:background 0.15s ease, color 0.15s ease;
-          &:hover {
-            color:#fff;
-            background:hsl(0, 0, 61);
-          }
-        }
-        &.disabled {
-          > a,
-          > span {
-            color:hsl(0, 0, 75);
-            background:transparent;
-          }
-        }
-        &.active {
-          > a,
-          > span {
-            color:#fff;
-            background:hsl(285, 0, 29);
-          }
-        }
-        &:first-child,
-        &:last-child {
-          > a,
-          > span {
-            border-radius:0;
-          }
-        }
-      }
-    }
-    .pages-selector-container{
-      padding-left:$gutter;
-      select{
-        appearance:none;
-        height:0.8333333333*$btnHeight;
-        color:#fff;
-        background:hsl(285, 0, 29) url('../images/caret-down.svg') no-repeat;
-        background-position:right 0.5714285714em center;
-        background-size:0.9285714286em auto;
-        font-size:0.875em;
-        padding:0 2.25em 0 0.5em;
-        margin:0;
-        border-radius:$borderRadius;
-        border:none;
-        cursor:pointer;
-        width:auto;
-      }
-    }
-  }
 
-  .options-dropdown {
-    position:relative;
-    .options-dropdown-toggle {
-      display:flex;
-      align-items:center;
-      color:hsl(285, 0, 61);
-      font-size:0.6875em;
-      text-transform:uppercase;
-      font-weight:500;
-      text-decoration:none !important;
-      i {
-        font-size:18px;
-        margin-left:6px;
+.dropdown-menu {
+  position:absolute;
+  input[type="checkbox"] {
+    position:absolute;
+    left:-9999px;
+    + label{
+      padding-left:28px;
+      &:hover{
+        background-color:#efefef;
       }
-      &:hover {
-        color:$btnprimary;
-      }
-    }
-    .options-dropdown-menu {
-      display:none;
-      position:absolute;
-      right:0;
-      top:100%;
-      background:#fff;
-      box-shadow:0 0 6px rgba(0, 0, 0, 0.5);
-      border-radius:$borderRadius;
-      margin:6px 0 0;
-      padding:0.5em 0;
-      list-style-type:none;
-      z-index:999;
-      font-size:0.874em;
-      min-width:160px;
-      background-clip:padding-box;
       &::before {
-        content:"";
-        position:absolute;
-        right:6px;
-        bottom:100%;
-        border-bottom:4px solid #fff;
-        border-left:4px solid transparent;
-        border-right:4px solid transparent;
-      }
-      label {
-        padding-left:2.25em;
-        &::before {
-          font-size:16px;
-          left:8px;
-          top:6px;
-        }
-      }
-    }
-    &.open {
-      .options-dropdown-menu {
-        display:block;
+        top:10px;
+        left:8px;
+        font-size:12px;
       }
     }
   }
 }
+.pagination-control-container {
+  display:flex;
+  padding:$gutter*1.6 $gutter;
+  .pagination-container {
+    flex:1;
+    text-align:center;
+  }
+  .pagination {
+    margin:0;
+    > li {
+      > a,
+      > span {
+        border:none;
+        font-size:0.875em;
+        line-height:0.8333333333*$btnHeight;
+        padding:0 0.5em;
+        min-width:0.8333333333*$btnHeight;
+        color:hsl(0, 0, 55);
+        margin:0 1px 1px 0;
+        border-radius:$borderRadius;
+        background:transparent;
+        transition:background 0.15s ease, color 0.15s ease;
+        &:hover {
+          color:#fff;
+          background:hsl(0, 0, 61);
+        }
+      }
+      &.disabled {
+        > a,
+        > span {
+          color:hsl(0, 0, 75);
+          background:transparent;
+        }
+      }
+      &.active {
+        > a,
+        > span {
+          color:#fff;
+          background:hsl(285, 0, 29);
+        }
+      }
+      &:first-child,
+      &:last-child {
+        > a,
+        > span {
+          border-radius:0;
+        }
+      }
+    }
+  }
+  .pages-selector-container{
+    padding-left:$gutter;
+    select{
+      appearance:none;
+      height:0.8333333333*$btnHeight;
+      color:#fff;
+      background:hsl(285, 0, 29) url('../images/caret-down.svg') no-repeat;
+      background-position:right 0.5714285714em center;
+      background-size:0.9285714286em auto;
+      font-size:0.875em;
+      padding:0 2.25em 0 0.5em;
+      margin:0;
+      border-radius:$borderRadius;
+      border:none;
+      cursor:pointer;
+      width:auto;
+    }
+  }
+}
+
+.options-dropdown {
+  position:relative;
+  .options-dropdown-toggle {
+    display:flex;
+    align-items:center;
+    color:hsl(285, 0, 61);
+    font-size:0.6875em;
+    text-transform:uppercase;
+    font-weight:500;
+    text-decoration:none !important;
+    i {
+      font-size:18px;
+      margin-left:6px;
+    }
+    &:hover {
+      color:$btnprimary;
+    }
+  }
+  .options-dropdown-menu {
+    display:none;
+    position:absolute;
+    right:0;
+    top:100%;
+    background:#fff;
+    box-shadow:0 0 6px rgba(0, 0, 0, 0.5);
+    border-radius:$borderRadius;
+    margin:6px 0 0;
+    padding:0.5em 0;
+    list-style-type:none;
+    z-index:999;
+    font-size:0.874em;
+    min-width:160px;
+    background-clip:padding-box;
+    &::before {
+      content:"";
+      position:absolute;
+      right:6px;
+      bottom:100%;
+      border-bottom:4px solid #fff;
+      border-left:4px solid transparent;
+      border-right:4px solid transparent;
+    }
+    label {
+      padding-left:2.25em;
+      &::before {
+        font-size:16px;
+        left:8px;
+        top:6px;
+      }
+    }
+  }
+  &.open {
+    .options-dropdown-menu {
+      display:block;
+    }
+  }
+}
+
 
 .search-list-panel {
   .panel {

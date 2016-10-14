@@ -1,7 +1,7 @@
 'use strict';
 
-var Core = require('core_boot');
-var Items = require('../collections/items');
+var Core = require('netgen-core');
+var $ = Core.$;
 
 module.exports = Core.View.extend({
   template: 'tree_item',

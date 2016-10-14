@@ -1,6 +1,7 @@
 'use strict';
 
 var Browser = require('./main');
+var Core = require('netgen-core');
 
 // var browser = new Browser({
 //   tree_config: {
@@ -9,6 +10,8 @@ var Browser = require('./main');
 // }).on('apply', function(){
 //   alert(browser.selected_values());
 // });
+
+var $ = Core.$;
 
 $(document).on('click', '.js-open-browser', function(e){
   e.preventDefault();
@@ -21,6 +24,6 @@ $(document).on('click', '.js-open-browser', function(e){
   }).on('apply', function(){
     alert(browser.selected_values());
   }).load_and_open();
-})
+});
 
 

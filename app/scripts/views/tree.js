@@ -1,7 +1,8 @@
 'use strict';
 
-var Core = require('core_boot');
+var Core = require('netgen-core');
 var TreeItemView = require('./tree_item');
+var $ = Core.$;
 
 module.exports = Core.View.extend({
   extend_with: ['tabs'],

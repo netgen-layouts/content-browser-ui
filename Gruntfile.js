@@ -7,7 +7,7 @@ var proxyMiddleware = require('http-proxy-middleware');
 var Handlebars = require('handlebars/lib/index');
 var JavaScriptCompiler = Handlebars.JavaScriptCompiler;
 
-var helpers = require('./app/scripts/core-ui/helpers');
+var helpers = require('netgen-core/app/scripts/helpers');
 
 var known_helpers = {};
 for (var k in helpers) {
@@ -43,6 +43,7 @@ module.exports = function(grunt) {
   var config = {
     app: 'app',
     dist: 'Resources/public',
+    dev: 'Resources/public/dev',
     local: grunt.file.readJSON(local_config)
   };
 
@@ -52,6 +53,11 @@ module.exports = function(grunt) {
 
 
     watch: {
+
+      browserify_vendor: {
+        files: ['node_modules/netgen-core/app/scripts/**/*.js'],
+        tasks: ['browserify:vendor']
+      },
 
       browserify: {
         files: ['<%= config.app %>/scripts/**/*.js'],
@@ -69,7 +75,7 @@ module.exports = function(grunt) {
 
     browserSync: {
       bsFiles: {
-        src: ['.tmp/scripts/demo.js','.tmp/styles/*.css', 'app/*html']
+        src: ['<%= config.dev %>/js/demo.js','<%= config.dev %>/styles/*.css', 'app/*html']
       },
       options: {
 
@@ -77,9 +83,9 @@ module.exports = function(grunt) {
         watchTask: true,
         server: {
           middleware: [
-            proxyMiddleware('/cb/', {target: 'http://'+config.local.domain +'/', changeOrigin: true, silent: true})
+            proxyMiddleware('/cb/', {target: 'http://'+config.local.domain +'/ngadminui/', changeOrigin: true, silent: true})
           ],
-          baseDir: ['.tmp', config.app]
+          baseDir: ['<%= config.dev %>', config.app, '.']
         }
       }
     },
@@ -89,14 +95,14 @@ module.exports = function(grunt) {
         files: [{
           dot: true,
           src: [
-            '.tmp',
+            '<%= config.dev %>',
             '<%= config.dist %>/*',
             '!<%= config.dist %>/vendor',
             '!<%= config.dist %>/.git*'
           ]
         }]
       },
-      server: '.tmp'
+      server: '<%= config.dev %>'
     },
 
 
@@ -141,7 +147,7 @@ module.exports = function(grunt) {
           expand: true,
           cwd: '<%= config.app %>/styles',
           src: ['*.{scss,sass}'],
-          dest: '.tmp/styles',
+          dest: '<%= config.dev %>/styles',
           ext: '.css'
         }]
       },
@@ -170,7 +176,7 @@ module.exports = function(grunt) {
         ]
       },
       server: {
-        src: '.tmp/styles/*.css'
+        src: '<%= config.dev %>/styles/*.css'
       },
 
       dist: {
@@ -181,61 +187,49 @@ module.exports = function(grunt) {
     browserify: {
       vendor: {
         src: [],
-        dest: '.tmp/scripts/vendor.js',
+        dest: '<%= config.dev %>/js/vendor.js',
         options: {
-          debug: true,
-          require: ['jquery', 'underscore', 'backbone'],
+          // require: ['netgen-core'],
           browserifyOptions: {
-            debug: true
+            // debug: true
           }
         }
       },
       dev: {
         src: ['<%= config.app %>/scripts/main.js'],
-        dest: '.tmp/scripts/main.js',
+        dest: '<%= config.dev %>/js/main.js',
         options: {
-          debug: true,
-          external: ['jquery', 'underscore', 'backbone'],
+          // external: ['netgen-core'],
           browserifyOptions: {
             debug: true
           },
           alias: {
-            'core': './app/scripts/core-ui/core.js',
-            'core_boot': './app/scripts/core-ui/core_boot.js',
-            'core_tree': './app/scripts/core-ui/models/mixin/tree.js',
-            'core_pager': './app/scripts/core-ui/components/pager.js'
+            'netgen-content-browser': './app/scripts/views/browser'
           }
         },
       },
 
       demo: {
         src: ['<%= config.app %>/scripts/demo.js'],
-        dest: '.tmp/scripts/demo.js',
+        dest: '<%= config.dev %>/js/demo.js',
         options: {
-          debug: true,
-          external: ['jquery', 'underscore', 'backbone'],
+          // external: ['netgen-core'],
           browserifyOptions: {
             debug: true
           },
           alias: {
-            'core': './app/scripts/core-ui/core.js',
-            'core_boot': './app/scripts/core-ui/core_boot.js',
-            'core_tree': './app/scripts/core-ui/models/mixin/tree.js',
-            'core_pager': './app/scripts/core-ui/components/pager.js'
+            'netgen-content-browser': './app/scripts/views/browser'
           }
         },
       },
 
       dist: {
         src: ['<%= config.app %>/scripts/main.js'],
-        dest: '.tmp/scripts/main.js',
+        dest: '<%= config.dist %>/js/<%= pkg.name %>.js',
         options: {
-          require: ['jquery', 'underscore', 'backbone'],
+          require: ['netgen-core'],
           alias: {
-            'core': './app/scripts/core-ui/core.js',
-            'core_boot': './app/scripts/core-ui/core_boot.js',
-            'core_tree': './app/scripts/core-ui/models/mixin/tree.js',
-            'core_pager': './app/scripts/core-ui/components/pager.js'
+            'netgen-content-browser': './app/scripts/views/browser'
           }
         },
       }
@@ -250,8 +244,8 @@ module.exports = function(grunt) {
             drop_console: true
           }
         },
-        src: '.tmp/scripts/main.js',
-        dest: '<%= config.dist %>/js/main.js'
+        src: '<%= config.dist %>/js/<%= pkg.name %>.js',
+        dest: '<%= config.dist %>/js/<%= pkg.name %>.js'
       }
     },
 
@@ -293,7 +287,7 @@ module.exports = function(grunt) {
           ]
         }, {
           expand: true,
-          cwd: '.tmp/images',
+          cwd: '<%= config.dev %>/images',
           dest: '<%= config.dist %>/images',
           src: [
             'generated/*'

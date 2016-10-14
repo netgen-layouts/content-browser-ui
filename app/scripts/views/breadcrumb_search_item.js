@@ -1,6 +1,5 @@
 'use strict';
 
-var Item = require('../models/item');
 var BreadcrumbItemView = require('./breadcrumb_item');
 
 module.exports = BreadcrumbItemView.extend({
