@@ -117,20 +117,39 @@
 
 
 .js-input-browse {
-  .js-trigger {
+  display:flex;
+  margin:0 0 1em;
+  .js-clear {
     display:flex;
-    margin:0 0 1em;
+    align-items:center;
+    cursor:pointer;
+    padding:0 0.25em;
+    transition:background 0.15s ease, color 0.15s ease;
+    i {
+      font-size:0.875em;;
+    }
+  }
+  &.item-empty {
+    .js-clear {
+      display:none;
+    }
+  }
+  .js-trigger {
+    flex:1;
+    display:flex;
     height:$btnHeight;
     font-size:0.75em;
     text-decoration:none;
-    border-radius:$borderRadius;
-    span {
+    .js-name {
       flex:1;
       overflow:hidden;
       text-overflow:ellipsis;
       white-space:nowrap;
       line-height:$btnHeight;
       padding:0 0.75em;
+    }
+    .js-clear {
+      width:40px;
     }
     &::after {
       @extend %material-icon;
@@ -156,7 +175,6 @@
     padding:0 1.5em;
     line-height:3;
     display:inline-block;
-    border-radius:$borderRadius;
     text-decoration:none;
     &:hover {
       background:hsl(0, 0, 38);
@@ -168,7 +186,6 @@
     margin:0 0 0.5em;
     padding:6px 0 0 6px;
     font-size:0.75em;
-    border-radius:$borderRadius;
     line-height:1.4166666;
     @extend %clearfix;
     .item {
@@ -183,7 +200,6 @@
         padding:0 3px;
         margin:0 1px 0 0;
         text-decoration:none;
-        border-radius:$borderRadius 0 0 $borderRadius;
         i {
           font-size:1.1666666667em;
           float:left;
@@ -191,7 +207,6 @@
         }
       }
       .name {
-        border-radius:0 $borderRadius $borderRadius 0;
         padding:4px 6px;
       }
     }
