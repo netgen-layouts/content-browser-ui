@@ -9,16 +9,17 @@ function InputBrowse(el, opts) {
   opts || (opts = {});
   this.$el = $(el);
   this.$name = this.$el.find('.js-name');
-  this.$input = this.$el.find('input');
+  this.$input = this.$el.find('.js-value');
   this.$trigger = this.$el.find('.js-trigger');
   this.empty_note = this.$name.data('empty-note');
+  this.$config_input = this.$el.find('.js-config-name');
   var data = this.$el.data();
+  var config_name = this.$config_input.val();
   var overrides = $.extend({}, data, opts.overrides, {min_selected: 1, max_selected: 1});
-
 
   this.browser_opts = $.extend({
     tree_config: {
-      root_path: data.browserConfigName,
+      root_path: config_name,
       overrides: overrides
     },
   }, opts);
@@ -29,6 +30,7 @@ function InputBrowse(el, opts) {
 InputBrowse.prototype.setup_events = function() {
   this.$el.on('click', '.js-trigger', this.$change.bind(this));
   this.$el.on('click', '.js-clear', this.$clear.bind(this));
+  this.$el.on('change', '.js-config-name', this.$change_config_name.bind(this));
 };
 
 
@@ -45,6 +47,12 @@ InputBrowse.prototype.$change = function(e){
     }
   }).load_and_open();
 };
+
+
+InputBrowse.prototype.$change_config_name = function(){
+  this.browser_opts.tree_config.root_path = this.$config_input.val();
+  this.$clear();
+}
 
 
 InputBrowse.prototype.$clear = function() {

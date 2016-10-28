@@ -11,6 +11,8 @@ function MultipleBrowse(el, opts) {
   var data = this.$el.data();
   this.input_template = data.browserPrototype;
   this.$items = this.$el.find('.items');
+  this.$config_input = this.$el.find('.js-config-name');
+  var config_name = this.$config_input.val();
   var overrides = $.extend({}, data, opts.overrides);
   this.$name = this.$el.find('.js-name');
   this.$input = this.$el.find('input');
@@ -19,7 +21,7 @@ function MultipleBrowse(el, opts) {
 
   this.browser_opts = $.extend({
     tree_config: {
-      root_path: data.browserConfigName,
+      root_path: config_name,
       overrides: overrides
     },
   }, opts);
