@@ -116,7 +116,7 @@
 }
 
 
-.js-input-browse {
+.input-browse {
   display:flex;
   margin:0 0 1em;
   .js-clear {
@@ -127,11 +127,6 @@
     transition:background 0.15s ease, color 0.15s ease;
     i {
       font-size:0.875em;;
-    }
-  }
-  &.item-empty {
-    .js-clear {
-      display:none;
     }
   }
   .js-trigger {
@@ -168,7 +163,13 @@
       }
     }
   }
+  .item-empty & {
+    .js-clear {
+      display:none;
+    }
+  }
 }
+
 .js-multiple-browse {
   .js-trigger {
     font-size:0.75em;
