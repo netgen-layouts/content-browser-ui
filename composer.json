@@ -11,7 +11,7 @@
             "homepage": "http://www.effectiva.hr"
         }
     ],
-    "require-dev": {
+    "require": {
         "netgen/core-ui-bundle": "^1.0@dev"
     },
     "autoload": {
