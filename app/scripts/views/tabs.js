@@ -128,6 +128,7 @@ module.exports = Core.View.extend({
   },
 
   render_list_options: function(){
+    if(this.list_options_view) return;
     this.list_options_view = new ListOptionsView({
       collection: this.columns,
       el: '.list-panel .options-dropdown'
