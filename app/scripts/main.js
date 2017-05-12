@@ -24,6 +24,17 @@ function InputBrowse(el, opts) {
     },
   }, opts);
 
+  var self = this;
+  this.browser = new Browser(this.browser_opts).on('apply', function(){
+    var selected = this.selected_collection.first();
+    if(selected){
+      self.$input.val(selected.get('value'));
+      self.$name.html(selected.get('name'));
+      self.$el.trigger('browser:change', {instance: self, browser: self.browser, selected: selected});
+      self.$el.removeClass('item-empty');
+    }
+  });
+
   this.setup_events();
 }
 
@@ -35,17 +46,8 @@ InputBrowse.prototype.setup_events = function() {
 
 
 InputBrowse.prototype.$change = function(e){
-  e.preventDefault();
-  var self = this;
-  this.browser = new Browser(this.browser_opts).on('apply', function(){
-    var selected = this.selected_collection.first();
-    if(selected){
-      self.$input.val(selected.get('value'));
-      self.$name.html(selected.get('name'));
-      self.$el.trigger('browser:change', {instance: self, browser: self.browser, selected: selected});
-      self.$el.removeClass('item-empty');
-    }
-  }).load_and_open();
+  e && e.preventDefault();
+  this.browser.load_and_open();
 };
 
 
