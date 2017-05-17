@@ -10,7 +10,8 @@ module.exports = Core.View.extend({
 
   events:{
     'click': '$toggle',
-    'click a': '$select'
+    'click a': '$select',
+    'click > ul': '$stop',
   },
 
   limit: 3,
@@ -18,7 +19,7 @@ module.exports = Core.View.extend({
 
   initialize: function(){
     Core.View.prototype.initialize.apply(this, arguments);
-    this.listenTo(this.model, 'locations:success', this.load_subtree);
+    this.listenTo(this.model, 'locations:' + this.model.id + ':success', this.load_subtree);
     this.listenTo(this.model, 'children:success', this.unmark_loading);
     this.setup_dom();
     return this;
@@ -30,6 +31,11 @@ module.exports = Core.View.extend({
       'data-id': this.model.id,
       'data-type': this.model.get('type')
     });
+  },
+
+  $stop: function(e){
+    e.preventDefault();
+    e.stopPropagation();
   },
 
   $toggle: function(e){

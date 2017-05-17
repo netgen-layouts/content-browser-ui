@@ -15,11 +15,11 @@ module.exports = Core.Model
       this.loaded_children = items;
 
       items.on('locations:success', function(e){
-        this.trigger('locations:success');
+        this.trigger('locations:' + this.id + ':success');
       }.bind(this));
 
       items.on('locations:error', function(e){
-        this.trigger('locations:error');
+        this.trigger('locations:' + this.id + ':error');
       }.bind(this));
 
       return items.fetch_tree_by_model_id(this.id);

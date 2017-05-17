@@ -4,30 +4,38 @@
   margin:0;
   padding:0;
   li {
-    font-size:0.875em;
+    font-size:14px;
     position:relative;
     ul {
       display: none;
       padding:0;
       margin:0;
       position:relative;
-      &::before {
-        content:"";
-        position:absolute;
-        width:1px;
-        background:hsl(0, 0, 83);
-        top:0;
-        bottom:9px;
-        left:7px;
-      }
-      > li.item::before {
-        content:"";
-        position:absolute;
-        height:1px;
-        left:7px;
-        top:14px;
-        width:8px;
-        background:hsl(0, 0, 83);
+      > li.item {
+        &::after {
+          content:"";
+          position:absolute;
+          width:1px;
+          background:hsl(0, 0, 83);
+          top:0;
+          bottom:0;
+          left:-14px;
+        }
+        &::before {
+          content:"";
+          position:absolute;
+          height:1px;
+          left:-14px;
+          top:12px;
+          width:8px;
+          background:hsl(0, 0, 83);
+        }
+        &:last-child {
+          &::after {
+            bottom:auto;
+            height:12px;
+          }
+        }
       }
     }
     a {
@@ -41,7 +49,7 @@
       position:relative;
       list-style:none;
       li.item {
-        padding-left:22px;
+        margin-left:22px;
       }
       > a {
         padding-left: 22px;
@@ -65,25 +73,29 @@
       }
     }
     &.has_children {
-      &::before {
-        @extend %material-icon;
-        content:"add_box";
-        position:absolute;
-        left:0;
-        font-size:15px;
-        top:0.25em;
-        cursor:pointer;
-      }
       > a {
         padding-left:0;
         margin-left:22px;
         &::before {
           display:none;
         }
+        &::after {
+          @extend %material-icon;
+          position:absolute;
+          pointer-events:none;
+          content:"add_box";
+          left:-21px;
+          color:hsl(0, 0, 20);
+          font-size:15px;
+          top:3px;
+          cursor:pointer;
+        }
       }
       &.open {
-        &::before {
-          content:"indeterminate_check_box";
+        > a {
+          &::after {
+            content:"indeterminate_check_box";
+          }
         }
       }
     }
@@ -96,9 +108,13 @@
       > ul { display: block; }
     }
     &.loading {
-      &.has_children::before {
-        content:"autorenew";
-        animation:load-spin 1.25s infinite linear;
+      &.has_children {
+        > a {
+          &::after {
+            content:"autorenew";
+            animation:load-spin 1.25s infinite linear;
+          }
+        }
       }
       > a {
         &::before {
