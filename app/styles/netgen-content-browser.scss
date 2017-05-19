@@ -134,6 +134,7 @@
     display:flex;
     height:$btnHeight;
     font-size:0.75em;
+    max-width:100%;
     text-decoration:none;
     .js-name {
       flex:1;
