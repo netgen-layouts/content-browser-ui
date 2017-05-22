@@ -75,5 +75,8 @@ $.fn.input_browse = function (opts) {
   });
 };
 
+$(function(){
+  $('.js-input-browse').input_browse();
+});
 
 module.exports = Browser;
