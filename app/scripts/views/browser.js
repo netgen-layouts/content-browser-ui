@@ -35,13 +35,19 @@ module.exports = Core.Modal.extend({
 
     this.selected_collection = new Items();
 
+
+
     this.selected_collection.browser = this;
     this.tree_collection.browser = this;
 
     this.browser_config = new BrowserConfig({id: 1});
     this.browser_config.fetch();
 
+    // this.list_items.browser = this.browser;
+    // this.browser.list_items = this.list_items;
+
     this.tree_collection.tree_config = this.selected_collection.tree_config = this.tree_config;
+
 
     this.listenToOnce(this.tree_collection, 'read:success', this.on_load);
 
@@ -142,20 +148,68 @@ module.exports = Core.Modal.extend({
   load_and_open: function(){
     this.open();
 
+
     this.tree_config.fetch().done(function(){
-      var default_location = this.tree_config.default_location();
 
-      $.when(
-        this.tree_collection.fetch_tree_by_model_id(default_location.id)
-      //, this.preselected_item_ids ? this.selected_collection.fetch_selected_items(this.preselected_item_ids) : true
+      this.list_items = new Items();
+      this.list_items.browser = this;
+      this.list_items.tree_config = this.tree_config;
 
-      ).then(null, function(){
-        alert('Error while loading content browser');
-      });
+
+
+      var start_location;
+
+      if(this.tree_config.has('start_location')){
+        start_location = this.tree_config.get('start_location');
+      }
+
+      if(start_location){
+        this.list_items.fetch_list_by_model_id(start_location).always(this._load.bind(this))
+      }else{
+        this._load();
+      }
+
+
 
 
     }.bind(this));
 
+    return this;
+  },
+
+  _load: function(xhr, status){
+    this.sections = this.tree_config.sections;
+    var default_location;
+
+    if(status !== 'error' && this.list_items.path){
+      default_location = this.list_items.path.first();
+    }else{
+      this.tree_config.set({start_location: false});
+      default_location = this.tree_config.default_location();
+    }
+    this.sections.get(default_location.id).set('default', true);
+
+    $.when(
+      this.tree_collection.fetch_tree_by_model_id(default_location.id)
+    //, this.preselected_item_ids ? this.selected_collection.fetch_selected_items(this.preselected_item_ids) : true
+
+    ).then(function(){
+
+
+      if(this.tree_config.get('start_location')){
+        var tree_model = this.tree_collection.get(this.list_items.path.models[1].id);
+        var ids = this.list_items.path.pluck('id');
+        ids.shift();
+        ids.shift();
+
+        if(tree_model){
+          tree_model.trigger('open_tree:' + tree_model.id, ids);
+        }
+      }
+
+    }.bind(this), function(){
+      alert('Error while loading content browser');
+    });
     return this;
   },
 

@@ -33,9 +33,10 @@ module.exports = Core.View.extend({
     Core.View.prototype.initialize.apply(this, arguments);
     this.sections = this.browser.tree_config.sections;
 
-    this.list_items = new Items();
-    this.list_items.tree_config = this.browser.tree_config;
-    this.list_items.browser = this.browser;
+
+    this.list_items = this.browser.list_items;
+    // this.list_items.tree_config = this.browser.tree_config;
+    // this.list_items.browser = this.browser;
 
     this.search_items = new Items();
     this.search_items.browser = this.browser;
@@ -137,10 +138,18 @@ module.exports = Core.View.extend({
 
   load_list_view: function(model){
     model || (model = this.sections.first());
-    this.list_items.fetch_list_by_model_id(model.id)
-        .done(function(){
-          model.trigger('children:success');
-        });
+    var id = model.id;
+
+    if(!this.list_items_shown_first_time && this.browser.tree_config.get('start_location')){
+      this.list_items_shown_first_time = true;
+      this.list_items.trigger('sync read:success');
+      model.trigger('children:success');
+    }else{
+      this.list_items.fetch_list_by_model_id(id).done(function(){
+        model.trigger('children:success');
+      });
+    }
+
   },
 
   render_list_root: function(){

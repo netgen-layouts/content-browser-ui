@@ -19,6 +19,8 @@ $(document).on('click', '.js-open-browser', function(e){
   console.log(type);
   var browser = new Browser({
     tree_config: {
+      // start_location: 999,
+      // start_location: 246,
       root_path: type // ezcontent, ezlocation, eztags
     }
   }).on('apply', function(){
@@ -27,3 +29,4 @@ $(document).on('click', '.js-open-browser', function(e){
 });
 
 
+$('.js-input-browse').input_browse();

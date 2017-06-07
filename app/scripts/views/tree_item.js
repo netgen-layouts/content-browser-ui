@@ -21,6 +21,7 @@ module.exports = Core.View.extend({
     Core.View.prototype.initialize.apply(this, arguments);
     this.listenTo(this.model, 'locations:' + this.model.id + ':success', this.load_subtree);
     this.listenTo(this.model, 'children:success', this.unmark_loading);
+    this.listenTo(this.model, 'open_tree:'+ this.model.id, this.open_tree);
     this.setup_dom();
     return this;
   },
@@ -57,6 +58,26 @@ module.exports = Core.View.extend({
     this.mark_loading();
     this.select_tree_item();
     this.load_list_view();
+    return this;
+  },
+
+  open_tree: function(ids){
+
+    console.log(this.model.attributes);
+    // this.mark_loading();
+    this.mark_opened()
+    this.select_tree_item();
+
+    var id = ids.shift();
+   console.log('ids!!!!!!!!!!!!!!!!!!', ids, id);
+
+    if(this.model.get('has_sub_locations')){
+      this.model.fetch_children().done(function(){
+        this.model.loaded_children.get(id).trigger('open_tree:'+id, ids);
+      }.bind(this));
+    }else{
+    }
+
     return this;
   },
 

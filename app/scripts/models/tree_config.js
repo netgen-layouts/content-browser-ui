@@ -36,7 +36,7 @@ module.exports = Core.Model
 
     parse: function(response) {
       console.debug(response, this.get('overrides'));
-      _.extend(response, _.pick(this.get('overrides'), 'min_selected', 'max_selected', 'has_tree', 'has_search', 'has_preview'));
+      _.extend(response, _.pick(this.get('overrides'), 'min_selected', 'max_selected', 'has_tree', 'has_search', 'has_preview', 'start_location'));
       this.initialize_root_items(response);
       return response;
     },
