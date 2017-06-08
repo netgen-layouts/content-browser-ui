@@ -54,9 +54,11 @@ module.exports = Core.Model
         var m = key.match(/^custom(.*)/);
         var param_name;
         if(m){
-          param_name = m[1];
-          param_name = param_name.charAt(0).toLowerCase() + param_name.slice(1);
-          custom_params[param_name] = value;
+          param_name = m[1].trim();
+          if(param_name !== ''){
+            param_name = param_name.charAt(0).toLowerCase() + param_name.slice(1);
+            custom_params[param_name] = value;
+          }
         }
       });
 
