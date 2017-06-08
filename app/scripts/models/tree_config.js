@@ -14,8 +14,15 @@ module.exports = Core.Model
 
     initialize: function(){
       Core.Model.prototype.initialize.apply(this, arguments);
+      this.extract_custom_params();
       this.on('read:success', this.setup);
       return this;
+    },
+
+    fetch: function(options){
+      options || (options = {});
+      options.data = _.extend({}, options.data, {customParams: this.get('custom_params') });
+      return this._super('fetch', [options]);
     },
 
     setup: function(){
@@ -35,11 +42,28 @@ module.exports = Core.Model
     },
 
     parse: function(response) {
-      console.debug(response, this.get('overrides'));
       _.extend(response, _.pick(this.get('overrides'), 'min_selected', 'max_selected', 'has_tree', 'has_search', 'has_preview', 'start_location'));
       this.initialize_root_items(response);
       return response;
     },
+
+    extract_custom_params: function(){
+      var custom_params = _.extend({}, this.get('custom_params'));
+
+      _.each(this.get('overrides'), function(value, key) {
+        var m = key.match(/^custom(.*)/);
+        var param_name;
+        if(m){
+          param_name = m[1];
+          param_name = param_name.charAt(0).toLowerCase() + param_name.slice(1);
+          custom_params[param_name] = value;
+        }
+      });
+
+      this.set({custom_params: custom_params });
+      return this;
+    },
+
 
     is_in_root_item: function(id){
       return this.sections.some(function(item){ return item.id === id; });

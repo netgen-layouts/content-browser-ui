@@ -3,6 +3,8 @@
 var Core = require('netgen-core');
 var Item = require('../models/item');
 var Breadcrumbs = require('./breadcrumbs');
+var _ = Core._;
+
 
 module.exports = Core.Collection.extend({
 
@@ -17,6 +19,11 @@ module.exports = Core.Collection.extend({
     return this;
   },
 
+  fetch: function(options){
+    options || (options = {});
+    options.data = _.extend({}, options.data, {customParams: this.tree_config.get('custom_params') });
+    return this._super('fetch', [options]);
+  },
 
   on_sync: function(){
     this.searchText = this.request.read.searchText || this.searchText;

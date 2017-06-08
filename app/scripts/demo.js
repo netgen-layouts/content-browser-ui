@@ -21,6 +21,9 @@ $(document).on('click', '.js-open-browser', function(e){
     tree_config: {
       // start_location: 999,
       // start_location: 246,
+      custom_params: {
+        hello: 'world'
+      },
       root_path: type // ezcontent, ezlocation, eztags
     }
   }).on('apply', function(){
