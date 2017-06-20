@@ -196,7 +196,7 @@ module.exports = Core.Modal.extend({
     ).then(function(){
 
 
-      if(this.tree_config.get('start_location')){
+      if(this.tree_config.get('start_location') && this.list_items.path.length > 1){
         var tree_model = this.tree_collection.get(this.list_items.path.models[1].id);
         var ids = this.list_items.path.pluck('id');
         ids.shift();

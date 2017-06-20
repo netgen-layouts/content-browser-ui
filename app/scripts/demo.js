@@ -20,7 +20,7 @@ $(document).on('click', '.js-open-browser', function(e){
   var browser = new Browser({
     tree_config: {
       // start_location: 999,
-      // start_location: 246,
+      start_location: 246,
       custom_params: {
         hello: 'world'
       },

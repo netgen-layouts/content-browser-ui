@@ -21,7 +21,7 @@ module.exports = Core.Collection.extend({
 
   fetch: function(options){
     options || (options = {});
-    options.data = _.extend({}, options.data, {customParams: this.tree_config.get('custom_params') });
+    options.data = _.extend({}, options.data, {customParams: this.browser.tree_config.get('custom_params') });
     return this._super('fetch', [options]);
   },
 
