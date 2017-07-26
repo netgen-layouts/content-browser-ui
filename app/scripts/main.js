@@ -8,6 +8,7 @@ require('./jquery/multiple');
 function InputBrowse(el, opts) {
   opts || (opts = {});
   this.$el = $(el);
+  this.$el.attr('data-input', '');
   this.$name = this.$el.find('.js-name');
   this.$input = this.$el.find('.js-value');
   this.$trigger = this.$el.find('.js-trigger');
