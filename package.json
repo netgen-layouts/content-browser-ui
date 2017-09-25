@@ -30,6 +30,6 @@
     "node": ">=0.8.0"
   },
   "dependencies": {
-    "netgen-core": "0.8.x"
+    "netgen-core": "0.9.x"
   }
 }
