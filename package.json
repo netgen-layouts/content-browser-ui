@@ -1,7 +1,7 @@
 {
   "name": "netgen-content-browser",
   "description": "Netgen - JS component for browse interface",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "main": "app/scripts/main.js",
   "devDependencies": {
     "autoprefixer": "^6.3.6",
@@ -30,6 +30,6 @@
     "node": ">=0.8.0"
   },
   "dependencies": {
-    "netgen-core": "0.9.x"
+    "netgen-core": "0.10.x"
   }
 }
