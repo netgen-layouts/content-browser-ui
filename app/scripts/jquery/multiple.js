@@ -97,3 +97,7 @@ $.fn.multiple_browse = function (opts) {
     $this.data('multiple_browse', instance);
   });
 };
+
+$(function(){
+  $('.js-multiple-browse').multiple_browse();
+});
