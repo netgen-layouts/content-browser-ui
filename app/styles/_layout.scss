@@ -37,6 +37,13 @@
   }
 }
 
+.preview-loader{
+  text-align: center;
+  i{
+    margin: 15px 0px 15px 0px;
+  }
+}
+
 &.loading{
   .loader{opacity: 1;}
   .modal-content{background-color:#2e2e2e;}
