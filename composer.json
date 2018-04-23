@@ -1,6 +1,7 @@
 {
     "name": "netgen/content-browser-ui",
     "description": "Netgen Content Browser UI",
+    "license": "proprietary",
     "authors": [
         {
             "name": "Netgen",
