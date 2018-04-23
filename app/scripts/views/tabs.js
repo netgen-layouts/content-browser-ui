@@ -72,7 +72,7 @@ module.exports = Core.View.extend({
   },
 
   on_list_items_success: function(){
-    this.render_preview(this.list_items.parent_item);
+    //this.render_preview(this.list_items.parent_item);
     return this;
   },
 
@@ -156,6 +156,8 @@ module.exports = Core.View.extend({
     var model = this.list_items.parent_item;
     model.browser = this.browser;
     model.is_root_model = true;
+
+    this.render_preview(model);
 
     this.list_root_view = new ListRootView({
       model: model,

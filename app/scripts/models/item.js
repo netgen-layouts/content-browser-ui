@@ -88,15 +88,14 @@ module.exports = Core.Model
 
     fetch_preview: function(){
       if (!this.get_browser()){
-        this.set('html_new', "");
+        this.set('html', "");
+        return "";
       } else {
         var url = Core.env.cb_api_url(this.get_browser().tree_config.get('root_path') + '/render/' + this.get("value"));
+        
+        return this.get('html') || Core.$.get(url).done(function(response){
+          this.set('html', response);
+        }.bind(this));
       }
-      
-      return this.get('html_new') || Core.$.get(url).done(function(response){
-         this.set('html_new', response);
-      }.bind(this));
-
-
     }
   });
