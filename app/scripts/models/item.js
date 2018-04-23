@@ -84,7 +84,19 @@ module.exports = Core.Model
 
     selected_collection: function(){
       return this.get_browser().selected_collection;
+    },
+
+    fetch_preview: function(){
+      if (!this.get_browser()){
+        this.set('html_new', "");
+      } else {
+        var url = Core.env.cb_api_url(this.get_browser().tree_config.get('root_path') + '/render/' + this.get("value"));
+      }
+      
+      return this.get('html_new') || Core.$.get(url).done(function(response){
+         this.set('html_new', response);
+      }.bind(this));
+
+
     }
-
-
   });
