@@ -86,16 +86,28 @@ module.exports = Core.Model
       return this.get_browser().selected_collection;
     },
 
+    do_fetch_preview: function(url){
+      this.set('loading_preview', true)
+
+      return Core.$.get(url).done(function(response){
+        this.get_browser().preview_cache[this.get("value")] = response;
+        this.set('loading_preview', false)
+        this.set('html', response);
+      }.bind(this));
+    },
+
     fetch_preview: function(){
       if (!this.get_browser()){
         this.set('html', "");
         return "";
       } else {
-        var url = Core.env.cb_api_url(this.get_browser().tree_config.get('root_path') + '/render/' + this.get("value"));
+
+        var cachedValue = this.get_browser().preview_cache[this.get("value")];
+
+        cachedValue && this.set("html", cachedValue);
         
-        return this.get('html') || Core.$.get(url).done(function(response){
-          this.set('html', response);
-        }.bind(this));
+        var url = Core.env.cb_api_url(this.get_browser().tree_config.get('root_path') + '/render/' + this.get("value"));
+        return this.get('html') || this.do_fetch_preview(url);
       }
     }
   });

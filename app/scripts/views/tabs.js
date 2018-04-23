@@ -191,7 +191,7 @@ module.exports = Core.View.extend({
     this.selectedModel = model;
     
     if (this.browser.browser_config.get('preview_visible')){
-      model.fetch_preview();
+      model.get('value') && model.fetch_preview();
       
       this.preview = new PreviewView({
         model: model

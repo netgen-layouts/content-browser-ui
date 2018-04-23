@@ -10,7 +10,7 @@ module.exports = Core.View.extend({
   },
   set_context: function(){
     Core.View.prototype.set_context.apply(this, arguments);
-    this.context.loading = !this.model.get('html');
+    this.context.loading = this.model.get('loading_preview');
     this.context.html =  this.model.get('html');
     return this;
   }
