@@ -72,7 +72,7 @@ module.exports = Core.View.extend({
   },
 
   on_list_items_success: function(){
-    this.render_preview(this.list_items.parent_item);
+    //this.render_preview(this.list_items.parent_item);
     return this;
   },
 
@@ -157,6 +157,8 @@ module.exports = Core.View.extend({
     model.browser = this.browser;
     model.is_root_model = true;
 
+    this.render_preview(model);
+
     this.list_root_view = new ListRootView({
       model: model,
       el: '.list .list-root',
@@ -182,19 +184,29 @@ module.exports = Core.View.extend({
   },
 
   render_preview: function(model){
-    if(this.preview && this.preview.model === model){return;}
-    this.preview && this.preview.model && this.preview.model.trigger('unselect');
-    model.trigger('select');
-    this.preview = new PreviewView({
-      model: model
-    });
+    if(this.selectedModel === model && this.preview && this.preview.model === model){return;}
+    this.selectedModel && this.selectedModel.trigger('unselect');
 
-    this.$('.preview').html(this.preview.render().$el);
+    model.trigger('select');
+    this.selectedModel = model;
+    
+    if (this.browser.browser_config.get('preview_visible')){
+      model.get('value') && model.fetch_preview();
+      
+      this.preview = new PreviewView({
+        model: model
+      });
+  
+      this.$('.preview:visible').html(this.preview.render().$el);
+    }
+    
   },
 
   $toggle_preview: function(){
     this.$el.toggleClass('preview-hidden');
-    this.browser.browser_config.save('preview_visible', !this.browser.browser_config.get('preview_visible'));
+    var previewVisible = !this.browser.browser_config.get('preview_visible');
+    this.browser.browser_config.save('preview_visible', previewVisible);
+    previewVisible && this.render_preview(this.selectedModel);
   },
 
   /* Search */

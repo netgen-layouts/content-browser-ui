@@ -1,5 +1,14 @@
-{{#if html}}
-  {{{html}}}
+{{#if loading}}
+  <div class="preview-loader">
+    <i class="loading-ng-icon"></i>
+    <p>
+      Loading...
+    </p>
+  </div>
 {{else}}
-  This item does not have a preview.
+  {{#if html}}
+    {{{html}}}
+  {{else}}
+    This item does not have a preview.
+  {{/if}}
 {{/if}}

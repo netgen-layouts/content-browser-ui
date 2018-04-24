@@ -84,7 +84,31 @@ module.exports = Core.Model
 
     selected_collection: function(){
       return this.get_browser().selected_collection;
+    },
+
+    do_fetch_preview: function(url){
+      this.set('loading_preview', true)
+      var url = Core.env.cb_api_url(this.get_browser().tree_config.get('root_path') + '/render/' + this.get("value"));
+
+      Core.$.get(url).done(function(response){
+        this.get_browser().preview_cache[this.get("value")] = response;
+        this.set('loading_preview', false)
+        this.set('html', response);
+      }.bind(this));
+    },
+
+    fetch_preview: function(){
+      if (!this.get_browser()){
+        this.set('html', "");
+        
+      } else {  
+        var cachedValue = this.get_browser().preview_cache[this.get("value")];
+        
+        cachedValue && this.set("html", cachedValue);
+        
+        !this.get('html') && this.do_fetch_preview();
+      }
+
+      return this;
     }
-
-
   });

@@ -132,7 +132,7 @@ module.exports = Core.View.extend({
   },
 
   show_preview: function(){
-    this.parent.tabs.render_preview(this.model);
+    //this.parent.tabs.render_preview(this.model);
   }
 
 

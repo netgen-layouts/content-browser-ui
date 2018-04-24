@@ -35,13 +35,13 @@ module.exports = Core.Modal.extend({
 
     this.selected_collection = new Items();
 
-
-
     this.selected_collection.browser = this;
     this.tree_collection.browser = this;
 
     this.browser_config = new BrowserConfig({id: 1});
     this.browser_config.fetch();
+
+    this.preview_cache = {};
 
     // this.list_items.browser = this.browser;
     // this.browser.list_items = this.list_items;
