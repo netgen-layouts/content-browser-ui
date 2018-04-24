@@ -88,8 +88,9 @@ module.exports = Core.Model
 
     do_fetch_preview: function(url){
       this.set('loading_preview', true)
+      var url = Core.env.cb_api_url(this.get_browser().tree_config.get('root_path') + '/render/' + this.get("value"));
 
-      return Core.$.get(url).done(function(response){
+      Core.$.get(url).done(function(response){
         this.get_browser().preview_cache[this.get("value")] = response;
         this.set('loading_preview', false)
         this.set('html', response);
@@ -99,15 +100,15 @@ module.exports = Core.Model
     fetch_preview: function(){
       if (!this.get_browser()){
         this.set('html', "");
-        return "";
-      } else {
-
+        
+      } else {  
         var cachedValue = this.get_browser().preview_cache[this.get("value")];
-
+        
         cachedValue && this.set("html", cachedValue);
         
-        var url = Core.env.cb_api_url(this.get_browser().tree_config.get('root_path') + '/render/' + this.get("value"));
-        return this.get('html') || this.do_fetch_preview(url);
+        !this.get('html') && this.do_fetch_preview();
       }
+
+      return this;
     }
   });
