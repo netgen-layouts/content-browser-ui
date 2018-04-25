@@ -16,3 +16,4 @@ composer.lock
 .php_cs.cache
 bundle/Resources/public/dev
 package-lock.json
+yarn.lock
