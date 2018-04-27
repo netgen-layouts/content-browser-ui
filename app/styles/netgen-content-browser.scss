@@ -4,7 +4,7 @@
 @import "fonts";
 @import "variables";
 
-.ngc .ngcb{
+.ngc .ngcb {
 
   @import "layout";
   @import "tabs";
@@ -13,57 +13,58 @@
 
 
   -webkit-font-smoothing:antialiased;
-  .right-panel{
+  .right-panel {
     position: relative;
     padding: 0px;
     border: none;
-    .no-content{
+    .no-content {
       padding: 10px;
     }
   }
-  input[type="checkbox"] {
-    & + label {
-      display:block;
-      position:relative;
-      padding:5px 5px 5px 20px;
-      margin-bottom:0px;
-      cursor:pointer;
-      font-weight:normal;
-      &::before {
-        position:absolute;
-        top:4px;
-        left:0px;
-        font-size:18px;
-        color:gray;
-        @extend %material-icon;
+  .modal-content {
+    input[type="checkbox"] {
+      & + label {
+        display:block;
+        position:relative;
+        padding:5px 5px 5px 20px;
+        margin-bottom:0px;
+        cursor:pointer;
+        font-weight:normal;
+        &::before {
+          position:absolute;
+          top:4px;
+          left:0px;
+          font-size:18px;
+          color:gray;
+          @extend %material-icon;
+        }
+        &:empty::before {
+          top:-4px;
+        }
       }
-      &:empty::before {
-        top:-4px;
+      &:not(:checked), &:checked {
+        position: absolute;
+        left: -9999px;
       }
-    }
-    &:not(:checked), &:checked {
-      position: absolute;
-      left: -9999px;
-    }
-    &:not(:checked) + label {
-      &::before {
-        content: "check_box_outline_blank";
+      &:not(:checked) + label {
+        &::before {
+          content: "check_box_outline_blank";
+        }
       }
-    }
-    &:checked + label {
-      &::before {
-        content: "check_box";
-        color: $btnprimary;
+      &:checked + label {
+        &::before {
+          content: "check_box";
+          color: $btnprimary;
+        }
       }
-    }
 
-    &:disabled + label {
-      &::before {
-        color: lighten(gray, 20%);
+      &:disabled + label {
+        &::before {
+          color: lighten(gray, 20%);
+        }
       }
     }
   }
-
 
 
   .form-group{
