@@ -227,8 +227,9 @@
       border-left:4px solid transparent;
       border-right:4px solid transparent;
     }
-    label {
+    input[type="checkbox"] + label {
       padding-left:2.25em;
+      font-size: 1em;
       &::before {
         font-size:16px;
         left:8px;
