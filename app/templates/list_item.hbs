@@ -4,6 +4,9 @@
     {{#eq column_id 'name'}}
       <input type="checkbox" id="{{uid true}}" {{#if ../model.is_checked }} checked="checked" {{/if}} {{#if ../model.is_disabled }} disabled="disabled" {{/if}} />
       <label for="{{uid false}}"></label>
+      {{#unless ../model.visible}}
+        <i class="material-icons">visibility_off</i>
+      {{/unless}}
       {{#if ../model.can_show_children}}
         <a href="#">{{get_column ../model column_id}}</a>
       {{else}}
