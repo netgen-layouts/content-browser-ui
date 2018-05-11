@@ -72,7 +72,7 @@ module.exports = Core.Modal.extend({
     this.render_tabs_view();
     this.enable_disable_apply();
     this.$el.removeClass('loading');
-    window.setTimeout(this.$loading_done.bind(this), 500); // fix for transitionend not firing every time (duration of timeout has to be the same as duration of transition for loader in css)
+    window.setTimeout(this.$loading_done.bind(this), 1000); // fix for transitionend not firing every time (duration of timeout has to be the same as duration of transition for loader in css)
     return this;
   },
 
