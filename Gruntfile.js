@@ -1,9 +1,8 @@
-// Generated on 2013-07-23 using generator-webapp 0.2.6
 'use strict';
 
 var proxyMiddleware = require('http-proxy-middleware');
 
-/* OVERRIDE HANDLEBARS DEFAULT NAME LOOKUP ========================================================================================================*/
+// Override Handlebars default name lookup
 var Handlebars = require('handlebars/lib/index');
 var JavaScriptCompiler = Handlebars.JavaScriptCompiler;
 
@@ -14,20 +13,9 @@ for (var k in helpers) {
   known_helpers[k] = true;
 }
 
-
-
 JavaScriptCompiler.prototype.nameLookup = function(parent, name /* , type*/ ) {
   return "Handlebars.r(" + parent + ",'" + name + "')";
 };
-
-/* OVERRIDE HANDLEBARS DEFAULT NAME LOOKUP ========================================================================================================*/
-
-
-// # Globbing
-// for performance reasons we're only matching one level down:
-// 'test/spec/{,*/}*.js'
-// use this if you want to recursively match all subfolders:
-// 'test/spec/**/*.js'
 
 module.exports = function(grunt) {
   // load all grunt tasks
@@ -35,11 +23,10 @@ module.exports = function(grunt) {
 
   var local_config = 'local_config.json';
   if(!grunt.file.exists(local_config)){
-    grunt.file.copy(local_config+'.example', local_config)
-    throw new Error('Please fill ' + local_config +' in directory of Gruntfile.js');
+    grunt.file.copy(local_config + '.dist', local_config)
+    throw new Error('Please fill in the ' + local_config +' file in the root directory and run Grunt again.');
   }
 
-  // configurable paths
   var config = {
     app: 'app',
     dist: 'bundle/Resources/public',
@@ -51,9 +38,7 @@ module.exports = function(grunt) {
     config: config,
     pkg: grunt.file.readJSON('package.json'),
 
-
     watch: {
-
       browserify_vendor: {
         files: ['node_modules/@netgen/layouts-core-ui/app/scripts/**/*.js'],
         tasks: ['browserify:vendor']
@@ -63,10 +48,12 @@ module.exports = function(grunt) {
         files: ['<%= config.app %>/scripts/**/*.js'],
         tasks: ['browserify:dev', 'browserify:demo']
       },
+
       sass: {
         files: ['<%= config.app %>/styles/{,*/}*.{scss,sass}'],
         tasks: ['sass:server', 'postcss:server']
       },
+
       handlebars: {
         files: ['<%= config.app %>/templates/**/*.hbs', 'tests/templates/**/*.hbs'],
         tasks: ['handlebars']
@@ -77,8 +64,8 @@ module.exports = function(grunt) {
       bsFiles: {
         src: ['<%= config.dev %>/js/demo.js','<%= config.dev %>/styles/*.css', 'app/*html']
       },
-      options: {
 
+      options: {
         open: false,
         watchTask: true,
         server: {
@@ -105,12 +92,12 @@ module.exports = function(grunt) {
       server: '<%= config.dev %>'
     },
 
-
     handlebars: {
       compile: {
         files: {
           '<%= config.app %>/scripts/templates.js': '<%= config.app %>/templates/**/*.hbs'
         },
+
         options: {
           compilerOptions: {
             knownHelpers: known_helpers,
@@ -137,6 +124,7 @@ module.exports = function(grunt) {
       options: {
         includePaths: ['.']
       },
+
       server: {
         options: {
           sourceMap: true,
@@ -151,6 +139,7 @@ module.exports = function(grunt) {
           ext: '.css'
         }]
       },
+
       dist: {
         options: {
           sourceMap: false,
@@ -175,6 +164,7 @@ module.exports = function(grunt) {
           require('autoprefixer')({browsers: 'last 3 versions'})
         ]
       },
+
       server: {
         src: '<%= config.dev %>/styles/*.css'
       },
@@ -189,6 +179,7 @@ module.exports = function(grunt) {
         src: [],
         dest: '<%= config.dev %>/js/vendor.js',
       },
+
       dev: {
         src: ['<%= config.app %>/scripts/main.js'],
         dest: '<%= config.dev %>/js/main.js',
@@ -225,9 +216,7 @@ module.exports = function(grunt) {
           }
         },
       }
-
     },
-
 
     uglify: {
       dist: {
@@ -241,7 +230,6 @@ module.exports = function(grunt) {
       }
     },
 
-
     imagemin: {
       dist: {
         files: [{
@@ -252,6 +240,7 @@ module.exports = function(grunt) {
         }]
       }
     },
+
     svgmin: {
       dist: {
         files: [{
@@ -262,8 +251,6 @@ module.exports = function(grunt) {
         }]
       }
     },
-
-
 
     // Put files not handled in other tasks here
     copy: {
@@ -288,7 +275,6 @@ module.exports = function(grunt) {
       }
     },
 
-
     concurrent: {
       server: [
         'sass:server',
@@ -306,9 +292,6 @@ module.exports = function(grunt) {
         'svgmin'
       ]
     },
-
-
-
   });
 
   grunt.registerTask('server', function() {
@@ -328,7 +311,6 @@ module.exports = function(grunt) {
     ]);
   });
 
-
   grunt.registerTask('build', function() {
     grunt.task.run([
       'clean:dist',
@@ -341,8 +323,5 @@ module.exports = function(grunt) {
 
   });
 
-
-
   grunt.registerTask('default', ['server']);
-
 };
