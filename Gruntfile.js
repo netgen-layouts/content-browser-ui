@@ -70,7 +70,7 @@ module.exports = function(grunt) {
         watchTask: true,
         server: {
           middleware: [
-            proxyMiddleware('/cb/', {target: 'http://'+config.local.domain +'/ngadminui/', changeOrigin: true, silent: true})
+            proxyMiddleware('/cb/', {target: 'http://' + config.local.domain + '/' + config.local.start_path, changeOrigin: true, silent: true})
           ],
           baseDir: ['<%= config.dev %>', config.app, '.']
         }

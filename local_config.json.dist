@@ -1,3 +1,4 @@
 {
-  "domain": "example.com"
+  "domain": "example.com",
+  "start_path": ""
 }
