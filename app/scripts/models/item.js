@@ -1,7 +1,7 @@
 'use strict';
 
-var Core = require('netgen-core');
-var MixinTree = require('netgen-core/app/scripts/models/mixin/tree');
+var Core = require('@netgen/layouts-core-ui');
+var MixinTree = require('@netgen/layouts-core-ui/app/scripts/models/mixin/tree');
 var _ = Core._;
 
 module.exports = Core.Model
@@ -100,12 +100,12 @@ module.exports = Core.Model
     fetch_preview: function(){
       if (!this.get_browser()){
         this.set('html', "");
-        
-      } else {  
+
+      } else {
         var cachedValue = this.get_browser().preview_cache[this.get("value")];
-        
+
         cachedValue && this.set("html", cachedValue);
-        
+
         !this.get('html') && this.do_fetch_preview();
       }
 

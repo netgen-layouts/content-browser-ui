@@ -7,7 +7,7 @@ var proxyMiddleware = require('http-proxy-middleware');
 var Handlebars = require('handlebars/lib/index');
 var JavaScriptCompiler = Handlebars.JavaScriptCompiler;
 
-var helpers = require('netgen-core/app/scripts/helpers');
+var helpers = require('@netgen/layouts-core-ui/app/scripts/helpers');
 
 var known_helpers = {};
 for (var k in helpers) {
@@ -55,7 +55,7 @@ module.exports = function(grunt) {
     watch: {
 
       browserify_vendor: {
-        files: ['node_modules/netgen-core/app/scripts/**/*.js'],
+        files: ['node_modules/@netgen/layouts-core-ui/app/scripts/**/*.js'],
         tasks: ['browserify:vendor']
       },
 
@@ -188,23 +188,16 @@ module.exports = function(grunt) {
       vendor: {
         src: [],
         dest: '<%= config.dev %>/js/vendor.js',
-        options: {
-          // require: ['netgen-core'],
-          browserifyOptions: {
-            // debug: true
-          }
-        }
       },
       dev: {
         src: ['<%= config.app %>/scripts/main.js'],
         dest: '<%= config.dev %>/js/main.js',
         options: {
-          // external: ['netgen-core'],
           browserifyOptions: {
             debug: true
           },
           alias: {
-            'netgen-content-browser': './app/scripts/views/browser'
+            '@netgen/content-browser-ui': './app/scripts/views/browser'
           }
         },
       },
@@ -213,23 +206,22 @@ module.exports = function(grunt) {
         src: ['<%= config.app %>/scripts/demo.js'],
         dest: '<%= config.dev %>/js/demo.js',
         options: {
-          // external: ['netgen-core'],
           browserifyOptions: {
             debug: true
           },
           alias: {
-            'netgen-content-browser': './app/scripts/views/browser'
+            '@netgen/content-browser-ui': './app/scripts/views/browser'
           }
         },
       },
 
       dist: {
         src: ['<%= config.app %>/scripts/main.js'],
-        dest: '<%= config.dist %>/js/<%= pkg.name %>.js',
+        dest: '<%= config.dist %>/js/netgen-content-browser.js',
         options: {
-          require: ['netgen-core'],
+          require: ['@netgen/layouts-core-ui'],
           alias: {
-            'netgen-content-browser': './app/scripts/views/browser'
+            '@netgen/content-browser-ui': './app/scripts/views/browser'
           }
         },
       }
@@ -244,8 +236,8 @@ module.exports = function(grunt) {
             drop_console: true
           }
         },
-        src: '<%= config.dist %>/js/<%= pkg.name %>.js',
-        dest: '<%= config.dist %>/js/<%= pkg.name %>.js'
+        src: '<%= config.dist %>/js/netgen-content-browser.js',
+        dest: '<%= config.dist %>/js/netgen-content-browser.js'
       }
     },
 

@@ -1,6 +1,6 @@
 'use strict';
 
-var Core = require('netgen-core');
+var Core = require('@netgen/layouts-core-ui');
 var Items = require('../collections/items');
 var Item = require('../models/item');
 var SectionItemsView = require('./section_items');
@@ -189,17 +189,17 @@ module.exports = Core.View.extend({
 
     model.trigger('select');
     this.selectedModel = model;
-    
+
     if (this.browser.browser_config.get('preview_visible')){
       model.get('value') && model.fetch_preview();
-      
+
       this.preview = new PreviewView({
         model: model
       });
-  
+
       this.$('.preview:visible').html(this.preview.render().$el);
     }
-    
+
   },
 
   $toggle_preview: function(){

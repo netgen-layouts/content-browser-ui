@@ -1,7 +1,7 @@
 'use strict';
 
-var Core = require('netgen-core');
-var MixinTree = require('netgen-core/app/scripts/models/mixin/tree');
+var Core = require('@netgen/layouts-core-ui');
+var MixinTree = require('@netgen/layouts-core-ui/app/scripts/models/mixin/tree');
 
 module.exports = Core.Model
   .extend(MixinTree)

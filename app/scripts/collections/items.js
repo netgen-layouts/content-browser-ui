@@ -1,6 +1,6 @@
 'use strict';
 
-var Core = require('netgen-core');
+var Core = require('@netgen/layouts-core-ui');
 var Item = require('../models/item');
 var Breadcrumbs = require('./breadcrumbs');
 var _ = Core._;
