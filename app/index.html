@@ -1,62 +1,43 @@
-<!doctype html>
-<html class="no-js"  data-manifest="manifest.appcache">
+<!DOCTYPE html>
+<html class="no-js">
     <head>
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>Netgen Content Browser</title>
-        <meta name="version" content="<!-- @echo VERSION -->">
-        <meta name="viewport" content="width=device-width,initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
-        <meta name="web-app-capable" content="yes">
-        <meta name="mobile-web-app-capable" content="yes">
-        <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <meta name="apple-mobile-web-app-capable" content="yes">
-        <link rel="icon" sizes="192x192" href="/apple-touch-icon.png">
 
-
-        <link rel="stylesheet" href="styles/netgen-content-browser.css">
-
+        <link rel="stylesheet" href="/styles/netgen-content-browser.css">
 
         <style type="text/css">
-          #app{display: flex; position:absolute; top:0; left:0; width:100%; height:100%;justify-content:center;align-items:center;}
+            #app{display: flex; position:absolute; top:0; left:0; width:100%; height:100%;justify-content:center;align-items:center;}
         </style>
-
     </head>
+
     <body>
         <div id="app" class="ngc">
+            <h1>
+                <select>
+                    <option value="ezcontent">ezcontent</option>
+                    <option value="ezlocation">ezlocation</option>
+                    <option value="eztags">eztags</option>
+                    <option value="sylius_product">sylius_product</option>
+                    <option value="ngbm_layout">ngbm_layout</option>
+                </select>
 
+                <a class="js-open-browser" href="#">open browser</a>
+            </h1>
 
+            <div class="js-input-browse item-empty" data-min_selected="1" data-max_selected="1" data-start_location="43" data-custom-param1="value1" data-custom-param2="value2" data-custom-hello-world="value1" data-custom data-custom-="test">
+                <div class="input-browse">
+                    <a class="js-trigger" href="#">
+                        <span class="js-name" data-empty-note="(NO ITEM SELECTED)">(NO ITEM SELECTED)</span>
+                    </a>
+                </div>
 
-
-         <h1>
-          <select>
-            <option value="ezcontent">ezcontent</option>
-            <option value="ezlocation">ezlocation</option>
-            <option value="eztags">eztags</option>
-            <option value="sylius_product">sylius_product</option>
-            <option value="ngbm_layout">ngbm_layout</option>
-          </select>
-          <a class="js-open-browser" href="#"> open browser</a>
-         </h1>
-
-
-
-
-          <div class="js-input-browse item-empty" data-min_selected="1" data-max_selected="1" data-start_location="43" data-custom-param1="value1" data-custom-param2="value2" data-custom-hello-world="value1" data-custom data-custom-="test">
-            <div class="input-browse">
-              <a class="js-trigger" href="#">
-                <span class="js-name" data-empty-note="(NO ITEM SELECTED)">(NO ITEM SELECTED)</span>
-              </a>
+                <input type="hidden" class="js-config-name" value="ezlocation">
+                <input type="hidden" class="js-value" required="required">
             </div>
-
-            <input type="hidden" class="js-config-name" value="ezlocation">
-            <input type="hidden" class="js-value" required="required">
-          </div>
-
         </div>
 
-
-
-      <script src="js/vendor.js"></script>
-      <script src="js/demo.js"></script>
+        <script src="/js/vendor.js"></script>
+        <script src="/js/demo.js"></script>
     </body>
 </html>
