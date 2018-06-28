@@ -4,6 +4,7 @@ var Core = require('@netgen/layouts-core-ui');
 
 module.exports = Core.Backbone.Model.extend({
   save_visibility: function(visible){
-    this.save({ visible: visible });
+    var local_id = 'column_' + this.get('column_id');
+    visible ? localStorage.setItem(local_id, visible) : localStorage.removeItem(local_id);;
   }
 });

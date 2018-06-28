@@ -4,7 +4,6 @@ var Core = require('@netgen/layouts-core-ui');
 var $ = Core.$;
 var Items = require('../collections/items');
 var Locations = require('../collections/locations');
-var Columns = require('../collections/columns');
 var SelectedItemsView = require('./selected_items');
 var TreeConfig = require('../models/tree_config');
 var BrowserConfig = require('../models/browser_config');
@@ -111,16 +110,11 @@ module.exports = Core.Modal.extend({
   },
 
   render_tabs_view: function(){
-    var columns = new Columns();
-    columns.suffix = this.tree_config.get('root_path');
-    columns.fetch();
-    console.log(columns);
-
     this.tabs = new TabsView({
       collection: this.tree_collection,
       el: '.browser-tabs',
       browser: this,
-      columns: columns,
+      columns: this.tree_config.get_columns(),
       context: {
         preview_visible: this.browser_config.get('preview_visible')
       }

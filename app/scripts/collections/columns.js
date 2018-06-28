@@ -16,10 +16,6 @@ module.exports = Core.Backbone.Collection.extend({
     return result;
   },
 
-  localStorage: function(){
-    return new Core.Backbone.LocalStorage('table_column_' + this.suffix);
-  },
-
   save_visibility: function(name, checked){
     var model = this.findWhere({ column_id: name });
     model.save_visibility(checked);

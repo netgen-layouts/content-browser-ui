@@ -27,7 +27,6 @@ module.exports = Core.Model
 
     setup: function(){
       this.save_default_limit();
-      this.save_available_columns();
       return this;
     },
 
@@ -89,26 +88,22 @@ module.exports = Core.Model
       delete(response.sections);
     },
 
-    save_available_columns: function(){
+    get_columns: function(){
+      var default_columns = this.get('default_columns');
+      var available_columns = this.get('available_columns');
 
-      if(!localStorage.getItem('table_column_' + this.get('root_path'))){
-        var default_columns = this.get('default_columns');
-        var available_columns = this.get('available_columns');
-
-        var columns = new Columns({});
-        columns.suffix = this.get('root_path');
-        Core._.each(available_columns, function(item, index){
-          var column = new Column({
-            column_id: item.id,
-            name: item.name,
-            visible: default_columns.indexOf(item.id) !== -1,
-            order: index
-          });
-          columns.add(column);
-          column.save();
-
+      var columns = new Columns();
+      columns.suffix = this.get('root_path');
+      Core._.each(available_columns, function(item, index){
+        var column = new Column({
+          column_id: item.id,
+          name: item.name,
+          visible: default_columns.indexOf(item.id) !== -1 || localStorage.getItem('column_' + item.id) === 'true',
+          order: index
         });
-      }
+        columns.add(column);
+      });
+      return columns;
     },
 
     save_default_limit: function(){
