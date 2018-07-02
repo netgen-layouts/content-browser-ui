@@ -30,6 +30,8 @@ module.exports = Core.View.extend({
     this.listenTo(this.model, 'select', this.mark_selected);
     this.listenTo(this.model, 'unselect', this.unmark_selected);
 
+    !this.model.get('visible') && this.$el.addClass('item-hidden');
+
     return this;
   },
 
