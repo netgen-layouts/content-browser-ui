@@ -27,6 +27,6 @@
     "handlebars": "^4.0.5"
   },
   "dependencies": {
-    "@netgen/layouts-core-ui": "0.12.x"
+    "@netgen/layouts-core-ui": "~0.12.0"
   }
 }
