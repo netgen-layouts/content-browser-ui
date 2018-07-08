@@ -30,9 +30,9 @@ function MultipleBrowse(el, opts) {
 }
 
 
-MultipleBrowse.prototype.preselected_item_ids = function() {
+MultipleBrowse.prototype.preselected_item_values = function() {
   return this.$items.find('input').map(function(){
-    return parseInt($(this).val(), 10);
+    return $(this).val();
   }).get();
 };
 
@@ -46,7 +46,7 @@ MultipleBrowse.prototype.setup_events = function() {
 MultipleBrowse.prototype.$change = function(e){
   e.preventDefault();
   var self = this;
-  this.browser_opts.disabled_item_ids = this.preselected_item_ids();
+  this.browser_opts.disabled_item_values = this.preselected_item_values();
   this.browser = new Browser(this.browser_opts).on('apply', function(){
     self.$items.append(self.render(this.selected_collection));
     self.trigger_change();

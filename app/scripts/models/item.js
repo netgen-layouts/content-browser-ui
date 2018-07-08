@@ -70,7 +70,7 @@ module.exports = Core.Model
 
 
     prechecked: function(){
-      return _.contains(this.get_browser().disabled_item_ids, this.get('value'));
+      return _.contains(this.get_browser().disabled_item_values, this.get('value'));
     },
 
     is_disabled: function(){

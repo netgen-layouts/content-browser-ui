@@ -27,8 +27,8 @@ module.exports = Core.Modal.extend({
     this.load_additional_vars();
 
     this.tree_config = new TreeConfig(options.tree_config);
-    this.disabled_item_ids = options.disabled_item_ids;
-    //this.preselected_item_ids = options.preselected_item_ids;
+    this.disabled_item_values = options.disabled_item_values;
+    //this.preselected_item_values = options.preselected_item_values;
 
     this.tree_collection = new Locations();
 
@@ -186,7 +186,7 @@ module.exports = Core.Modal.extend({
 
     $.when(
       this.tree_collection.fetch_tree_by_model_id(default_location.id)
-    //, this.preselected_item_ids ? this.selected_collection.fetch_selected_items(this.preselected_item_ids) : true
+    //, this.preselected_item_values ? this.selected_collection.fetch_selected_items(this.preselected_item_values) : true
 
     ).then(function(){
 
