@@ -36,7 +36,6 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
     config: config,
-    pkg: grunt.file.readJSON('package.json'),
 
     watch: {
       browserify_vendor: {
