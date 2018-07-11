@@ -1,4 +1,4 @@
 {
-  "domain": "example.com",
-  "start_path": ""
+  "domain": "http://example.com",
+  "start_path": "/admin"
 }

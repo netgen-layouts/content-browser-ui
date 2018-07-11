@@ -62,12 +62,16 @@ module.exports = function(grunt) {
       options: {
         open: false,
         watchTask: true,
-        server: {
-          middleware: [
-            proxyMiddleware('/cb/', {target: 'http://' + config.local.domain + '/' + config.local.start_path, changeOrigin: true, silent: true})
-          ],
-          baseDir: ['<%= config.dev %>', config.app, '.']
-        }
+        startPath: '/cb',
+        proxy: config.local.domain,
+        middleware: [
+          proxyMiddleware('/cb/api', {target: config.local.domain + config.local.start_path, changeOrigin: true, silent: true}),
+        ],
+        serveStatic: [
+          { route: '/cb', dir: '<%= config.app %>' },
+          { route: '/cb/css', dir: '<%= config.dev %>/css' },
+          { route: '/cb/js', dir: '<%= config.dev %>/js' },
+        ]
       }
     },
 
