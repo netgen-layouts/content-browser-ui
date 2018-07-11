@@ -40,7 +40,7 @@ module.exports = function(grunt) {
     watch: {
       browserify: {
         files: ['<%= config.app %>/scripts/**/*.js'],
-        tasks: ['browserify:dev', 'browserify:demo']
+        tasks: ['browserify:dev']
       },
 
       sass: {
@@ -56,7 +56,7 @@ module.exports = function(grunt) {
 
     browserSync: {
       bsFiles: {
-        src: ['<%= config.dev %>/js/netgen-content-browser-demo.js','<%= config.dev %>/css/*.css', 'app/*html']
+        src: ['<%= config.dev %>/js/netgen-content-browser.js','<%= config.dev %>/css/*.css', 'app/*html']
       },
 
       options: {
@@ -170,21 +170,8 @@ module.exports = function(grunt) {
 
     browserify: {
       dev: {
-        src: ['<%= config.app %>/scripts/main.js'],
+        src: ['<%= config.app %>/scripts/dev.js'],
         dest: '<%= config.dev %>/js/netgen-content-browser.js',
-        options: {
-          browserifyOptions: {
-            debug: true
-          },
-          alias: {
-            '@netgen/content-browser-ui': './app/scripts/views/browser'
-          }
-        },
-      },
-
-      demo: {
-        src: ['<%= config.app %>/scripts/demo.js'],
-        dest: '<%= config.dev %>/js/netgen-content-browser-demo.js',
         options: {
           browserifyOptions: {
             debug: true
@@ -267,7 +254,7 @@ module.exports = function(grunt) {
     concurrent: {
       server: [
         'sass:server',
-        'browserify:demo'
+        'browserify:dev'
       ],
       dist: [
         'handlebars',
