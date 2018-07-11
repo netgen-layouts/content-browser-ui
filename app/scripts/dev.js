@@ -31,5 +31,8 @@ $(document).on('click', '.js-open-browser', function(e){
   }).load_and_open();
 });
 
+$(document).on('click', '.js-input-browse', function(e){
+  e.preventDefault();
+});
 
 $('.js-input-browse').input_browse();
