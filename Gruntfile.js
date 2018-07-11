@@ -61,7 +61,7 @@ module.exports = function(grunt) {
 
     browserSync: {
       bsFiles: {
-        src: ['<%= config.dev %>/js/demo.js','<%= config.dev %>/styles/*.css', 'app/*html']
+        src: ['<%= config.dev %>/js/demo.js','<%= config.dev %>/css/*.css', 'app/*html']
       },
 
       options: {
@@ -134,7 +134,7 @@ module.exports = function(grunt) {
           expand: true,
           cwd: '<%= config.app %>/styles',
           src: ['*.{scss,sass}'],
-          dest: '<%= config.dev %>/styles',
+          dest: '<%= config.dev %>/css',
           ext: '.css'
         }]
       },
@@ -165,7 +165,7 @@ module.exports = function(grunt) {
       },
 
       server: {
-        src: '<%= config.dev %>/styles/*.css'
+        src: '<%= config.dev %>/css/*.css'
       },
 
       dist: {
