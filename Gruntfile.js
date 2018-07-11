@@ -56,7 +56,7 @@ module.exports = function(grunt) {
 
     browserSync: {
       bsFiles: {
-        src: ['<%= config.dev %>/js/demo.js','<%= config.dev %>/css/*.css', 'app/*html']
+        src: ['<%= config.dev %>/js/netgen-content-browser-demo.js','<%= config.dev %>/css/*.css', 'app/*html']
       },
 
       options: {
@@ -171,7 +171,7 @@ module.exports = function(grunt) {
     browserify: {
       dev: {
         src: ['<%= config.app %>/scripts/main.js'],
-        dest: '<%= config.dev %>/js/main.js',
+        dest: '<%= config.dev %>/js/netgen-content-browser.js',
         options: {
           browserifyOptions: {
             debug: true
@@ -184,7 +184,7 @@ module.exports = function(grunt) {
 
       demo: {
         src: ['<%= config.app %>/scripts/demo.js'],
-        dest: '<%= config.dev %>/js/demo.js',
+        dest: '<%= config.dev %>/js/netgen-content-browser-demo.js',
         options: {
           browserifyOptions: {
             debug: true
@@ -268,9 +268,6 @@ module.exports = function(grunt) {
       server: [
         'sass:server',
         'browserify:demo'
-      ],
-      test: [
-
       ],
       dist: [
         'handlebars',
