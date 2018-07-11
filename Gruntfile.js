@@ -120,6 +120,7 @@ module.exports = function(grunt) {
 
     sass: {
       options: {
+        implementation: require('node-sass'),
         includePaths: ['.']
       },
 
@@ -290,7 +291,6 @@ module.exports = function(grunt) {
   grunt.registerTask('build', function() {
     grunt.task.run([
       'clean:dist',
-      'gitinfo',
       'concurrent:dist',
       'postcss:dist',
       'uglify',
