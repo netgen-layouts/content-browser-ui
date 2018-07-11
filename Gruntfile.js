@@ -38,11 +38,6 @@ module.exports = function(grunt) {
     config: config,
 
     watch: {
-      browserify_vendor: {
-        files: ['node_modules/@netgen/layouts-core-ui/app/scripts/**/*.js'],
-        tasks: ['browserify:vendor']
-      },
-
       browserify: {
         files: ['<%= config.app %>/scripts/**/*.js'],
         tasks: ['browserify:dev', 'browserify:demo']
@@ -174,11 +169,6 @@ module.exports = function(grunt) {
     },
 
     browserify: {
-      vendor: {
-        src: [],
-        dest: '<%= config.dev %>/js/vendor.js',
-      },
-
       dev: {
         src: ['<%= config.app %>/scripts/main.js'],
         dest: '<%= config.dev %>/js/main.js',
@@ -277,7 +267,6 @@ module.exports = function(grunt) {
     concurrent: {
       server: [
         'sass:server',
-        'browserify:vendor',
         'browserify:demo'
       ],
       test: [
