@@ -1,19 +1,19 @@
 <!DOCTYPE html>
-<html class="no-js">
+<html lang="en" class="no-js">
     <head>
         <meta charset="utf-8">
         <title>Netgen Content Browser</title>
 
         <link rel="stylesheet" href="/css/netgen-content-browser.css">
 
-        <style type="text/css">
-            #app{display: flex; position:absolute; top:0; left:0; width:100%; height:100%;justify-content:center;align-items:center;}
+        <style>
+            #app{ display:flex; zoom:2; position:absolute; top:0; left:0; width:100%; height:100%; justify-content:center; align-items:center; flex-direction:column; }
         </style>
     </head>
 
     <body>
         <div id="app" class="ngc">
-            <h1>
+            <div>
                 <select>
                     <option value="ezcontent">ezcontent</option>
                     <option value="ezlocation">ezlocation</option>
@@ -22,18 +22,18 @@
                     <option value="ngbm_layout">ngbm_layout</option>
                 </select>
 
-                <a class="js-open-browser" href="#">open browser</a>
-            </h1>
+                <a class="js-open-browser" href="#">Open browser</a>
+            </div>
 
             <div class="js-input-browse item-empty" data-min_selected="1" data-max_selected="1" data-start_location="43" data-custom-param1="value1" data-custom-param2="value2" data-custom-hello-world="value1" data-custom data-custom-="test">
                 <div class="input-browse">
                     <a class="js-trigger" href="#">
-                        <span class="js-name" data-empty-note="(NO ITEM SELECTED)">(NO ITEM SELECTED)</span>
+                        <span class="js-name" data-empty-note="(No item selected)">(No item selected)</span>
                     </a>
                 </div>
 
                 <input type="hidden" class="js-config-name" value="ezlocation">
-                <input type="hidden" class="js-value" required="required">
+                <input type="hidden" class="js-value">
             </div>
         </div>
 
