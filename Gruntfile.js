@@ -22,7 +22,7 @@ module.exports = function(grunt) {
   require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
   var grunt_config = 'grunt.json';
-  if(!grunt.file.exists(grunt_config)){
+  if (!grunt.file.exists(grunt_config)) {
     grunt.file.copy(grunt_config + '.dist', grunt_config)
     throw new Error('Please fill in the ' + grunt_config +' file in the root directory and run Grunt again.');
   }
@@ -45,7 +45,7 @@ module.exports = function(grunt) {
 
       sass: {
         files: ['<%= config.app %>/styles/{,*/}*.{scss,sass}'],
-        tasks: ['sass:server', 'postcss:server']
+        tasks: ['sass:dev', 'postcss:dev']
       },
 
       handlebars: {
@@ -56,7 +56,7 @@ module.exports = function(grunt) {
 
     browserSync: {
       bsFiles: {
-        src: ['<%= config.dev %>/js/netgen-content-browser.js','<%= config.dev %>/css/*.css', 'app/*html']
+        src: ['<%= config.dev %>/js/*.js','<%= config.dev %>/css/*.css', 'app/*.html']
       },
 
       options: {
@@ -76,18 +76,8 @@ module.exports = function(grunt) {
     },
 
     clean: {
-      dist: {
-        files: [{
-          dot: true,
-          src: [
-            '<%= config.dev %>',
-            '<%= config.dist %>/*',
-            '!<%= config.dist %>/vendor',
-            '!<%= config.dist %>/.git*'
-          ]
-        }]
-      },
-      server: '<%= config.dev %>'
+      dev: '<%= config.dev %>',
+      dist: '<%= config.dist %>'
     },
 
     handlebars: {
@@ -124,7 +114,7 @@ module.exports = function(grunt) {
         includePaths: ['.']
       },
 
-      server: {
+      dev: {
         options: {
           sourceMap: true,
           sourceMapEmbed: true,
@@ -164,7 +154,7 @@ module.exports = function(grunt) {
         ]
       },
 
-      server: {
+      dev: {
         src: '<%= config.dev %>/css/*.css'
       },
 
@@ -242,25 +232,19 @@ module.exports = function(grunt) {
           cwd: '<%= config.app %>',
           dest: '<%= config.dist %>',
           src: [
-            'images/{,*/}*.{webp,gif}',
             'fonts/**/{,*/}*.{eot,svg,ttf,woff,woff2}'
-          ]
-        }, {
-          expand: true,
-          cwd: '<%= config.dev %>/images',
-          dest: '<%= config.dist %>/images',
-          src: [
-            'generated/*'
           ]
         }]
       }
     },
 
     concurrent: {
-      server: [
-        'sass:server',
-        'browserify:dev'
+      dev: [
+        'handlebars',
+        'browserify:dev',
+        'sass:dev'
       ],
+
       dist: [
         'handlebars',
         'browserify:dist',
@@ -281,10 +265,9 @@ module.exports = function(grunt) {
 
   grunt.registerTask('fast_build', function() {
     grunt.task.run([
-      'clean:server',
-      'handlebars',
-      'concurrent:server',
-      'postcss:server'
+      'clean:dev',
+      'concurrent:dev',
+      'postcss:dev'
     ]);
   });
 
@@ -293,8 +276,8 @@ module.exports = function(grunt) {
       'clean:dist',
       'concurrent:dist',
       'postcss:dist',
-      'uglify',
-      'copy:dist'
+      'copy:dist',
+      'uglify:dist'
     ]);
 
   });
