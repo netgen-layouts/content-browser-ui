@@ -17,6 +17,11 @@ var render_partial = function(template, context){
 
 module.exports = {
 
+  get_column: function(model, property_name){
+    var columns = model.get('columns');
+    return columns ? columns[property_name] : '';
+  },
+
   /**
      * TODO !
      *
