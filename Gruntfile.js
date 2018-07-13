@@ -1,5 +1,6 @@
 'use strict';
 
+var _ = require('underscore');
 var proxyMiddleware = require('http-proxy-middleware');
 
 // Override Handlebars default name lookup
@@ -7,9 +8,11 @@ var Handlebars = require('handlebars/lib/index');
 var JavaScriptCompiler = Handlebars.JavaScriptCompiler;
 
 var helpers = require('@netgen/layouts-core-ui/app/scripts/helpers');
+var project_helpers = require('./app/scripts/helpers');
+var all_helpers = _.extend({}, helpers, project_helpers);
 
 var known_helpers = {};
-for (var k in helpers) {
+for (var k in all_helpers) {
   known_helpers[k] = true;
 }
 
