@@ -12,6 +12,7 @@ module.exports = Core.Model
   .extend({
 
     api_url: Env.cb_api_url,
+    default_limit: 25,
 
     initialize: function(){
       Core.Model.prototype.initialize.apply(this, arguments);
@@ -109,7 +110,7 @@ module.exports = Core.Model
 
     save_default_limit: function(){
       if(!localStorage.getItem('default_limit')){
-        localStorage.setItem('default_limit', this.get('default_limit'));
+        localStorage.setItem('default_limit', this.default_limit);
       }
     }
 

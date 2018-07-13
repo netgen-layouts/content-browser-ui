@@ -42,7 +42,7 @@ module.exports = Core.Collection.extend({
       last && last.set({last: true});
       last && (this.last_model = last);
       this.children_count = response.children_count;
-      this.children_limit = localStorage.getItem('default_limit') || this.tree_config.get('default_limit');
+      this.children_limit = localStorage.getItem('default_limit') || this.tree_config.default_limit;
       this.children_offset = Math.floor(this.children_count / this.children_limit);
       return response.children;
     }else{
