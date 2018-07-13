@@ -1,6 +1,7 @@
 'use strict';
 
 var Core = require('@netgen/layouts-core-ui');
+var Env = require('../environments/default');
 var Location = require('../models/location');
 var _ = Core._;
 
@@ -22,7 +23,7 @@ module.exports = Core.Collection
 
 
     url: function(){
-      return Core.env.cb_api_url(this.browser.tree_config.get('root_path') + '/browse');
+      return Env.cb_api_url(this.browser.tree_config.get('root_path') + '/browse');
     },
 
     fetch_tree_by_model_id: function(id, options){

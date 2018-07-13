@@ -1,6 +1,7 @@
 'use strict';
 
 var Core = require('@netgen/layouts-core-ui');
+var Env = require('../environments/default');
 var Item = require('../models/item');
 var Breadcrumbs = require('./breadcrumbs');
 var _ = Core._;
@@ -50,7 +51,7 @@ module.exports = Core.Collection.extend({
   },
 
   url: function(){
-    return Core.env.cb_api_url(this.browser.tree_config.get('root_path') + '/browse');
+    return Env.cb_api_url(this.browser.tree_config.get('root_path') + '/browse');
   },
 
 
@@ -74,7 +75,7 @@ module.exports = Core.Collection.extend({
   },
 
   search_data: function(options){
-    var url = Core.env.cb_api_url(this.browser.tree_config.get('root_path') +'/search');
+    var url = Env.cb_api_url(this.browser.tree_config.get('root_path') +'/search');
     options = this.setup_options(options);
     return this.fetch(Core._.extend({
       url: url
@@ -82,7 +83,7 @@ module.exports = Core.Collection.extend({
   },
 
   fetch_selected_items: function(ids){
-    var url = Core.env.cb_api_url(this.tree_config.get('root_path') + '/values');
+    var url = Env.cb_api_url(this.tree_config.get('root_path') + '/values');
     return this.fetch({
       url: url,
       data: {

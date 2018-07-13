@@ -1,6 +1,7 @@
 'use strict';
 
 var Core = require('@netgen/layouts-core-ui');
+var Env = require('../environments/default');
 var Locations = require('../collections/locations');
 var Columns = require('../collections/columns');
 var Breadcrumbs = require('../collections/breadcrumbs');
@@ -10,7 +11,7 @@ var _ = Core._;
 module.exports = Core.Model
   .extend({
 
-    content_browser: true,
+    api_url: Env.cb_api_url,
 
     initialize: function(){
       Core.Model.prototype.initialize.apply(this, arguments);

@@ -1,6 +1,7 @@
 'use strict';
 
 var Core = require('@netgen/layouts-core-ui');
+var Env = require('../environments/default');
 var $ = Core.$;
 var Items = require('../collections/items');
 var Locations = require('../collections/locations');
@@ -57,7 +58,7 @@ module.exports = Core.Modal.extend({
 
   load_additional_vars: function(){
     var cb_base_path = $('meta[name="ngcb-base-path"]').attr('content');
-    cb_base_path && (Core.env.cb_base_path = cb_base_path);
+    cb_base_path && (Env.cb_base_path = cb_base_path);
   },
 
   $loading_done: function(e){

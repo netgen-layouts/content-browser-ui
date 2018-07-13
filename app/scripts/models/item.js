@@ -1,6 +1,7 @@
 'use strict';
 
 var Core = require('@netgen/layouts-core-ui');
+var Env = require('../environments/default');
 var MixinTree = require('./mixin/tree');
 var _ = Core._;
 
@@ -10,7 +11,7 @@ module.exports = Core.Model
 
     idAttribute: 'value',
 
-    content_browser: true,
+    api_url: Env.cb_api_url,
 
     index: [
       ['value']
@@ -88,7 +89,7 @@ module.exports = Core.Model
 
     do_fetch_preview: function(url){
       this.set('loading_preview', true)
-      var url = Core.env.cb_api_url(this.get_browser().tree_config.get('root_path') + '/render/' + this.get("value"));
+      var url = Env.cb_api_url(this.get_browser().tree_config.get('root_path') + '/render/' + this.get("value"));
 
       Core.$.get(url).done(function(response){
         this.get_browser().preview_cache[this.get("value")] = response;

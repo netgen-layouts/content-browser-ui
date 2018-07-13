@@ -1,12 +1,13 @@
 'use strict';
 
 var Core = require('@netgen/layouts-core-ui');
+var Env = require('../environments/default');
 var MixinTree = require('./mixin/tree');
 
 module.exports = Core.Model
   .extend(MixinTree)
   .extend({
-    content_browser: true,
+    api_url: Env.cb_api_url,
 
     //For tree
     fetch_children: function(){
