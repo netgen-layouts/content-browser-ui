@@ -26,6 +26,8 @@
     "underscore": "^1.9.1"
   },
   "dependencies": {
-    "@netgen/layouts-core-ui": "~0.12.0"
+    "@netgen/layouts-core-ui": "~0.12.0",
+    "bootstrap": "^3.3.7",
+    "bootstrap-sass": "^3.3.7"
   }
 }
