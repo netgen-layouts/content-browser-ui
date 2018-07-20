@@ -71,9 +71,7 @@ module.exports = function(grunt) {
           proxyMiddleware('/cb/api', {target: config.local.domain + config.local.start_path, changeOrigin: true, silent: true}),
         ],
         serveStatic: [
-          { route: '/cb', dir: '<%= config.app %>' },
-          { route: '/cb/css', dir: '<%= config.dev %>/css' },
-          { route: '/cb/js', dir: '<%= config.dev %>/js' },
+          { route: '/cb', dir: ['<%= config.dev %>', '<%= config.app %>'] }
         ]
       }
     },
@@ -241,6 +239,15 @@ module.exports = function(grunt) {
       }
     },
 
+    shell: {
+      dev: {
+        command: [
+          'ln -s ../../../../app/fonts <%= config.dev %>/fonts',
+          'ln -s ../../../../app/images <%= config.dev %>/images'
+        ].join('\n')
+      }
+    },
+
     concurrent: {
       dev: [
         'browserify:dev',
@@ -269,7 +276,8 @@ module.exports = function(grunt) {
       'clean:dev',
       'handlebars',
       'concurrent:dev',
-      'postcss:dev'
+      'postcss:dev',
+      'shell:dev'
     ]);
   });
 
