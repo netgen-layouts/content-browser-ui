@@ -68,7 +68,7 @@ module.exports = function(grunt) {
         startPath: '/cb',
         proxy: config.local.domain,
         middleware: [
-          proxyMiddleware('/cb/api', {target: config.local.domain + config.local.start_path, changeOrigin: true, silent: true}),
+          proxyMiddleware('/cb/api', {target: config.local.domain + config.local.path_prefix, changeOrigin: true, silent: true}),
         ],
         serveStatic: [
           { route: '/cb', dir: ['<%= config.dev %>', '<%= config.app %>'] }
