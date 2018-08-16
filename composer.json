@@ -1,7 +1,7 @@
 {
     "name": "netgen/content-browser-ui",
     "description": "Netgen Content Browser user interface",
-    "license": "proprietary",
+    "license": "GPL-2.0-or-later",
     "authors": [
         {
             "name": "Netgen",
