@@ -1,6 +1,6 @@
 'use strict';
 
-var Core = require('@netgen/layouts-core-ui');
+var Core = require('@netgen/layouts-ui-core');
 var Env = require('../environments/default');
 var Locations = require('../collections/locations');
 var Columns = require('../collections/columns');

@@ -7,7 +7,7 @@ var proxyMiddleware = require('http-proxy-middleware');
 var Handlebars = require('handlebars/lib/index');
 var JavaScriptCompiler = Handlebars.JavaScriptCompiler;
 
-var helpers = require('@netgen/layouts-core-ui/app/scripts/helpers');
+var helpers = require('@netgen/layouts-ui-core/app/scripts/helpers');
 var project_helpers = require('./app/scripts/helpers');
 var all_helpers = _.extend({}, helpers, project_helpers);
 
@@ -181,7 +181,7 @@ module.exports = function(grunt) {
         src: ['<%= config.app %>/scripts/main.js'],
         dest: '<%= config.dist %>/js/netgen-content-browser.js',
         options: {
-          require: ['@netgen/layouts-core-ui'],
+          require: ['@netgen/layouts-ui-core'],
           alias: {
             '@netgen/content-browser-ui': './app/scripts/views/browser'
           }

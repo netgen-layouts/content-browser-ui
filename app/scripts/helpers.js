@@ -1,11 +1,11 @@
 'use strict';
 
 var Core = typeof window !== 'undefined' ?
-  require('@netgen/layouts-core-ui/app/scripts/core_base') :
-  require('@netgen/layouts-core-ui/app/scripts/core_namespace');
+  require('@netgen/layouts-ui-core/app/scripts/core_base') :
+  require('@netgen/layouts-ui-core/app/scripts/core_namespace');
 
 var _ = require('underscore');
-var TagHelper = require('@netgen/layouts-core-ui/app/scripts/tag_helper');
+var TagHelper = require('@netgen/layouts-ui-core/app/scripts/tag_helper');
 
 var safe = function(){
   return TagHelper.safe.apply(this, arguments);

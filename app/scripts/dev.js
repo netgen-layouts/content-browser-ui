@@ -1,7 +1,7 @@
 'use strict';
 
 var Browser = require('./main');
-var Core = require('@netgen/layouts-core-ui');
+var Core = require('@netgen/layouts-ui-core');
 
 // var browser = new Browser({
 //   tree_config: {

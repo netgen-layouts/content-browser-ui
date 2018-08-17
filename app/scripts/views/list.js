@@ -1,6 +1,6 @@
 'use strict';
 
-var Core = require('@netgen/layouts-core-ui');
+var Core = require('@netgen/layouts-ui-core');
 var Pager = require('../components/pager');
 var ListItemView = require('./list_item');
 var $ = Core.$;

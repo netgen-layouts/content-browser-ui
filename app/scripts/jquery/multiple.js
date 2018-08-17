@@ -1,7 +1,7 @@
 'use strict';
 
 var Browser = require('../views/browser');
-var Core = require('@netgen/layouts-core-ui');
+var Core = require('@netgen/layouts-ui-core');
 var $ = Core.$;
 var _ = Core._;
 
