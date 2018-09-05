@@ -55,7 +55,7 @@ module.exports = Core.View.extend({
 
   $toggle_checkbox: function(e){
     console.log(e);
-    $('[data-id="' + e.id + '"]').prop('checked', e.attributes.visible);
+    $('[data-id="' + e.attributes.column_id + '"]').prop('checked', e.attributes.visible);
   }
 
 });

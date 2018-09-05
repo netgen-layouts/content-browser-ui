@@ -104,7 +104,7 @@ this["JST"]["list_options"] = Handlebars.template({"1":function(container,depth0
     + "\" id=\""
     + alias2(Handlebars.r(helpers,'uid').call(alias3,true,{"name":"uid","hash":{},"data":data}))
     + "\" type=\"checkbox\" class=\"column-check\" data-id=\""
-    + alias2(alias1((depth0 != null ? Handlebars.r(depth0,'id') : depth0), depth0))
+    + alias2(alias1((depth0 != null ? Handlebars.r(depth0,'column_id') : depth0), depth0))
     + "\" autocomplete=\"off\" "
     + ((stack1 = Handlebars.r(helpers,'if').call(alias3,(depth0 != null ? Handlebars.r(depth0,'visible') : depth0),{"name":"if","hash":{},"fn":container.program(2, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
     + ">\n      <label for=\""
