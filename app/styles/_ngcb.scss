@@ -33,7 +33,7 @@
           left:0px;
           font-size:18px;
           color:gray;
-          @extend %material-icon;
+          @extend %material-icons-cb;
         }
         &:empty::before {
           top:-4px;
@@ -146,7 +146,7 @@
       width:40px;
     }
     &::after {
-      @extend %material-icon;
+      @extend %material-icons-cb;
       padding:0 0.5833333333em;
       align-items:center;
       font-size:24px;

@@ -29,10 +29,6 @@ $borderRadius: 2px;
   flex:1;
 }
 
-%material-icon {
-  @extend .material-icons;
-}
-
 %clearfix {
     &::after {
         display:table;

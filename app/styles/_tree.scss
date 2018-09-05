@@ -56,7 +56,7 @@
         padding-left: 22px;
         position:relative;
         &::before {
-          @extend %material-icon;
+          @extend %material-icons-cb;
           content:"folder";
           position:absolute;
           left:0;
@@ -81,7 +81,7 @@
           display:none;
         }
         &::after {
-          @extend %material-icon;
+          @extend %material-icons-cb;
           position:absolute;
           pointer-events:none;
           content:"add_box";
