@@ -2,6 +2,7 @@
     "name": "netgen/content-browser-ui",
     "description": "Netgen Content Browser user interface",
     "license": "GPL-2.0-or-later",
+    "type": "symfony-bundle",
     "authors": [
         {
             "name": "Netgen",
