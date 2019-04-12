@@ -1,0 +1,35 @@
+@value variables: '../Variables.module.css';
+@value gray60 from variables;
+
+.dropdown {
+  position: relative;
+}
+
+.toggle {
+  color: gray60;
+  text-decoration: none;
+  font-size: .6875em;
+  font-weight: 500;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+}
+
+.toggle i {
+  margin-left: .35em;
+}
+
+.menu {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background: #fff;
+  box-shadow: 0 0 .5em rgba(0, 0, 0, .5);
+  border-radius: 2px;
+  padding: .5em 0;
+  list-style-type: none;
+  z-index: 999;
+  font-size: .874em;
+  min-width: 160px;
+  background-clip: padding-box;
+}

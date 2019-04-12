@@ -1,0 +1,56 @@
+@value variables: './Variables.module.css';
+@value gray93, gray20 from variables;
+
+.browser {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  background: rgba(0, 0, 0, .5);
+  color: gray20;
+}
+
+.browser * {
+  box-sizing: border-box;
+}
+
+.dialog {
+  padding: 1em;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  background: #fff;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.panels {
+  display: flex;
+  flex: 1;
+}
+
+.treePanel {
+  flex: 0 0 25%;
+  padding: 0 1em;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.itemsPanel {
+  flex: 1;
+  background: gray93;
+  position: relative;
+}
+
+.tree {
+  background: gray93;
+  flex: 1;
+  margin-top: .5em;
+}

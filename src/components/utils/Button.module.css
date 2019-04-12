@@ -1,0 +1,20 @@
+@value variables: '../Variables.module.css';
+@value linkColor, linkHover from variables;
+
+.button {
+  cursor: pointer;
+}
+
+.link {
+  border: 0;
+  padding: 0;
+  background: transparent;
+  font-size: inherit;
+  color: linkColor;
+  transition: color .25s;
+}
+
+.link:hover {
+  text-decoration: underline;
+  color: linkHover;
+}

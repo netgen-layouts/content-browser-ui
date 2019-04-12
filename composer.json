@@ -1,0 +1,31 @@
+{
+    "name": "netgen/content-browser-ui",
+    "description": "Netgen Content Browser user interface",
+    "license": "MIT",
+    "type": "symfony-bundle",
+    "authors": [
+        {
+            "name": "Netgen",
+            "homepage": "https://www.netgenlabs.com"
+        },
+        {
+            "name": "Effectiva",
+            "homepage": "https://effectiva.hr"
+        }
+    ],
+    "require-dev": {
+        "netgen/layouts-ui-core": "~0.13.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Netgen\\Bundle\\ContentBrowserUIBundle\\": "bundle/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.13.x-dev"
+        }
+    }
+}

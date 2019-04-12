@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="theme-color" content="#000000" />
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>React App</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div>
+        <div>
+            <select>
+                <option value="ezcontent">ezcontent</option>
+                <option value="ezlocation">ezlocation</option>
+                <option value="eztags">eztags</option>
+                <option value="sylius_product">sylius_product</option>
+                <option value="ngbm_layout">ngbm_layout</option>
+            </select>
+
+            <a class="js-open-browser" href="#">Open browser</a>
+        </div>
+
+        <div class="js-input-browse item-empty"
+             data-min_selected="1"
+             data-max_selected="1"
+             data-start_location="43"
+             data-custom-param1="value1"
+             data-custom-param2="value2"
+             data-custom-hello-world="value1"
+             data-custom data-custom-="test"
+        >
+            <div class="input-browse">
+                <a class="js-trigger" href="#">
+                    <span class="js-name" data-empty-note="(No item selected)">(No item selected)</span>
+                </a>
+            </div>
+
+            <input type="hidden" class="js-config-name" value="ezlocation">
+            <input type="hidden" class="js-value">
+        </div>
+    </div>
+    <div id="root"></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+  </body>
+</html>

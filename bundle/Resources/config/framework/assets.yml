@@ -1,0 +1,14 @@
+assets:
+    packages:
+        ngcb_css:
+            base_path: '/bundles/netgencontentbrowserui/css'
+            version: '%ngcb.asset.version%'
+            version_format: '%%s?%%s'
+        ngcb_js:
+            base_path: '/bundles/netgencontentbrowserui/js'
+            version: '%ngcb.asset.version%'
+            version_format: '%%s?%%s'
+        ngcb:
+            base_path: '/bundles/netgencontentbrowserui'
+            version: '%ngcb.asset.version%'
+            version_format: '%%s?%%s'
