@@ -1,17 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
+import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
+import S from './Checkbox.module.css';
 
-function Checkbox({ onChange, checked, name, id, label }) {
-  const [isChecked, setIsChecked] = useState(checked || false);
-
-  const handleChange = (e) => {
-    setIsChecked(!isChecked);
-    if (onChange) onChange(e);
-  }
-
+function Checkbox({ onChange, checked, name, id, label, disabled, iconSize = 18 }) {
   return (
     <React.Fragment>
-      <input name={name} id={id} type="checkbox" onChange={handleChange} checked={isChecked} />
-      <label htmlFor={id}>{label}</label>
+      <input name={name} id={id} type="checkbox" onChange={onChange} checked={checked} className={S.checkbox} disabled={disabled} />
+      <label htmlFor={id} className={disabled ? S.disabledLabel : S.label}>
+        <span className={checked ? S.iconActive : S.icon}>
+          {checked ? <CheckBoxIcon color="inherit" fontSize="inherit" /> : <CheckBoxOutlineBlankIcon color="inherit" fontSize="inherit" />}
+        </span>
+        {label}
+      </label>
     </React.Fragment>
   );
 }

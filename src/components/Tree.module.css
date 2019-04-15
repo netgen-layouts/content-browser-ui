@@ -1,0 +1,27 @@
+@value variables: './Variables.module.css';
+@value fontPrimary, gray60 from variables;
+
+.tree {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.button {
+  background: transparent;
+  cursor: pointer;
+  font-family: fontPrimary;
+  border: 0;
+  padding: .25em 0;
+  font-size: .875em;
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  color: gray60;
+  display: flex;
+  align-items: center;
+  margin-right: .5em;
+  font-size: 1.1428571429em;
+}

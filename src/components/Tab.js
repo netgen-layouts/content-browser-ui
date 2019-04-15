@@ -1,5 +1,4 @@
 import React from 'react';
-import MaterialIcon from 'material-icons-react';
 import S from './Tabs.module.css';
 
 function Tab(props) {
@@ -7,7 +6,7 @@ function Tab(props) {
   if (props.isActive) className += ` ${S.active}`;
   return (
     <li className={className} onClick={props.onClick}>
-      {props.icon ? <MaterialIcon icon={props.icon} size={18} color="inherit" /> : ''}{props.label}
+      {props.icon ? props.icon : ''}{props.label}
     </li>
   );
 }

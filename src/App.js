@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Browser from './components/Browser';
 
-function App() {
+function App({ min_selected = 1, max_selected = 3 }) {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [config, setConfig] = useState({});
@@ -14,6 +14,7 @@ function App() {
   const [parentLocation, setParentLocation] = useState({});
   const [currentPath, setCurrentPath] = useState([]);
   const [activeColumns, setActiveColumns] = useState([]);
+  const [selectedItems, setSelectedItems] = useState([]);
 
   useEffect(() => fetchConfig(), []);
   useEffect(() => fetchTreeItems(), [sectionId]);
@@ -39,7 +40,7 @@ function App() {
           setIsLoaded(true);
         }
       )
-  }
+  };
 
   const fetchTreeItems = () => {
     if (!sectionId) return;
@@ -55,7 +56,7 @@ function App() {
           setIsLoadingTree(false);
         }
       )
-  }
+  };
 
   const fetchSectionItems = () => {
     if (!locationId) return;
@@ -73,12 +74,12 @@ function App() {
           setIsLoadingItems(false);
         }
       )
-  }
+  };
 
   const handleChangeSectionId = (id) => {
     setSectionId(id);
     setLocationId(id);
-  }
+  };
 
   const handleToggleColumn = (id, active) => {
     let columns;
@@ -89,7 +90,15 @@ function App() {
     }
     setActiveColumns(columns);
     localStorage.setItem('activeColumns', JSON.stringify(columns));
-  }
+  };
+
+  const handleSetSelectedItem = (selectedItem, add) => {
+    if (add) {
+      max_selected === 1 ? setSelectedItems([selectedItem]) : setSelectedItems([...selectedItems, selectedItem]);
+    } else {
+      setSelectedItems(selectedItems.filter(item => item !== selectedItem));
+    }
+  };
 
   if (error) {
     return <div>Error: {error.message}</div>;
@@ -111,6 +120,10 @@ function App() {
         currentPath={currentPath}
         activeColumns={activeColumns}
         toggleColumn={handleToggleColumn}
+        selectedItems={selectedItems}
+        setSelectedItems={handleSetSelectedItem}
+        min_selected={min_selected}
+        max_selected={max_selected}
       />
     );
   }

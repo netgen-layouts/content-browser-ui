@@ -4,6 +4,7 @@ import Breadcrumbs from './Breadcrumbs';
 import Loader from './utils/Loader';
 import Dropdown from './utils/Dropdown';
 import Checkbox from './utils/Checkbox';
+import SettingsIcon from '@material-ui/icons/Settings';
 import S from './Items.module.css';
 
 function Items(props) {
@@ -16,7 +17,7 @@ function Items(props) {
       <React.Fragment>
         <div className={S.header}>
           <Breadcrumbs items={props.currentPath} setLocationId={props.setLocationId} />
-          <Dropdown label="Table options" icon="settings">
+          <Dropdown label="Table options" icon={<SettingsIcon fontSize="small" color="inherit" />}>
             {props.availableColumns.map(column => {
               if (column.id === 'name') return false;
               return (
@@ -27,6 +28,7 @@ function Items(props) {
                     label={column.name}
                     onChange={(e) => props.toggleColumn(column.id, e.target.checked)}
                     checked={props.activeColumns.includes(column.id)}
+                    iconSize={16}
                   />
                 </li>
               );

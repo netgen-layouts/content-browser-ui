@@ -1,6 +1,7 @@
 import React from 'react';
 import TreeItem from './TreeItem';
 import Loader from './utils/Loader';
+import S from './Tree.module.css';
 
 function Tree(props) {
   if (!props.items) {
@@ -9,8 +10,8 @@ function Tree(props) {
     return <Loader />;
   } else {
     return (
-      <ul>
-        {props.items.map(child => <TreeItem data={child} handleClick={props.onChangeLocation} key={`treeItem-${child.id}`} />)}
+      <ul className={S.tree}>
+        {props.items.map(child => <TreeItem item={child} onClick={props.onChangeLocation} key={`treeItem-${child.id}`} />)}
       </ul>
     );
   }

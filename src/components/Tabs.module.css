@@ -20,7 +20,7 @@
   border: 1px solid linkColor;
   color: linkColor;
   cursor: pointer;
-  padding: .625em .125em;
+  padding: .5em .125em;
 }
 
 .tab:first-child {
@@ -31,8 +31,7 @@
   border-radius: 0 2px 2px 0;
 }
 
-.tab i {
-  font-size: 1.5em;
+.tab svg {
   margin-right: .125em;
 }
 

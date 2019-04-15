@@ -2,5 +2,9 @@
 @value linkColor: #0098c7;
 @value linkHover: #23527c;
 @value gray93: #ededed;
+@value gray87: #dedede;
 @value gray60: #999;
+@value gray22: #383838;
 @value gray20: #333;
+
+@value fontPrimary: 'Roboto', 'Helvetica Neue', sans-serif;

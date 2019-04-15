@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import S from './Select.module.css';
 
 function Select({ options = [], onChange, value }) {
   const [selectedValue, setSelectedValue] = useState(value || null);
@@ -9,7 +10,7 @@ function Select({ options = [], onChange, value }) {
   }
 
   return (
-    <select value={selectedValue} onChange={handleChange}>
+    <select value={selectedValue} onChange={handleChange} className={S.select}>
       {options.map(option => <option value={option.value} key={`option-${option.value}`}>{option.label}</option>)}
     </select>
   );

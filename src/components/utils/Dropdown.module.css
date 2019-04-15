@@ -15,7 +15,7 @@
   align-items: center;
 }
 
-.toggle i {
+.toggle svg {
   margin-left: .35em;
 }
 
@@ -32,4 +32,8 @@
   font-size: .874em;
   min-width: 160px;
   background-clip: padding-box;
+}
+
+.menu li {
+  padding: .35em .5em;
 }

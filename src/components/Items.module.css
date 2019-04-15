@@ -1,6 +1,6 @@
 .header {
   display: flex;
-  padding: 1em;
+  padding: .75em 1em;
   justify-content: space-between;
 }
 
@@ -15,6 +15,8 @@
 .table td {
   padding: .5em .5em .5em 0;
   font-size: .875em;
+  vertical-align: middle;
+  transition: background-color .25s;
 }
 
 .table th {
@@ -36,7 +38,15 @@
   padding-bottom: .8333333333em;
 }
 
+table tr {
+  cursor: default;
+}
+
 .table tr > th:first-child,
 .table tr > td:first-child {
   padding-left: 1em;
+}
+
+.table tbody tr:hover td {
+  background: #f2f2f2;
 }

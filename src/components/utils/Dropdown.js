@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import MaterialIcon from 'material-icons-react';
 import S from './Dropdown.module.css';
 
 class Dropdown extends Component {
@@ -38,7 +37,7 @@ class Dropdown extends Component {
   render() {
     return (
       <div className={S.dropdown} ref={this.dropdownRef}>
-        <a href="#/" onClick={this.toggleDropdown} className={S.toggle}>{this.props.label}{this.props.icon ? <MaterialIcon icon={this.props.icon} size={18} color="inherit" /> : ''}</a>
+        <a href="#/" onClick={this.toggleDropdown} className={S.toggle}>{this.props.label}{this.props.icon ? this.props.icon : ''}</a>
         {this.state.isOpen && <ul className={S.menu}>{this.props.children}</ul>}
       </div>
     );

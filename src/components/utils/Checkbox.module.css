@@ -1,0 +1,29 @@
+.checkbox {
+  position: absolute;
+  opacity: 0;
+  left: -9999em;
+  pointer-events: all;
+}
+
+.label {
+  line-height: 1.2;
+  cursor: pointer;
+  display: inline-flex;
+}
+
+.disabledLabel {
+  composes: label;
+  opacity: .5;
+  cursor: not-allowed;
+}
+
+.icon {
+  color: #808080;
+  font-size: 1.1428571429em;
+  margin-right: .35em;
+}
+
+.iconActive {
+  composes: icon;
+  color: #0098c7;
+}

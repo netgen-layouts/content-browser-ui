@@ -2,7 +2,7 @@ import React from 'react';
 import Item from './Item';
 import S from './Items.module.css';
 
-function ItemsTable({ items, isLoading, parentLocation, activeColumns, availableColumns, setLocationId }) {
+function ItemsTable({ items, isLoading, parentLocation, activeColumns, availableColumns, setLocationId, selectedItems, setSelectedItems, max_selected }) {
   const visibleColumns = availableColumns.filter(column => activeColumns.includes(column.id));
 
   if (!items) {
@@ -16,13 +16,13 @@ function ItemsTable({ items, isLoading, parentLocation, activeColumns, available
           <tr>
             {visibleColumns.map((column) => <th key={`column-${column.id}`}>{column.name}</th>)}
           </tr>
-          <tr>
-            <td>{parentLocation.name}</td>
-            {visibleColumns.map((column) => {
-              if (column.id === 'name') return false;
-              return <td key={`${column.id}-${parentLocation.location_id}`} dangerouslySetInnerHTML={{__html: parentLocation.columns[column.id]}}></td>;
-            })}
-          </tr>
+          <Item
+            item={parentLocation}
+            columns={visibleColumns}
+            setSelectedItems={setSelectedItems}
+            selectedItems={selectedItems}
+            max_selected={max_selected}
+          />
         </thead>
         <tbody>
           {items.map(child => (
@@ -31,6 +31,9 @@ function ItemsTable({ items, isLoading, parentLocation, activeColumns, available
               item={child}
               setLocationId={setLocationId}
               columns={visibleColumns}
+              setSelectedItems={setSelectedItems}
+              selectedItems={selectedItems}
+              max_selected={max_selected}
             />
           ))}
         </tbody>
