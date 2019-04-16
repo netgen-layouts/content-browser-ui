@@ -20,6 +20,10 @@
   user-select: none;
 }
 
+.button:focus {
+  outline: none;
+}
+
 .button[disabled] {
   opacity: .65;
   cursor: not-allowed;
@@ -49,6 +53,10 @@
 
 .default {
 
+}
+
+.transparent {
+  background-color: transparent;
 }
 
 .cancel {

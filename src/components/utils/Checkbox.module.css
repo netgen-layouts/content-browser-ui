@@ -21,6 +21,7 @@
   color: #808080;
   font-size: 1.1428571429em;
   margin-right: .35em;
+  display: inline-flex;
 }
 
 .iconActive {

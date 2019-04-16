@@ -7,11 +7,11 @@ function Footer(props) {
   return (
     <div className={S.footer}>
       <div className={S.items}>
-        {props.selectedItems.map(item => <FooterItem key={`item-${item.location_id}`} item={item} onClick={() => props.setSelectedItems(item, false)} />)}
+        {props.selectedItems.map(item => <FooterItem key={`item-${item.value}`} item={item} onClick={() => props.setSelectedItems(item, false)} />)}
       </div>
       <div className={S.actions}>
-        <Button variant="cancel">Cancel</Button>
-        <Button variant="primary" disabled={props.selectedItems.length < props.min_selected}>Confirm</Button>
+        <Button variant="cancel" onClick={props.onCancel}>Cancel</Button>
+        <Button variant="primary" disabled={props.selectedItems.length < props.min_selected} onClick={() => props.onConfirm(props.selectedItems)}>Confirm</Button>
       </div>
     </div>
   );

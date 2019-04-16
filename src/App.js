@@ -1,36 +1,64 @@
 import React, { useState, useEffect } from 'react';
 import Browser from './components/Browser';
+import { buildUrl } from './helpers/index';
 
-function App({ min_selected = 1, max_selected = 3 }) {
+function App({ min_selected = 1, max_selected = 1, startLocation = null, onCancel, onConfirm, rootPath }) {
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [config, setConfig] = useState({});
-  const [sectionId, setSectionId] = useState(null);
+  const [sectionId, setSectionId] = useState(startLocation);
   const [locationId, setLocationId] = useState(null);
   const [treeItems, setTreeItems] = useState([]);
-  const [sectionItems, setSectionItems] = useState([]);
+  const [sectionItems, setSectionItems] = useState({});
   const [isLoadingTree, setIsLoadingTree] = useState(false);
   const [isLoadingItems, setIsLoadingItems] = useState(false);
-  const [parentLocation, setParentLocation] = useState({});
-  const [currentPath, setCurrentPath] = useState([]);
   const [activeColumns, setActiveColumns] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
+  const [itemsLimit, setItemsLimit] = useState(localStorage.getItem('cb_itemsLimit') || 25);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [previewItem, setPreviewItem] = useState(null);
+  const [previews, setPreviews] = useState({});
+  const [isPreviewLoading, setIsPreviewLoading] = useState(false);
+  const [currentPreview, setCurrentPreview] = useState(null);
+  const [showPreview, setShowPreview] = useState(localStorage.getItem('cb_showPreview') ? JSON.parse(localStorage.getItem('cb_showPreview')) : false);
+
+  const cbBasePath = document.querySelector('meta[name=ngcb-base-path]').getAttribute('content');
+  const cbBaseApiPath = '/api/v1/';
+
+  const cbApiUrl = (path) => {
+    return `${cbBasePath}${cbBaseApiPath}${rootPath}/${path}`.replace(/\/{2,}/g, '/');
+  }
 
   useEffect(() => fetchConfig(), []);
   useEffect(() => fetchTreeItems(), [sectionId]);
-  useEffect(() => fetchSectionItems(), [locationId]);
+  useEffect(() => fetchSectionItems(), [locationId, itemsLimit, currentPage]);
+  useEffect(() => setCurrentPage(1), [sectionId, locationId]);
+  useEffect(() => {
+    if (previews[previewItem]) {
+      setCurrentPreview(previews[previewItem]);
+    } else {
+      fetchPreview(previewItem);
+    }
+  }, [previewItem, showPreview]);
+  useEffect(() => localStorage.setItem('cb_showPreview', showPreview), [showPreview]);
+  useEffect(() => setLocationId(sectionId), [sectionId]);
+  useEffect(() => {
+    setCurrentPage(1);
+    localStorage.setItem('cb_itemsLimit', itemsLimit);
+  }, [itemsLimit]);
+
 
   const fetchConfig = () => {
-    fetch('/cb/api/v1/ezcontent/config')
+    fetch(cbApiUrl('config'))
       .then(res => res.json())
       .then(
         (result) => {
           setConfig(result);
-          setSectionId(result.sections[0].id);
-          setLocationId(result.sections[0].id);
+          setSectionId(sectionId || result.sections[0].id.toString());
+          setLocationId(sectionId || result.sections[0].id.toString());
 
           /* set active columns from local storage or default columns */
-          const storedColumns = localStorage.getItem('activeColumns');
+          const storedColumns = localStorage.getItem('cb_activeColumns');
           setActiveColumns(storedColumns ? JSON.parse(storedColumns) : result.default_columns);
 
           setIsLoaded(true);
@@ -43,9 +71,9 @@ function App({ min_selected = 1, max_selected = 3 }) {
   };
 
   const fetchTreeItems = () => {
-    if (!sectionId) return;
+    if (sectionId === null) return;
     setIsLoadingTree(true);
-    fetch(`/cb/api/v1/ezcontent/browse/${sectionId}/locations`)
+    fetch(cbApiUrl(`browse/${sectionId}/locations`))
       .then(res => res.json())
       .then(
         (result) => {
@@ -59,15 +87,14 @@ function App({ min_selected = 1, max_selected = 3 }) {
   };
 
   const fetchSectionItems = () => {
-    if (!locationId) return;
+    if (locationId === null) return;
     setIsLoadingItems(true);
-    fetch(`/cb/api/v1/ezcontent/browse/${locationId}/items`)
+    fetch(buildUrl(cbApiUrl(`browse/${locationId}/items`), {limit: itemsLimit, page: currentPage}))
       .then(res => res.json())
       .then(
         (result) => {
-          setCurrentPath(result.path);
-          setParentLocation(result.parent);
-          setSectionItems(result.children);
+          setPreviewItem(locationId);
+          setSectionItems(result);
           setIsLoadingItems(false);
         },
         (error) => {
@@ -76,9 +103,24 @@ function App({ min_selected = 1, max_selected = 3 }) {
       )
   };
 
-  const handleChangeSectionId = (id) => {
-    setSectionId(id);
-    setLocationId(id);
+  const fetchPreview = (id) => {
+    if (id === null || !showPreview) return;
+    setIsPreviewLoading(true);
+    fetch(buildUrl(cbApiUrl(`render/${id}`)))
+      .then(res => res.text())
+      .then(
+        (result) => {
+          setPreviews({
+            ...previews,
+            [id]: result,
+          });
+          setCurrentPreview(result);
+          setIsPreviewLoading(false);
+        },
+        (error) => {
+          setIsPreviewLoading(false);
+        }
+      )
   };
 
   const handleToggleColumn = (id, active) => {
@@ -89,7 +131,7 @@ function App({ min_selected = 1, max_selected = 3 }) {
       columns = activeColumns.filter(column => column !== id);
     }
     setActiveColumns(columns);
-    localStorage.setItem('activeColumns', JSON.stringify(columns));
+    localStorage.setItem('cb_activeColumns', JSON.stringify(columns));
   };
 
   const handleSetSelectedItem = (selectedItem, add) => {
@@ -100,33 +142,38 @@ function App({ min_selected = 1, max_selected = 3 }) {
     }
   };
 
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  } else if (!isLoaded) {
-    return <div>Loading...</div>;
-  } else {
-    return (
-      <Browser
-        config={config}
-        sectionId={sectionId}
-        locationId={locationId}
-        setLocationId={setLocationId}
-        setSectionId={handleChangeSectionId}
-        treeItems={treeItems}
-        sectionItems={sectionItems}
-        isLoadingTree={isLoadingTree}
-        isLoadingItems={isLoadingItems}
-        parentLocation={parentLocation}
-        currentPath={currentPath}
-        activeColumns={activeColumns}
-        toggleColumn={handleToggleColumn}
-        selectedItems={selectedItems}
-        setSelectedItems={handleSetSelectedItem}
-        min_selected={min_selected}
-        max_selected={max_selected}
-      />
-    );
-  }
+  return (
+    <Browser
+      error={error}
+      isLoaded={isLoaded}
+      config={config}
+      sectionId={sectionId}
+      locationId={locationId}
+      setLocationId={setLocationId}
+      setSectionId={setSectionId}
+      treeItems={treeItems}
+      sectionItems={sectionItems}
+      isLoadingTree={isLoadingTree}
+      isLoadingItems={isLoadingItems}
+      activeColumns={activeColumns}
+      toggleColumn={handleToggleColumn}
+      selectedItems={selectedItems}
+      setSelectedItems={handleSetSelectedItem}
+      min_selected={min_selected}
+      max_selected={max_selected}
+      onCancel={onCancel}
+      onConfirm={onConfirm}
+      itemsLimit={itemsLimit}
+      setItemsLimit={setItemsLimit}
+      currentPage={currentPage}
+      setPage={setCurrentPage}
+      setPreviewItem={setPreviewItem}
+      preview={currentPreview}
+      isPreviewLoading={isPreviewLoading}
+      showPreview={showPreview}
+      setShowPreview={setShowPreview}
+    />
+  );
 }
 
 export default App;

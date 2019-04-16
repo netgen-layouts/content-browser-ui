@@ -11,7 +11,14 @@ function Tree(props) {
   } else {
     return (
       <ul className={S.tree}>
-        {props.items.map(child => <TreeItem item={child} onClick={props.onChangeLocation} key={`treeItem-${child.id}`} />)}
+        {props.items.map(child => (
+          <TreeItem
+            item={child}
+            onClick={props.onChangeLocation}
+            key={`treeItem-${child.id}`}
+            isActive={child.id === props.locationId}
+          />
+        ))}
       </ul>
     );
   }

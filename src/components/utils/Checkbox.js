@@ -3,7 +3,7 @@ import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import S from './Checkbox.module.css';
 
-function Checkbox({ onChange, checked, name, id, label, disabled, iconSize = 18 }) {
+function Checkbox({ onChange, checked, name, id, label, disabled }) {
   return (
     <React.Fragment>
       <input name={name} id={id} type="checkbox" onChange={onChange} checked={checked} className={S.checkbox} disabled={disabled} />

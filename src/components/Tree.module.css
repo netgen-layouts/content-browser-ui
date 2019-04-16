@@ -1,5 +1,5 @@
 @value variables: './Variables.module.css';
-@value fontPrimary, gray60 from variables;
+@value fontPrimary, linkColor, gray60 from variables;
 
 .tree {
   list-style-type: none;
@@ -16,6 +16,15 @@
   font-size: .875em;
   display: flex;
   align-items: center;
+}
+
+.active {
+  color: linkColor;
+  font-weight: 700;
+}
+
+.button:focus {
+  outline: none;
 }
 
 .icon {

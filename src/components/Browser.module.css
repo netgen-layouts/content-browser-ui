@@ -1,5 +1,5 @@
 @value variables: './Variables.module.css';
-@value gray93, gray20 from variables;
+@value gray93, gray60, gray20 from variables;
 
 .browser {
   position: fixed;
@@ -10,6 +10,9 @@
   z-index: 1000;
   background: rgba(0, 0, 0, .5);
   color: gray20;
+  font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .browser * {
@@ -29,6 +32,7 @@
   flex: 1;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .panels {
@@ -59,4 +63,17 @@
   flex: 1;
   margin-top: .5em;
   padding: 1em;
+}
+
+.loading {
+  background: gray20;
+  color: gray60;
+  flex: 1;
+  box-shadow: 0 .5em 1em rgba(0, 0, 0, .5);
+}
+
+.togglePreview {
+  position: absolute;
+  right: 1em;
+  top: 1em;
 }
