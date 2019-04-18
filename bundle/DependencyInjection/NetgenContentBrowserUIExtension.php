@@ -20,7 +20,7 @@ final class NetgenContentBrowserUIExtension extends Extension implements Prepend
     public function prepend(ContainerBuilder $container): void
     {
         $container->setParameter(
-            'ngcb.asset.version',
+            'netgen_content_browser.asset.version',
             PrettyVersions::getVersion('netgen/content-browser-ui')->getShortCommitHash()
         );
 
