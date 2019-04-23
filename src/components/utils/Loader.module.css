@@ -60,6 +60,24 @@
   animation: loadBounceBottomSquash .75s alternate infinite ease, loadBounceBottomFlow .75s alternate infinite ease;
 }
 
+.fadeEnter {
+  opacity: .01;
+}
+
+.fadeActiveEnter {
+  opacity: 1;
+  transition: opacity .25s;
+}
+
+.fadeExit {
+  opacity: 1;
+}
+
+.fadeActiveExit {
+  opacity: .01;
+  transition: opacity .25s;
+}
+
 @keyframes loadBounceTopSquash {
   0% {
     height: .375em;

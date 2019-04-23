@@ -7,7 +7,7 @@ function Item({ item, setLocationId, columns, setSelectedItems, selectedItems, m
   const isChecked = selectedItems.findIndex(selectedItem => selectedItem.value === item.value) > -1;
   const isDisabled = !isChecked && max_selected > 1 && selectedItems.length >= max_selected;
   return (
-    <tr onClick={() => setPreviewItem(item.value)}>
+    <tr onClick={() => {if (item.value) setPreviewItem(item.value)}}>
       <td>
         <span className={S.checkbox}>
           <Checkbox

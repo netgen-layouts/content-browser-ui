@@ -1,6 +1,8 @@
 import React from 'react';
+import { CSSTransition } from 'react-transition-group';
 import Tree from './Tree';
 import Items from './Items';
+import Search from './Search';
 import Select from './utils/Select';
 import Tabs from './Tabs';
 import Preview from './Preview';
@@ -15,19 +17,22 @@ function BrowserLoader() {
   return <div className={S.loading}><Loader/></div>
 }
 
+function RenderToggle(props) {
+  return (
+    <Toggle
+      name="togglePreview"
+      id="togglePreview"
+      onChange={(e) => props.setShowPreview(e.target.checked)}
+      checked={props.showPreview}
+      label="Preview"
+    />
+  )
+}
+
 function BrowserContent(props) {
   return (
     <div className={S.content}>
-      <div className={S.togglePreview}>
-        <Toggle
-          name="togglePreview"
-          id="togglePreview"
-          onChange={(e) => props.setShowPreview(e.target.checked)}
-          checked={props.showPreview}
-          label="Show preview"
-        />
-      </div>
-      <Tabs>
+      <Tabs headerContent={<RenderToggle setShowPreview={props.setShowPreview} showPreview={props.showPreview} />}>
         <div id="tab-browse" label="Browse" icon={<ListIcon fontSize="default" color="inherit" />}>
           <div className={S.panels}>
             {props.config.has_tree &&
@@ -67,12 +72,58 @@ function BrowserContent(props) {
                 setPreviewItem={props.setPreviewItem}
               />
             </div>
-            {props.showPreview && <Preview preview={props.preview} isLoading={props.isPreviewLoading} />}
+            <CSSTransition
+              in={props.showPreview}
+              unmountOnExit
+              timeout={250}
+              classNames={{
+                enter: S.slideEnter,
+                enterActive: S.slideActiveEnter,
+                exit: S.slideExit,
+                exitActive: S.slideActiveExit,
+              }}
+            >
+              <Preview preview={props.preview} isLoading={props.isPreviewLoading} />
+            </CSSTransition>
           </div>
         </div>
         {props.config.has_search && <div id="tab-search" label="Search" icon={<SearchIcon fontSize="small" color="inherit" />}>
           <div className={S.panels}>
-            Search tab
+            <Search
+              cbApiUrl={props.cbApiUrl}
+              availableColumns={props.config.available_columns}
+              toggleColumn={props.toggleColumn}
+              activeColumns={props.activeColumns}
+              setSelectedItems={props.setSelectedItems}
+              selectedItems={props.selectedItems}
+              min_selected={props.min_selected}
+              max_selected={props.max_selected}
+              itemsLimit={props.itemsLimit}
+              setItemsLimit={props.setItemsLimit}
+              searchResults={props.searchResults}
+              searchTerm={props.searchTerm}
+              setSearchTerm={props.setSearchTerm}
+              handleSearch={props.handleSearch}
+              isLoading={props.isSearchLoading}
+              currentPage={props.currentSearchPage}
+              setPage={props.setCurrentSearchPage}
+
+              setLocationId={props.setLocationId}
+              setPreviewItem={props.setSearchPreviewItem}
+            />
+            <CSSTransition
+              in={props.showPreview}
+              unmountOnExit
+              timeout={250}
+              classNames={{
+                enter: S.slideEnter,
+                enterActive: S.slideActiveEnter,
+                exit: S.slideExit,
+                exitActive: S.slideActiveExit,
+              }}
+            >
+              <Preview preview={props.searchPreview} isLoading={props.isPreviewLoading} />
+            </CSSTransition>
           </div>
         </div>}
       </Tabs>

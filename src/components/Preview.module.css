@@ -1,5 +1,35 @@
+@value variables: './Variables.module.css';
+@value linkColor from variables;
+
 .preview {
-  flex: 0 0 20%;
-  padding: 0 1em;
+  width: 18em;
   position: relative;
+  overflow-x: hidden;
+}
+
+.content {
+  padding: 0 1em;
+  width: 18em;
+}
+
+.preview a {
+  color: linkColor;
+  text-decoration: none;
+}
+
+.preview a:hover,
+.preview a:focus {
+  text-decoration: underline;
+}
+
+.preview figure {
+  margin: 0;
+}
+
+.preview img {
+  max-width: 100%;
+}
+
+.preview p {
+  margin: 0 0 1em;
 }

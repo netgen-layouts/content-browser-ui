@@ -40,3 +40,15 @@
   color: #fff;
   cursor: default;
 }
+
+.tabsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.headerContent {
+  padding: 1em 1em .5em;
+  flex: 1;
+  text-align: right;
+}

@@ -13,6 +13,7 @@
   font-family: 'Roboto', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 .browser * {
@@ -72,8 +73,24 @@
   box-shadow: 0 .5em 1em rgba(0, 0, 0, .5);
 }
 
-.togglePreview {
-  position: absolute;
-  right: 1em;
-  top: 1em;
+.slideEnter {
+  width: 0;
+  opacity: .01;
+}
+
+.slideActiveEnter {
+  width: 18em;
+  opacity: 1;
+  transition: width .25s ease-out, opacity .15s;
+}
+
+.slideExit {
+  width: 18em;
+  opacity: 1;
+}
+
+.slideActiveExit {
+  width: 0;
+  opacity: .01;
+  transition: width .25s ease-out, opacity .15s .1s;
 }

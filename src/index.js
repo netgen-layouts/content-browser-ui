@@ -5,8 +5,6 @@ import './fonts.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-// ReactDOM.render(<App />, document.getElementById('root'));
-
 class Browser {
   constructor(el) {
     this.el = el;
@@ -17,9 +15,15 @@ class Browser {
     [this.nameEl] = el.getElementsByClassName('js-name');
     [this.valueEl] = el.getElementsByClassName('js-value');
     this.rootPath = el.getElementsByClassName('js-config-name')[0].value;
+    this.browserEl = document.createElement('div');
 
-    this.setupEvents();
+    this.init();
     console.log(this);
+  }
+
+  init() {
+    this.el.appendChild(this.browserEl);
+    this.setupEvents();
   }
 
   setupEvents() {
@@ -30,8 +34,6 @@ class Browser {
 
   openBrowser(e) {
     e && e.preventDefault();
-    this.browserEl = document.createElement('div');
-    this.el.appendChild(this.browserEl);
     ReactDOM.render(
       <App
         min_selected={this.min_selected}
@@ -71,8 +73,7 @@ class Browser {
   }
 
   closeBrowser() {
-    this.el.removeChild(this.browserEl);
-    this.browserEl = null;
+    ReactDOM.unmountComponentAtNode(this.browserEl);
   }
 }
 

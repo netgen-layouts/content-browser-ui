@@ -4,25 +4,34 @@ import S from './Tabs.module.css';
 
 function Tabs(props) {
   const [activeTab, setActiveTab] = useState(props.initialTab || props.children[0].props.id);
+  const children = props.children.filter(child => !!child);
 
   return (
     <React.Fragment>
-      <ul className={S.tabs}>
-        {props.children.map((child) => {
-          if (!child) return false;
-          return (
-            <Tab
-              isActive={activeTab === child.props.id}
-              key={`tab-${child.props.id}`}
-              label={child.props.label}
-              onClick={() => setActiveTab(child.props.id)}
-              icon={child.props.icon}
-            />
-          );
-        })}
-      </ul>
+      <div className={S.tabsHeader}>
+        {children.length > 1 &&
+          <ul className={S.tabs}>
+            {children.map((child) => {
+              if (!child) return false;
+              return (
+                <Tab
+                  isActive={activeTab === child.props.id}
+                  key={`tab-${child.props.id}`}
+                  label={child.props.label}
+                  onClick={() => setActiveTab(child.props.id)}
+                  icon={child.props.icon}
+                />
+              );
+            })}
+          </ul>
+        }
+        {props.headerContent && <div className={S.headerContent}>
+            {props.headerContent}
+          </div>
+        }
+      </div>
       <React.Fragment>
-        {props.children.map((child) => {
+        {children.map((child) => {
           if (!child) return false;
           if (child.props.id !== activeTab) return undefined;
           return child.props.children;

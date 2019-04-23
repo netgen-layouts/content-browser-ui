@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Browser from './components/Browser';
+// import S from './App.module.css';
 import { buildUrl } from './helpers/index';
 
 function App({ min_selected = 1, max_selected = 1, startLocation = null, onCancel, onConfirm, rootPath }) {
@@ -22,6 +23,13 @@ function App({ min_selected = 1, max_selected = 1, startLocation = null, onCance
   const [currentPreview, setCurrentPreview] = useState(null);
   const [showPreview, setShowPreview] = useState(localStorage.getItem('cb_showPreview') ? JSON.parse(localStorage.getItem('cb_showPreview')) : false);
 
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState({});
+  const [isSearchLoading, setIsSearchLoading] = useState(false);
+  const [currentSearchPage, setCurrentSearchPage] = useState(1);
+  const [searchPreviewItem, setSearchPreviewItem] = useState(null);
+  const [currentSearchPreview, setCurrentSearchPreview] = useState(null);
+
   const cbBasePath = document.querySelector('meta[name=ngcb-base-path]').getAttribute('content');
   const cbBaseApiPath = '/api/v1/';
 
@@ -29,10 +37,22 @@ function App({ min_selected = 1, max_selected = 1, startLocation = null, onCance
     return `${cbBasePath}${cbBaseApiPath}${rootPath}/${path}`.replace(/\/{2,}/g, '/');
   }
 
-  useEffect(() => fetchConfig(), []);
+  const handleKeypress = (e) => {
+    e.keyCode === 27 && onCancel();
+  }
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeypress);
+    fetchConfig();
+  }, []);
+  useEffect(() => {
+    return () => {
+      window.removeEventListener('keydown', handleKeypress);
+    }
+  }, []);
   useEffect(() => fetchTreeItems(), [sectionId]);
-  useEffect(() => fetchSectionItems(), [locationId, itemsLimit, currentPage]);
-  useEffect(() => setCurrentPage(1), [sectionId, locationId]);
+  useEffect(() => fetchSectionItems(), [locationId, currentPage]);
+  useEffect(() => setCurrentPage(1), [sectionId]);
   useEffect(() => {
     if (previews[previewItem]) {
       setCurrentPreview(previews[previewItem]);
@@ -44,12 +64,24 @@ function App({ min_selected = 1, max_selected = 1, startLocation = null, onCance
   useEffect(() => setLocationId(sectionId), [sectionId]);
   useEffect(() => {
     setCurrentPage(1);
+    setCurrentSearchPage(1);
+    fetchSectionItems();
+    fetchSearchResults();
     localStorage.setItem('cb_itemsLimit', itemsLimit);
   }, [itemsLimit]);
 
+  useEffect(() => fetchSearchResults(), [currentSearchPage]);
+  useEffect(() => {
+    if (previews[searchPreviewItem]) {
+      setCurrentSearchPreview(previews[searchPreviewItem]);
+    } else {
+      fetchPreview(searchPreviewItem, true);
+    }
+  }, [searchPreviewItem, showPreview]);
 
   const fetchConfig = () => {
-    fetch(cbApiUrl('config'))
+    const abortController = new AbortController();
+    fetch(cbApiUrl('config'), {signal: abortController.signal})
       .then(res => res.json())
       .then(
         (result) => {
@@ -68,12 +100,17 @@ function App({ min_selected = 1, max_selected = 1, startLocation = null, onCance
           setIsLoaded(true);
         }
       )
+
+    return function cleanup() {
+      abortController.abort();
+    }
   };
 
   const fetchTreeItems = () => {
     if (sectionId === null) return;
+    const abortController = new AbortController();
     setIsLoadingTree(true);
-    fetch(cbApiUrl(`browse/${sectionId}/locations`))
+    fetch(cbApiUrl(`browse/${sectionId}/locations`), {signal: abortController.signal})
       .then(res => res.json())
       .then(
         (result) => {
@@ -81,32 +118,43 @@ function App({ min_selected = 1, max_selected = 1, startLocation = null, onCance
           setIsLoadingTree(false);
         },
         (error) => {
-          setIsLoadingTree(false);
         }
       )
+
+    return function cleanup() {
+      abortController.abort();
+    }
   };
 
   const fetchSectionItems = () => {
     if (locationId === null) return;
+    const abortController = new AbortController();
     setIsLoadingItems(true);
-    fetch(buildUrl(cbApiUrl(`browse/${locationId}/items`), {limit: itemsLimit, page: currentPage}))
+    fetch(buildUrl(cbApiUrl(`browse/${locationId}/items`), {limit: itemsLimit, page: currentPage}), {signal: abortController.signal})
       .then(res => res.json())
       .then(
         (result) => {
-          setPreviewItem(locationId);
+          setPreviewItem(result.parent.value ? result.parent.value : null);
           setSectionItems(result);
           setIsLoadingItems(false);
         },
         (error) => {
-          setIsLoadingItems(false);
         }
       )
+
+    return function cleanup() {
+      abortController.abort();
+    }
   };
 
-  const fetchPreview = (id) => {
-    if (id === null || !showPreview) return;
+  const fetchPreview = (id, isSearchItem) => {
+    if (id === null || !showPreview) {
+      isSearchItem ? setCurrentSearchPreview(null) : setCurrentPreview(null);
+      return;
+    }
+    const abortController = new AbortController();
     setIsPreviewLoading(true);
-    fetch(buildUrl(cbApiUrl(`render/${id}`)))
+    fetch(buildUrl(cbApiUrl(`render/${id}`)), {signal: abortController.signal})
       .then(res => res.text())
       .then(
         (result) => {
@@ -114,13 +162,38 @@ function App({ min_selected = 1, max_selected = 1, startLocation = null, onCance
             ...previews,
             [id]: result,
           });
-          setCurrentPreview(result);
+          isSearchItem ? setCurrentSearchPreview(result) : setCurrentPreview(result);
           setIsPreviewLoading(false);
         },
         (error) => {
           setIsPreviewLoading(false);
         }
       )
+
+    return function cleanup() {
+      abortController.abort();
+    }
+  };
+
+  const abortSearchController = new AbortController();
+  const fetchSearchResults = () => {
+    console.log('FETCH SEARCH');
+    if (!searchTerm) return;
+    setIsSearchLoading(true);
+    fetch(buildUrl(cbApiUrl(`search`), {searchText: searchTerm, limit: itemsLimit, page: currentSearchPage}), {signal: abortSearchController.signal})
+      .then(res => res.json())
+      .then(
+        (result) => {
+          setSearchResults(result);
+          setIsSearchLoading(false);
+        },
+        (error) => {
+        }
+      )
+
+    return function cleanup() {
+      abortSearchController.abort();
+    }
   };
 
   const handleToggleColumn = (id, active) => {
@@ -142,6 +215,16 @@ function App({ min_selected = 1, max_selected = 1, startLocation = null, onCance
     }
   };
 
+  const handleSetLocationId = (id) => {
+    setCurrentPage(1);
+    setLocationId(id);
+  }
+
+  const handleSearch = () => {
+    setCurrentSearchPage(1);
+    fetchSearchResults();
+  }
+
   return (
     <Browser
       error={error}
@@ -149,7 +232,7 @@ function App({ min_selected = 1, max_selected = 1, startLocation = null, onCance
       config={config}
       sectionId={sectionId}
       locationId={locationId}
-      setLocationId={setLocationId}
+      setLocationId={handleSetLocationId}
       setSectionId={setSectionId}
       treeItems={treeItems}
       sectionItems={sectionItems}
@@ -172,6 +255,15 @@ function App({ min_selected = 1, max_selected = 1, startLocation = null, onCance
       isPreviewLoading={isPreviewLoading}
       showPreview={showPreview}
       setShowPreview={setShowPreview}
+      searchTerm={searchTerm}
+      setSearchTerm={setSearchTerm}
+      handleSearch={handleSearch}
+      isSearchLoading={isSearchLoading}
+      searchResults={searchResults}
+      currentSearchPage={currentSearchPage}
+      setCurrentSearchPage={setCurrentSearchPage}
+      searchPreview={currentSearchPreview}
+      setSearchPreviewItem={setSearchPreviewItem}
     />
   );
 }

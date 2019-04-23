@@ -1,43 +1,59 @@
 import React from 'react';
 import Item from './Item';
+import Pager from './utils/Pager';
 import S from './Items.module.css';
 
-function ItemsTable({ items, activeColumns, availableColumns, setLocationId, selectedItems, setSelectedItems, max_selected, setPreviewItem }) {
-  const visibleColumns = availableColumns.filter(column => activeColumns.includes(column.id));
+const calculatePages = (total, limit) => {
+  const totalPages = parseInt(total / limit, 10);
+  return (total % limit) === 0 ? totalPages : totalPages + 1;
+}
 
-  if (!items.children) {
+function ItemsTable(props) {
+  const visibleColumns = props.availableColumns.filter(column => props.activeColumns.includes(column.id));
+
+  if (!props.items.children) {
     return '';
   } else {
     return (
-      <table className={S.table}>
-        <thead>
-          <tr>
-            {visibleColumns.map((column) => <th key={`column-${column.id}`}>{column.name}</th>)}
-          </tr>
-          <Item
-            item={items.parent}
-            columns={visibleColumns}
-            setSelectedItems={setSelectedItems}
-            selectedItems={selectedItems}
-            max_selected={max_selected}
-            setPreviewItem={setPreviewItem}
-          />
-        </thead>
-        <tbody>
-          {items.children.map(child => (
-            <Item
-              key={`locationItem-${child.value}`}
-              item={child}
-              setLocationId={setLocationId}
-              columns={visibleColumns}
-              setSelectedItems={setSelectedItems}
-              selectedItems={selectedItems}
-              max_selected={max_selected}
-              setPreviewItem={setPreviewItem}
-            />
-          ))}
-        </tbody>
-      </table>
+      <React.Fragment>
+        <table className={S.table}>
+          <thead>
+            <tr>
+              {visibleColumns.map((column) => <th key={`column-${column.id}`}>{column.name}</th>)}
+            </tr>
+            {props.showParentItem && <Item
+                item={props.items.parent}
+                columns={visibleColumns}
+                setSelectedItems={props.setSelectedItems}
+                selectedItems={props.selectedItems}
+                max_selected={props.max_selected}
+                setPreviewItem={props.setPreviewItem}
+              />
+            }
+          </thead>
+          <tbody>
+            {props.items.children.map(child => (
+              <Item
+                key={`locationItem-${child.value}`}
+                item={child}
+                setLocationId={props.setLocationId}
+                columns={visibleColumns}
+                setSelectedItems={props.setSelectedItems}
+                selectedItems={props.selectedItems}
+                max_selected={props.max_selected}
+                setPreviewItem={props.setPreviewItem}
+              />
+            ))}
+          </tbody>
+        </table>
+        <Pager
+          setItemsLimit={props.setItemsLimit}
+          itemsLimit={props.itemsLimit}
+          pages={calculatePages(props.items.children_count, props.itemsLimit)}
+          setPage={props.setPage}
+          currentPage={props.currentPage}
+        />
+      </React.Fragment>
     );
   }
 }
