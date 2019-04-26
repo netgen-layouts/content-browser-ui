@@ -9,8 +9,6 @@ import {
   FETCH_LOCATION_ITEMS,
   SET_PAGE,
   SET_PREVIEW_ITEM,
-  START_PREVIEW_LOAD,
-  STOP_PREVIEW_LOAD,
 } from '../actionTypes';
 
 const INITIAL_STATE = {
@@ -22,7 +20,6 @@ const INITIAL_STATE = {
   locationItems: {},
   currentPage: 1,
   previewItem: '',
-  isPreviewLoading: false,
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -85,18 +82,6 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         previewItem: action.id,
-      };
-
-    case START_PREVIEW_LOAD:
-      return {
-        ...state,
-        isPreviewLoading: true,
-      };
-
-    case STOP_PREVIEW_LOAD:
-      return {
-        ...state,
-        isPreviewLoading: false,
       };
 
     default:

@@ -7,6 +7,8 @@ import {
   SET_ITEMS_LIMIT,
   TOGGLE_PREVIEW,
   FETCH_PREVIEW,
+  START_PREVIEW_LOAD,
+  STOP_PREVIEW_LOAD,
 } from '../actionTypes';
 
 const INITIAL_STATE = {
@@ -27,6 +29,7 @@ const INITIAL_STATE = {
     {id: 25, name: 25},
   ],
   previews: {},
+  isPreviewLoading: false,
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -98,6 +101,18 @@ export default (state = INITIAL_STATE, action) => {
           ...state.previews,
           ...action.preview,
         },
+      };
+
+    case START_PREVIEW_LOAD:
+      return {
+        ...state,
+        isPreviewLoading: true,
+      };
+
+    case STOP_PREVIEW_LOAD:
+      return {
+        ...state,
+        isPreviewLoading: false,
       };
 
     default:

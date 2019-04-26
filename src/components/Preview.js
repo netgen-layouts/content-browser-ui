@@ -1,12 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Loader from './utils/Loader';
 import { CSSTransition } from 'react-transition-group';
 import S from './Preview.module.css';
 import { connect } from 'react-redux';
+import { fetchPreview } from '../store/actions/app';
 
 const mapsStateToProps = state => ({
   previews: state.app.previews,
   showPreview: state.app.showPreview,
+  isLoading: state.app.isPreviewLoading,
+});
+
+const mapDispatchToProps = dispatch => ({
+  fetchPreview: (id) => {
+    dispatch(fetchPreview(id));
+  },
 });
 
 function PreviewContent(props) {
@@ -24,6 +32,10 @@ function PreviewContent(props) {
 }
 
 function Preview(props) {
+  useEffect(() => {
+    if (props.showPreview && props.previewItem) props.fetchPreview(props.previewItem);
+  }, [props.previewItem, props.showPreview]);
+
   return (
     <CSSTransition
       in={props.showPreview}
@@ -43,4 +55,5 @@ function Preview(props) {
 
 export default connect(
   mapsStateToProps,
+  mapDispatchToProps,
 )(Preview);

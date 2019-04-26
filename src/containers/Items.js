@@ -6,12 +6,8 @@ const mapsStateToProps = state => ({
   isLoading: state.items.isLocationLoading,
   items: state.items.locationItems,
   id: state.items.locationId,
-  availableColumns: state.app.config.available_columns,
-  activeColumns: state.app.activeColumns,
   currentPage: state.items.currentPage,
-  isPreviewLoading: state.items.isPreviewLoading,
   previewItem: state.items.previewItem,
-  showPreview: state.app.showPreview,
 });
 
 const mapDispatchToProps = dispatch => ({

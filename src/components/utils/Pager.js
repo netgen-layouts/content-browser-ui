@@ -13,7 +13,6 @@ const calculatePages = (total, limit) => {
 const mapsStateToProps = state => ({
   limits: state.app.limits,
   itemsLimit: state.app.itemsLimit,
-  currentPage: state.items.currentPage,
 });
 
 const mapDispatchToProps = dispatch => ({

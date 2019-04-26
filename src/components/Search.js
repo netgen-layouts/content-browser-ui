@@ -3,50 +3,33 @@ import ItemsTable from './ItemsTable';
 import Loader from './utils/Loader';
 import Input from './utils/Input';
 import Button from './utils/Button';
-import Checkbox from './utils/Checkbox';
-import Dropdown from './utils/Dropdown';
-import SettingsIcon from '@material-ui/icons/Settings';
+import TableSettings from './TableSettings';
+import Preview from './Preview';
 import S from './Search.module.css';
 import I from './Items.module.css';
 
 function Search(props) {
-  const handleChangeSearch = (e) => {
-    props.setSearchTerm(e.target.value);
-  };
-
-
   return (
-    <div className={S.searchPanel}>
-      <div>
+    <React.Fragment>
+      <div className={S.searchPanel}>
         <div className={I.header}>
           <div className={S.search}>
             <Input
-              onChange={handleChangeSearch}
+              onChange={(e) => props.setSearchTerm(e.target.value)}
               value={props.searchTerm}
               placeholder='Search...'
             />
-            <Button onClick={props.handleSearch}>Search</Button>
+            <Button onClick={props.fetchItems}>Search</Button>
           </div>
-          <Dropdown label="Table options" icon={<SettingsIcon fontSize="small" color="inherit" />}>
-            {props.availableColumns.map(column => {
-              if (column.id === 'name') return false;
-              return (
-                <li key={column.id}>
-                  <Checkbox
-                    name="set-table-option"
-                    id={`set-${column.id}`}
-                    label={column.name}
-                    onChange={(e) => props.toggleColumn(column.id, e.target.checked)}
-                    checked={props.activeColumns.includes(column.id)}
-                  />
-                </li>
-              );
-            })}
-          </Dropdown>
+          <TableSettings />
         </div>
-        {props.isLoading ? <Loader /> : <ItemsTable {...props} items={props.searchResults} setPage={props.setPage} currentPage={props.currentPage} showParentItem={false} />}
+        {props.isLoading
+          ? <Loader />
+          : <ItemsTable {...props} showParentItem={false} />
+        }
       </div>
-    </div>
+      <Preview previewItem={props.previewItem} isLoading={props.isPreviewLoading} />
+    </React.Fragment>
   );
 }
 

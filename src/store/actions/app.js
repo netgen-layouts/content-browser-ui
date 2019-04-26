@@ -1,5 +1,6 @@
 import fetch from 'cross-fetch';
-import { saveSectionId, setLocationId, fetchTreeItems, setPage, fetchPreview } from './items';
+import { saveSectionId, setLocationId, fetchTreeItems, setPage } from './items';
+import { setSearchPage } from './search';
 import {
   INITIAL_SETUP,
   CONFIG_LOADED,
@@ -8,6 +9,9 @@ import {
   SET_SELECTED_ITEM,
   SET_ITEMS_LIMIT,
   TOGGLE_PREVIEW,
+  START_PREVIEW_LOAD,
+  STOP_PREVIEW_LOAD,
+  FETCH_PREVIEW,
 } from '../actionTypes';
 
 const cbBasePath = document.querySelector('meta[name=ngcb-base-path]').getAttribute('content');
@@ -80,6 +84,7 @@ export const setItemsLimit = (limit) => {
   return dispatch => {
     dispatch(saveItemsLimit(limit));
     dispatch(setPage(1));
+    dispatch(setSearchPage(1));
   }
 };
 
@@ -89,6 +94,48 @@ export const togglePreview = (toggle) => {
       type: TOGGLE_PREVIEW,
       toggle,
     });
-    if (toggle) dispatch(fetchPreview());
   }
+};
+
+const startPreviewLoad = () => {
+  return {
+    type: START_PREVIEW_LOAD
+  };
+};
+
+const stopPreviewLoad = () => {
+  return {
+    type: STOP_PREVIEW_LOAD
+  };
+};
+
+const storePreview = (preview) => {
+  return {
+    type: FETCH_PREVIEW,
+    preview,
+  }
+};
+
+export const fetchPreview = (item) => {
+  return (dispatch, getState) => {
+    if (!getState().app.showPreview || getState().app.previews[item] || item === null) return;
+    dispatch(startPreviewLoad());
+    const url = cbApiUrl(getState().app.rootPath, `render/${item}`);
+    return fetch(url)
+      .then(res => {
+        if (!res.ok) {
+            return res.text().then((data) => {
+              dispatch(storePreview({[item]: null}));
+              dispatch(stopPreviewLoad());
+            });
+        }
+        return res.text();
+      })
+      .then(
+        (result) => {
+          dispatch(storePreview({[item]: result}));
+          dispatch(stopPreviewLoad());
+        },
+      )
+    }
 };

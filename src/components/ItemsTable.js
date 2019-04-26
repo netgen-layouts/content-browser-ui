@@ -1,7 +1,13 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Item from './Item';
 import Pager from './utils/Pager';
 import S from './ItemsTable.module.css';
+
+const mapsStateToProps = state => ({
+  availableColumns: state.app.config.available_columns,
+  activeColumns: state.app.activeColumns,
+});
 
 function ItemsTable(props) {
   const visibleColumns = props.availableColumns.filter(column => props.activeColumns.includes(column.id));
@@ -49,4 +55,6 @@ function ItemsTable(props) {
   }
 }
 
-export default ItemsTable;
+export default connect(
+  mapsStateToProps,
+)(ItemsTable);

@@ -11,9 +11,6 @@ import {
   STOP_LOCATION_LOAD,
   SET_PAGE,
   SET_PREVIEW_ITEM,
-  START_PREVIEW_LOAD,
-  STOP_PREVIEW_LOAD,
-  FETCH_PREVIEW,
 } from '../actionTypes';
 
 const cbBasePath = document.querySelector('meta[name=ngcb-base-path]').getAttribute('content');
@@ -137,60 +134,9 @@ export const setPage = (page) => {
   }
 };
 
-const savePreviewItem = (id) => {
+export const setPreviewItem = (id) => {
   return {
     type: SET_PREVIEW_ITEM,
     id,
   };
-};
-
-export const setPreviewItem = (id) => {
-  return dispatch => {
-    dispatch(savePreviewItem(id));
-    dispatch(fetchPreview());
-  }
-};
-
-const startPreviewLoad = () => {
-  return {
-    type: START_PREVIEW_LOAD
-  };
-};
-
-const stopPreviewLoad = () => {
-  return {
-    type: STOP_PREVIEW_LOAD
-  };
-};
-
-const storePreview = (preview) => {
-  return {
-    type: FETCH_PREVIEW,
-    preview,
-  }
-};
-
-export const fetchPreview = () => {
-  return (dispatch, getState) => {
-    const previewItem = getState().items.previewItem;
-    if (!getState().app.showPreview || getState().app.previews[previewItem] || previewItem === null) return;
-    dispatch(startPreviewLoad());
-    const url = cbApiUrl(getState().app.rootPath, `render/${previewItem}`);
-    return fetch(url)
-      .then(res => {
-        if (!res.ok) {
-            return res.text().then((data) => {
-              dispatch(storePreview({[previewItem]: null}));
-              dispatch(stopPreviewLoad());
-            });
-        }
-        return res.text();
-      })
-      .then(
-        (result) => {
-          dispatch(storePreview({[previewItem]: result}));
-          dispatch(stopPreviewLoad());
-        },
-      )
-    }
 };
