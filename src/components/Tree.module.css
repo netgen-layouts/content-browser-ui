@@ -1,5 +1,12 @@
 @value variables: './Variables.module.css';
-@value fontPrimary, linkColor, gray60 from variables;
+@value fontPrimary, linkColor, gray93, gray60 from variables;
+
+.wrapper {
+  background: gray93;
+  flex: 1;
+  margin-top: .5em;
+  padding: 1em;
+}
 
 .tree {
   list-style-type: none;

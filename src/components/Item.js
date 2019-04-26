@@ -2,30 +2,47 @@ import React from 'react';
 import Button from './utils/Button';
 import Checkbox from './utils/Checkbox';
 import S from './Items.module.css';
+import { connect } from 'react-redux';
+import { setSelectedItem } from '../store/actions/app';
 
-function Item({ item, setLocationId, columns, setSelectedItems, selectedItems, max_selected, setPreviewItem }) {
-  const isChecked = selectedItems.findIndex(selectedItem => selectedItem.value === item.value) > -1;
-  const isDisabled = !isChecked && max_selected > 1 && selectedItems.length >= max_selected;
+const mapsStateToProps = state => ({
+  selectedItems: state.app.selectedItems,
+  maxSelected: state.app.maxSelected,
+  columns: state.app.activeColumns,
+});
+
+const mapDispatchToProps = dispatch => ({
+  setSelectedItem: (id, checked) => {
+    dispatch(setSelectedItem(id, checked));
+  },
+});
+
+function Item(props) {
+  const isChecked = props.selectedItems.findIndex(selectedItem => selectedItem.value === props.item.value) > -1;
+  const isDisabled = !isChecked && props.max_selected > 1 && props.selectedItems.length >= props.max_selected;
   return (
-    <tr onClick={() => {if (item.value) setPreviewItem(item.value)}}>
+    <tr onClick={() => {if (props.item.value) props.setPreviewItem(props.item.value)}}>
       <td>
         <span className={S.checkbox}>
           <Checkbox
             name="choose-item"
-            id={`item-${item.value}`}
-            onChange={(e) => setSelectedItems(item, e.target.checked)}
+            id={`item-${props.item.value}`}
+            onChange={(e) => props.setSelectedItem(props.item, e.target.checked)}
             checked={isChecked}
             disabled={isDisabled}
           />
         </span>
-        {item.has_sub_items && setLocationId ? <Button variant="link" onClick={() => setLocationId(item.value)}>{item.name}</Button> : <span>{item.name}</span>}
+        {props.item.has_sub_items && props.setId ? <Button variant="link" onClick={() => props.setId(props.item.value)}>{props.item.name}</Button> : <span>{props.item.name}</span>}
       </td>
-      {columns.map((column) => {
-        if (column.id === 'name') return false;
-        return <td key={`${column.id}-${item.value}`} dangerouslySetInnerHTML={{__html: item.columns[column.id]}}></td>;
+      {props.columns.map((column) => {
+        if (column === 'name') return false;
+        return <td key={`${column}-${props.item.value}`} dangerouslySetInnerHTML={{__html: props.item.columns[column]}}></td>;
       })}
     </tr>
   );
 }
 
-export default Item;
+export default connect(
+  mapsStateToProps,
+  mapDispatchToProps
+)(Item);

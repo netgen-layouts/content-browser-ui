@@ -2,7 +2,7 @@ import React from 'react';
 import Button from './utils/Button';
 import S from './Breadcrumbs.module.css';
 
-function Breadcrumbs({ items, setLocationId }) {
+function Breadcrumbs({ items, setId }) {
   if (!items) {
     return '';
   } else {
@@ -11,7 +11,7 @@ function Breadcrumbs({ items, setLocationId }) {
         {items.map((item, i) => (
           <li key={item.name}>
             {i < items.length - 1 ?
-              <Button onClick={() => setLocationId(item.id)} variant="link">{item.name}</Button>
+              <Button onClick={() => setId(item.id)} variant="link">{item.name}</Button>
               :
               <span>{item.name}</span>
             }

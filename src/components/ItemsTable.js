@@ -3,11 +3,6 @@ import Item from './Item';
 import Pager from './utils/Pager';
 import S from './Items.module.css';
 
-const calculatePages = (total, limit) => {
-  const totalPages = parseInt(total / limit, 10);
-  return (total % limit) === 0 ? totalPages : totalPages + 1;
-}
-
 function ItemsTable(props) {
   const visibleColumns = props.availableColumns.filter(column => props.activeColumns.includes(column.id));
 
@@ -23,10 +18,6 @@ function ItemsTable(props) {
             </tr>
             {props.showParentItem && <Item
                 item={props.items.parent}
-                columns={visibleColumns}
-                setSelectedItems={props.setSelectedItems}
-                selectedItems={props.selectedItems}
-                max_selected={props.max_selected}
                 setPreviewItem={props.setPreviewItem}
               />
             }
@@ -36,20 +27,14 @@ function ItemsTable(props) {
               <Item
                 key={`locationItem-${child.value}`}
                 item={child}
-                setLocationId={props.setLocationId}
-                columns={visibleColumns}
-                setSelectedItems={props.setSelectedItems}
-                selectedItems={props.selectedItems}
-                max_selected={props.max_selected}
+                setId={props.setId}
                 setPreviewItem={props.setPreviewItem}
               />
             ))}
           </tbody>
         </table>
         <Pager
-          setItemsLimit={props.setItemsLimit}
-          itemsLimit={props.itemsLimit}
-          pages={calculatePages(props.items.children_count, props.itemsLimit)}
+          itemsNr={props.items.children_count}
           setPage={props.setPage}
           currentPage={props.currentPage}
         />

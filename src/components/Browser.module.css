@@ -59,13 +59,6 @@
   overflow-y: auto;
 }
 
-.tree {
-  background: gray93;
-  flex: 1;
-  margin-top: .5em;
-  padding: 1em;
-}
-
 .loading {
   background: gray20;
   color: gray60;

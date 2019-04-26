@@ -2,12 +2,25 @@ import React from 'react';
 import Select from './Select';
 import Button from './Button';
 import S from './Pager.module.css';
+import { connect } from 'react-redux';
+import { setItemsLimit } from '../../store/actions/app';
 
-const limits = [
-  {id: 5, name: 5},
-  {id: 10, name: 10},
-  {id: 25, name: 25},
-]
+const calculatePages = (total, limit) => {
+  const totalPages = parseInt(total / limit, 10);
+  return (total % limit) === 0 ? totalPages : totalPages + 1;
+}
+
+const mapsStateToProps = state => ({
+  limits: state.app.limits,
+  itemsLimit: state.app.itemsLimit,
+  currentPage: state.items.currentPage,
+});
+
+const mapDispatchToProps = dispatch => ({
+  setItemsLimit: (limit) => {
+    dispatch(setItemsLimit(limit));
+  },
+});
 
 function Pager(props) {
   const getPageButtons = (nr) => {
@@ -28,10 +41,10 @@ function Pager(props) {
   return (
     <div className={S.pager}>
       <ul className={S.pagination}>
-        {getPageButtons(props.pages)}
+        {getPageButtons(calculatePages(props.itemsNr, props.itemsLimit))}
       </ul>
       <Select
-        options={limits.map(limit => ({value: limit.id, label: limit.name}))}
+        options={props.limits.map(limit => ({value: limit.id, label: limit.name}))}
         onChange={props.setItemsLimit}
         value={props.itemsLimit}
       />
@@ -39,4 +52,7 @@ function Pager(props) {
   );
 }
 
-export default Pager;
+export default connect(
+  mapsStateToProps,
+  mapDispatchToProps
+)(Pager);
