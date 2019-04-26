@@ -1,13 +1,15 @@
 import React from 'react';
 import Loader from './utils/Loader';
+import { CSSTransition } from 'react-transition-group';
 import S from './Preview.module.css';
 import { connect } from 'react-redux';
 
 const mapsStateToProps = state => ({
   previews: state.app.previews,
+  showPreview: state.app.showPreview,
 });
 
-function Preview(props) {
+function PreviewContent(props) {
   if (props.isLoading) {
     return <div className={S.preview}><Loader/></div>
   } else if (props.previewItem === null) {
@@ -19,6 +21,24 @@ function Preview(props) {
       <div className={S.preview}><div className={S.content} dangerouslySetInnerHTML={{__html: props.previews[props.previewItem]}}></div></div>
     );
   }
+}
+
+function Preview(props) {
+  return (
+    <CSSTransition
+      in={props.showPreview}
+      unmountOnExit
+      timeout={250}
+      classNames={{
+        enter: S.slideEnter,
+        enterActive: S.slideActiveEnter,
+        exit: S.slideExit,
+        exitActive: S.slideActiveExit,
+      }}
+    >
+      <PreviewContent {...props} />
+    </CSSTransition>
+  )
 }
 
 export default connect(

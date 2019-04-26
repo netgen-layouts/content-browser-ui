@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from './utils/Button';
 import Checkbox from './utils/Checkbox';
-import S from './Items.module.css';
+import S from './ItemsTable.module.css';
 import { connect } from 'react-redux';
 import { setSelectedItem } from '../store/actions/app';
 

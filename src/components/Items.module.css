@@ -1,67 +1,19 @@
+@value variables: './Variables.module.css';
+@value gray93 from variables;
+
+.items {
+  flex: 1;
+  background: gray93;
+  position: relative;
+  max-height: 100%;
+  overflow-y: auto;
+}
+
 .header {
   display: flex;
   padding: .75em 1em;
   justify-content: space-between;
   align-items: center;
-}
-
-.table {
-  width: 100%;
-  border-collapse: collapse;
-  border-spacing: 0;
-  border-bottom: 1px solid #cccccc;
-}
-
-.table th,
-.table td {
-  padding: .5em .5em .5em 0;
-  font-size: .875em;
-  line-height: 1.3;
-  vertical-align: middle;
-  transition: background-color .25s;
-}
-
-.table th {
-  background: #999999;
-  color: #fff;
-  font-size: .75em;
-  text-transform: uppercase;
-  font-weight: 400;
-  text-align: left;
-}
-
-.table thead td {
-  border-bottom: 1px solid #cccccc;
-}
-
-.table thead th,
-.table thead td {
-  padding-top: .8333333333em;
-  padding-bottom: .8333333333em;
-}
-
-.table tr {
-  cursor: default;
-}
-
-.table tr > th:first-child,
-.table tr > td:first-child {
-  padding-left: 1em;
-}
-
-.table tbody tr:hover td {
-  background: #f2f2f2;
-}
-
-.table.indent tbody td:first-child {
-  padding-left: 3em;
-}
-
-.checkbox {
-  font-size: 1.125em;
-  display: inline-flex;
-  vertical-align: middle;
-  margin-right: .25em;
 }
 
 .fadeEnter {

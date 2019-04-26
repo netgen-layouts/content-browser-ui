@@ -5,9 +5,6 @@ import Browser from '../components/Browser';
 const mapsStateToProps = state => ({
   isLoaded: state.app.isLoaded,
   config: state.app.config,
-  showPreview: state.app.showPreview,
-  isPreviewLoading: state.items.isPreviewLoading,
-  previewItem: state.items.previewItem,
   onCancel: state.app.onCancel,
 });
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import Item from './Item';
 import Pager from './utils/Pager';
-import S from './Items.module.css';
+import S from './ItemsTable.module.css';
 
 function ItemsTable(props) {
   const visibleColumns = props.availableColumns.filter(column => props.activeColumns.includes(column.id));

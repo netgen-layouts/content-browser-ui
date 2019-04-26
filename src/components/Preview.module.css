@@ -33,3 +33,25 @@
 .preview p {
   margin: 0 0 1em;
 }
+
+.slideEnter {
+  width: 0;
+  opacity: .01;
+}
+
+.slideActiveEnter {
+  width: 18em;
+  opacity: 1;
+  transition: width .25s ease-out, opacity .15s;
+}
+
+.slideExit {
+  width: 18em;
+  opacity: 1;
+}
+
+.slideActiveExit {
+  width: 0;
+  opacity: .01;
+  transition: width .25s ease-out, opacity .15s .1s;
+}

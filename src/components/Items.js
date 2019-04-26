@@ -3,10 +3,11 @@ import { CSSTransition } from 'react-transition-group';
 import ItemsTable from './ItemsTable';
 import Breadcrumbs from './Breadcrumbs';
 import TableSettings from './TableSettings';
+import Preview from './Preview';
 import Loader from './utils/Loader';
 import S from './Items.module.css';
 
-function Items(props) {
+function ItemsContent(props) {
   if (!props.items) {
     return '';
   } else if (props.isLoading) {
@@ -36,6 +37,18 @@ function Items(props) {
       </CSSTransition>
     );
   }
+}
+
+function Items(props) {
+  return (
+    <React.Fragment>
+      <div className={S.items}>
+        <ItemsContent {...props} />
+      </div>
+      <Preview previewItem={props.previewItem} isLoading={props.isPreviewLoading} />
+    </React.Fragment>
+  );
+
 }
 
 export default Items;

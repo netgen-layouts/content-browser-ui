@@ -23,22 +23,7 @@ function BrowserContent(props) {
                 <Tree/>
               </div>
             }
-            <div className={S.itemsPanel}>
-              <Items/>
-            </div>
-            <CSSTransition
-              in={props.showPreview}
-              unmountOnExit
-              timeout={250}
-              classNames={{
-                enter: S.slideEnter,
-                enterActive: S.slideActiveEnter,
-                exit: S.slideExit,
-                exitActive: S.slideActiveExit,
-              }}
-            >
-              <Preview previewItem={props.previewItem} isLoading={props.isPreviewLoading} />
-            </CSSTransition>
+            <Items/>
           </div>
         </div>
         {props.config.has_search &&
