@@ -6,7 +6,7 @@ import Search from './Search';
 import Tabs from './Tabs';
 import Preview from './Preview';
 import TogglePreview from './TogglePreview';
-// import Footer from './Footer';
+import Footer from './Footer';
 import ListIcon from '@material-ui/icons/List';
 import SearchIcon from '@material-ui/icons/Search';
 import Loader from './utils/Loader';
@@ -83,7 +83,7 @@ function BrowserContent(props) {
           </div>
         }
       </Tabs>
-      {/*<Footer selectedItems={props.selectedItems} setSelectedItems={props.setSelectedItems} min_selected={props.min_selected} onCancel={props.onCancel} onConfirm={props.onConfirm} />*/}
+      <Footer/>
     </div>
   );
 }

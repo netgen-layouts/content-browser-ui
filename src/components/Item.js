@@ -7,8 +7,7 @@ import { setSelectedItem } from '../store/actions/app';
 
 const mapsStateToProps = state => ({
   selectedItems: state.app.selectedItems,
-  maxSelected: state.app.maxSelected,
-  columns: state.app.activeColumns,
+  max_selected: state.app.max_selected,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -35,8 +34,8 @@ function Item(props) {
         {props.item.has_sub_items && props.setId ? <Button variant="link" onClick={() => props.setId(props.item.value)}>{props.item.name}</Button> : <span>{props.item.name}</span>}
       </td>
       {props.columns.map((column) => {
-        if (column === 'name') return false;
-        return <td key={`${column}-${props.item.value}`} dangerouslySetInnerHTML={{__html: props.item.columns[column]}}></td>;
+        if (column.id === 'name') return false;
+        return <td key={`${column.id}-${props.item.value}`} dangerouslySetInnerHTML={{__html: props.item.columns[column.id]}}></td>;
       })}
     </tr>
   );

@@ -2,7 +2,7 @@ import React from 'react';
 import Browser from './containers/Browser';
 import { Provider as ReduxProvider } from 'react-redux';
 import configureStore from './store/store';
-import { setRootPath } from './store/actions/app';
+import { initialSetup } from './store/actions/app';
 import { saveSectionId } from './store/actions/items';
 
 function App({ min_selected = 1, max_selected = 1, startLocation = null, onCancel, onConfirm, rootPath }) {
@@ -228,12 +228,20 @@ function App({ min_selected = 1, max_selected = 1, startLocation = null, onCance
   // }
 
   const reduxStore = configureStore();
-  reduxStore.dispatch(setRootPath(rootPath))
+  reduxStore.dispatch(initialSetup({
+    rootPath,
+    min_selected,
+    max_selected,
+    onCancel,
+    onConfirm,
+    itemsLimit: localStorage.getItem('cb_itemsLimit') || 10,
+    showPreview: localStorage.getItem('cb_showPreview') ? JSON.parse(localStorage.getItem('cb_showPreview')) : false,
+  }))
   reduxStore.dispatch(saveSectionId(startLocation))
 
   return (
     <ReduxProvider store={reduxStore}>
-      <Browser onCancel={onCancel} rootPath />
+      <Browser/>
     </ReduxProvider>
   );
 

@@ -21,7 +21,7 @@ const INITIAL_STATE = {
   treeItems: [],
   locationItems: {},
   currentPage: 1,
-  previewItem: null,
+  previewItem: '',
   isPreviewLoading: false,
 };
 
@@ -84,7 +84,7 @@ export default (state = INITIAL_STATE, action) => {
     case SET_PREVIEW_ITEM:
       return {
         ...state,
-        previewItem: action.item,
+        previewItem: action.id,
       };
 
     case START_PREVIEW_LOAD:

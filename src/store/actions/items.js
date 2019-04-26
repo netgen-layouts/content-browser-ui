@@ -85,7 +85,6 @@ export const setLocationId = (id) => {
     dispatch(savePage(1));
     dispatch(saveLocationId(id));
     dispatch(fetchLocationItems());
-    dispatch(setPreviewItem(id));
   }
 };
 
@@ -118,6 +117,7 @@ export const fetchLocationItems = () => {
         (result) => {
           dispatch(getLocationItems(result));
           dispatch(stopLocationLoad());
+          dispatch(setPreviewItem(result.parent.value ? result.parent.value : null));
         },
       )
     }
@@ -137,16 +137,16 @@ export const setPage = (page) => {
   }
 };
 
-const savePreviewItem = (item) => {
+const savePreviewItem = (id) => {
   return {
     type: SET_PREVIEW_ITEM,
-    item,
+    id,
   };
 };
 
-export const setPreviewItem = (item) => {
+export const setPreviewItem = (id) => {
   return dispatch => {
-    dispatch(savePreviewItem(item));
+    dispatch(savePreviewItem(id));
     dispatch(fetchPreview());
   }
 };
@@ -173,11 +173,19 @@ const storePreview = (preview) => {
 export const fetchPreview = () => {
   return (dispatch, getState) => {
     const previewItem = getState().items.previewItem;
-    if (!getState().app.showPreview || getState().app.previews[previewItem]) return;
+    if (!getState().app.showPreview || getState().app.previews[previewItem] || previewItem === null) return;
     dispatch(startPreviewLoad());
     const url = cbApiUrl(getState().app.rootPath, `render/${previewItem}`);
     return fetch(url)
-      .then(res => res.text())
+      .then(res => {
+        if (!res.ok) {
+            return res.text().then((data) => {
+              dispatch(storePreview({[previewItem]: null}));
+              dispatch(stopPreviewLoad());
+            });
+        }
+        return res.text();
+      })
       .then(
         (result) => {
           dispatch(storePreview({[previewItem]: result}));

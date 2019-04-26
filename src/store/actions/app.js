@@ -1,7 +1,7 @@
 import fetch from 'cross-fetch';
 import { saveSectionId, setLocationId, fetchTreeItems, setPage, fetchPreview } from './items';
 import {
-  SET_ROOT_PATH,
+  INITIAL_SETUP,
   CONFIG_LOADED,
   TOGGLE_COLUMN,
   FETCH_CONFIG,
@@ -17,10 +17,10 @@ const cbApiUrl = (rootPath, path) => {
   return `${cbBasePath}${cbBaseApiPath}${rootPath}/${path}`.replace(/\/{2,}/g, '/');
 }
 
-export const setRootPath = (path) => {
+export const initialSetup = (data) => {
   return {
-    type: SET_ROOT_PATH,
-    path,
+    type: INITIAL_SETUP,
+    data,
   };
 };
 

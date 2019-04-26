@@ -5,20 +5,25 @@ import S from './Items.module.css';
 
 function ItemsTable(props) {
   const visibleColumns = props.availableColumns.filter(column => props.activeColumns.includes(column.id));
+  const showParent = props.showParentItem && !!props.items.parent.value;
+
+  let className = S.table;
+  if (showParent) className += ` ${S.indent}`;
 
   if (!props.items.children) {
     return '';
   } else {
     return (
       <React.Fragment>
-        <table className={S.table}>
+        <table className={className}>
           <thead>
             <tr>
               {visibleColumns.map((column) => <th key={`column-${column.id}`}>{column.name}</th>)}
             </tr>
-            {props.showParentItem && <Item
+            {showParent && <Item
                 item={props.items.parent}
                 setPreviewItem={props.setPreviewItem}
+                columns={visibleColumns}
               />
             }
           </thead>
@@ -29,6 +34,7 @@ function ItemsTable(props) {
                 item={child}
                 setId={props.setId}
                 setPreviewItem={props.setPreviewItem}
+                columns={visibleColumns}
               />
             ))}
           </tbody>

@@ -8,6 +8,7 @@ const mapsStateToProps = state => ({
   showPreview: state.app.showPreview,
   isPreviewLoading: state.items.isPreviewLoading,
   previewItem: state.items.previewItem,
+  onCancel: state.app.onCancel,
 });
 
 const mapDispatchToProps = dispatch => ({

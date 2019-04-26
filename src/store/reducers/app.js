@@ -1,7 +1,7 @@
 import {
   CONFIG_LOADED,
   FETCH_CONFIG,
-  SET_ROOT_PATH,
+  INITIAL_SETUP,
   TOGGLE_COLUMN,
   SET_SELECTED_ITEM,
   SET_ITEMS_LIMIT,
@@ -13,11 +13,14 @@ const INITIAL_STATE = {
   rootPath: '',
   isLoaded: false,
   config: {},
-  itemsLimit: localStorage.getItem('cb_itemsLimit') || 10,
+  itemsLimit: null,
   activeColumns: [],
   selectedItems: [],
-  maxSelected: 1,
-  showPreview: localStorage.getItem('cb_showPreview') ? JSON.parse(localStorage.getItem('cb_showPreview')) : false,
+  min_selected: 1,
+  max_selected: 1,
+  onCancel: null,
+  onConfirm: null,
+  showPreview: null,
   limits: [
     {id: 5, name: 5},
     {id: 10, name: 10},
@@ -43,10 +46,10 @@ export default (state = INITIAL_STATE, action) => {
         config: action.config,
       };
 
-    case SET_ROOT_PATH:
+    case INITIAL_SETUP:
       return {
         ...state,
-        rootPath: action.path,
+        ...action.data,
       };
 
     case TOGGLE_COLUMN:

@@ -1,4 +1,4 @@
-export const SET_ROOT_PATH = 'SET_ROOT_PATH';
+export const INITIAL_SETUP = 'INITIAL_SETUP';
 export const CONFIG_LOADED = 'CONFIG_LOADED';
 export const FETCH_CONFIG = 'FETCH_CONFIG';
 export const TOGGLE_COLUMN = 'TOGGLE_COLUMN';
