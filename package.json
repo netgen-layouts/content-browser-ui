@@ -32,7 +32,7 @@
     "underscore": "^1.9.1"
   },
   "dependencies": {
-    "@netgen/layouts-ui-core": "https://github.com/netgen-layouts/layouts-ui-core#master",
+    "@netgen/layouts-ui-core": "https://github.com/netgen-layouts/layouts-ui-core#0.13",
     "bootstrap": "^3.3.7",
     "bootstrap-sass": "^3.3.7"
   }
