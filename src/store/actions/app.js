@@ -1,6 +1,7 @@
 import fetch from 'cross-fetch';
 import { saveSectionId, setLocationId, fetchTreeItems, setPage } from './items';
 import { setSearchPage } from './search';
+import { buildUrl } from '../../helpers';
 import {
   INITIAL_SETUP,
   CONFIG_LOADED,
@@ -14,18 +15,18 @@ import {
   FETCH_PREVIEW,
 } from '../actionTypes';
 
-const cbBasePath = document.querySelector('meta[name=ngcb-base-path]').getAttribute('content');
-const cbBaseApiPath = '/api/v1/';
-
-const cbApiUrl = (rootPath, path) => {
-  return `${cbBasePath}${cbBaseApiPath}${rootPath}/${path}`.replace(/\/{2,}/g, '/');
-}
-
 export const initialSetup = (data) => {
+  return dispatch => {
+    dispatch(receiveOverrides(data));
+    dispatch(fetchConfig());
+  }
+};
+
+const receiveOverrides = (data) => {
   return {
     type: INITIAL_SETUP,
     data,
-  };
+  }
 };
 
 const configLoaded = () => {
@@ -34,7 +35,7 @@ const configLoaded = () => {
   };
 };
 
-const receivePosts = (config) => {
+const receiveConfig = (config) => {
   return {
     type: FETCH_CONFIG,
     config,
@@ -49,15 +50,15 @@ export const toggleColumn = (id, toggle) => {
   };
 };
 
-export const fetchConfig = () => {
+const fetchConfig = () => {
   return (dispatch, getState) => {
-    return fetch(cbApiUrl(getState().app.rootPath, 'config'))
+    return fetch(buildUrl(getState, 'config'))
       .then(res => res.json())
       .then(
         (config) => {
-          if (!getState().items.sectionId) dispatch(saveSectionId(config.sections[0].id));
+          dispatch(receiveConfig(config));
+          dispatch(saveSectionId(getState().app.config.start_location || config.sections[0].id));
           dispatch(setLocationId(getState().items.sectionId));
-          dispatch(receivePosts(config));
           dispatch(fetchTreeItems());
           dispatch(configLoaded());
         },
@@ -120,7 +121,7 @@ export const fetchPreview = (item) => {
   return (dispatch, getState) => {
     if (!getState().app.showPreview || getState().app.previews[item] || item === null) return;
     dispatch(startPreviewLoad());
-    const url = cbApiUrl(getState().app.rootPath, `render/${item}`);
+    const url = buildUrl(getState, `render/${item}`, {}, false);
     return fetch(url)
       .then(res => {
         if (!res.ok) {

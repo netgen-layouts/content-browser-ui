@@ -10,7 +10,7 @@ function Tree(props) {
       <Select
         options={props.sections.map(section => ({value: section.id, label: section.name}))}
         onChange={props.setSectionId}
-        value={props.id}
+        value={props.id.toString()}
       />
       <div className={S.wrapper}>
         {props.isLoading

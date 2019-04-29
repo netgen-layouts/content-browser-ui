@@ -13,13 +13,6 @@ import {
   SET_PREVIEW_ITEM,
 } from '../actionTypes';
 
-const cbBasePath = document.querySelector('meta[name=ngcb-base-path]').getAttribute('content');
-const cbBaseApiPath = '/api/v1/';
-
-const cbApiUrl = (rootPath, path) => {
-  return `${cbBasePath}${cbBaseApiPath}${rootPath}/${path}`.replace(/\/{2,}/g, '/');
-}
-
 const startTreeLoad = () => {
   return {
     type: START_TREE_LOAD
@@ -42,7 +35,7 @@ const getTreeItems = (items) => {
 export const fetchTreeItems = () => {
   return (dispatch, getState) => {
     dispatch(startTreeLoad());
-    const url = cbApiUrl(getState().app.rootPath, `browse/${getState().items.sectionId}/locations`);
+    const url = buildUrl(getState, `browse/${getState().items.sectionId}/locations`);
     return fetch(url)
       .then(res => res.json())
       .then(
@@ -107,7 +100,7 @@ const stopLocationLoad = () => {
 export const fetchLocationItems = () => {
   return (dispatch, getState) => {
     dispatch(startLocationLoad());
-    const url = buildUrl(cbApiUrl(getState().app.rootPath, `browse/${getState().items.locationId}/items`), {limit: getState().app.itemsLimit, page: getState().items.currentPage});
+    const url = buildUrl(getState, `browse/${getState().items.locationId}/items`, {limit: getState().app.itemsLimit, page: getState().items.currentPage});
     return fetch(url)
       .then(res => res.json())
       .then(

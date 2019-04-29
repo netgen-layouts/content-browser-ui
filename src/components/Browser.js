@@ -40,7 +40,6 @@ function BrowserContent(props) {
 function Browser(props) {
   useEffect(() => {
     window.addEventListener('keydown', handleKeypress);
-    props.fetchConfig();
   }, []);
   useEffect(() => {
     return () => {

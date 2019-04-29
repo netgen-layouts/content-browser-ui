@@ -7,7 +7,7 @@ import { setSelectedItem } from '../store/actions/app';
 
 const mapsStateToProps = state => ({
   selectedItems: state.app.selectedItems,
-  min_selected: state.app.min_selected,
+  min_selected: parseInt(state.app.config.min_selected, 10),
   onCancel: state.app.onCancel,
   onConfirm: state.app.onConfirm,
 });

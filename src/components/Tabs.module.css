@@ -23,6 +23,10 @@
   padding: .5em .125em;
 }
 
+.tab + .tab {
+  border-left: 0;
+}
+
 .tab:first-child {
   border-radius: 2px 0 0 2px;
 }

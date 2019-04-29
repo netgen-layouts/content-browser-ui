@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import { fetchConfig } from '../store/actions/app';
 import Browser from '../components/Browser';
 
 const mapsStateToProps = state => ({
@@ -8,13 +7,6 @@ const mapsStateToProps = state => ({
   onCancel: state.app.onCancel,
 });
 
-const mapDispatchToProps = dispatch => ({
-  fetchConfig: () => {
-    dispatch(fetchConfig());
-  },
-});
-
 export default connect(
   mapsStateToProps,
-  mapDispatchToProps
 )(Browser);

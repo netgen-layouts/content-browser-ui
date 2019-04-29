@@ -9,13 +9,6 @@ import {
   SET_SEARCH_PREVIEW_ITEM,
 } from '../actionTypes';
 
-const cbBasePath = document.querySelector('meta[name=ngcb-base-path]').getAttribute('content');
-const cbBaseApiPath = '/api/v1/';
-
-const cbApiUrl = (rootPath, path) => {
-  return `${cbBasePath}${cbBaseApiPath}${rootPath}/${path}`.replace(/\/{2,}/g, '/');
-}
-
 const startLoad = () => {
   return {
     type: START_SEARCH_LOAD
@@ -46,7 +39,7 @@ export const fetchItems = () => {
   return (dispatch, getState) => {
     if (!getState().search.searchTerm) return dispatch(getItems({}));
     dispatch(startLoad());
-    const url = buildUrl(cbApiUrl(getState().app.rootPath, 'search'), {searchText: getState().search.searchTerm, limit: getState().app.itemsLimit, page: getState().search.currentPage});
+    const url = buildUrl(getState, 'search', {searchText: getState().search.searchTerm, limit: getState().app.itemsLimit, page: getState().search.currentPage});
     return fetch(url)
       .then(res => res.json())
       .then(

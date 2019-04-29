@@ -7,7 +7,8 @@ import { setSelectedItem } from '../store/actions/app';
 
 const mapsStateToProps = state => ({
   selectedItems: state.app.selectedItems,
-  max_selected: state.app.max_selected,
+  max_selected: parseInt(state.app.config.max_selected, 10),
+  disabledItems: state.app.disabledItems,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -17,8 +18,9 @@ const mapDispatchToProps = dispatch => ({
 });
 
 function Item(props) {
-  const isChecked = props.selectedItems.findIndex(selectedItem => selectedItem.value === props.item.value) > -1;
-  const isDisabled = !isChecked && props.max_selected > 1 && props.selectedItems.length >= props.max_selected;
+  const isItemDisabled = props.disabledItems.indexOf(props.item.value) > -1;
+  const isChecked = isItemDisabled || props.selectedItems.findIndex(selectedItem => selectedItem.value === props.item.value) > -1;
+  const isDisabled = isItemDisabled || (!isChecked && props.max_selected !== 0 && props.max_selected > 1 && props.selectedItems.length >= props.max_selected);
   return (
     <tr onClick={() => {if (props.item.value) props.setPreviewItem(props.item.value)}}>
       <td>

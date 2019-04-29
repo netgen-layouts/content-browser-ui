@@ -1,3 +1,4 @@
+import { extractCustomParams } from '../../helpers';
 import {
   CONFIG_LOADED,
   FETCH_CONFIG,
@@ -18,8 +19,6 @@ const INITIAL_STATE = {
   itemsLimit: null,
   activeColumns: [],
   selectedItems: [],
-  min_selected: 1,
-  max_selected: 1,
   onCancel: null,
   onConfirm: null,
   showPreview: null,
@@ -30,6 +29,7 @@ const INITIAL_STATE = {
   ],
   previews: {},
   isPreviewLoading: false,
+  customParams: {},
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -40,19 +40,23 @@ export default (state = INITIAL_STATE, action) => {
         isLoaded: true,
       };
 
+    case INITIAL_SETUP:
+      return {
+        ...state,
+        ...action.data,
+        customParams: extractCustomParams(action.data.config),
+      };
+
     case FETCH_CONFIG:
       const storedColumns = localStorage.getItem('cb_activeColumns');
       const activeColumns = storedColumns ? JSON.parse(storedColumns) : action.config.default_columns;
       return {
         ...state,
         activeColumns,
-        config: action.config,
-      };
-
-    case INITIAL_SETUP:
-      return {
-        ...state,
-        ...action.data,
+        config: {
+          ...action.config,
+          ...state.config,
+        },
       };
 
     case TOGGLE_COLUMN:
@@ -71,7 +75,7 @@ export default (state = INITIAL_STATE, action) => {
     case SET_SELECTED_ITEM:
       let selectedItems;
       if (action.selected) {
-        selectedItems = state.max_selected === 1 ? [action.item] : [...state.selectedItems, action.item];
+        selectedItems = parseInt(state.config.max_selected, 10) === 1 ? [action.item] : [...state.selectedItems, action.item];
       } else {
         selectedItems = state.selectedItems.filter(item => item !== action.item);
       }

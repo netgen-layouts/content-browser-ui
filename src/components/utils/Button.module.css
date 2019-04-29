@@ -25,6 +25,14 @@
   outline: none;
 }
 
+.prefixed {
+  border-radius: 0 2px 2px 0;
+}
+
+.sufixed {
+  border-radius: 2px 0 0 2px;
+}
+
 .button[disabled] {
   opacity: .65;
   cursor: not-allowed;
