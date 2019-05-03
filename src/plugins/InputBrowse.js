@@ -16,7 +16,6 @@ export default class InputBrowse {
     this.browser = new Browser({
       overrides: this.overrides,
       rootPath: this.rootPath,
-      onCancel: this.cancel.bind(this),
       onConfirm: this.onConfirm.bind(this),
     });
 
@@ -40,11 +39,6 @@ export default class InputBrowse {
     this.browser.rootPath = e.target.value;
   }
 
-  cancel(e) {
-    e && e.preventDefault();
-    this.closeBrowser();
-  }
-
   clear() {
     this.selectedItems = [];
     this.nameEl.innerHTML = this.nameEl.dataset.emptyNote;
@@ -58,15 +52,10 @@ export default class InputBrowse {
     this.nameEl.innerHTML = selected[0].name;
     this.valueEl.value = selected[0].value;
     this.el.classList.remove('item-empty');
-    this.closeBrowser();
     this.triggerChangeEvent();
   }
 
   triggerChangeEvent() {
     this.el.dispatchEvent(new CustomEvent('browser:change', { bubbles: true, cancelable: true, detail: { instance: this } }));
-  }
-
-  closeBrowser() {
-    this.browser.close();
   }
 }

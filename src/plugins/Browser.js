@@ -10,6 +10,8 @@ export default class Browser {
     this.onConfirm = opts.onConfirm;
     this.disabledItems = opts.disabledItems || [];
 
+    this.cancel = this.cancel.bind(this);
+    this.confirm = this.confirm.bind(this);
     this.el = document.createElement('div');
   }
 
@@ -19,12 +21,23 @@ export default class Browser {
       <App
         overrides={this.overrides}
         rootPath={this.rootPath}
-        onCancel={this.onCancel}
-        onConfirm={this.onConfirm.bind(this)}
+        onCancel={this.cancel}
+        onConfirm={this.confirm}
         disabledItems={this.disabledItems}
       />,
       this.el
     );
+  }
+
+  confirm(data) {
+    this.onConfirm && this.onConfirm(data);
+    this.close();
+  }
+
+  cancel(e) {
+    e && e.preventDefault();
+    this.onCancel && this.onCancel();
+    this.close();
   }
 
   close() {

@@ -18,7 +18,6 @@ export default class MultipleBrowse {
     this.browser = new Browser({
       overrides: this.overrides,
       rootPath: this.rootPath,
-      onCancel: this.cancel.bind(this),
       onConfirm: this.onConfirm.bind(this),
       disabledItems: this.selectedItems.map(item => item.value),
     });
@@ -48,11 +47,6 @@ export default class MultipleBrowse {
     this.browser.rootPath = e.target.value;
   }
 
-  cancel(e) {
-    e && e.preventDefault();
-    this.closeBrowser();
-  }
-
   clear() {
     this.selectedItems = [];
     [...this.itemsEl.getElementsByClassName('item')].forEach(itemEl => {
@@ -66,7 +60,6 @@ export default class MultipleBrowse {
     this.selectedItems = this.selectedItems.concat(selected);
     this.renderAddedItems(selected);
     this.toggleEmptyMsg();
-    this.closeBrowser();
     this.triggerChangeEvent();
   }
 
@@ -79,10 +72,6 @@ export default class MultipleBrowse {
     newItem.getElementsByClassName('name')[0].innerHTML = item.name;
     newItem.getElementsByTagName('INPUT')[0].value = item.value;
     return newItem;
-  }
-
-  closeBrowser() {
-    this.browser.close();
   }
 
   triggerChangeEvent() {
