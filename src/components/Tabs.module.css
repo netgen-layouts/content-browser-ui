@@ -21,6 +21,7 @@
   color: linkColor;
   cursor: pointer;
   padding: .5em .125em;
+  margin: 0;
 }
 
 .tab + .tab {

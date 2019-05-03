@@ -1,5 +1,5 @@
 @value variables: '../Variables.module.css';
-@value linkColor, linkHover, fontPrimary, gray87 from variables;
+@value linkColor, linkHover, fontPrimary, gray87, gray20 from variables;
 
 .button {
   cursor: pointer;
@@ -19,6 +19,7 @@
   border-radius: 2px;
   user-select: none;
   transition: background-color .25s, color .25s;
+  color: gray20;
 }
 
 .button:focus {

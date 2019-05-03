@@ -35,6 +35,7 @@
 
 .table tr {
   cursor: default;
+  background: transparent;
 }
 
 .table tr > th:first-child,
@@ -55,4 +56,12 @@
   display: inline-flex;
   vertical-align: middle;
   margin-right: .25em;
+}
+
+.table td img {
+  display: block;
+  max-width: 4.2857142857em;
+  max-height: 4.2857142857em;
+  padding: 2px;
+  background-color: #fff;
 }

@@ -1,5 +1,5 @@
 @value variables: '../Variables.module.css';
-@value gray60 from variables;
+@value gray60, linkColor from variables;
 
 .dropdown {
   position: relative;
@@ -15,6 +15,13 @@
   align-items: center;
 }
 
+.toggle:hover,
+.toggle:active,
+.toggle:focus {
+  color: linkColor;
+  text-decoration: none;
+}
+
 .toggle svg {
   margin-left: .35em;
 }
@@ -27,6 +34,7 @@
   box-shadow: 0 0 .5em rgba(0, 0, 0, .5);
   border-radius: 2px;
   padding: .5em 0;
+  margin: 1em 0 0;
   list-style-type: none;
   z-index: 999;
   font-size: .874em;
@@ -36,4 +44,5 @@
 
 .menu li {
   padding: .35em .5em;
+  margin: 0;
 }

@@ -9,6 +9,8 @@
 .breadcrumbs li {
   display: inline-block;
   font-size: .75em;
+  margin: 0;
+  padding: 0;
 }
 
 .breadcrumbs li + li::before {

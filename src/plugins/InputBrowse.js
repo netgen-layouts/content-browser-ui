@@ -16,6 +16,7 @@ export default class InputBrowse {
     this.browser = new Browser({
       overrides: this.overrides,
       rootPath: this.rootPath,
+      onCancel: this.cancel.bind(this),
       onConfirm: this.onConfirm.bind(this),
     });
 
@@ -23,14 +24,22 @@ export default class InputBrowse {
   }
 
   setupEvents() {
-    [...this.el.getElementsByClassName('js-trigger')].forEach(el => el.addEventListener('click', this.openBrowser.bind(this)));
+    [...this.el.getElementsByClassName('js-trigger')].forEach(el => el.addEventListener('click', this.open.bind(this)));
     [...this.el.getElementsByClassName('js-config-name')].forEach(el => el.addEventListener('change', this.changeRootPath.bind(this)));
     [...this.el.getElementsByClassName('js-clear')].forEach(el => el.addEventListener('click', this.clear.bind(this)));
   }
 
-  openBrowser(e) {
+  open(e) {
     e && e.preventDefault();
     this.browser.open();
+  }
+
+  close() {
+    this.browser.close();
+  }
+
+  cancel() {
+    this.el.dispatchEvent(new CustomEvent('browser:cancel', { bubbles: true, cancelable: true, detail: { instance: this } }));
   }
 
   changeRootPath(e) {

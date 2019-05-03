@@ -18,6 +18,7 @@ export default class MultipleBrowse {
     this.browser = new Browser({
       overrides: this.overrides,
       rootPath: this.rootPath,
+      onCancel: this.cancel.bind(this),
       onConfirm: this.onConfirm.bind(this),
       disabledItems: this.selectedItems.map(item => item.value),
     });
@@ -26,7 +27,7 @@ export default class MultipleBrowse {
   }
 
   setupEvents() {
-    [...this.el.getElementsByClassName('js-trigger')].forEach(el => el.addEventListener('click', this.openBrowser.bind(this)));
+    [...this.el.getElementsByClassName('js-trigger')].forEach(el => el.addEventListener('click', this.open.bind(this)));
     [...this.el.getElementsByClassName('js-config-name')].forEach(el => el.addEventListener('change', this.changeRootPath.bind(this)));
     [...this.el.getElementsByClassName('js-clear')].forEach(el => el.addEventListener('click', this.clear.bind(this)));
     this.el.addEventListener('click', (e) => {
@@ -36,9 +37,17 @@ export default class MultipleBrowse {
     });
   }
 
-  openBrowser(e) {
+  open(e) {
     e && e.preventDefault();
     this.browser.open();
+  }
+
+  close() {
+    this.browser.close();
+  }
+
+  cancel() {
+    this.el.dispatchEvent(new CustomEvent('browser:cancel', { bubbles: true, cancelable: true, detail: { instance: this } }));
   }
 
   changeRootPath(e) {
