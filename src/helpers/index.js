@@ -14,6 +14,7 @@ const buildUrlParams = (parameters, isCustomParam) => {
   }
   return qs;
 };
+
 const cbBasePath = document.querySelector('meta[name=ngcb-base-path]').getAttribute('content');
 const cbBaseApiPath = '/api/v1/';
 

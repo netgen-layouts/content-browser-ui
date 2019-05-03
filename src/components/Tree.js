@@ -1,5 +1,5 @@
 import React from 'react';
-import TreeItem from './TreeItem';
+import TreeItems from './TreeItems';
 import Loader from './utils/Loader';
 import Select from './utils/Select';
 import S from './Tree.module.css';
@@ -15,16 +15,11 @@ function Tree(props) {
       <div className={S.wrapper}>
         {props.isLoading
           ? <Loader />
-          : <ul className={S.tree}>
-            {props.items.map(child => (
-              <TreeItem
-                item={child}
-                onClick={props.setLocationId}
-                key={`treeItem-${child.id}`}
-                isActive={child.id === props.locationId}
-              />
-            ))}
-          </ul>
+          : <TreeItems
+              items={props.items}
+              setLocationId={props.setLocationId}
+              locationId={props.locationId}
+            />
         }
       </div>
     </React.Fragment>
