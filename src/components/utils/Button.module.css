@@ -20,6 +20,7 @@
   user-select: none;
   transition: background-color .25s, color .25s;
   color: gray20;
+  height: 2.6428571429em;
 }
 
 .button:focus {
@@ -49,6 +50,7 @@
   border-radius: 0;
   color: linkColor;
   transition: color .25s;
+  height: auto;
 }
 
 .link:hover {
@@ -73,7 +75,7 @@
   background-color: transparent;
 }
 
-.transparent:hover {
+.transparent:hover:not(:disabled) {
   background: gray87;
 }
 

@@ -1,6 +1,8 @@
 import React from 'react';
 import Select from './Select';
 import Button from './Button';
+import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
+import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import S from './Pager.module.css';
 import { connect } from 'react-redux';
 import { setItemsLimit } from '../../store/actions/app';
@@ -22,14 +24,15 @@ const mapDispatchToProps = dispatch => ({
 });
 
 function Pager(props) {
-  const getPageButtons = (nr) => {
+  const pagesNr = calculatePages(props.itemsNr, props.itemsLimit);
+  const getPageButtons = () => {
     const pages = [];
-    for (let i = 1; i <= nr; i++) {
+    for (let i = 1; i <= pagesNr; i++) {
       pages.push(
         <li key={`page-${i}`} className={S.paginatorItem}>
           <Button
             variant={i === props.currentPage ? 'primary' : 'transparent'}
-            onClick={() => props.setPage(i)}
+            onClick={() => props.currentPage !== i && props.setPage(i)}
           >{i}</Button>
         </li>
       );
@@ -40,7 +43,21 @@ function Pager(props) {
   return (
     <div className={S.pager}>
       <ul className={S.pagination}>
-        {getPageButtons(calculatePages(props.itemsNr, props.itemsLimit))}
+        <li className={S.paginatorItem}>
+          <Button
+            variant={'transparent'}
+            disabled={props.currentPage === 1}
+            onClick={() => props.setPage(props.currentPage - 1)}
+          ><ArrowLeftIcon fontSize="inherit" /></Button>
+        </li>
+        {getPageButtons()}
+        <li className={S.paginatorItem}>
+          <Button
+            variant={'transparent'}
+            disabled={props.currentPage === pagesNr}
+            onClick={() => props.setPage(props.currentPage + 1)}
+          ><ArrowRightIcon fontSize="inherit" /></Button>
+        </li>
       </ul>
       <Select
         options={props.limits.map(limit => ({value: limit.id, label: limit.name}))}
