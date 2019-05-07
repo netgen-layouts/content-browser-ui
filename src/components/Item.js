@@ -33,7 +33,7 @@ function Item(props) {
             disabled={isDisabled}
           />
         </span>
-        {props.item.has_sub_items && props.setId ? <Button variant="link" onClick={() => props.setId(props.item.value)}>{props.item.name}</Button> : <span>{props.item.name}</span>}
+        {props.item.has_sub_items && props.setId ? <Button variant="link" onClick={() => props.setId(props.item.location_id)}>{props.item.name}</Button> : <span>{props.item.name}</span>}
       </td>
       {props.columns.map((column) => {
         if (column.id === 'name') return false;
