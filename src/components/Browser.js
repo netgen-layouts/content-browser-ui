@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { CSSTransition } from 'react-transition-group';
 import Tree from '../containers/Tree';
 import Items from '../containers/Items';
 import Search from '../containers/Search';
@@ -53,16 +54,30 @@ function Browser(props) {
 
   return (
     <div className={S.browser}>
-      <div className={S.dialog}>
-        {props.error ?
-          <div>Error: {props.error.message}</div>
-          :
-          !props.isLoaded ?
-            <div className={S.loading}><Loader/></div>
+      <CSSTransition
+        in
+        appear
+        timeout={500}
+        classNames={{
+          appear: S.slideEnter,
+          appearActive: S.slideActiveEnter,
+          appearDone: S.slideActiveDone,
+          enterDone: S.slideEnterDone,
+          exit: S.slideExit,
+          exitActive: S.slideActiveExit,
+        }}
+      >
+        <div className={S.dialog}>
+          {props.error ?
+            <div>Error: {props.error.message}</div>
             :
-            <BrowserContent {...props} />
-        }
-      </div>
+            !props.isLoaded ?
+              <div className={S.loading}><Loader/></div>
+              :
+              <BrowserContent {...props} />
+          }
+        </div>
+      </CSSTransition>
     </div>
   );
 }
