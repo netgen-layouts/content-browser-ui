@@ -65,3 +65,10 @@
   padding: 2px;
   background-color: #fff;
 }
+
+.invisibleIcon {
+  font-size: 1.1428571429em;
+  display: inline-flex;
+  vertical-align: middle;
+  margin-right: .5em;
+}

@@ -58,16 +58,23 @@ function TreeItem(props) {
     setShowSubItems(!showSubItems);
   };
 
+  let iconClassName = S.icon;
   let icon = item.has_sub_items ? 'normal' : 'empty';
-  if (item.has_sub_locations) icon = showSubItems ? 'open' : 'closed';
-  if (isLoadingSubItems) icon = 'loading';
+  if (item.has_sub_locations) {
+    icon = showSubItems ? 'open' : 'closed';
+    iconClassName += ` ${S.hasItems}`;
+  }
+  if (isLoadingSubItems) {
+    icon = 'loading';
+    iconClassName += ` ${S.rotate}`;
+  }
   const IconTag = iconNames[icon]
   const getIcon = () => <IconTag fontSize="inherit" onClick={handleToggleSubtree} />;
 
   return (
-    <li>
+    <li className={S.item}>
       <Button variant="primary" onClick={() => props.setLocationId(item.id)} className={`${S.button}${isActive ? ` ${S.active}` : ''}`}>
-        <div className={S.icon}>
+        <div className={iconClassName}>
           {getIcon()}
         </div>
         {item.name}
