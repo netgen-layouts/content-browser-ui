@@ -2,6 +2,7 @@ import Browser from './Browser';
 
 export default class InputBrowse {
   constructor(el, opts = {}) {
+    if (el.dataset.browser) return;
     this.el = el;
     this.overrides = {
       min_selected: 1,
@@ -19,6 +20,8 @@ export default class InputBrowse {
       onCancel: this.cancel.bind(this),
       onConfirm: this.onConfirm.bind(this),
     });
+
+    this.el.dataset.browser = true;
 
     this.setupEvents();
   }

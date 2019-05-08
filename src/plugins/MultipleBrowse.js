@@ -3,6 +3,7 @@ import Browser from './Browser';
 
 export default class MultipleBrowse {
   constructor(el, opts = {}) {
+    if (el.dataset.browser) return;
     this.el = el;
     this.overrides = {
       min_selected: 1,
@@ -22,6 +23,8 @@ export default class MultipleBrowse {
       onConfirm: this.onConfirm.bind(this),
       disabledItems: this.selectedItems.map(item => item.value),
     });
+
+    this.el.dataset.browser = true;
 
     this.setupEvents();
   }
