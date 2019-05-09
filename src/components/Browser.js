@@ -14,7 +14,7 @@ import S from './Browser.module.css';
 function BrowserContent(props) {
   return (
     <div className={S.content}>
-      <Tabs headerContent={<TogglePreview />}>
+      <Tabs headerContent={props.config.has_preview ? <TogglePreview /> : ''}>
         <div id="tab-browse" label="Browse" icon={<ListIcon fontSize="default" color="inherit" />}>
           <div className={S.panels}>
             {props.config.has_tree &&

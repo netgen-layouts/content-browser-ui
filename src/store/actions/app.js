@@ -119,7 +119,7 @@ const storePreview = (preview) => {
 
 export const fetchPreview = (item) => {
   return (dispatch, getState) => {
-    if (!getState().app.showPreview || getState().app.previews[item] || item === null) return;
+    if (!getState().app.config.has_preview || !getState().app.showPreview || getState().app.previews[item] || item === null) return;
     dispatch(startPreviewLoad());
     const url = buildUrl(getState, `render/${item}`, {}, false);
     return fetch(url)

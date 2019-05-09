@@ -9,6 +9,7 @@ const mapsStateToProps = state => ({
   previews: state.app.previews,
   showPreview: state.app.showPreview,
   isLoading: state.app.isPreviewLoading,
+  has_preview: state.app.config.has_preview,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -36,6 +37,7 @@ function Preview(props) {
     if (props.showPreview && props.previewItem) props.fetchPreview(props.previewItem);
   }, [props.previewItem, props.showPreview]);
 
+  if (!props.has_preview) return null;
   return (
     <CSSTransition
       in={props.showPreview}
