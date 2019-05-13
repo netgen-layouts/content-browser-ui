@@ -1,0 +1,16 @@
+{
+  "item_type":"ezlocation",
+  "min_selected":1,
+  "max_selected":0,
+  "has_tree":true,
+  "has_search":true,
+  "has_preview":true,
+  "default_columns":["name","location_id","visible"],
+  "available_columns":[
+    {"id":"name","name":"Name"},
+    {"id":"location_id","name":"Location ID"},
+    {"id":"content_id","name":"Content ID"},
+    {"id":"visible","name":"Visible"},
+    {"id":"priority","name":"Priority"}
+  ]
+}
