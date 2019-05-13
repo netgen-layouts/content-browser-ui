@@ -11,6 +11,7 @@ function TreeItems(props) {
           setLocationId={props.setLocationId}
           key={`treeItem-${child.id}`}
           isActive={child.id === props.locationId}
+          locationId={props.locationId}
         />
       ))}
     </ul>

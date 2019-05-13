@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import { setItemsLimit } from '../../store/actions/app';
 
 const calculatePages = (total, limit) => {
+  if (total === 0) return 1;
   const totalPages = parseInt(total / limit, 10);
   return (total % limit) === 0 ? totalPages : totalPages + 1;
 }
