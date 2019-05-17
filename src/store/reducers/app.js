@@ -37,7 +37,7 @@ export default (state = INITIAL_STATE, action) => {
     case CONFIG_LOADED:
       return {
         ...state,
-        isLoaded: true,
+        isLoaded: action.isLoaded,
       };
 
     case INITIAL_SETUP:

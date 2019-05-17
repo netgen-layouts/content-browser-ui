@@ -29,9 +29,10 @@ const receiveOverrides = (data) => {
   }
 };
 
-const configLoaded = () => {
+const configLoaded = (isLoaded) => {
   return {
-    type: CONFIG_LOADED
+    type: CONFIG_LOADED,
+    isLoaded,
   };
 };
 
@@ -60,7 +61,7 @@ const fetchConfig = () => {
           dispatch(saveSectionId(getState().app.config.start_location || config.sections[0].id));
           dispatch(setLocationId(getState().items.sectionId));
           dispatch(fetchTreeItems());
-          dispatch(configLoaded());
+          dispatch(configLoaded(true));
         },
       )
     }
