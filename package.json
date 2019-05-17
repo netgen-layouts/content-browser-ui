@@ -6,6 +6,7 @@
   "main": "dist/js/main.js",
   "module": "dist/js/main.js",
   "devDependencies": {
+    "cypress": "^3.2.0",
     "http-proxy-middleware": "^0.19.1",
     "nodemon": "^1.19.0"
   },
@@ -71,9 +72,10 @@
     "workbox-webpack-plugin": "3.6.3"
   },
   "scripts": {
-    "start": "node scripts/start.js",
+    "start": "nodemon --watch .env --watch config node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
+    "cypress": "cypress open",
     "express": "nodemon express/server.js -V -w express"
   },
   "eslintConfig": {

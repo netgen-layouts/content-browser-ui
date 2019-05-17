@@ -9,5 +9,8 @@ if (process.env.NODE_ENV !== 'production') {
 }
 export default function configureStore() {
   const store = createStore(reducer, applyMiddleware(...middleware));
+  if (window.Cypress) {
+    window.store = store
+  }
   return store;
 }
