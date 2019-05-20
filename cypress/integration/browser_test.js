@@ -51,17 +51,25 @@ describe('Multiple browse test', function() {
     })
     describe('Test content tree', () => {
       it('changes section in select dropdown', () => {
-        cy.get('[class^="Browser_treePanel_"]').find('select').as('sectionSelect').children().should('have.length', 2);
-        cy.get('@sectionSelect').select('1');
-        cy.checkBreadcrumbsAndTableForText('Users');
-        cy.get('@sectionSelect').select('2');
-        cy.checkBreadcrumbsAndTableForText('Home');
+        cy.get('[class^="Browser_treePanel_"]').find('select').as('sectionSelect').children().its('length').should('be.greaterThan', 1);
+        cy.get('@sectionSelect').children().eq(1).then((el) => {
+          cy.get('@sectionSelect').select(el.val());
+          cy.wrap(el).invoke('text').then((text) => {
+            cy.checkBreadcrumbsAndTableForText(text);
+          });
+        });
+        cy.get('@sectionSelect').children().eq(0).then((el) => {
+          cy.get('@sectionSelect').select(el.val());
+          cy.wrap(el).invoke('text').then((text) => {
+            cy.checkBreadcrumbsAndTableForText(text);
+          });
+        });
       });
       it('opens second level in tree item', () => {
         cy.get('[class^="Tree_tree_"]').as('tree');
         cy.get('@tree').find('[class*="Tree_hasItems_"]').as('toggle').click();
         cy.get('@toggle').closest('[class^="Tree_item_"]').as('item');
-        cy.get('@item').find('[class^="Tree_tree_"]').should('be.visible').children().should('have.length', 3);
+        cy.get('@item').find('[class^="Tree_tree_"]').should('be.visible').children().its('length').should('be.greaterThan', 1);
         cy.get('@toggle').click();
         cy.get('@item').find('[class^="Tree_tree_"]').should('not.be.visible');
       });
