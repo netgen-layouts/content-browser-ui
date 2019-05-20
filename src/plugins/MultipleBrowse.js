@@ -26,7 +26,6 @@ export default class MultipleBrowse {
 
     this.el.dataset.browser = true;
 
-    console.log(this);
     this.setupEvents();
   }
 
