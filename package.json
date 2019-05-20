@@ -3,29 +3,21 @@
   "description": "Netgen Content Browser user interface",
   "license": "GPL-2.0-or-later",
   "version": "0.12.0",
-  "main": "dist/js/main.js",
-  "module": "dist/js/main.js",
+  "main": "bundle/Resources/public/js/main.js",
+  "module": "src/index.js",
   "devDependencies": {
-    "cypress": "^3.2.0",
-    "http-proxy-middleware": "^0.19.1",
-    "nodemon": "^1.19.0"
-  },
-  "dependencies": {
     "@babel/core": "7.2.2",
-    "@material-ui/core": "^3.9.3",
-    "@material-ui/icons": "^3.0.2",
     "@svgr/webpack": "4.1.0",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "9.0.0",
-    "babel-jest": "23.6.0",
     "babel-loader": "8.0.5",
     "babel-plugin-named-asset-import": "^0.3.1",
     "babel-polyfill": "^6.26.0",
     "babel-preset-react-app": "^7.0.2",
     "bfj": "6.1.1",
     "case-sensitive-paths-webpack-plugin": "2.2.0",
-    "cross-fetch": "^3.0.2",
     "css-loader": "1.0.0",
+    "cypress": "^3.2.0",
     "dotenv": "6.0.0",
     "dotenv-expand": "4.2.0",
     "eslint": "5.12.0",
@@ -39,28 +31,16 @@
     "file-loader": "2.0.0",
     "fs-extra": "7.0.1",
     "html-webpack-plugin": "4.0.0-alpha.2",
+    "http-proxy-middleware": "^0.19.1",
     "identity-obj-proxy": "3.0.0",
-    "jest": "23.6.0",
-    "jest-pnp-resolver": "1.0.2",
-    "jest-resolve": "23.6.0",
-    "jest-watch-typeahead": "^0.2.1",
     "mini-css-extract-plugin": "0.5.0",
+    "nodemon": "^1.19.0",
     "optimize-css-assets-webpack-plugin": "5.0.1",
     "pnp-webpack-plugin": "1.2.1",
     "postcss-flexbugs-fixes": "4.1.0",
     "postcss-loader": "3.0.0",
     "postcss-preset-env": "6.5.0",
     "postcss-safe-parser": "4.0.1",
-    "react": "^16.8.6",
-    "react-addons-css-transition-group": "^15.6.2",
-    "react-app-polyfill": "^0.2.2",
-    "react-dev-utils": "^8.0.0",
-    "react-dom": "^16.8.6",
-    "react-redux": "^7.0.2",
-    "react-transition-group": "^4.0.0",
-    "redux": "^4.0.1",
-    "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.3.0",
     "resolve": "1.10.0",
     "sass-loader": "7.1.0",
     "style-loader": "0.23.1",
@@ -70,6 +50,21 @@
     "webpack-dev-server": "3.1.14",
     "webpack-manifest-plugin": "2.0.4",
     "workbox-webpack-plugin": "3.6.3"
+  },
+  "dependencies": {
+    "@material-ui/core": "^3.9.3",
+    "@material-ui/icons": "^3.0.2",
+    "cross-fetch": "^3.0.2",
+    "react": "^16.8.6",
+    "react-addons-css-transition-group": "^15.6.2",
+    "react-app-polyfill": "^0.2.2",
+    "react-dev-utils": "^8.0.0",
+    "react-dom": "^16.8.6",
+    "react-redux": "^7.0.2",
+    "react-transition-group": "^4.0.0",
+    "redux": "^4.0.1",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0"
   },
   "scripts": {
     "start": "nodemon --watch .env --watch config node scripts/start.js",
@@ -87,51 +82,6 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "jest": {
-    "collectCoverageFrom": [
-      "src/**/*.{js,jsx,ts,tsx}",
-      "!src/**/*.d.ts"
-    ],
-    "resolver": "jest-pnp-resolver",
-    "setupFiles": [
-      "react-app-polyfill/jsdom"
-    ],
-    "testMatch": [
-      "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
-      "<rootDir>/src/**/?(*.)(spec|test).{js,jsx,ts,tsx}"
-    ],
-    "testEnvironment": "jsdom",
-    "testURL": "http://localhost",
-    "transform": {
-      "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest",
-      "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
-      "^(?!.*\\.(js|jsx|ts|tsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
-    },
-    "transformIgnorePatterns": [
-      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx)$",
-      "^.+\\.module\\.(css|sass|scss)$"
-    ],
-    "moduleNameMapper": {
-      "^react-native$": "react-native-web",
-      "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy"
-    },
-    "moduleFileExtensions": [
-      "web.js",
-      "js",
-      "web.ts",
-      "ts",
-      "web.tsx",
-      "tsx",
-      "json",
-      "web.jsx",
-      "jsx",
-      "node"
-    ],
-    "watchPlugins": [
-      "/Users/goranmartinjak/sites/enterprisesite/_repos/content-browser-ui-react/node_modules/jest-watch-typeahead/filename.js",
-      "/Users/goranmartinjak/sites/enterprisesite/_repos/content-browser-ui-react/node_modules/jest-watch-typeahead/testname.js"
-    ]
-  },
   "babel": {
     "presets": [
       "@babel/react",
