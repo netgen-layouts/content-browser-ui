@@ -72,12 +72,11 @@
   },
   "scripts": {
     "start": "nodemon --watch .env --watch config node scripts/start.js",
-    "start:all": "start-test express 8282 'node scripts/start.js'",
     "build": "node scripts/build.js",
     "cypress": "cypress open",
     "express": "nodemon express/server.js -V -w express",
-    "test": "cypress run",
-    "ci": "start-test start:all 8181 test"
+    "test": "CYPRESS_baseUrl=http://localhost:8282 cypress run",
+    "ci": "start-test 'node express/server.js' 8282 test"
   },
   "eslintConfig": {
     "extends": "react-app"

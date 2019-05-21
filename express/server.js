@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const model = require('./helpers');
 
@@ -28,8 +29,12 @@ app.get('/cb/api/v1/:name/search', function (req, res) {
   res.send(data);
 });
 
-app.get('/', function (req, res) {
-  res.send('');
+app.use(express.static(path.join(__dirname, '../bundle/Resources/public'), {
+    index: false
+}));
+
+app.get('*', function(req, res) {
+    res.sendFile(path.join(__dirname, '../bundle/Resources/public', 'index.html'));
 });
 
 app.listen('8282');
