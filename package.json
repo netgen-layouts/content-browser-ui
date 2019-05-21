@@ -72,7 +72,7 @@
   },
   "scripts": {
     "start": "nodemon --watch .env --watch config node scripts/start.js",
-    "start:all": "start-test express 8282 start",
+    "start:all": "start-test express 8282 'node scripts/start.js'",
     "build": "node scripts/build.js",
     "cypress": "cypress open",
     "express": "nodemon express/server.js -V -w express",
