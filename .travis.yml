@@ -10,6 +10,9 @@ branches:
     - master
     - /^\d.\d+$/
 
+before_script:
+  - cp .env.dist .env
+
 script:
   - npm run build
   - npm run ci
