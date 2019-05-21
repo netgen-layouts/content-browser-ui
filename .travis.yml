@@ -5,6 +5,11 @@ language: node_js
 node_js:
   - "node"
 
+matrix:
+  include:
+    - env: RUN_TESTS="yes"
+    - env: RUN_BUILD="yes"
+
 branches:
   only:
     - master
@@ -14,8 +19,15 @@ before_script:
   - cp .env.dist .env
 
 script:
-  - npm run build
-  - npm run ci
+  - |
+    if [ "$RUN_TESTS" = "yes" ] ; then
+      npm run ci
+    fi
+
+  - |
+    if [ "$RUN_BUILD" = "yes" ] ; then
+      npm run build
+    fi
 
 notifications:
   email: false
