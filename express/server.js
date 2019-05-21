@@ -28,4 +28,8 @@ app.get('/cb/api/v1/:name/search', function (req, res) {
   res.send(data);
 });
 
+app.get('/', function (req, res) {
+  res.send('');
+});
+
 app.listen('8282');
