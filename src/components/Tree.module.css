@@ -1,0 +1,97 @@
+@value variables: './Variables.module.css';
+@value fontPrimary, linkColor, gray93, gray78, gray60 from variables;
+
+.wrapper {
+  background: gray93;
+  flex: 1;
+  margin-top: .5em;
+  padding: 1em;
+}
+
+.tree {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tree .tree {
+  margin-left: 1.5em;
+}
+
+.item {
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+.tree .tree > .item::before {
+  content: '';
+  position: absolute;
+  left: -1em;
+  height: 100%;
+  top: 0;
+  width: 1px;
+  background: gray78;
+}
+
+.tree .tree > .item:last-child::before {
+  height: 50%;
+}
+
+.tree .tree > .item::after {
+  content: '';
+  position: absolute;
+  left: -1em;
+  height: 1px;
+  top: 50%;
+  width: .5em;
+  background: gray78;
+}
+
+.button {
+  background: transparent;
+  cursor: pointer;
+  font-family: fontPrimary;
+  border: 0;
+  padding: .25em 0;
+  font-size: .875em;
+  display: flex;
+  align-items: center;
+  transition: color .2s;
+}
+
+.active {
+  color: linkColor;
+  font-weight: 700;
+}
+
+.button:focus {
+  outline: none;
+}
+
+.icon {
+  color: gray60;
+  display: flex;
+  align-items: center;
+  margin-right: .5em;
+  font-size: 1.1428571429em;
+}
+
+.hasItems {
+  color: #333;
+  font-size: 1.0714285714em;
+  margin-left: 1px;
+}
+
+.rotate {
+  animation: rotate 1.25s linear infinite;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

@@ -1,0 +1,64 @@
+@value variables: '../Variables.module.css';
+@value gray78 from variables;
+
+.checkbox {
+  position: absolute;
+  opacity: 0;
+  left: -9999em;
+  pointer-events: all;
+}
+
+.label {
+  line-height: 1.2;
+  cursor: pointer;
+  display: inline-flex;
+  font-size: .6875em;
+  text-transform: uppercase;
+  font-weight: 500;
+  align-items: center;
+  padding: 1.0909090909em 0;
+  margin: 0;
+}
+
+.disabledLabel {
+  composes: label;
+  opacity: .5;
+  cursor: not-allowed;
+}
+
+.icon {
+  display: inline-block;
+  margin-left: .75em;
+  width: 2.5454545455em;
+  height: 1.0909090909em;
+  border-radius: 50em;
+  position: relative;
+  background: gray78;
+  transition: background-color .3s;
+}
+
+.icon::before {
+  content: '';
+  display: inline-block;
+  position: absolute;
+  width: 1.4545454545em;
+  height: 1.4545454545em;
+  border-radius: 50em;
+  left: -2px;
+  top: 50%;
+  transform: translate3d(0, -50%, 0);
+  transition: left .3s cubic-bezier(.4, 0, .2, 1), background-color .1s;
+  background: #fff;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+}
+
+.iconActive {
+  composes: icon;
+  background: #04a6d7;
+}
+
+.iconActive::before {
+  left: 1.2727272727em;
+  background: #006a8a;
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, .14), 0 3px 3px -2px rgba(0, 0, 0, .2), 0 1px 8px 0 rgba(0, 0, 0, .12);
+}

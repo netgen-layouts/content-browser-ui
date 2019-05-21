@@ -1,0 +1,17 @@
+.pager {
+  padding: 2em 1em 0;
+  display: flex;
+}
+
+.pagination {
+  flex: 1;
+  text-align: center;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.paginatorItem {
+  display: inline-block;
+  margin-right: 1px;
+}

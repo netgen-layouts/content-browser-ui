@@ -1,11 +1,10 @@
 .tmp/
-.sass-cache/
+.env
 node_modules/
 vendor/
 **/Resources/public/dev/
 .php_cs.cache
 composer.lock
-grunt.json
 package-lock.json
 yarn.lock
 yarn-error.log

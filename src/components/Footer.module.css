@@ -1,0 +1,25 @@
+@value variables: './Variables.module.css';
+@value gray22, gray60 from variables;
+
+.footer {
+  background: gray22;
+  color: #fff;
+  padding: 1em;
+  display: flex;
+  justify-content: space-between;
+}
+
+.actions > button {
+  margin-left: .5em;
+}
+
+.items button {
+  margin-right: .5em;
+}
+
+.itemIcon {
+  margin-left: .5em;
+  color: gray60;
+  font-size: 1.25em;
+  display: inline-flex;
+}

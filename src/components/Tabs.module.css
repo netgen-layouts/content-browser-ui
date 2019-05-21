@@ -1,0 +1,59 @@
+@value variables: './Variables.module.css';
+@value linkColor from variables;
+
+.tabs {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  width: 25%;
+  padding: 1em 1em .5em;
+}
+
+.tab {
+  flex: 1;
+  text-align: center;
+  font-size: .75em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid linkColor;
+  color: linkColor;
+  cursor: pointer;
+  padding: .5em .125em;
+  margin: 0;
+}
+
+.tab + .tab {
+  border-left: 0;
+}
+
+.tab:first-child {
+  border-radius: 2px 0 0 2px;
+}
+
+.tab:last-child {
+  border-radius: 0 2px 2px 0;
+}
+
+.tab svg {
+  margin-right: .125em;
+}
+
+.active {
+  background: linkColor;
+  color: #fff;
+  cursor: default;
+}
+
+.tabsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.headerContent {
+  padding: 1em 1em .5em;
+  flex: 1;
+  text-align: right;
+}

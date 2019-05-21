@@ -1,0 +1,100 @@
+.input-browse {
+  display: flex;
+  margin: 0 0 1em;
+}
+.input-browse .js-clear {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 0 .25em;
+  transition: background .15s ease, color .15s ease;
+}
+.input-browse .js-clear i {
+  font-size: .875em;
+}
+.input-browse .js-trigger {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  height: 3em;
+  font-size: .75em;
+  max-width: 100%;
+  text-decoration: none;
+}
+.input-browse .js-name {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 0 .75em;
+}
+.input-browse .js-clear {
+  width: 40px;
+}
+/* .input-browse .js-trigger::after {
+  @extend %material-icons-cb;
+  padding:0 0.5833333333em;
+  align-items:center;
+  font-size:24px;
+  line-height:$btnHeight;
+  content:"folder_open";
+  transition:background 0.15s ease, color 0.15s ease;
+  border-radius:0 $borderRadius $borderRadius 0;
+} */
+.input-browse .js-trigger:hover {
+  text-decoration: none;
+}
+.input-browse .js-trigger:hover::after {
+  background: #999;
+}
+.item-empty .input-browse .js-clear {
+  display: none;
+}
+
+.js-multiple-browse .js-trigger {
+  font-size: .75em;
+  padding: 0 1.5em;
+  line-height: 3;
+  display: inline-block;
+  text-decoration: none;
+}
+.js-multiple-browse .js-trigger:hover {
+  background: #999;
+  text-decoration: none;
+}
+.js-multiple-browse .items {
+  min-height: 3em;
+  margin: 0 0 .5em;
+  padding: .5em 0 0 .5em;
+  font-size: .75em;
+  line-height: 1.4166666;
+  display: flex;
+}
+.js-multiple-browse .item {
+  margin: 0 .5em .5em 0;
+  display: flex;
+}
+.js-multiple-browse .item > * {
+  display: flex;
+  align-items: center;
+}
+.js-multiple-browse .js-remove {
+  padding: 0 3px;
+  margin: 0 1px 0 0;
+  text-decoration: none;
+}
+.js-multiple-browse .js-remove i {
+  font-size: 1.1666666667em;
+  float: left;
+  line-height: inherit;
+}
+.js-multiple-browse .item .name {
+  padding: 4px 6px;
+}
+.js-multiple-browse .no-items {
+  padding: 4px 0;
+  display: none;
+}
+.js-multiple-browse.items-empty .no-items {
+  display: block;
+}

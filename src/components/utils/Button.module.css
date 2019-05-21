@@ -1,0 +1,89 @@
+@value variables: '../Variables.module.css';
+@value linkColor, linkHover, fontPrimary, gray87, gray20 from variables;
+
+.button {
+  cursor: pointer;
+  font-family: fontPrimary;
+  font-weight: normal;
+  display: inline-flex;
+  align-items: center;
+  background-image: none;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  touch-action: manipulation;
+  border: 1px solid transparent;
+  padding: .5em 1em;
+  font-size: .875em;
+  line-height: 1.5;
+  border-radius: 2px;
+  user-select: none;
+  transition: background-color .25s, color .25s;
+  color: gray20;
+  height: 2.6428571429em;
+}
+
+.button:focus {
+  outline: none;
+}
+
+.prefixed {
+  border-radius: 0 2px 2px 0;
+}
+
+.sufixed {
+  border-radius: 2px 0 0 2px;
+}
+
+.button[disabled] {
+  opacity: .65;
+  cursor: not-allowed;
+}
+
+.link {
+  border: 0;
+  padding: 0;
+  white-space: normal;
+  background: transparent;
+  font-size: inherit;
+  line-height: inherit;
+  border-radius: 0;
+  color: linkColor;
+  transition: color .25s;
+  height: auto;
+}
+
+.link:hover {
+  text-decoration: underline;
+  color: linkHover;
+}
+
+.primary {
+  background: linkColor;
+  color: #fff;
+}
+
+.primary:hover:not(:disabled) {
+  background: linkHover;
+}
+
+.default {
+
+}
+
+.transparent {
+  background-color: transparent;
+}
+
+.transparent:hover:not(:disabled) {
+  background: gray87;
+}
+
+.cancel {
+  background: transparent;
+  color: #fff;
+}
+
+.cancel:hover {
+  text-decoration: underline;
+}

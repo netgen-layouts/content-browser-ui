@@ -1,9 +1,0 @@
-<a data-target="#" role="button" class="options-dropdown-toggle">Table options <i class="material-icons">settings</i></a>
-<ul class="options-dropdown-menu">
-  {{#each items_for_menu}}
-    <li>
-      <input name="{{column_id}}" id="{{uid true}}" type="checkbox" class="column-check" data-id="{{this.column_id}}" autocomplete="off" {{#if visible}}checked{{/if}}>
-      <label for="{{uid false}}">{{name}}</label>
-    </li>
-  {{/each}}
-</ul>

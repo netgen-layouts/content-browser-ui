@@ -1,0 +1,15 @@
+@value variables: './Variables.module.css';
+@value gray93 from variables;
+
+.searchPanel {
+  flex: 1;
+  background: gray93;
+  position: relative;
+  max-height: 100%;
+  overflow-y: auto;
+  padding-bottom: 1em;
+}
+
+.search {
+  display: flex;
+}
