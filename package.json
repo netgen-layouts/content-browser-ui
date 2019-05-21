@@ -1,8 +1,12 @@
 {
   "name": "@netgen/content-browser-ui",
   "description": "Netgen Content Browser user interface",
-  "license": "GPL-2.0-or-later",
   "version": "1.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/netgen-layouts/content-browser-ui.git"
+  },
+  "private": true,
   "main": "bundle/Resources/public/js/main.js",
   "module": "src/index.js",
   "devDependencies": {
@@ -43,6 +47,7 @@
     "postcss-safe-parser": "4.0.1",
     "resolve": "1.10.0",
     "sass-loader": "7.1.0",
+    "start-server-and-test": "^1.9.0",
     "style-loader": "0.23.1",
     "terser-webpack-plugin": "1.2.2",
     "url-loader": "1.1.2",
@@ -67,10 +72,12 @@
   },
   "scripts": {
     "start": "nodemon --watch .env --watch config node scripts/start.js",
+    "start:all": "start-test express 8282 start",
     "build": "node scripts/build.js",
     "cypress": "cypress open",
     "express": "nodemon express/server.js -V -w express",
-    "test": "cypress run"
+    "test": "cypress run",
+    "ci": "start-test start:all 8181 test"
   },
   "eslintConfig": {
     "extends": "react-app"
