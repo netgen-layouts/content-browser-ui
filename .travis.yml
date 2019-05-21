@@ -10,12 +10,9 @@ branches:
     - master
     - /^\d.\d+$/
 
-before_script:
-  - npm install -g grunt-cli
-  - cp grunt.json.dist grunt.json
-
 script:
-  - grunt build
+  - npm run build
+  - npm run ci
 
 notifications:
   email: false
