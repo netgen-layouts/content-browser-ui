@@ -24,14 +24,15 @@
           data-max_selected="1"
       >
         <div class="row-input">
-          <select id="query_edit_parameters_use_current_location_parent_location_id_item_type" name="query_edit[parameters][use_current_location][parent_location_id][item_type]" class="js-config-name">
-            <option value="ngbm_layout">Layout</option>
+          <select name="cb_config_name" class="js-config-name">
+            <option value="layout">Layout</option>
             <option value="eztags">eZ Tags</option>
             <option value="ezlocation">eZ location</option>
             <option value="ezcontent">eZ content</option>
           </select>
         </div>
-        <input type="hidden" id="query_edit_parameters_use_current_location_parent_location_id_item_value" name="query_edit[parameters][use_current_location][parent_location_id][item_value]" class="js-value">
+
+        <input type="hidden" name="cb_value" class="js-value">
 
         <div class="input-browse">
           <span class="js-clear">clear</span>
@@ -67,7 +68,7 @@
 
     <div class="cb-demo-item">
       <div class="js-multiple-browse"
-        data-browser-prototype="<div class=&quot;item&quot;><a href=&quot;#&quot; class=&quot;js-remove&quot;><i class=&quot;material-icons&quot;>close</i></a><span class=&quot;name&quot;></span><input type=&quot;hidden&quot; id=&quot;query_edit_parameters_filter_by_tags___name__&quot; name=&quot;query_edit[parameters][filter_by_tags][__name__]&quot; required=&quot;required&quot; /></div>"
+        data-browser-prototype="<div class=&quot;item&quot;><a href=&quot;#&quot; class=&quot;js-remove&quot;><i class=&quot;material-icons&quot;>close</i></a><span class=&quot;name&quot;></span><input type=&quot;hidden&quot; name=&quot;__name__&quot; required=&quot;required&quot; /></div>"
         data-input=""
       >
         <div class="items">
