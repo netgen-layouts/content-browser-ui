@@ -1,6 +1,7 @@
 .tmp/
 .env
 cypress/screenshots/
+cypress/fixtures/
 node_modules/
 vendor/
 **/Resources/public/dev/
