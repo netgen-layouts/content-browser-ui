@@ -13,7 +13,7 @@ export default class InputBrowse {
     this.selectedItems = [];
     [this.nameEl] = el.getElementsByClassName('js-name');
     [this.valueEl] = el.getElementsByClassName('js-value');
-    this.itemType = el.getElementsByClassName('js-config-name')[0].value;
+    this.itemType = el.getElementsByClassName('js-item-type')[0].value;
     this.browser = new Browser({
       overrides: this.overrides,
       itemType: this.itemType,
@@ -28,7 +28,7 @@ export default class InputBrowse {
 
   setupEvents() {
     [...this.el.getElementsByClassName('js-trigger')].forEach(el => el.addEventListener('click', this.open.bind(this)));
-    [...this.el.getElementsByClassName('js-config-name')].forEach(el => el.addEventListener('change', this.changeItemType.bind(this)));
+    [...this.el.getElementsByClassName('js-item-type')].forEach(el => el.addEventListener('change', this.changeItemType.bind(this)));
     [...this.el.getElementsByClassName('js-clear')].forEach(el => el.addEventListener('click', this.clear.bind(this)));
   }
 

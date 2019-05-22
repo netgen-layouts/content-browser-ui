@@ -12,8 +12,8 @@ export default class MultipleBrowse {
       ...opts.overrides,
     };
     [this.valueEl] = el.getElementsByClassName('js-value');
-    this.itemType = el.getElementsByClassName('js-config-name')[0].value;
-    this.input_template = el.dataset.browserPrototype;
+    this.itemType = el.getElementsByClassName('js-item-type')[0].value;
+    this.inputTemplate = el.dataset.browserPrototype;
     [this.itemsEl] = el.getElementsByClassName('items');
     this.selectedItems = this.getPreselectedItems();
     this.browser = new Browser({
@@ -31,7 +31,7 @@ export default class MultipleBrowse {
 
   setupEvents() {
     [...this.el.getElementsByClassName('js-trigger')].forEach(el => el.addEventListener('click', this.open.bind(this)));
-    [...this.el.getElementsByClassName('js-config-name')].forEach(el => el.addEventListener('change', this.changeItemType.bind(this)));
+    [...this.el.getElementsByClassName('js-item-type')].forEach(el => el.addEventListener('change', this.changeItemType.bind(this)));
     [...this.el.getElementsByClassName('js-clear')].forEach(el => el.addEventListener('click', this.clear.bind(this)));
     this.el.addEventListener('click', (e) => {
       if (e.target.closest('.js-remove')) {
@@ -80,7 +80,7 @@ export default class MultipleBrowse {
   }
 
   renderItem(item) {
-    const newItem = htmlParser(this.input_template.replace(/__name__/g, item.value))[0];
+    const newItem = htmlParser(this.inputTemplate.replace(/__name__/g, item.value))[0];
     newItem.getElementsByClassName('name')[0].innerHTML = item.name;
     newItem.getElementsByTagName('INPUT')[0].value = item.value;
     return newItem;
