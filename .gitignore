@@ -1,5 +1,6 @@
 .tmp/
 .env
+cypress/screenshots/
 node_modules/
 vendor/
 **/Resources/public/dev/
