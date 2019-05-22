@@ -1,14 +1,11 @@
-.tmp/
 .env
 cypress/screenshots/
 cypress/fixtures/
 node_modules/
 vendor/
-**/Resources/public/dev/
 .php_cs.cache
 composer.lock
 package-lock.json
 yarn.lock
 yarn-error.log
 *.sublime-workspace
-**/Resources/public/vendor/*/package.json
