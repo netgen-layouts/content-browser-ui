@@ -5,7 +5,7 @@ import App from '../App';
 export default class Browser {
   constructor(opts = {}) {
     this.overrides = opts.overrides || {};
-    this.rootPath = opts.rootPath || '';
+    this.itemType = opts.itemType || '';
     this.onCancel = opts.onCancel;
     this.onConfirm = opts.onConfirm;
     this.disabledItems = opts.disabledItems || [];
@@ -20,7 +20,7 @@ export default class Browser {
     ReactDOM.render(
       <App
         overrides={this.overrides}
-        rootPath={this.rootPath}
+        itemType={this.itemType}
         onCancel={this.cancel}
         onConfirm={this.confirm}
         disabledItems={this.disabledItems}

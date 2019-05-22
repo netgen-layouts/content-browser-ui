@@ -13,7 +13,7 @@ import {
 } from '../actionTypes';
 
 const INITIAL_STATE = {
-  rootPath: '',
+  itemType: '',
   isLoaded: false,
   config: {},
   itemsLimit: null,

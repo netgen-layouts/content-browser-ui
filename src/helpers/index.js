@@ -23,7 +23,7 @@ export const buildUrl = (getState, path, params = {}, sendCustomParams = true) =
     ...params,
     customParams: getState().app.customParams,
   }) : '';
-  return `${cbBasePath}${cbBaseApiPath}${getState().app.rootPath}/${path}${urlParams}`.replace(/\/{2,}/g, '/');
+  return `${cbBasePath}${cbBaseApiPath}${getState().app.itemType}/${path}${urlParams}`.replace(/\/{2,}/g, '/');
 };
 
 export const extractCustomParams = (params) => {

@@ -12,13 +12,13 @@ export default class MultipleBrowse {
       ...opts.overrides,
     };
     [this.valueEl] = el.getElementsByClassName('js-value');
-    this.rootPath = el.getElementsByClassName('js-config-name')[0].value;
+    this.itemType = el.getElementsByClassName('js-config-name')[0].value;
     this.input_template = el.dataset.browserPrototype;
     [this.itemsEl] = el.getElementsByClassName('items');
     this.selectedItems = this.getPreselectedItems();
     this.browser = new Browser({
       overrides: this.overrides,
-      rootPath: this.rootPath,
+      itemType: this.itemType,
       onCancel: this.cancel.bind(this),
       onConfirm: this.onConfirm.bind(this),
       disabledItems: this.selectedItems.map(item => item.value),
@@ -31,7 +31,7 @@ export default class MultipleBrowse {
 
   setupEvents() {
     [...this.el.getElementsByClassName('js-trigger')].forEach(el => el.addEventListener('click', this.open.bind(this)));
-    [...this.el.getElementsByClassName('js-config-name')].forEach(el => el.addEventListener('change', this.changeRootPath.bind(this)));
+    [...this.el.getElementsByClassName('js-config-name')].forEach(el => el.addEventListener('change', this.changeItemType.bind(this)));
     [...this.el.getElementsByClassName('js-clear')].forEach(el => el.addEventListener('click', this.clear.bind(this)));
     this.el.addEventListener('click', (e) => {
       if (e.target.closest('.js-remove')) {
@@ -53,10 +53,10 @@ export default class MultipleBrowse {
     this.el.dispatchEvent(new CustomEvent('browser:cancel', { bubbles: true, cancelable: true, detail: { instance: this } }));
   }
 
-  changeRootPath(e) {
+  changeItemType(e) {
     this.clear();
-    this.rootPath = e.target.value;
-    this.browser.rootPath = e.target.value;
+    this.itemType = e.target.value;
+    this.browser.itemType = e.target.value;
   }
 
   clear() {

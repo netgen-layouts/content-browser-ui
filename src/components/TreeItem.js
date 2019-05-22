@@ -12,7 +12,7 @@ import S from './Tree.module.css';
 
 const mapsStateToProps = state => ({
   customParams: state.app.customParams,
-  rootPath: state.app.rootPath,
+  itemType: state.app.itemType,
 });
 
 const iconNames = {
@@ -38,7 +38,7 @@ function TreeItem(props) {
     const url = buildUrl(() => ({
       app: {
         customParams: props.customParams,
-        rootPath: props.rootPath,
+        itemType: props.itemType,
       },
     }), `browse/${item.id}/locations`);
     fetch(url)
