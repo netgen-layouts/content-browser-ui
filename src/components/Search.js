@@ -31,7 +31,7 @@ function Search(props) {
         </div>
         {props.isLoading
           ? <Loader />
-          : <ItemsTable {...props} showParentItem={false} />
+          : <ItemsTable {...props} showParentItem={false} previewItem={props.previewItem} />
         }
       </div>
       <Preview previewItem={props.previewItem} isLoading={props.isPreviewLoading} />

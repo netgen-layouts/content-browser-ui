@@ -30,6 +30,7 @@ function ItemsTable(props) {
                 item={props.items.parent}
                 setPreviewItem={props.setPreviewItem}
                 columns={visibleColumns}
+                previewItem={props.previewItem}
               />
             }
           </thead>
@@ -41,6 +42,7 @@ function ItemsTable(props) {
                 setId={props.setId}
                 setPreviewItem={props.setPreviewItem}
                 columns={visibleColumns}
+                previewItem={props.previewItem}
               />
             ))}
           </tbody>

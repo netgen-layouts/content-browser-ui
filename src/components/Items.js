@@ -32,7 +32,7 @@ function ItemsContent(props) {
             <Breadcrumbs items={props.items.path} setId={props.setId} />
             <TableSettings />
           </div>
-          <ItemsTable {...props} showParentItem={true} />
+          <ItemsTable {...props} showParentItem={true} previewItem={props.previewItem} />
         </div>
       </CSSTransition>
     );

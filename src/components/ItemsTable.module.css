@@ -47,6 +47,10 @@
   background: #f2f2f2;
 }
 
+.table tbody tr.activeRow td {
+  background: #e0e0e0;
+}
+
 .table.indent tbody td:first-child {
   padding-left: 3em;
 }
