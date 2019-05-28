@@ -34,6 +34,16 @@
   margin: 0 0 1em;
 }
 
+.preview :global .layout-icon {
+  width: 90%;
+  height: 0;
+  padding-bottom: 130%;
+  margin: 1em auto 0;
+  border: 2px solid #a1a1a1;
+  background-size: 95%;
+  border-radius: 3px;
+}
+
 .slideEnter {
   width: 0;
   opacity: .01;
