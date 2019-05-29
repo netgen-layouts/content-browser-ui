@@ -8,7 +8,6 @@
   },
   "private": true,
   "main": "bundle/Resources/public/js/main.js",
-  "module": "src/index.js",
   "devDependencies": {
     "@babel/core": "7.2.2",
     "@svgr/webpack": "4.1.0",
