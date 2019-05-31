@@ -33,14 +33,15 @@ function PreviewContent(props) {
 }
 
 function Preview(props) {
+  const {showPreview, previewItem, fetchPreview} = props;
   useEffect(() => {
-    if (props.showPreview && props.previewItem) props.fetchPreview(props.previewItem);
-  }, [props.previewItem, props.showPreview]);
+    if (showPreview && previewItem) fetchPreview(previewItem);
+  }, [previewItem, showPreview, fetchPreview]);
 
   if (!props.has_preview) return null;
   return (
     <CSSTransition
-      in={props.showPreview}
+      in={showPreview}
       unmountOnExit
       timeout={250}
       classNames={{

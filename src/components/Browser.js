@@ -41,12 +41,12 @@ function BrowserContent(props) {
 function Browser(props) {
   useEffect(() => {
     window.addEventListener('keydown', handleKeypress);
-  }, []);
+  });
   useEffect(() => {
     return () => {
       window.removeEventListener('keydown', handleKeypress);
     }
-  }, []);
+  });
 
   const handleKeypress = (e) => {
     e.keyCode === 27 && props.onCancel();

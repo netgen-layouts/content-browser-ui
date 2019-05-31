@@ -30,10 +30,11 @@ function TreeItem(props) {
   const [isLoadingSubItems, setIsLoadingSubItems] = useState(false);
 
   useEffect(() => {
-    if (showSubItems && !subItems.length) fetchSubItems();
-  }, [showSubItems]);
+    if (showSubItems) fetchSubItems();
+  });
 
   const fetchSubItems = () => {
+    if (subItems.length || isLoadingSubItems) return;
     setIsLoadingSubItems(true);
     const url = buildUrl(() => ({
       app: {
