@@ -16,7 +16,7 @@ const buildUrlParams = (parameters, isCustomParam) => {
 };
 
 const cbBasePath = document.querySelector('meta[name=ngcb-base-path]').getAttribute('content');
-const cbBaseApiPath = '/api/v1/';
+const cbBaseApiPath = '/api/';
 
 export const buildUrl = (getState, path, params = {}, sendCustomParams = true) => {
   const urlParams = sendCustomParams ? buildUrlParams({
