@@ -5,6 +5,11 @@ language: node_js
 node_js:
   - "node"
 
+addons:
+  apt:
+    packages:
+      - libgconf-2-4
+
 matrix:
   include:
     - env: RUN_TESTS="yes"
