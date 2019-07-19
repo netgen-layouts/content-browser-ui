@@ -7,10 +7,6 @@
         {
             "name": "Netgen",
             "homepage": "https://www.netgenlabs.com"
-        },
-        {
-            "name": "Effectiva",
-            "homepage": "https://effectiva.hr"
         }
     ],
     "autoload": {
