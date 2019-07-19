@@ -5,6 +5,9 @@ language: node_js
 node_js:
   - "node"
 
+cache:
+  npm: false
+
 addons:
   apt:
     packages:
