@@ -69,6 +69,7 @@
   font-size: .75em;
   line-height: 1.4166666;
   display: flex;
+  flex-wrap: wrap;
 }
 .js-multiple-browse .item {
   margin: 0 .5em .5em 0;
