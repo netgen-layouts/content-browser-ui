@@ -31,16 +31,6 @@
 .input-browse .js-clear {
   width: 40px;
 }
-/* .input-browse .js-trigger::after {
-  @extend %material-icons-cb;
-  padding:0 0.5833333333em;
-  align-items:center;
-  font-size:24px;
-  line-height:$btnHeight;
-  content:"folder_open";
-  transition:background 0.15s ease, color 0.15s ease;
-  border-radius:0 $borderRadius $borderRadius 0;
-} */
 .input-browse .js-trigger:hover {
   text-decoration: none;
 }
