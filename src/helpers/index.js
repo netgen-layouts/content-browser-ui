@@ -9,7 +9,7 @@ const buildUrlParams = (parameters, isCustomParam) => {
     }
   }
   if (qs.length > 0) {
-    qs = qs.substring(0, qs.length - 1); //chop off last "&"
+    if (qs.match(/&$/)) qs = qs.slice(0, -1); //chop off last "&"
     if (!isCustomParam) qs = `?${qs}`;
   }
   return qs;
