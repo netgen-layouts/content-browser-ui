@@ -22,7 +22,7 @@ function Item(props) {
   const { item } = props;
   const isItemDisabled = props.disabledItems.indexOf(item.value) > -1;
   const isChecked = isItemDisabled || props.selectedItems.findIndex(selectedItem => selectedItem.value === item.value) > -1;
-  const isDisabled = isItemDisabled || (!isChecked && props.max_selected !== 0 && props.max_selected > 1 && props.selectedItems.length >= props.max_selected);
+  const isDisabled = !item.selectable || isItemDisabled || (!isChecked && props.max_selected !== 0 && props.max_selected > 1 && props.selectedItems.length >= props.max_selected);
   return (
     <tr onClick={() => {if (item.value) props.setPreviewItem(item.value)}} className={props.previewItem === item.value ? S.activeRow : undefined}>
       <td>
