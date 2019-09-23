@@ -33,7 +33,7 @@ module.exports = function(webpackEnv) {
     : isEnvDevelopment && '/';
   // Some apps do not use client-side routing with pushState.
   // For these, "homepage" can be set to "." to enable relative asset paths.
-  const shouldUseRelativeAssetPaths = publicPath === './';
+  const shouldUseRelativeAssetPaths = publicPath === '/';
 
   const env = getClientEnvironment();
 
@@ -45,7 +45,7 @@ module.exports = function(webpackEnv) {
         loader: MiniCssExtractPlugin.loader,
         options: Object.assign(
           {},
-          shouldUseRelativeAssetPaths ? { publicPath: '../../' } : undefined
+          shouldUseRelativeAssetPaths ? { publicPath: '../' } : undefined
         ),
       },
       {
