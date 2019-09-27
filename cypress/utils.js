@@ -1,7 +1,7 @@
 export const loginToAdmin = (test) => {
   const options = {
     method: 'POST',
-    url: '/ngadminui/login_check',
+    url: '/admin/login_check',
     form: true,
     body: {
       _username: 'admin',
