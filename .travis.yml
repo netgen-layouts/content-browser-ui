@@ -23,8 +23,7 @@ branches:
     - master
     - /^\d.\d+$/
 
-install:
-  - yarn install
+install: yarn install
 
 before_script:
   - cp .env.dist .env
