@@ -29,12 +29,12 @@ before_script:
 script:
   - |
     if [ "$RUN_TESTS" = "yes" ] ; then
-      npm run ci
+      yarn run ci
     fi
 
   - |
     if [ "$RUN_BUILD" = "yes" ] ; then
-      npm run build
+      yarn run build
     fi
 
 notifications:
