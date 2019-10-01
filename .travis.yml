@@ -13,10 +13,9 @@ addons:
     packages:
       - libgconf-2-4
 
-matrix:
-  include:
-    - env: RUN_TESTS="yes"
-    - env: RUN_BUILD="yes"
+env:
+  - RUN_TESTS="yes"
+  - RUN_BUILD="yes"
 
 branches:
   only:
