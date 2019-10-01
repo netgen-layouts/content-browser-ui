@@ -23,18 +23,21 @@ branches:
     - master
     - /^\d.\d+$/
 
+install:
+  - yarn install
+
 before_script:
   - cp .env.dist .env
 
 script:
   - |
     if [ "$RUN_TESTS" = "yes" ] ; then
-      npm run ci
+      yarn run ci
     fi
 
   - |
     if [ "$RUN_BUILD" = "yes" ] ; then
-      npm run build
+      yarn run build
     fi
 
 notifications:
