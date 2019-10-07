@@ -1,12 +1,9 @@
 import React from 'react';
-import ItemsTable from './ItemsTable';
-import Loader from './utils/Loader';
+import SearchItems from '../containers/SearchItems';
+import Select from './utils/Select';
 import Input from './utils/Input';
 import Button from './utils/Button';
-import TableSettings from './TableSettings';
-import Preview from './Preview';
 import S from './Search.module.css';
-import I from './Items.module.css';
 
 function Search(props) {
   const handleSearchSubmit = (e) => {
@@ -17,8 +14,13 @@ function Search(props) {
   return (
     <>
       <div className={S.searchPanel}>
-        <div className={I.header}>
-          <form className={S.search} onSubmit={handleSearchSubmit} data-cy="search-form">
+        <Select
+          options={props.sections.map(section => ({value: section.id, label: section.name}))}
+          onChange={props.setSectionId}
+          value={props.id.toString()}
+        />
+        <div className={S.searchWrapper}>
+          <form className={S.search} onSubmit={handleSearchSubmit}>
             <Input
               onChange={(e) => props.setSearchTerm(e.target.value)}
               value={props.searchTerm}
@@ -27,14 +29,9 @@ function Search(props) {
             />
             <Button type='submit' prefixed={true}>Search</Button>
           </form>
-          <TableSettings />
         </div>
-        {props.isLoading
-          ? <Loader />
-          : <ItemsTable {...props} showParentItem={false} previewItem={props.previewItem} />
-        }
       </div>
-      <Preview previewItem={props.previewItem} isLoading={props.isPreviewLoading} />
+      <SearchItems />
     </>
   );
 }

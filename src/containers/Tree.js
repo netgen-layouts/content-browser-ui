@@ -1,11 +1,12 @@
 import { connect } from 'react-redux';
-import { fetchTreeItems, setSectionId, setLocationId } from '../store/actions/items';
+import { fetchTreeItems, setLocationId } from '../store/actions/items';
+import { setSectionId } from '../store/actions/app';
 import Tree from '../components/Tree';
 
 const mapsStateToProps = state => ({
   isLoading: state.items.isTreeLoading,
   items: state.items.treeItems,
-  id: state.items.sectionId,
+  id: state.app.sectionId,
   locationId: state.items.locationId,
   sections: state.app.config.sections,
 });

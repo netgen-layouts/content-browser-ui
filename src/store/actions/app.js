@@ -1,5 +1,5 @@
 import fetch from 'cross-fetch';
-import { saveSectionId, setLocationId, fetchTreeItems, setPage } from './items';
+import { setLocationId, fetchTreeItems, setPage, savePage } from './items';
 import { setSearchPage } from './search';
 import { buildUrl } from '../../helpers';
 import {
@@ -7,6 +7,7 @@ import {
   CONFIG_LOADED,
   TOGGLE_COLUMN,
   FETCH_CONFIG,
+  SET_SECTION_ID,
   SET_SELECTED_ITEM,
   SET_ITEMS_LIMIT,
   TOGGLE_PREVIEW,
@@ -51,6 +52,22 @@ export const toggleColumn = (id, toggle) => {
   };
 };
 
+export const saveSectionId = (id) => {
+  return {
+    type: SET_SECTION_ID,
+    id,
+  }
+};
+
+export const setSectionId = (id) => {
+  return dispatch => {
+    dispatch(savePage(1));
+    dispatch(saveSectionId(id));
+    dispatch(setLocationId(id));
+    dispatch(fetchTreeItems());
+  }
+};
+
 const fetchConfig = () => {
   return (dispatch, getState) => {
     return fetch(buildUrl(getState, 'config'))
@@ -59,7 +76,7 @@ const fetchConfig = () => {
         (config) => {
           dispatch(receiveConfig(config));
           dispatch(saveSectionId(getState().app.config.start_location || config.sections[0].id));
-          dispatch(setLocationId(getState().items.sectionId));
+          dispatch(setLocationId(getState().app.sectionId));
           dispatch(fetchTreeItems());
           dispatch(configLoaded(true));
         },

@@ -4,7 +4,6 @@ import {
   FETCH_TREE,
   START_TREE_LOAD,
   STOP_TREE_LOAD,
-  SET_SECTION_ID,
   SET_LOCATION_ID,
   FETCH_LOCATION_ITEMS,
   START_LOCATION_LOAD,
@@ -35,7 +34,7 @@ const getTreeItems = (items) => {
 export const fetchTreeItems = () => {
   return (dispatch, getState) => {
     dispatch(startTreeLoad());
-    const url = buildUrl(getState, `browse/${getState().items.sectionId}/locations`);
+    const url = buildUrl(getState, `browse/${getState().app.sectionId}/locations`);
     return fetch(url)
       .then(res => res.json())
       .then(
@@ -45,22 +44,6 @@ export const fetchTreeItems = () => {
         },
       )
     }
-};
-
-export const saveSectionId = (id) => {
-  return {
-    type: SET_SECTION_ID,
-    id,
-  }
-};
-
-export const setSectionId = (id) => {
-  return dispatch => {
-    dispatch(savePage(1));
-    dispatch(saveSectionId(id));
-    dispatch(setLocationId(id));
-    dispatch(fetchTreeItems());
-  }
 };
 
 const saveLocationId = (id) => {
@@ -113,7 +96,7 @@ export const fetchLocationItems = () => {
     }
 };
 
-const savePage = (page) => {
+export const savePage = (page) => {
   return {
     type: SET_PAGE,
     page,

@@ -1,21 +1,15 @@
 import { connect } from 'react-redux';
-import { setSearchTerm, fetchItems, setSearchPage, setPreviewItem } from '../store/actions/search';
-import Search from '../components/Search';
+import { fetchItems, setSearchPage, setPreviewItem } from '../store/actions/search';
+import Items from '../components/Items';
 
 const mapsStateToProps = state => ({
   isLoading: state.search.isLoading,
   items: state.search.items,
-  searchTerm: state.search.searchTerm,
   currentPage: state.search.currentPage,
   previewItem: state.search.previewItem,
-  sections: state.app.config.sections,
-  id: state.app.sectionId,
 });
 
 const mapDispatchToProps = dispatch => ({
-  setSearchTerm: (term) => {
-    dispatch(setSearchTerm(term));
-  },
   fetchItems: () => {
     dispatch(fetchItems());
   },
@@ -30,4 +24,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapsStateToProps,
   mapDispatchToProps
-)(Search);
+)(Items);

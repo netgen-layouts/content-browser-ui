@@ -41,3 +41,8 @@
   bottom: 0;
   overflow-y: auto;
 }
+
+.settings {
+  flex: 1;
+  text-align: right;
+}

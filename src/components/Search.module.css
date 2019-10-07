@@ -2,6 +2,16 @@
 @value gray93 from variables;
 
 .searchPanel {
+  flex: 0 0 25%;
+  padding: 0 1em;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  max-height: 100%;
+  overflow-y: auto;
+}
+
+.resultsPanel {
   flex: 1;
   background: gray93;
   position: relative;
@@ -10,6 +20,18 @@
   padding-bottom: 1em;
 }
 
+.searchWrapper {
+  flex: 1;
+  background: gray93;
+  margin-top: .5em;
+  padding: 1em;
+}
+
 .search {
   display: flex;
+  width: 100%;
+}
+
+.search input {
+  flex: 1;
 }
