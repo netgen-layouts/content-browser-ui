@@ -4,6 +4,7 @@ import {
   FETCH_CONFIG,
   INITIAL_SETUP,
   TOGGLE_COLUMN,
+  SET_SECTION_ID,
   SET_SELECTED_ITEM,
   SET_ITEMS_LIMIT,
   TOGGLE_PREVIEW,
@@ -30,6 +31,7 @@ const INITIAL_STATE = {
   previews: {},
   isPreviewLoading: false,
   customParams: {},
+  sectionId: null,
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -82,6 +84,12 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         selectedItems,
+      };
+
+    case SET_SECTION_ID:
+      return {
+        ...state,
+        sectionId: action.id,
       };
 
     case SET_ITEMS_LIMIT:

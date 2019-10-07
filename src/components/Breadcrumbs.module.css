@@ -3,7 +3,8 @@
   margin: 0;
   padding: 0;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
 }
 
 .breadcrumbs li {
@@ -13,8 +14,16 @@
   padding: 0;
 }
 
+.breadcrumbs li + li {
+  position: relative;
+  padding-left: 1.5em;
+}
+
 .breadcrumbs li + li::before {
   content: '/';
   display: inline-block;
   margin: 0 .5em;
+  position: absolute;
+  left: 0;
+  top: .125em;
 }

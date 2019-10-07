@@ -4,7 +4,6 @@ import {
   START_LOCATION_LOAD,
   STOP_LOCATION_LOAD,
   FETCH_TREE,
-  SET_SECTION_ID,
   SET_LOCATION_ID,
   FETCH_LOCATION_ITEMS,
   SET_PAGE,
@@ -14,7 +13,6 @@ import {
 const INITIAL_STATE = {
   isTreeLoading: false,
   isLocationLoading: false,
-  sectionId: null,
   locationId: null,
   treeItems: [],
   locationItems: {},
@@ -52,12 +50,6 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         treeItems: action.items,
-      };
-
-    case SET_SECTION_ID:
-      return {
-        ...state,
-        sectionId: action.id,
       };
 
     case SET_LOCATION_ID:

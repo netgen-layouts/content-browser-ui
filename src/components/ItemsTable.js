@@ -11,7 +11,7 @@ const mapsStateToProps = state => ({
 
 function ItemsTable(props) {
   const visibleColumns = props.availableColumns.filter(column => props.activeColumns.includes(column.id));
-  const showParent = props.showParentItem && !!props.items.parent.value;
+  const showParent = props.showParentItem && props.items.parent && !!props.items.parent.value;
 
   let className = S.table;
   if (showParent) className += ` ${S.indent}`;

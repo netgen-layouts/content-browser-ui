@@ -30,7 +30,9 @@ function ItemsContent(props) {
         <div className={S.wrapper}>
           <div className={S.header} data-cy="items-header">
             <Breadcrumbs items={props.items.path} setId={props.setId} />
-            <TableSettings />
+            <div className={S.settings}>
+              <TableSettings />
+            </div>
           </div>
           <ItemsTable {...props} showParentItem={true} previewItem={props.previewItem} />
         </div>

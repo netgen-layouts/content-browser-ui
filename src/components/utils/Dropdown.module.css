@@ -3,6 +3,7 @@
 
 .dropdown {
   position: relative;
+  display: inline-block;
 }
 
 .toggle {
@@ -40,6 +41,7 @@
   font-size: .874em;
   min-width: 160px;
   background-clip: padding-box;
+  text-align: left;
 }
 
 .menu li {

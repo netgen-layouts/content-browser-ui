@@ -35,11 +35,12 @@ export const setSearchTerm = (term) => {
   }
 };
 
-export const fetchItems = () => {
+export const fetchItems = (samePage = false) => {
   return (dispatch, getState) => {
     if (!getState().search.searchTerm) return dispatch(getItems({}));
     dispatch(startLoad());
-    const url = buildUrl(getState, 'search', {searchText: getState().search.searchTerm, limit: getState().app.itemsLimit, page: getState().search.currentPage});
+    if (!samePage) dispatch(savePage(1));
+    const url = buildUrl(getState, 'search', {searchText: getState().search.searchTerm, limit: getState().app.itemsLimit, page: getState().search.currentPage, sectionId: getState().app.sectionId});
     return fetch(url)
       .then(res => res.json())
       .then(
@@ -61,7 +62,7 @@ const savePage = (page) => {
 export const setSearchPage = (page) => {
   return dispatch => {
     dispatch(savePage(page));
-    dispatch(fetchItems());
+    dispatch(fetchItems(true));
   }
 };
 
