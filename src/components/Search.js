@@ -15,7 +15,7 @@ function Search(props) {
   };
 
   return (
-    <React.Fragment>
+    <>
       <div className={S.searchPanel}>
         <div className={I.header}>
           <form className={S.search} onSubmit={handleSearchSubmit}>
@@ -35,7 +35,7 @@ function Search(props) {
         }
       </div>
       <Preview previewItem={props.previewItem} isLoading={props.isPreviewLoading} />
-    </React.Fragment>
+    </>
   );
 }
 

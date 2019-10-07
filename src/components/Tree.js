@@ -6,7 +6,7 @@ import S from './Tree.module.css';
 
 function Tree(props) {
   return (
-    <React.Fragment>
+    <>
       <Select
         options={props.sections.map(section => ({value: section.id, label: section.name}))}
         onChange={props.setSectionId}
@@ -22,7 +22,7 @@ function Tree(props) {
             />
         }
       </div>
-    </React.Fragment>
+    </>
   );
 }
 

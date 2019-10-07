@@ -6,7 +6,7 @@ function Input({ onChange, value, name, id, label, type = 'text', disabled, plac
   if (prefixed) className += ` ${S.prefixed}`;
   if (sufixed) className += ` ${S.sufixed}`;
   return (
-    <React.Fragment>
+    <>
       {label && <label htmlFor={id} className={disabled ? S.disabledLabel : S.label}>
           {label}
         </label>
@@ -21,7 +21,7 @@ function Input({ onChange, value, name, id, label, type = 'text', disabled, plac
         placeholder={placeholder}
         value={value}
       />
-    </React.Fragment>
+    </>
   );
 }
 

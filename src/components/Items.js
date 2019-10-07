@@ -41,12 +41,12 @@ function ItemsContent(props) {
 
 function Items(props) {
   return (
-    <React.Fragment>
+    <>
       <div className={S.items}>
         <ItemsContent {...props} />
       </div>
       <Preview previewItem={props.previewItem} isLoading={props.isPreviewLoading} />
-    </React.Fragment>
+    </>
   );
 
 }

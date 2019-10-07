@@ -20,7 +20,7 @@ function ItemsTable(props) {
     return '';
   } else {
     return (
-      <React.Fragment>
+      <>
         <table className={className}>
           <thead>
             <tr>
@@ -52,7 +52,7 @@ function ItemsTable(props) {
           setPage={props.setPage}
           currentPage={props.currentPage}
         />
-      </React.Fragment>
+      </>
     );
   }
 }

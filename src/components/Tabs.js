@@ -7,7 +7,7 @@ function Tabs(props) {
   const children = props.children.filter(child => !!child);
 
   return (
-    <React.Fragment>
+    <>
       <div className={S.tabsHeader}>
         {children.length > 1 &&
           <ul className={S.tabs}>
@@ -30,14 +30,14 @@ function Tabs(props) {
           </div>
         }
       </div>
-      <React.Fragment>
+      <>
         {children.map((child) => {
           if (!child) return false;
           if (child.props.id !== activeTab) return undefined;
           return child.props.children;
         })}
-      </React.Fragment>
-    </React.Fragment>
+      </>
+    </>
   );
 }
 
