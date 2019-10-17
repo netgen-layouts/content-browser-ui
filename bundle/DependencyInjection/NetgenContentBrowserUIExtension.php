@@ -25,7 +25,7 @@ final class NetgenContentBrowserUIExtension extends Extension implements Prepend
         );
 
         $prependConfigs = [
-            'framework/assets.yml' => 'framework',
+            'framework/assets.yaml' => 'framework',
         ];
 
         foreach ($prependConfigs as $configFile => $prependConfig) {
