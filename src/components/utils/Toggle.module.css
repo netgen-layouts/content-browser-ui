@@ -1,5 +1,5 @@
 @value variables: '../Variables.module.css';
-@value gray78 from variables;
+@value gray78, linkColor from variables;
 
 .checkbox {
   position: absolute;
@@ -54,11 +54,11 @@
 
 .iconActive {
   composes: icon;
-  background: #04a6d7;
+  background: #7EA9F5;
 }
 
 .iconActive::before {
   left: 1.2727272727em;
-  background: #006a8a;
+  background: linkColor;
   box-shadow: 0 3px 4px 0 rgba(0, 0, 0, .14), 0 3px 3px -2px rgba(0, 0, 0, .2), 0 1px 8px 0 rgba(0, 0, 0, .12);
 }
