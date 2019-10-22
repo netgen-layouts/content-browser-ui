@@ -1,3 +1,6 @@
+@value variables: '../Variables.module.css';
+@value linkColor from variables;
+
 .checkbox {
   position: absolute;
   opacity: 0;
@@ -29,5 +32,5 @@
 
 .iconActive {
   composes: icon;
-  color: #0098c7;
+  color: linkColor;
 }
