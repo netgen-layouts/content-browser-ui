@@ -4,17 +4,18 @@
 .footer {
   background: gray22;
   color: #fff;
-  padding: 1em;
+  padding: .75em;
   display: flex;
   justify-content: space-between;
 }
 
-.actions > button {
-  margin-left: .5em;
+.actions {
+  min-width: 11em;
+  text-align: right;
 }
 
-.items button {
-  margin-right: .5em;
+.footer button {
+  margin: .25em;
 }
 
 .itemIcon {

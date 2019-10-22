@@ -10,6 +10,12 @@
 .content {
   padding: 0 1em;
   width: 18em;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  overflow-y: auto;
 }
 
 .preview a {

@@ -27,7 +27,7 @@ function ItemsContent(props) {
           exitActive: S.fadeActiveExit,
         }}
       >
-        <div>
+        <div className={S.wrapper}>
           <div className={S.header}>
             <Breadcrumbs items={props.items.path} setId={props.setId} />
             <TableSettings />
