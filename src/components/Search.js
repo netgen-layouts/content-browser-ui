@@ -20,7 +20,7 @@ function Search(props) {
           value={props.id.toString()}
         />
         <div className={S.searchWrapper}>
-          <form className={S.search} onSubmit={handleSearchSubmit}>
+          <form className={S.search} onSubmit={handleSearchSubmit} data-cy="search-form">
             <Input
               onChange={(e) => props.setSearchTerm(e.target.value)}
               value={props.searchTerm}

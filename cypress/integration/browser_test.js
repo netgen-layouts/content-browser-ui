@@ -197,7 +197,7 @@ describe('Multiple browse test', function() {
         if (cy.window().its('store').invoke('getState').its('app').its('config').its('has_search')) {
           cy.get(withCyTag('tabs')).contains('Search').should('be.visible').click();
           cy.get(withCyTag('tree-panel')).should('not.be.visible');
-          cy.get(withCyTag('items')).should('not.be.visible');
+          cy.get(withCyTag('items-table')).should('not.be.visible');
           cy.get(withCyTag('search-form')).as('form').find('input').as('input').type('test');
           cy.get('@form').submit();
           cy.get(withCyTag('items-table')).should('be.visible').find('tbody').children().its('length').should('be.greaterThan', 3);
