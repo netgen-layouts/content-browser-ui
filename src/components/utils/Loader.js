@@ -17,7 +17,7 @@ function Loader(props) {
         exitActive: S.fadeActiveExit,
       }}
     >
-      <div className={S.loader}>
+      <div className={S.loader} data-cy="loader">
         <div className={S.content}>
           <i className={S.icon}></i>
           <span>Loading</span>

@@ -73,9 +73,9 @@ function TreeItem(props) {
   const getIcon = () => <IconTag fontSize="inherit" onClick={handleToggleSubtree} />;
 
   return (
-    <li className={S.item}>
+    <li className={S.item} data-cy="tree-item">
       <Button variant="primary" onClick={() => props.setLocationId(item.id)} className={`${S.button}${isActive ? ` ${S.active}` : ''}`}>
-        <div className={iconClassName}>
+        <div className={iconClassName} data-cy={item.has_sub_locations ? 'item-icon-has-sub' : 'item-icon'}>
           {getIcon()}
         </div>
         {item.name}

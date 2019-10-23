@@ -7,7 +7,7 @@ function Breadcrumbs({ items, setId }) {
     return '';
   } else {
     return (
-      <ul className={S.breadcrumbs}>
+      <ul className={S.breadcrumbs} data-cy="breadcrumbs">
         {items.map((item, i) => (
           <li key={item.name}>
             {i < items.length - 1 ?

@@ -18,7 +18,7 @@ function BrowserContent(props) {
         <div id="tab-browse" label="Browse" icon={<ListIcon fontSize="default" color="inherit" />}>
           <div className={S.panels}>
             {props.config.has_tree &&
-              <div className={S.treePanel}>
+              <div className={S.treePanel} data-cy="tree-panel">
                 <Tree/>
               </div>
             }
@@ -53,7 +53,7 @@ function Browser(props) {
   }
 
   return (
-    <div className={S.browser}>
+    <div className={S.browser} data-cy="browser">
       <CSSTransition
         in
         appear
@@ -72,7 +72,7 @@ function Browser(props) {
             <div>Error: {props.error.message}</div>
             :
             !props.isLoaded ?
-              <div className={S.loading}><Loader/></div>
+              <div className={S.loading} data-cy="browser-loading"><Loader/></div>
               :
               <BrowserContent {...props} />
           }

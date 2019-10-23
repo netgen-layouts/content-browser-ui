@@ -12,7 +12,7 @@ function Tree(props) {
         onChange={props.setSectionId}
         value={props.id.toString()}
       />
-      <div className={S.wrapper}>
+      <div className={S.wrapper} data-cy="tree-wrapper">
         {props.isLoading
           ? <Loader />
           : <TreeItems

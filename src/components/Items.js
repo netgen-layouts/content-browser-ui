@@ -28,7 +28,7 @@ function ItemsContent(props) {
         }}
       >
         <div className={S.wrapper}>
-          <div className={S.header}>
+          <div className={S.header} data-cy="items-header">
             <Breadcrumbs items={props.items.path} setId={props.setId} />
             <TableSettings />
           </div>
@@ -42,7 +42,7 @@ function ItemsContent(props) {
 function Items(props) {
   return (
     <>
-      <div className={S.items}>
+      <div className={S.items} data-cy="items">
         <ItemsContent {...props} />
       </div>
       <Preview previewItem={props.previewItem} isLoading={props.isPreviewLoading} />
