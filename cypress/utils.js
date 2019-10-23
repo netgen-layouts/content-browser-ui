@@ -1,3 +1,5 @@
+/* global cy */
+
 export const loginToAdmin = (test) => {
   const options = {
     method: 'POST',
@@ -12,3 +14,5 @@ export const loginToAdmin = (test) => {
     cy.getCookie('eZSESSID').then(cookie => test.eZSESSID = cookie.value);
   });
 };
+
+export const withCyTag = value => `[data-cy=${value}]`;

@@ -4,7 +4,7 @@ import S from './Tree.module.css';
 
 function TreeItems(props) {
   return (
-    <ul className={S.tree}>
+    <ul className={S.tree} data-cy="tree">
       {props.items.map(child => (
         <TreeItem
           item={child}

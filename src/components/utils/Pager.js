@@ -42,8 +42,8 @@ function Pager(props) {
   }
 
   return (
-    <div className={S.pager}>
-      <ul className={S.pagination}>
+    <div className={S.pager} data-cy="pager">
+      <ul className={S.pagination} data-cy="pagination">
         <li className={S.paginatorItem}>
           <Button
             variant={'transparent'}

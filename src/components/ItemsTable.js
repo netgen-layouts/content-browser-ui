@@ -21,8 +21,8 @@ function ItemsTable(props) {
   } else {
     return (
       <React.Fragment>
-        <table className={className}>
-          <thead>
+        <table className={className} data-cy="items-table">
+          <thead data-cy="items-table-head">
             <tr>
               {visibleColumns.map((column) => <th key={`column-${column.id}`}>{column.name}</th>)}
             </tr>
@@ -34,7 +34,7 @@ function ItemsTable(props) {
               />
             }
           </thead>
-          <tbody>
+          <tbody data-cy="items-table-body">
             {props.items.children.map(child => (
               <Item
                 key={`locationItem-${child.value}`}

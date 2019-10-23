@@ -36,9 +36,9 @@ class Dropdown extends Component {
 
   render() {
     return (
-      <div className={S.dropdown} ref={this.dropdownRef}>
-        <a href="#/" onClick={this.toggleDropdown} className={S.toggle}>{this.props.label}{this.props.icon ? this.props.icon : ''}</a>
-        {this.state.isOpen && <ul className={S.menu}>{this.props.children}</ul>}
+      <div className={S.dropdown} ref={this.dropdownRef} data-cy="dropdown">
+        <a href="#/" onClick={this.toggleDropdown} className={S.toggle} data-cy="dropdown-toggle">{this.props.label}{this.props.icon ? this.props.icon : ''}</a>
+        {this.state.isOpen && <ul className={S.menu} data-cy="dropdown-menu">{this.props.children}</ul>}
       </div>
     );
   }

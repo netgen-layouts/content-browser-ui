@@ -20,14 +20,14 @@ const mapDispatchToProps = dispatch => ({
 
 function PreviewContent(props) {
   if (props.isLoading) {
-    return <div className={S.preview}><Loader/></div>
+    return <Loader/>
   } else if (props.previewItem === null) {
     return (
-      <div className={S.preview}><div className={S.content}>This item does not have a preview.</div></div>
+      <div className={S.content}>This item does not have a preview.</div>
     );
   } else {
     return (
-      <div className={S.preview}><div className={S.content} dangerouslySetInnerHTML={{__html: props.previews[props.previewItem]}}></div></div>
+      <div className={S.content} dangerouslySetInnerHTML={{__html: props.previews[props.previewItem]}}></div>
     );
   }
 }
@@ -51,7 +51,9 @@ function Preview(props) {
         exitActive: S.slideActiveExit,
       }}
     >
-      <PreviewContent {...props} />
+      <div className={S.preview} data-cy="preview">
+        <PreviewContent {...props} />
+      </div>
     </CSSTransition>
   )
 }

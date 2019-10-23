@@ -10,7 +10,7 @@ function Tabs(props) {
     <React.Fragment>
       <div className={S.tabsHeader}>
         {children.length > 1 &&
-          <ul className={S.tabs}>
+          <ul className={S.tabs} data-cy="tabs">
             {children.map((child) => {
               if (!child) return false;
               return (

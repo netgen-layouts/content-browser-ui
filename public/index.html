@@ -70,14 +70,15 @@
       <div class="js-multiple-browse"
         data-browser-prototype="<div class=&quot;item&quot;><a href=&quot;#&quot; class=&quot;js-remove&quot;><i class=&quot;material-icons&quot;>close</i></a><span class=&quot;name&quot;></span><input type=&quot;hidden&quot; name=&quot;__name__&quot; required=&quot;required&quot; /></div>"
         data-input=""
+        data-cy="multiple-browse"
       >
-        <div class="items">
+        <div class="items" data-cy="multiple-items">
           <div class="no-items">
               (NO ITEMS SELECTED)
           </div>
         </div>
         <input type="hidden" class="js-item-type" value="ezlocation">
-        <a href="#" class="js-trigger">Add items</a>
+        <a href="#" class="js-trigger" data-cy="multiple-add">Add items</a>
       </div>
     </div>
   </div>
