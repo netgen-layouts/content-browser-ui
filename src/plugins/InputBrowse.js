@@ -6,8 +6,11 @@ export default class InputBrowse {
     this.el = el;
     const overrides = {...el.dataset};
     for (const key in overrides) {
-      if (overrides[key] === 'false' || overrides[key] === 'true') {
-        overrides[key] = overrides[key] === 'true';
+      const val = overrides[key];
+      if (!isNaN(val)) {
+        overrides[key] = parseInt(val, 10);
+      } else if (val === 'false' || val === 'true') {
+        overrides[key] = val === 'true';
       }
     }
     this.overrides = {

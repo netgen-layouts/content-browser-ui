@@ -17,10 +17,11 @@ function BrowserContent(props) {
       <Tabs headerContent={props.config.has_preview ? <TogglePreview /> : ''}>
         <div id="tab-browse" label="Browse" icon={<ListIcon fontSize="default" color="inherit" />}>
           <div className={S.panels}>
-            {props.config.has_tree &&
+            {props.config.has_tree ?
               <div className={S.treePanel} data-cy="tree-panel">
                 <Tree/>
               </div>
+              : null
             }
             <Items/>
           </div>
