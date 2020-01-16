@@ -4,10 +4,16 @@ export default class InputBrowse {
   constructor(el, opts = {}) {
     if (el.dataset.browser) return;
     this.el = el;
+    const overrides = {...el.dataset};
+    for (const key in overrides) {
+      if (overrides[key] === 'false' || overrides[key] === 'true') {
+        overrides[key] = overrides[key] === 'true';
+      }
+    }
     this.overrides = {
       min_selected: 1,
       max_selected: 1,
-      ...el.dataset,
+      ...overrides,
       ...opts.overrides,
     };
     this.selectedItems = [];
