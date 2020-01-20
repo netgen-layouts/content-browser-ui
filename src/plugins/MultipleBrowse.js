@@ -5,10 +5,19 @@ export default class MultipleBrowse {
   constructor(el, opts = {}) {
     if (el.dataset.browser) return;
     this.el = el;
+    const overrides = {...el.dataset};
+    for (const key in overrides) {
+      const val = overrides[key];
+      if (!isNaN(val)) {
+        overrides[key] = parseInt(val, 10);
+      } else if (val === 'false' || val === 'true') {
+        overrides[key] = val === 'true';
+      }
+    }
     this.overrides = {
       min_selected: 1,
       max_selected: 0,
-      ...el.dataset,
+      ...overrides,
       ...opts.overrides,
     };
     [this.valueEl] = el.getElementsByClassName('js-value');
