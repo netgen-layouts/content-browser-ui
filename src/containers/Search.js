@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { setSearchTerm, fetchItems, setSearchPage, setPreviewItem } from '../store/actions/search';
 import Search from '../components/Search';
+import {setSectionId} from '../store/actions/app';
 
 const mapsStateToProps = state => ({
   isLoading: state.search.isLoading,
@@ -24,6 +25,9 @@ const mapDispatchToProps = dispatch => ({
   },
   setPreviewItem: (item) => {
     dispatch(setPreviewItem(item));
+  },
+  setSectionId: (id) => {
+    dispatch(setSectionId(id));
   },
 });
 
