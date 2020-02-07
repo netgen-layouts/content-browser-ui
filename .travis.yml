@@ -13,10 +13,6 @@ addons:
     packages:
       - libgconf-2-4
 
-env:
-  - RUN_TESTS="yes"
-  - RUN_BUILD="yes"
-
 branches:
   only:
     - master
@@ -28,15 +24,8 @@ before_script:
   - cp .env.dist .env
 
 script:
-  - |
-    if [ "$RUN_TESTS" = "yes" ] ; then
-      yarn run ci
-    fi
-
-  - |
-    if [ "$RUN_BUILD" = "yes" ] ; then
-      yarn run build
-    fi
+  - yarn run build
+  - yarn run ci
 
 notifications:
   email: false
