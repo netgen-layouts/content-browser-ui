@@ -209,6 +209,28 @@ describe('Multiple browse test', function() {
         }
       });
     });
+    describe.only('Test category select', () => {
+      it('saves category to store when changing it on tree panel', () => {
+        cy.visit('/');
+        cy.openContentBrowser();
+        cy.get(withCyTag('tabs')).contains('Browse').should('be.visible').click();
+        cy.get(withCyTag('tree-panel')).find('select').find(':selected').contains("Home");
+        cy.window().its('store').invoke('getState').its('app').its('sectionId').should('eq', 2);
+        cy.get(withCyTag('tree-panel')).find('select').select('Users');
+        cy.get(withCyTag('tree-panel')).find('select').find(':selected').contains("Users");
+        cy.window().its('store').invoke('getState').its('app').its('sectionId').should('eq', 1);
+      });
+      it('saves category to store when changing it on search panel', () => {
+        cy.visit('/');
+        cy.openContentBrowser();
+        cy.get(withCyTag('tabs')).contains('Search').should('be.visible').click();
+        cy.get(withCyTag('search-panel')).find('select').find(':selected').contains("Home");
+        cy.window().its('store').invoke('getState').its('app').its('sectionId').should('eq', 2);
+        cy.get(withCyTag('search-panel')).find('select').select('Users');
+        cy.get(withCyTag('search-panel')).find('select').find(':selected').contains("Users");
+        cy.window().its('store').invoke('getState').its('app').its('sectionId').should('eq', 1);
+      });
+    });
     describe('Closes content browser', () => {
       it('clicks on Cancel in footer and closes content browser', () => {
         cy.get(withCyTag('footer-actions')).contains('Cancel').click();

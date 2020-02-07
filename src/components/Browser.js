@@ -28,7 +28,7 @@ function BrowserContent(props) {
         </div>
         {props.config.has_search &&
           <div id="tab-search" label="Search" icon={<SearchIcon fontSize="small" color="inherit" />}>
-            <div className={S.panels}>
+            <div className={S.panels} data-cy="search-panel">
               <Search/>
             </div>
           </div>
