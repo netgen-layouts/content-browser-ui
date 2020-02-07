@@ -209,7 +209,7 @@ describe('Multiple browse test', function() {
         }
       });
     });
-    describe.only('Test category select', () => {
+    describe('Test category select', () => {
       it('saves category to store when changing it on tree panel', () => {
         cy.visit('/');
         cy.openContentBrowser();
