@@ -230,6 +230,24 @@ describe('Multiple browse test', function() {
         cy.get(withCyTag('search-panel')).find('select').find(':selected').contains("Users");
         cy.window().its('store').invoke('getState').its('app').its('sectionId').should('eq', 1);
       });
+      it('perfoms search when category is changed', () => {
+        cy.visit('/');
+        cy.openContentBrowser();
+        cy.get(withCyTag('tabs')).contains('Search').should('be.visible').click();
+
+        cy.get(withCyTag('search-form')).as('form').find('input').as('input').type('test');
+        cy.get('@form').submit();
+        
+        cy.get(withCyTag('items-table')).should('be.visible').find('tbody').children().first().contains('Test');
+        
+        cy.get(withCyTag('search-panel')).find('select').first().select('Users');
+        cy.get(withCyTag('items-table')).should('be.visible').find('tbody').children().first().contains('User');
+
+        cy.get(withCyTag('search-form')).as('form').find('input').as('input').clear();
+        cy.get(withCyTag('search-panel')).find('select').first().select('Home');
+        cy.get(withCyTag('items-table')).should('be.visible').find('tbody').children().first().contains('User');
+
+      });
     });
     describe('Closes content browser', () => {
       it('clicks on Cancel in footer and closes content browser', () => {

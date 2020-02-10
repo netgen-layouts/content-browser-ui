@@ -101,9 +101,10 @@ const getPreview = (req) => {
 }
 
 const getSearchResults = (req) => {
+  const parentLocation = parseInt(req.query.sectionId, 10);
   let children = [];
   if (req.query.searchText.length > 2) items.forEach(item => {
-    if (children.length < 12) {
+    if (children.length < 12 && item.parent_id === parentLocation) {
       const newItem = {...item};
       delete newItem.id;
       delete newItem.parent_id;

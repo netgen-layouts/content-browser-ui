@@ -11,12 +11,20 @@ function Search(props) {
     props.fetchItems();
   };
 
+  const handleSectionChange = id => {
+    props.setSectionId(id);
+
+    if (props.searchTerm){
+      props.fetchItems()
+    }
+  }
+
   return (
     <>
       <div className={S.searchPanel}>
         <Select
           options={props.sections.map(section => ({value: section.id, label: section.name}))}
-          onChange={props.setSectionId}
+          onChange={handleSectionChange}
           value={props.id.toString()}
         />
         <div className={S.searchWrapper}>
