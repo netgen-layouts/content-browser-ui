@@ -55,7 +55,7 @@ export const toggleColumn = (id, toggle) => {
 export const saveSectionId = (id) => {
   return {
     type: SET_SECTION_ID,
-    id
+    id: isNaN(id) ? id : +id
   }
 };
 
