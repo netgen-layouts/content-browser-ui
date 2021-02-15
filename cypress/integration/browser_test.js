@@ -218,7 +218,7 @@ describe('Multiple browse test', function() {
         cy.window().its('store').invoke('getState').its('app').its('sectionId').should('eq', 2);
         cy.get(withCyTag('tree-panel')).find('select').select('Users');
         cy.get(withCyTag('tree-panel')).find('select').find(':selected').contains("Users");
-        cy.window().its('store').invoke('getState').its('app').its('sectionId').should('eq', 1);
+        cy.window().its('store').invoke('getState').its('app').its('sectionId').should('eq', '1');
       });
       it('saves category to store when changing it on search panel', () => {
         cy.visit('/');
@@ -228,7 +228,7 @@ describe('Multiple browse test', function() {
         cy.window().its('store').invoke('getState').its('app').its('sectionId').should('eq', 2);
         cy.get(withCyTag('search-panel')).find('select').select('Users');
         cy.get(withCyTag('search-panel')).find('select').find(':selected').contains("Users");
-        cy.window().its('store').invoke('getState').its('app').its('sectionId').should('eq', 1);
+        cy.window().its('store').invoke('getState').its('app').its('sectionId').should('eq', '1');
       });
       it('perfoms search when category is changed', () => {
         cy.visit('/');

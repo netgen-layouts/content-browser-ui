@@ -54,7 +54,7 @@ function Browser(props) {
   }
 
   return (
-    <div className={S.browser} data-cy="browser">
+    <div className={S.browser+ ' js-content-browser'} data-cy="browser" data-item-type={props.config.item_type}>
       <CSSTransition
         in
         appear
