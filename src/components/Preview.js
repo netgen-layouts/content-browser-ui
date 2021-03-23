@@ -21,7 +21,7 @@ const mapDispatchToProps = dispatch => ({
 function PreviewContent(props) {
   if (props.isLoading) {
     return <Loader/>
-  } else if (props.previewItem === null) {
+  } else if (props.previewItem === null || !props.previews[props.previewItem]) {
     return (
       <div className={S.content}>This item does not have a preview.</div>
     );

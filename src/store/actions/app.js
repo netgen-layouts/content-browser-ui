@@ -152,7 +152,7 @@ export const fetchPreview = (item) => {
       })
       .then(
         (result) => {
-          dispatch(storePreview({[item]: result}));
+          dispatch(storePreview({[item]: result.trim()}));
           dispatch(stopPreviewLoad());
         },
       )
