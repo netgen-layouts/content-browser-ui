@@ -4,7 +4,7 @@ cypress/screenshots/
 cypress/fixtures/
 node_modules/
 vendor/
-.php_cs.cache
+.php-cs-fixer.cache
 composer.lock
 composer.phar
 package-lock.json
