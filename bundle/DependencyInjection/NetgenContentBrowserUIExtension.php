@@ -22,7 +22,7 @@ final class NetgenContentBrowserUIExtension extends Extension implements Prepend
     {
         $container->setParameter(
             'netgen_content_browser.asset.version',
-            PrettyVersions::getVersion('netgen/content-browser-ui')->getShortReference()
+            PrettyVersions::getVersion('netgen/content-browser-ui')->getShortReference(),
         );
 
         $prependConfigs = [
