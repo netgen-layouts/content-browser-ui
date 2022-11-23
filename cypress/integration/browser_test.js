@@ -237,9 +237,9 @@ describe('Multiple browse test', function() {
 
         cy.get(withCyTag('search-form')).as('form').find('input').as('input').type('test');
         cy.get('@form').submit();
-        
+
         cy.get(withCyTag('items-table')).should('be.visible').find('tbody').children().first().contains('Test');
-        
+
         cy.get(withCyTag('search-panel')).find('select').first().select('Users');
         cy.get(withCyTag('items-table')).should('be.visible').find('tbody').children().first().contains('User');
 
