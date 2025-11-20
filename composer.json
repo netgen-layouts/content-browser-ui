@@ -10,7 +10,7 @@
         }
     ],
     "require-dev": {
-        "netgen/layouts-coding-standard": "^2.0"
+        "netgen/layouts-coding-standard": "^3.0"
     },
     "config": {
         "allow-plugins": false
