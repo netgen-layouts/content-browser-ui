@@ -1,5 +1,5 @@
 {
-  "item_type":"ezlocation",
+  "item_type":"ibexa_location",
   "min_selected":1,
   "max_selected":0,
   "has_tree":true,

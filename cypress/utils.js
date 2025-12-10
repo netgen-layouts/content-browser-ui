@@ -11,7 +11,7 @@ export const loginToAdmin = (test) => {
     }
   }
   cy.request(options).then(() => {
-    cy.getCookie('eZSESSID').then(cookie => test.eZSESSID = cookie.value);
+    cy.getCookie('IBX_SESSION_ID').then(cookie => test.IBX_SESSION_ID = cookie.value);
   });
 };
 
