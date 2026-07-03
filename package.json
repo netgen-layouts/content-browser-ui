@@ -86,7 +86,8 @@
     "redux-thunk": "^2.3.0"
   },
   "resolutions": {
-    "minimatch": "^3.0.0"
+    "minimatch": "^3.0.0",
+    "node-releases": "2.0.44"
   },
   "engines": {
     "node": "^14"
